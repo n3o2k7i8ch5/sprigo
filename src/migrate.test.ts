@@ -92,3 +92,28 @@ test("v4: speech_sessions has nullable conditions and avoided", async () => {
   const cols = await db.select<{ name: string; notnull: number }>("PRAGMA table_info(speech_sessions)");
   for (const c of ["conditions", "avoided"]) assert.equal(cols.find((x) => x.name === c)?.notnull, 0, c);
 });
+
+test("v5 seeds FSRS state from word strength and keeps every word", async () => {
+  const db = fresh();
+  await runMigrations(db, MIGRATIONS.filter((m) => m.v <= 4));
+  await db.execute("INSERT INTO profiles(id, name, color, ui_lang, native_lang, stats) VALUES (1, 'a', 'green', 'en', 'en', '{}')");
+  await db.execute("INSERT INTO enrollments(id, profile_id, course_iso, level) VALUES (1, 1, 'es', 'A1')");
+  for (const [w, s] of [["uno", 0], ["una", 1], ["dos", 2], ["tres", 3], ["cuatro", 4], ["cinco", 5]] as const)
+    await db.execute("INSERT INTO words(enrollment_id, word, translation, strength, updated_at) VALUES (1, $1, 'x', $2, '2026-01-01 00:00:00')", [w, s]);
+  await runMigrations(db, MIGRATIONS);
+  const rows = await db.select<Record<string, unknown>>("SELECT word, state, stability, difficulty, reps, lapses, due, last_review FROM words ORDER BY strength, word");
+  assert.equal(rows.length, 6);
+  for (const [i, word] of ["uno", "una"].entries()) {
+    const { due: newDue, ...fresh0 } = rows[i];
+    assert.deepEqual(fresh0, { word, state: 0, stability: 0, difficulty: 0, reps: 0, lapses: 0, last_review: null });
+    assert.match(String(newDue), /^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d$/);
+  }
+  const seeded = (word: string, stability: number, reps: number, due: string) =>
+    ({ word, state: 2, stability, difficulty: 5, reps, lapses: 0, due, last_review: "2026-01-01 00:00:00" });
+  assert.deepEqual(rows.slice(2), [
+    seeded("dos", 1, 1, "2026-01-02 00:00:00"),
+    seeded("tres", 3, 2, "2026-01-04 00:00:00"),
+    seeded("cuatro", 7, 3, "2026-01-08 00:00:00"),
+    seeded("cinco", 15, 4, "2026-01-16 00:00:00"),
+  ]);
+});

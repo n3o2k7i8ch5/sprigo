@@ -54,4 +54,23 @@ CREATE INDEX speech_sessions_profile ON speech_sessions(profile_id)`,
     sql: `ALTER TABLE speech_sessions ADD COLUMN conditions TEXT;
 ALTER TABLE speech_sessions ADD COLUMN avoided TEXT`,
   },
+  {
+    v: 5, // #20: FSRS state per word (src/srs.ts), seeded from the old 0–5 strength so progress carries over.
+    // `due` has no default: ALTER TABLE only takes constant defaults, so addWords writes it. `strength` stays, unused.
+    sql: `ALTER TABLE words ADD COLUMN due TEXT;
+ALTER TABLE words ADD COLUMN stability REAL NOT NULL DEFAULT 0;
+ALTER TABLE words ADD COLUMN difficulty REAL NOT NULL DEFAULT 0;
+ALTER TABLE words ADD COLUMN reps INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE words ADD COLUMN lapses INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE words ADD COLUMN state INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE words ADD COLUMN last_review TEXT;
+UPDATE words SET
+  state = CASE WHEN strength >= 2 THEN 2 ELSE 0 END,
+  stability = CASE WHEN strength >= 5 THEN 15 WHEN strength = 4 THEN 7 WHEN strength = 3 THEN 3 WHEN strength = 2 THEN 1 ELSE 0 END,
+  difficulty = CASE WHEN strength >= 2 THEN 5 ELSE 0 END,
+  reps = CASE WHEN strength >= 2 THEN MIN(strength, 5) - 1 ELSE 0 END,
+  last_review = CASE WHEN strength >= 2 THEN updated_at END,
+  due = CASE WHEN strength >= 5 THEN datetime(updated_at, '+15 days') WHEN strength = 4 THEN datetime(updated_at, '+7 days')
+    WHEN strength = 3 THEN datetime(updated_at, '+3 days') WHEN strength = 2 THEN datetime(updated_at, '+1 day') ELSE CURRENT_TIMESTAMP END`,
+  },
 ];

@@ -7,6 +7,7 @@ import * as db from "./db";
 import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechScore, type Item } from "./activities";
 import { MicButton } from "./Mic";
 import { sttReady } from "./stt";
+import { dueToday } from "./srs";
 import { speak } from "./tts";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
@@ -57,6 +58,10 @@ type PItem = Item & { mistakeId?: number };
 async function practiceItems(id: string, enrollmentId: number, listenPrompt: string): Promise<PItem[]> {
   if (id === "practice-mistakes") return (await db.listMistakes<Item>(enrollmentId, 10)).map((m) => ({ ...m.item, mistakeId: m.id }));
   if (id === "practice-listen") return listenItems(await db.listWords(enrollmentId), listenPrompt);
+  if (id === "practice-due") {
+    const all = await db.listWords(enrollmentId);
+    return listenItems(dueToday(all, new Date()).slice(0, 10), listenPrompt, 10, all); // listenItems only reorders these 10
+  }
   if (id === "practice-speak") return speakItems(await db.listWords(enrollmentId));
   if (id === "practice-madness") return madnessItems(await db.listWords(enrollmentId));
   if (id === "practice-timed") return (await db.cachedLessonItems<Item>(enrollmentId)).sort(() => Math.random() - 0.5).slice(0, 20);
@@ -153,7 +158,7 @@ export function Lesson({ id }: { id: string }) {
         completeStep(id, xp);
         prefetchNext(enrollment.id, ctx.course, ctx.level, id, ctx.native);
       } else gainXp(xp);
-      // "My words": phrases taught or matched in this lesson (strength grows each time they come back).
+      // "My words": phrases taught or matched in this lesson become New FSRS cards; only recall (listen, due review) grades them.
       db.addWords(enrollment.id, list.flatMap((x): [string, string][] =>
         x.kind === "learn" ? [[x.phrase, x.translation]] : x.kind === "match" ? x.pairs : []));
     }
@@ -182,7 +187,7 @@ export function Lesson({ id }: { id: string }) {
   const grade = (ok: boolean, correct: string, given: string, note?: string, judged = false) => {
     if (it && enrollment) {
       const { mistakeId, ...item } = it;
-      if (id === "practice-listen" && it.kind === "choice") db.nudgeWord(enrollment.id, it.listen, ok ? 1 : -1);
+      if ((id === "practice-listen" || id === "practice-due") && it.kind === "choice") db.reviewWord(enrollment.id, it.listen, ok);
       else if (ok && mistakeId) db.deleteMistake(mistakeId);
       else if (!ok && !mistakeId) db.addMistake(enrollment.id, item);
     }
