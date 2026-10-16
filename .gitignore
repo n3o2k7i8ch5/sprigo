@@ -27,3 +27,6 @@ dist-ssr
 src-tauri/resources/*.bin
 src-tauri/resources/*.part
 .serena
+
+# Lesson eval reports (pnpm eval)
+eval/

@@ -33,6 +33,7 @@ pnpm fetch-model   # downloads the whisper speech model into src-tauri/resources
 pnpm tauri dev     # desktop app
 pnpm dev           # browser preview (no speech, dev storage in localStorage)
 pnpm bench         # tutor reply latency per Ollama model (pnpm bench <model…> for some)
+pnpm eval          # lesson quality per Ollama model, report in eval/ (JUDGE=<model> adds a judge)
 ```
 
 How the app fits together is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); design decisions and their reasons are in [docs/DECISIONS.md](docs/DECISIONS.md).
@@ -47,6 +48,12 @@ How the app fits together is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); de
    pnpm test
    ```
 4. Open the pull request against **`test`**, not `master`. `test` is tried before it goes live; `master` is what users get through in-app updates.
+
+### Evaluating lessons
+
+`pnpm eval [model…]` generates a fixed set of lessons (`CASES` in [`scripts/eval.ts`](scripts/eval.ts): several courses, levels and every exercise type) with the app's real prompts and checks each exercise: the answer is among the options, options are distinct, nothing gives the answer away, text is in the right language, there is exactly one blank. `JUDGE=<model>` also has a strong model (for example an Ollama `:cloud` model) score naturalness, level fit, clarity and whether exactly one answer is correct.
+
+Run it when you change a lesson prompt (`src/activities.ts`), add a course level, or want to recommend a model. Each run writes `eval/<time>-<model>.md` (and `.json` with every exercise). To compare two prompt versions, run it on each branch with the same model and compare the tables; the report header shows the commit. The rule checks themselves are tested in `src/evalRules.test.ts`.
 
 ### Conventions
 
