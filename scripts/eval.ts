@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { z } from "zod";
 import { REGISTRY, langEn, lessonPrompt, lessonSchema, plannedActivities, systemPrompt, type LessonActivity, type LessonContext } from "../src/activities.ts";
+import { retry } from "../src/retry.ts";
 import { levelsOf, parseCourse } from "../src/course.ts";
 import { checkItem, lessonMetrics, RULES, summarize, type ItemResult, type Judged, type Lang, type TypeRow } from "../src/evalRules.ts";
 
@@ -39,12 +40,25 @@ const contexts = CASES.map(contextOf); // a renamed step fails here, before any 
 // Same rule as `reasoning` in src/ai.ts.
 const effort = (m: string) => (m.startsWith("glm-5.3-flash") ? "low" : "none");
 
+/** Loads a cold model before the first timed call, like warmUp in src/ai.ts. Errors are ignored. */
+const warmed = new Set<string>();
+async function warm(model: string) {
+  if (warmed.has(model)) return;
+  warmed.add(model);
+  await fetch(`${BASE}/api/generate`, { method: "POST", body: JSON.stringify({ model, keep_alive: "10m" }), signal: AbortSignal.timeout(180_000) }).then((r) => r.arrayBuffer(), () => {});
+}
+
+// A bad reply is tried again (3 tries in all, like generate in src/ai.ts); HTTP errors and timeouts fail at once.
+const badReply = (e: unknown) => e instanceof z.ZodError || e instanceof SyntaxError || (e as Error)?.message === "no JSON object in the reply";
+
 /** One structured call, sent the way src/ai.ts sends it (json_schema response_format, schema in the prompt too). */
-async function chat<S extends z.ZodType>(model: string, schema: S, system: string, prompt: string): Promise<z.infer<S>> {
+const chat = <S extends z.ZodType>(model: string, schema: S, system: string, prompt: string, temperature?: number): Promise<z.infer<S>> =>
+  retry(() => chatOnce(model, schema, system, prompt, temperature), badReply);
+async function chatOnce<S extends z.ZodType>(model: string, schema: S, system: string, prompt: string, temperature?: number): Promise<z.infer<S>> {
   const json = z.toJSONSchema(schema);
   const r = await fetch(`${BASE}/v1/chat/completions`, { method: "POST", headers: { "content-type": "application/json" },
     signal: AbortSignal.timeout(180_000), // like generate()
-    body: JSON.stringify({ model, reasoning_effort: effort(model),
+    body: JSON.stringify({ model, reasoning_effort: effort(model), temperature,
       response_format: { type: "json_schema", json_schema: { name: "response", schema: json, strict: true } },
       messages: [{ role: "system", content: `${system}\n\nJSON schema of the reply:\n${JSON.stringify(json)}` }, { role: "user", content: prompt }] }) });
   if (!r.ok) throw new Error(`${r.status} ${(await r.text()).slice(0, 200)}`);
@@ -90,8 +104,15 @@ const judgeSystem = (c: LessonContext) => [
   "`one_correct`: exactly one option or answer is correct (true for exercises without options).",
   "Respond only with JSON matching the schema.",
 ].join("\n");
-const judgeItem = (c: LessonContext, r: Raw): Promise<Judged> =>
-  chat(JUDGE!, judgeSchema, judgeSystem(c), `Exercise type: ${r.type}\n${JSON.stringify(r.raw)}`).catch(() => null);
+// A failed call stays null (unscored) but is counted and shown, so a flaky judge is visible.
+let judgeFails = 0, judgeCalls = 0;
+const judgeItem = (c: LessonContext, r: Raw): Promise<Judged> => {
+  judgeCalls++;
+  return chat(JUDGE!, judgeSchema, judgeSystem(c), `Exercise type: ${r.type}\n${JSON.stringify(r.raw)}`, 0).catch((e) => {
+    if (!judgeFails++) console.error(`    judge failed (first error): ${short(e)}`);
+    return null;
+  });
+};
 
 type Case = (typeof CASES)[number] & { level: string } & (
   | { error: string }
@@ -100,22 +121,31 @@ type Case = (typeof CASES)[number] & { level: string } & (
 const git = (args: string) => { try { return execSync(`git ${args}`, { encoding: "utf8" }).trim(); } catch { return ""; } };
 const meta = { judge: JUDGE ?? null, date: new Date().toISOString(), commit: git("rev-parse --short HEAD"), dirty: git("status --porcelain") !== "", cases: CASES };
 
-function markdown(model: string, rows: TypeRow[], cases: Case[]) {
+const expected = contexts.reduce((sum, c) => sum + plannedActivities(c.step.activities).reduce((m, a) => m + a.count, 0), 0);
+/** What the table is built from; errored cases are in the denominators so a model cannot look better by failing. */
+function summaryOf(cases: Case[]) {
+  const ok = cases.flatMap((x) => ("error" in x ? [] : [x]));
+  const summary = { cases_ok: ok.length, cases: cases.length, fallback: ok.filter((x) => x.fallback).length, count_ok: ok.filter((x) => x.count_ok).length,
+    items: ok.reduce((m, x) => m + x.items.length, 0), items_expected: expected, judge_failed: judgeFails, judge_calls: judgeCalls };
+  return { ...summary, text: `cases ok ${summary.cases_ok}/${summary.cases} · fallback ${summary.fallback} · count ok ${summary.count_ok}/${summary.cases_ok} · items ${summary.items}/${expected} expected` };
+}
+
+function markdown(model: string, rows: TypeRow[], cases: Case[], summary: ReturnType<typeof summaryOf>) {
   const line = (cells: unknown[]) => `| ${cells.map((x) => x ?? "–").join(" | ")} |`;
   const head = ["type", "items", "pass %", ...RULES, ...(JUDGE ? ["natural", "level fit", "clear", "one correct %"] : [])];
   const caseHead = ["case", "level", "ms", "fallback", "count ok", "vocab %", "repeats"];
   return [
     `# Lesson eval: ${model}`, "",
-    `${meta.date} · commit ${meta.commit}${meta.dirty ? " (dirty)" : ""} · judge ${JUDGE ?? "none"}`, "",
+    `${meta.date} · commit ${meta.commit}${meta.dirty ? " (dirty)" : ""} · judge ${JUDGE ? `${JUDGE}${judgeFails ? ` (failed ${judgeFails}/${judgeCalls})` : ""}` : "none"}`, summary.text, "",
     line(head), line(head.map(() => "---")),
     ...rows.map((r) => line([r.type, r.items, r.pass, ...RULES.map((k) => r.fails[k]), ...(JUDGE ? [r.natural, r.level_fit, r.clear, r.one_correct] : [])])),
     "", "## Cases", "", line(caseHead), line(caseHead.map(() => "---")),
     ...cases.map((x) => "error" in x
-      ? line([`${x.course}/${x.step}`, x.level, `error: ${x.error.replace(/\|/g, "/")}`, "", "", "", ""])
+      ? line([`${x.course}/${x.step}`, x.level, `error: ${x.error.replace(/\|/g, "/").replace(/\s+/g, " ")}`, "", "", "", ""])
       : line([`${x.course}/${x.step}`, x.level, x.ms, x.fallback ? "yes" : "", x.count_ok ? "yes" : "no", x.vocab_coverage, x.repeats])),
     "", "## Failures", "",
     ...cases.flatMap((x) => "error" in x ? [] : x.items.filter((it) => it.failed.length)
-      .map((it) => `- **${x.course}/${x.step}** ${it.type} [${it.failed.join(", ")}]: \`${JSON.stringify(it.raw)}\``)),
+      .map((it) => `- **${x.course}/${x.step}** ${it.type} [${it.failed.join(", ")}]: \`${JSON.stringify(it.raw).replace(/\`/g, "'")}\``)),
   ].join("\n") + "\n";
 }
 
@@ -127,6 +157,9 @@ const stamp = meta.date.slice(0, 16).replace("T", "-").replace(":", ""); // 2026
 for (const model of models) {
   console.error(`\n${model}${JUDGE ? ` (judge ${JUDGE})` : ""}`);
   const cases: Case[] = [];
+  judgeFails = judgeCalls = 0;
+  await warm(model);
+  if (JUDGE) await warm(JUDGE);
   for (const [i, k] of CASES.entries()) {
     const c = contexts[i], t0 = performance.now();
     try {
@@ -147,9 +180,11 @@ for (const model of models) {
     }
   }
   const rows = summarize(cases.flatMap((x) => ("error" in x ? [] : x.items)));
+  const summary = summaryOf(cases);
   const file = new URL(`../eval/${stamp}-${model.replace(/[:/]/g, "-")}`, import.meta.url).pathname;
-  writeFileSync(`${file}.json`, JSON.stringify({ meta: { ...meta, model }, cases }, null, 2));
-  writeFileSync(`${file}.md`, markdown(model, rows, cases));
+  writeFileSync(`${file}.json`, JSON.stringify({ meta: { ...meta, model, summary }, cases }, null, 2));
+  writeFileSync(`${file}.md`, markdown(model, rows, cases, summary));
   console.table(rows.map(({ fails, ...r }) => ({ ...r, ...fails })));
+  console.error(summary.text + (JUDGE ? ` · judge failed ${judgeFails}/${judgeCalls}` : ""));
   console.error(`→ ${file}.md`);
 }
