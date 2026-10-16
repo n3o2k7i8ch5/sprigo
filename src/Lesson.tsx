@@ -182,7 +182,7 @@ export function Lesson({ id }: { id: string }) {
   const grade = (ok: boolean, correct: string, given: string, note?: string, judged = false) => {
     if (it && enrollment) {
       const { mistakeId, ...item } = it;
-      if (id === "practice-listen" && it.kind === "choice") db.nudgeWord(enrollment.id, it.listen, ok ? 1 : -1);
+      if ((id === "practice-listen" || id === "practice-due") && it.kind === "choice") db.reviewWord(enrollment.id, it.listen, ok);
       else if (ok && mistakeId) db.deleteMistake(mistakeId);
       else if (!ok && !mistakeId) db.addMistake(enrollment.id, item);
     }

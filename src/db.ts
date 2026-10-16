@@ -13,6 +13,7 @@ import { deleteProfileSql } from "./profileDelete";
 import type { Baseline, Conditions, SessionRow, SpeechSummary } from "./speech";
 import { remoteDb, serveCompanion } from "./companion";
 import { evictIds, type Memory, type MemoryOps, type MemorySource } from "./memory";
+import { isDue, newCard, review, strengthOf, type WordCard } from "./srs";
 export { NEW_STATS, type Stats };
 
 type Row = Record<string, any>;
@@ -185,19 +186,35 @@ export async function deleteMistakeByItem(enrollmentId: number, item: unknown) {
   await (await db()).execute("DELETE FROM mistakes WHERE enrollment_id = $1 AND item = $2", [enrollmentId, JSON.stringify(item)]);
 }
 
-export type Word = { word: string; translation: string; strength: number };
-/** Seen again → stronger (max 5). */
+export type Word = { word: string; translation: string; strength: number; card: WordCard };
+const CARD_COLS = "due, stability, difficulty, reps, lapses, state, last_review";
+/** New words start as FSRS New cards. Seeing a word again only refreshes its translation: only recall is graded (#20). */
 export async function addWords(enrollmentId: number, pairs: [string, string][]) {
-  const d = await db();
+  const d = await db(), c = newCard(new Date());
   for (const [w, t] of pairs) await d.execute(
-    "INSERT INTO words(enrollment_id, word, translation) VALUES ($1, $2, $3) ON CONFLICT DO UPDATE SET strength = MIN(5, strength + 1), translation = $3, updated_at = CURRENT_TIMESTAMP",
-    [enrollmentId, w, t]);
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+     ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
+    [enrollmentId, w, t, c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review]);
 }
-export async function nudgeWord(enrollmentId: number, word: string, delta: number) {
-  await (await db()).execute("UPDATE words SET strength = MAX(0, MIN(5, strength + $1)), updated_at = CURRENT_TIMESTAMP WHERE enrollment_id = $2 AND word = $3", [delta, enrollmentId, word]);
+/** One recall of `word`: right → Good, wrong → Again (src/srs.ts). */
+export async function reviewWord(enrollmentId: number, word: string, ok: boolean) {
+  const d = await db();
+  const [row] = await d.select<WordCard>(`SELECT ${CARD_COLS} FROM words WHERE enrollment_id = $1 AND word = $2`, [enrollmentId, word]);
+  if (!row) return;
+  const c = review(row, ok, new Date());
+  await d.execute(
+    "UPDATE words SET due = $1, stability = $2, difficulty = $3, reps = $4, lapses = $5, state = $6, last_review = $7, updated_at = CURRENT_TIMESTAMP WHERE enrollment_id = $8 AND word = $9",
+    [c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review, enrollmentId, word]);
 }
-export async function listWords(enrollmentId: number) {
-  return (await db()).select<Word>("SELECT word, translation, strength FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word", [enrollmentId]);
+export async function listWords(enrollmentId: number): Promise<Word[]> {
+  const rows = await (await db()).select<{ word: string; translation: string } & WordCard>(
+    `SELECT word, translation, ${CARD_COLS} FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word`, [enrollmentId]);
+  return rows.map(({ word, translation, ...card }) => ({ word, translation, strength: strengthOf(card), card }));
+}
+// ponytail: filters the whole list in JS; a `due` index and a WHERE when word lists reach the thousands.
+export async function dueWords(enrollmentId: number) {
+  const now = new Date();
+  return (await listWords(enrollmentId)).filter((w) => isDue(w.card, now));
 }
 
 // ---- Profile memory (SPR-22, src/memory.ts; per profile, shared by its courses) ----
