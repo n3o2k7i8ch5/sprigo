@@ -42,7 +42,7 @@ export function dueToday<T extends { card: WordCard }>(words: T[], now: Date): T
     .sort((a, b) => +isNew(a) - +isNew(b) || (a.card.due < b.card.due ? -1 : a.card.due > b.card.due ? 1 : 0));
 }
 
-// Stability (days until recall drops to 90%) bucketed to the 0–5 bar the word list shows.
+// Stability (days until recall drops to 90%) bucketed to the 1–5 bar the word list shows.
 // Not retrievability: that reads ~1 right after any review, a wrong answer included.
 const BUCKETS = [1, 3, 7, 15];
 export const strengthOf = (r: WordCard) =>
