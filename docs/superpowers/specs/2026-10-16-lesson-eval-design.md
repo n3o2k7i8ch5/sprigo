@@ -70,7 +70,7 @@ Models: the CLI arguments. Without any, every model Ollama lists (`/api/tags`, m
 
 Choice types are `word_select`, `multiple_choice`, `image_select`, `listen_select`, `fill_blank`, `sentence_complete` and `error_correct`.
 
-**Target and native fields per type:** target fields are the options of `image_select`, `listen_select`, `fill_blank`, `sentence_complete`, `error_correct` and `dialogue` (not `word_select` or `multiple_choice`: their direction can go either way, so their options are not language-checked), `audio_text`, `sentence_with_blank`, `sentence_start`, `wrong_sentence`, `dialogue_lines`, the `word_bank` answer, `translate` (`answer` or `source_sentence`: whichever is not guessed as native must be the target language), `phrase` (`learn`), `sentence` (`speak`) and match `target`. Native fields are `prompt`, `translation`, `note` and match `native`.
+**Target and native fields per type:** target fields are the options of `image_select`, `fill_blank`, `sentence_complete`, `error_correct` and `dialogue`, joined into one text because a single option is too short to guess (not `word_select`, `multiple_choice` or `listen_select`: their options may be in either language), `audio_text`, `sentence_with_blank`, `sentence_start`, `wrong_sentence`, `dialogue_lines`, the `word_bank` answer, `translate` (`answer` or `source_sentence`: whichever is not guessed as native must be the target language), `phrase` (`learn`), `sentence` (`speak`) and match `target`. Native fields are `prompt`, `translation`, `note` and match `native`.
 
 **Language guess:** `guessLang(text)` counts hits against small stopword lists for en, de, es, fr and tr and returns the best language, or `null` when the text has fewer than 3 words or no clear winner. `null` is never a failure. `// ponytail: stopword guess; a language-detection library if it misfires.`
 
@@ -99,7 +99,7 @@ A failed or unparseable judge call stores `null` for that item and is left out o
 
 ## Report
 
-Files: `eval/<YYYY-MM-DD-HHmm>-<model>.json` and `.md`, with `:` and `/` in the model name replaced by `-`.
+Files: `eval/<YYYY-MM-DD-HHmm>-<model>.json` (UTC time) and `.md`, with `:` and `/` in the model name replaced by `-`.
 
 - **JSON:** `meta` (model, judge, date, git short sha, dirty flag, the case list) plus, per case, the raw output, `fallback`, `ms`, the lesson metrics, and per item its type, raw object, failed rules and judge result. Kept so a run can be re-scored later by hand.
 - **Markdown:** a header with the meta, then one table row per activity type: items, % passing every rule, a failure count per rule, judge averages (natural, level fit, clear, % one correct). Then a total row, a per-case table of lesson metrics, and a "Failures" list showing each failing item's type, rules and text.
