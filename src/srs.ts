@@ -32,6 +32,16 @@ export const review = (r: WordCard, ok: boolean, now: Date) =>
 
 export const isDue = (r: WordCard, now: Date) => r.state === State.New || fromSql(r.due) <= now;
 
+/** End of the learner's local day: "due today" includes words due later today. */
+export const endOfDay = (now: Date) => { const d = new Date(now); d.setHours(23, 59, 59, 999); return d; };
+
+/** Words due by the end of today: reviews first (oldest due first), then New cards (oldest first). */
+export function dueToday<T extends { card: WordCard }>(words: T[], now: Date): T[] {
+  const eod = endOfDay(now), isNew = (w: T) => w.card.state === State.New;
+  return words.filter((w) => isDue(w.card, eod))
+    .sort((a, b) => +isNew(a) - +isNew(b) || (a.card.due < b.card.due ? -1 : a.card.due > b.card.due ? 1 : 0));
+}
+
 // Stability (days until recall drops to 90%) bucketed to the 0–5 bar the word list shows.
 // Not retrievability: that reads ~1 right after any review, a wrong answer included.
 const BUCKETS = [1, 3, 7, 15];

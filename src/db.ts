@@ -13,7 +13,7 @@ import { deleteProfileSql } from "./profileDelete";
 import type { Baseline, Conditions, SessionRow, SpeechSummary } from "./speech";
 import { remoteDb, serveCompanion } from "./companion";
 import { evictIds, type Memory, type MemoryOps, type MemorySource } from "./memory";
-import { isDue, newCard, review, strengthOf, type WordCard } from "./srs";
+import { newCard, review, strengthOf, type WordCard } from "./srs";
 export { NEW_STATS, type Stats };
 
 type Row = Record<string, any>;
@@ -210,11 +210,6 @@ export async function listWords(enrollmentId: number): Promise<Word[]> {
   const rows = await (await db()).select<{ word: string; translation: string } & WordCard>(
     `SELECT word, translation, ${CARD_COLS} FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word`, [enrollmentId]);
   return rows.map(({ word, translation, ...card }) => ({ word, translation, strength: strengthOf(card), card }));
-}
-// ponytail: filters the whole list in JS; a `due` index and a WHERE when word lists reach the thousands.
-export async function dueWords(enrollmentId: number) {
-  const now = new Date();
-  return (await listWords(enrollmentId)).filter((w) => isDue(w.card, now));
 }
 
 // ---- Profile memory (SPR-22, src/memory.ts; per profile, shared by its courses) ----

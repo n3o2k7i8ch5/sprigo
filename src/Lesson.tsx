@@ -7,6 +7,7 @@ import * as db from "./db";
 import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechScore, type Item } from "./activities";
 import { MicButton } from "./Mic";
 import { sttReady } from "./stt";
+import { dueToday } from "./srs";
 import { speak } from "./tts";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
@@ -58,8 +59,8 @@ async function practiceItems(id: string, enrollmentId: number, listenPrompt: str
   if (id === "practice-mistakes") return (await db.listMistakes<Item>(enrollmentId, 10)).map((m) => ({ ...m.item, mistakeId: m.id }));
   if (id === "practice-listen") return listenItems(await db.listWords(enrollmentId), listenPrompt);
   if (id === "practice-due") {
-    const [due, all] = await Promise.all([db.dueWords(enrollmentId), db.listWords(enrollmentId)]);
-    return listenItems(due, listenPrompt, 10, all);
+    const all = await db.listWords(enrollmentId);
+    return listenItems(dueToday(all, new Date()).slice(0, 10), listenPrompt, 10, all); // listenItems only reorders these 10
   }
   if (id === "practice-speak") return speakItems(await db.listWords(enrollmentId));
   if (id === "practice-madness") return madnessItems(await db.listWords(enrollmentId));
@@ -157,7 +158,7 @@ export function Lesson({ id }: { id: string }) {
         completeStep(id, xp);
         prefetchNext(enrollment.id, ctx.course, ctx.level, id, ctx.native);
       } else gainXp(xp);
-      // "My words": phrases taught or matched in this lesson (strength grows each time they come back).
+      // "My words": phrases taught or matched in this lesson become New FSRS cards; only recall (listen, due review) grades them.
       db.addWords(enrollment.id, list.flatMap((x): [string, string][] =>
         x.kind === "learn" ? [[x.phrase, x.translation]] : x.kind === "match" ? x.pairs : []));
     }

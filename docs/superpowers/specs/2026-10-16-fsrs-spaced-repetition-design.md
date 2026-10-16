@@ -12,9 +12,12 @@ Every word gets a due date computed by FSRS from how well the learner recalled i
 - **What counts as a review:** only per-word recall. That means answers in `practice-listen` and in the new `practice-due` session. Seeing a word (`learn` cards, `match` pairs, saved roleplay phrases) only creates the card in the `New` state. It never grades it.
 - **Rating:** wrong → `Again`, right → `Good`. A multiple-choice listen item has no reliable hint or speed signal, so `Hard` and `Easy` are not used yet.
 - **Library:** `ts-fsrs` (no dependencies). It is the reference TypeScript implementation, and hand-written FSRS is easy to get subtly wrong.
-- **`strength`:** the column stays, because migrations are append-only, but nothing writes it any more. The 0–5 value the UI shows is derived from FSRS retrievability.
+- **`strength`:** the column stays, because migrations are append-only, but nothing writes it any more. The value the UI shows (1–5) is derived from FSRS stability buckets (see `strengthOf`).
 - **Scheduler:** `fsrs({ enable_short_term: false })`: no same-day learning steps, so `learning_steps` is not stored.
 - **Lessons:** due words are not mixed into AI lessons in this version.
+- **Due today:** a word counts as due if its `due` is on or before the end of the learner's local day (`endOfDay`), so words due later today are included and 'come back tomorrow' is true when nothing is due.
+- **Due session order:** due Review/Relearning cards first, oldest `due` first; New cards fill the remaining slots, oldest first; at most 10 per session. Weakest-first would let the stream of New cards (all strength 1) starve overdue mature words.
+- **Seeding policy:** the old `strength` grew with exposure as well as recall, so a word seen in 2+ lessons is seeded as a reviewed card. Accepted: it only sets a starting interval.
 
 ## Data: migration v5
 
@@ -55,7 +58,7 @@ A small wrapper around `ts-fsrs` with no DB or React imports, so it runs under `
 - `addWords`: inserts new words as `New` cards. For an existing word it only updates `translation` and `updated_at`.
 - `nudgeWord` is replaced by `reviewWord(enrollmentId, word, ok)`, which reads the row, applies `srs.review` and writes the FSRS columns.
 - `listWords`: selects the FSRS columns as well and fills `strength` with `strengthOf(...)`, so the `Word` type and its callers (word chips, `speakItems`, `listenItems`) keep working unchanged.
-- `dueWords(enrollmentId)`: `listWords` filtered by `isDue`. The session orders them weakest first, like Listen.
+- `dueToday(words, now)` (in `srs.ts`, pure): filters `listWords` output by `isDue` at `endOfDay(now)` and orders it as described in Decisions. No separate DB query.
 
 ## UI
 
@@ -70,13 +73,14 @@ A small wrapper around `ts-fsrs` with no DB or React imports, so it runs under `
 - `src/srs.test.ts`:
   - `review` with `ok = false` gives `Again`: `lapses` grows on a Review card and `due` comes soon.
   - `review` with `ok = true` gives `Good`: `due` moves further out with each review.
-  - `strengthOf` returns 1 for `New`, stays within 0–5, and follows the stability buckets.
+  - `strengthOf` returns 1 for `New`, and otherwise follows the stability buckets (1–5).
+  - `endOfDay` and `dueToday` (later-today inclusion, tomorrow exclusion, reviews before New, oldest first).
   - `fromRow`/`toRow` round-trips.
-- Migration test (sql.js, following `migrate.test.ts`): a v4 database with words at strength 0, 2 and 5 migrates to v5 with the states, stabilities and due dates from the table above, and loses no rows.
+- Migration test (sql.js, following `migrate.test.ts`): a v4 database with words at strengths 0, 1, 2–5 migrates to v5 with the states, stabilities and due dates from the table above, and loses no rows.
 
 ## Out of scope
 
-Mixing due words into lessons, `Hard`/`Easy` ratings, a review log, due-word notifications, and FSRS parameter tuning (the `ts-fsrs` defaults are used).
+Mixing due words into lessons, `Hard`/`Easy` ratings, a review log, due-word notifications, and FSRS parameter tuning (the `ts-fsrs` defaults are used), the session cap of 10 vs. the full due count on the card.
 
 ## Done when
 
