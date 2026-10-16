@@ -64,7 +64,7 @@ Models: the CLI arguments. Without any, every model Ollama lists (`/api/tags`, m
 | | `translate` | `answer` equals `source_sentence` (normalized) |
 | | `listen_type` | the prompt contains `audio_text` (normalized) |
 | `target_lang` | all | a target-language field is guessed as another language |
-| `native_lang` | all | `prompt`, a translation or a note is guessed as another language than the native one |
+| `native_lang` | all | `prompt`, a translation or a note is guessed as another language than the native one, after removing the item's own target-side strings and quoted `'…'` spans |
 | `one_blank` | `fill_blank` | `sentence_with_blank` does not contain exactly one `___` |
 | `dropped` | all | the app's `toItem` returns `null` |
 
@@ -76,7 +76,7 @@ Choice types are `word_select`, `multiple_choice`, `image_select`, `listen_selec
 
 **Lesson metrics** (per case):
 
-- `vocab_coverage`: the share of the step's vocabulary entries that appear (normalized substring) in the lesson's target fields.
+- `vocab_coverage`: the share of the step's vocabulary entries that appear at a word start (normalized) in any string of the lesson's items.
 - `repeats`: the number of target sentences that appear in more than one item.
 - `count_ok`: every activity returned its requested `count` of items.
 - `fallback` and `ms` (wall time).

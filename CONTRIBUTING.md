@@ -53,7 +53,7 @@ How the app fits together is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); de
 
 `pnpm eval [model…]` generates a fixed set of lessons (`CASES` in [`scripts/eval.ts`](scripts/eval.ts): several courses, levels and every exercise type) with the app's real prompts and checks each exercise: the answer is among the options, options are distinct, nothing gives the answer away, text is in the right language, there is exactly one blank. `JUDGE=<model>` also has a strong model (for example an Ollama `:cloud` model) score naturalness, level fit, clarity and whether exactly one answer is correct.
 
-Run it when you change a lesson prompt (`src/activities.ts`), add a course level, or want to recommend a model. Each run writes `eval/<time>-<model>.md` (and `.json` with every exercise). To compare two prompt versions, run it on each branch with the same model and compare the tables; the report header shows the commit. The rule checks themselves are tested in `src/evalRules.test.ts`.
+Run it when you change a lesson prompt (`src/activities.ts`), add a course level, or want to recommend a model. Each run writes `eval/<time>-<model>.md` (and `.json` with every exercise). To compare two prompt versions, run it on each branch with the same model and compare the tables; the report header shows the commit. Generation is not deterministic, so run each side twice and treat differences of a few points as noise. The rule checks themselves are tested in `src/evalRules.test.ts`.
 
 ### Conventions
 

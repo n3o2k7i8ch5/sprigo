@@ -9,6 +9,9 @@ export type Rule = (typeof RULES)[number];
 export type Judged = { notes: string; natural: number; level_fit: number; clear: number; one_correct: boolean } | null;
 export type ItemResult = { type: string; raw: any; failed: Rule[]; judge?: Judged };
 
+// normalize uses toLocaleLowerCase, which turns "I" into "ı" under a Turkish locale.
+const n = (t: string) => normalize(t.toLowerCase());
+
 // ponytail: stopword guess; a language-detection library if it misfires.
 const STOP: Record<Lang, Set<string>> = {
   en: new Set("the a an is are was were i you he she it we they to of and in on at for with my your this that do does not have has".split(" ")),
@@ -22,7 +25,7 @@ const MARK: Record<Lang, RegExp> = { en: /(?!)/, de: /[ßä]/, es: /[ñáíóú]
 
 /** The likeliest of the five course languages, or null for under 3 words or no clear winner. */
 export function guessLang(text: string): Lang | null {
-  const words = normalize(text).split(" ").filter(Boolean);
+  const words = n(text).split(" ").filter(Boolean);
   if (words.length < 3) return null;
   const ranked = LANGS.map((l) => [l, words.filter((w) => STOP[l].has(w) || MARK[l].test(w)).length] as const).sort((a, b) => b[1] - a[1]);
   return ranked[0][1] > ranked[1][1] ? ranked[0][0] : null;
@@ -51,8 +54,13 @@ export function fieldsOf(type: string, g: any, native: Lang): { target: string[]
   }
 }
 
-const n = normalize;
 const has = (text: string, part: string) => !!n(part) && ` ${n(text)} `.includes(` ${n(part)} `);
+/** The item's target-language strings: quoted in a native prompt, they must not decide its language. */
+const targetStrings = (g: any): string[] => [g.options, g.dialogue_lines, g.answer_words?.join(" "), g.pairs?.map((p: any) => p.target),
+  g.audio_text, g.source_sentence, g.answer, g.phrase, g.sentence, g.sentence_with_blank, g.sentence_start, g.wrong_sentence]
+  .flat().filter((s): s is string => typeof s === "string").map(n).filter((s) => s.length >= 3); // shorter ones would eat letters of native words
+// Quoted spans start after a space, so Turkish suffixes (İstanbul'a) are not cut. The quoted text may be a meaning the options translate.
+const withoutTarget = (text: string, g: any) => targetStrings(g).reduce((t, s) => t.split(s).join(" "), n(text)).replace(/(^| )'[^']*'(?= |$)/g, " ");
 const wrongLang = (texts: string[], want: Lang) => texts.some((t) => { const l = guessLang(t); return l !== null && l !== want; });
 
 /** The rules a schema-valid raw item fails, in RULES order. */
@@ -79,21 +87,22 @@ export function checkItem(type: string, g: any, ctx: { target: Lang; native: Lan
   if (type === "fill_blank" && (g.sentence_with_blank.match(/_{3,}/g) ?? []).length !== 1) bad.add("one_blank");
   const f = fieldsOf(type, g, ctx.native);
   if (wrongLang(f.target, ctx.target)) bad.add("target_lang");
-  if (wrongLang(f.native, ctx.native)) bad.add("native_lang");
+  if (wrongLang(f.native.map((t) => withoutTarget(t, g)), ctx.native)) bad.add("native_lang");
   return RULES.filter((r) => bad.has(r));
 }
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 
-/** vocab_coverage: % of the step's vocabulary found anywhere in the lesson; repeats: target sentences (3+ words) used by more than one item. */
+/** vocab_coverage: % of the step's vocabulary found at a word start in any string of the lesson; repeats: target sentences (3+ words) used by more than one item. */
 export function lessonMetrics(vocab: string[], items: { type: string; raw: any }[], native: Lang) {
-  const all = ` ${n(items.map((it) => JSON.stringify(it.raw)).join(" "))} `;
+  const strings = (v: unknown): string[] => typeof v === "string" ? [v] : v && typeof v === "object" ? Object.values(v).flatMap(strings) : [];
+  const all = ` ${n(items.flatMap((it) => strings(it.raw)).join(" "))}`;
   const seen = new Map<string, number>();
   for (const it of items) {
     const own = new Set(fieldsOf(it.type, it.raw, native).target.map(n).filter((t) => t.split(" ").length >= 3));
     for (const t of own) seen.set(t, (seen.get(t) ?? 0) + 1);
   }
-  return { vocab_coverage: pct(vocab.filter((v) => all.includes(` ${n(v)} `)).length, vocab.length), repeats: [...seen.values()].filter((k) => k > 1).length };
+  return { vocab_coverage: pct(vocab.filter((v) => all.includes(` ${n(v)}`)).length, vocab.length), repeats: [...seen.values()].filter((k) => k > 1).length };
 }
 
 export type TypeRow = { type: string; items: number; pass: number; fails: Record<Rule, number>;

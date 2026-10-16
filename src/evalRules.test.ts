@@ -60,6 +60,20 @@ test("target text in another language; native text in the target language", () =
   assert.deepEqual(checkItem("learn", { phrase: "Good morning", translation: "Günaydın", note: "You say this in the morning to greet someone." }, EN_TR), ["native_lang"]);
 });
 
+test("native text quoting target-language text is not flagged", () => {
+  const mc = { prompt: "'Good morning, how are you?' Türkçede ne demek?", options: ["Günaydın, nasılsın?", "İyi geceler", "Hoşça kal", "Teşekkürler"], answer_index: 0 };
+  assert.deepEqual(checkItem("multiple_choice", mc, EN_TR), []);
+  const ls = { prompt: "Duyduğun cümle: 'I am at the office'?", audio_text: "I am at the office", options: ["Ofisteyim", "Evdeyim", "Okuldayım", "Parktayım"], answer_index: 0 };
+  assert.deepEqual(checkItem("listen_select", ls, EN_TR), []);
+});
+
+test("lessonMetrics counts values, not key names, at word starts", () => {
+  const item = { type: "learn", raw: { phrase: "Good morning", translation: "Günaydın", note: "Sabah söylenir." } };
+  assert.equal(lessonMetrics(["note", "translation", "answer"], [item], "tr").vocab_coverage, 0);
+  const q = { type: "speak", raw: { sentence: "How old are you?", translation: "Kaç yaşındasın?" } };
+  assert.equal(lessonMetrics(["yaş"], [q], "tr").vocab_coverage, 100);
+});
+
 test("lessonMetrics: vocabulary coverage and repeated sentences", () => {
   const items = [
     { type: "speak", raw: { sentence: "Good morning, how are you?", translation: "Günaydın, nasılsın?" } },
