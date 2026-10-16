@@ -67,11 +67,16 @@ test("native text quoting target-language text is not flagged", () => {
   assert.deepEqual(checkItem("listen_select", ls, EN_TR), []);
 });
 
+test("a Turkish suffix apostrophe is not a quote", () => {
+  const g = { prompt: "İstanbul'a gitmek istiyorum, bu cümleyi nasıl söylersin?", options: ["I want to go to Istanbul", "I live in Istanbul", "I like Istanbul", "I left Istanbul"], answer_index: 0 };
+  assert.ok(!checkItem("multiple_choice", g, EN_TR).includes("native_lang"));
+});
+
 test("lessonMetrics counts values, not key names, at word starts", () => {
   const item = { type: "learn", raw: { phrase: "Good morning", translation: "Günaydın", note: "Sabah söylenir." } };
   assert.equal(lessonMetrics(["note", "translation", "answer"], [item], "tr").vocab_coverage, 0);
   const q = { type: "speak", raw: { sentence: "How old are you?", translation: "Kaç yaşındasın?" } };
-  assert.equal(lessonMetrics(["yaş"], [q], "tr").vocab_coverage, 100);
+  assert.equal(lessonMetrics(["", "yaş"], [q], "tr").vocab_coverage, 100);
 });
 
 test("lessonMetrics: vocabulary coverage and repeated sentences", () => {

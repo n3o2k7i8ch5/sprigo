@@ -42,8 +42,8 @@ The `LessonContext` for a normal step is built in the script (course, level, lev
 
 For each model, and for each case:
 
-1. One call for the whole lesson with `systemPrompt(c)` + the JSON schema of `lessonSchema(acts)` as the system message, `lessonPrompt(c, acts)` as the user message, and `response_format: json_schema`. The reply is parsed with the same `{`…`}` extraction as `extractJson` and validated with the zod schema.
-2. If parsing or validation fails, fall back to one call per activity, the same way `generateItems` does. The case is marked `fallback: true`.
+1. One call for the whole lesson with `systemPrompt(c)` + the JSON schema of `lessonSchema(acts)` as the system message, `lessonPrompt(c, acts)` as the user message, and `response_format: json_schema`. The reply is parsed with the same `{`…`}` extraction as `extractJson` and validated with the zod schema. A reply-shape error (zod, JSON syntax, no JSON object) is retried up to 3 tries in all, like `generate`; HTTP errors and timeouts fail at once.
+2. If the call still fails after its retries, fall back to one call per activity, the same way `generateItems` does. The case is marked `fallback: true`.
 3. For every raw item, run `REGISTRY[type].toItem` (an item the app would drop counts as `dropped`), then the rule checks.
 4. If `JUDGE` is set, send every item to the judge, one call per item.
 
@@ -64,7 +64,7 @@ Models: the CLI arguments. Without any, every model Ollama lists (`/api/tags`, m
 | | `translate` | `answer` equals `source_sentence` (normalized) |
 | | `listen_type` | the prompt contains `audio_text` (normalized) |
 | `target_lang` | all | a target-language field is guessed as another language |
-| `native_lang` | all | `prompt`, a translation or a note is guessed as another language than the native one, after removing the item's own target-side strings and quoted `'…'` spans |
+| `native_lang` | all | `prompt`, a translation or a note is guessed as another language than the native one, after removing the item's own target-side strings and quoted `'…'` spans that open at a word start |
 | `one_blank` | `fill_blank` | `sentence_with_blank` does not contain exactly one `___` |
 | `dropped` | all | the app's `toItem` returns `null` |
 
@@ -95,7 +95,7 @@ z.object({
 })
 ```
 
-A failed or unparseable judge call stores `null` for that item and is left out of the averages.
+Judge calls use `temperature: 0` and the same retry. A failed judge call stores `null` for that item and is left out of the averages; the first error per model is logged, and the failure count shows in the header as `judge <model> (failed K/N)` and in `meta.summary`.
 
 ## Report
 
@@ -104,6 +104,8 @@ Files: `eval/<YYYY-MM-DD-HHmm>-<model>.json` (UTC time) and `.md`, with `:` and 
 - **JSON:** `meta` (model, judge, date, git short sha, dirty flag, the case list) plus, per case, the raw output, `fallback`, `ms`, the lesson metrics, and per item its type, raw object, failed rules and judge result. Kept so a run can be re-scored later by hand.
 - **Markdown:** a header with the meta, then one table row per activity type: items, % passing every rule, a failure count per rule, judge averages (natural, level fit, clear, % one correct). Then a total row, a per-case table of lesson metrics, and a "Failures" list showing each failing item's type, rules and text.
 - **Console:** the per-type table via `console.table`, like `bench.ts`.
+- **Summary line** `cases ok X/8 · fallback F · count ok C/X · items N/E expected` (E counts errored cases too): in the Markdown header, on stderr after the table, and in `meta.summary`.
+- **Warm-up:** before a model's first case (and once for the judge model) one tiny `/api/generate` request loads a cold model; it is not timed.
 
 ## Errors
 

@@ -45,7 +45,7 @@ const warmed = new Set<string>();
 async function warm(model: string) {
   if (warmed.has(model)) return;
   warmed.add(model);
-  await fetch(`${BASE}/api/generate`, { method: "POST", body: JSON.stringify({ model, keep_alive: "10m" }), signal: AbortSignal.timeout(180_000) }).then((r) => r.arrayBuffer(), () => {});
+  await fetch(`${BASE}/api/generate`, { method: "POST", body: JSON.stringify({ model, keep_alive: "10m" }), signal: AbortSignal.timeout(180_000) }).then((r) => r.arrayBuffer()).catch(() => {});
 }
 
 // A bad reply is tried again (3 tries in all, like generate in src/ai.ts); HTTP errors and timeouts fail at once.

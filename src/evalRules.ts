@@ -97,12 +97,13 @@ const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 export function lessonMetrics(vocab: string[], items: { type: string; raw: any }[], native: Lang) {
   const strings = (v: unknown): string[] => typeof v === "string" ? [v] : v && typeof v === "object" ? Object.values(v).flatMap(strings) : [];
   const all = ` ${n(items.flatMap((it) => strings(it.raw)).join(" "))}`;
+  const words = vocab.filter((v) => n(v)); // an entry that normalizes to nothing would match everywhere
   const seen = new Map<string, number>();
   for (const it of items) {
     const own = new Set(fieldsOf(it.type, it.raw, native).target.map(n).filter((t) => t.split(" ").length >= 3));
     for (const t of own) seen.set(t, (seen.get(t) ?? 0) + 1);
   }
-  return { vocab_coverage: pct(vocab.filter((v) => all.includes(` ${n(v)}`)).length, vocab.length), repeats: [...seen.values()].filter((k) => k > 1).length };
+  return { vocab_coverage: pct(words.filter((v) => all.includes(` ${n(v)}`)).length, words.length), repeats: [...seen.values()].filter((k) => k > 1).length };
 }
 
 export type TypeRow = { type: string; items: number; pass: number; fails: Record<Rule, number>;
