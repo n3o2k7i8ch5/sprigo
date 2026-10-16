@@ -57,6 +57,10 @@ type PItem = Item & { mistakeId?: number };
 async function practiceItems(id: string, enrollmentId: number, listenPrompt: string): Promise<PItem[]> {
   if (id === "practice-mistakes") return (await db.listMistakes<Item>(enrollmentId, 10)).map((m) => ({ ...m.item, mistakeId: m.id }));
   if (id === "practice-listen") return listenItems(await db.listWords(enrollmentId), listenPrompt);
+  if (id === "practice-due") {
+    const [due, all] = await Promise.all([db.dueWords(enrollmentId), db.listWords(enrollmentId)]);
+    return listenItems(due, listenPrompt, 10, all);
+  }
   if (id === "practice-speak") return speakItems(await db.listWords(enrollmentId));
   if (id === "practice-madness") return madnessItems(await db.listWords(enrollmentId));
   if (id === "practice-timed") return (await db.cachedLessonItems<Item>(enrollmentId)).sort(() => Math.random() - 0.5).slice(0, 20);
