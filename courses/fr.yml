@@ -552,3 +552,3105 @@ levels:
         - { type: listen_select, count: 3 }
         - { type: translate, count: 3 }
         - { type: dialogue }
+
+  A2:
+    title: Elementary
+    description: >
+      Communicate in simple, routine tasks on familiar topics and describe your background, past experiences and future plans.
+
+    units:
+      - id: metiers-et-travail
+        title: Jobs & Work
+        description: Talk about jobs, workplaces and your working week.
+        icon: 💼
+        steps:
+          - id: professions-sans-article
+            title: Professions
+            description: Say what people do; no article after être, but un/une after c'est.
+            vocabulary: [médecin, infirmier, infirmière, professeur, serveur, serveuse, avocat, avocate, ingénieur, "le métier"]
+            grammar:
+              - pattern: "Je suis infirmière."
+              - pattern: "C'est un médecin."
+              - pattern: "Qu'est-ce que tu fais dans la vie ?"
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+              - { type: error_correct }
+          - id: travailler-chez-comme
+            title: Where I Work
+            description: Say where and as what you work with dans, chez and comme.
+            vocabulary: ["le bureau", "l'entreprise", "l'hôpital", "le magasin", "le patron", "la patronne", "le collègue", "la collègue", "travailler comme"]
+            grammar:
+              - pattern: "Je travaille dans une grande entreprise."
+              - pattern: "Ma sœur travaille chez Renault."
+              - pattern: "Il travaille comme serveur dans un restaurant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: adverbes-de-frequence
+            title: How Often?
+            description: Frequency adverbs and expressions for your working routine.
+            vocabulary: [toujours, souvent, parfois, rarement, "ne … jamais", "tous les jours", "une fois par semaine", "le week-end"]
+            grammar:
+              - pattern: "J'arrive toujours au bureau à neuf heures."
+              - pattern: "Je ne travaille jamais le dimanche."
+              - pattern: "Je déjeune parfois avec mes collègues."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: entretien-depuis
+            title: A Job Interview
+            description: Say how long you have been doing something with depuis, il y a … que and ça fait … que.
+            vocabulary: ["l'entretien", "l'expérience", "le CV", "le salaire", depuis, "il y a … que", "ça fait … que", "à temps plein", "à temps partiel"]
+            grammar:
+              - pattern: "Je travaille ici depuis trois ans."
+              - pattern: "Ça fait deux ans que j'apprends le français."
+              - pattern: "Depuis combien de temps est-ce que vous travaillez ici ?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer questions about your job, your experience and how long you have worked there.
+
+      - id: comparatifs-superlatifs
+        title: Comparisons
+        description: Compare people, things and places, and say which is the best.
+        icon: ⚖️
+        steps:
+          - id: plus-moins-aussi-que
+            title: More, Less, As
+            description: Compare adjectives with plus, moins and aussi … que.
+            vocabulary: [grand, petit, cher, "bon marché", rapide, lent, "plus … que", "moins … que", "aussi … que"]
+            grammar:
+              - pattern: "Paris est plus grand que Lyon."
+              - pattern: "Le train est moins cher que l'avion."
+              - pattern: "Ma sœur est aussi grande que moi."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: word_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: meilleur-ou-mieux
+            title: Better
+            description: Use meilleur with nouns and mieux with verbs.
+            vocabulary: [bon, bonne, meilleur, meilleure, bien, mieux, mauvais, pire]
+            grammar:
+              - pattern: "Ce gâteau est meilleur que l'autre."
+              - pattern: "Elle chante mieux que moi."
+              - pattern: "Les vacances à la mer sont meilleures."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: autant-de-que
+            title: As Much As
+            description: Compare quantities and actions with autant (de) … que.
+            vocabulary: ["plus de", "moins de", "autant de", autant, "le temps", "l'argent", "les amis", "le travail"]
+            grammar:
+              - pattern: "J'ai autant de livres que toi."
+              - pattern: "Il travaille autant que son frère."
+              - pattern: "Nous avons moins de temps que vous."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: superlatif-le-plus
+            title: The Best of All
+            description: Say what is the most or the least with le/la/les plus … de.
+            vocabulary: ["le plus", "la plus", "les plus", "le moins", "le meilleur", "la meilleure", "du monde", "de la ville"]
+            grammar:
+              - pattern: "C'est la plus belle ville du monde."
+              - pattern: "C'est le restaurant le moins cher du quartier."
+              - pattern: "Marie est la meilleure élève de la classe."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: comparing_cities
+                goal: Compare two cities and say which one you prefer and why.
+
+      - id: aux-magasins
+        title: At the Shops
+        description: Buy things in the right quantities, point to items and return what doesn't fit.
+        icon: 🛍️
+        steps:
+          - id: quantites-au-marche
+            title: At the Market
+            description: Ask for quantities with de after the measure.
+            vocabulary: ["un kilo de", "une livre de", "une bouteille de", "une boîte de", "un paquet de", "une tranche de", "beaucoup de", "un peu de", "assez de"]
+            grammar:
+              - pattern: "Je voudrais un kilo de tomates, s'il vous plaît."
+              - pattern: "J'achète une bouteille d'eau et un paquet de café."
+              - pattern: "Il y a beaucoup de monde au marché."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: listen_select, count: 2 }
+          - id: demonstratifs-ce-cette
+            title: This One, That One
+            description: Point to things with ce, cet, cette, ces and -ci / -là.
+            vocabulary: [ce, cet, cette, ces, "celui-ci", "celle-là", "la taille", "la couleur", "le pull", "la robe"]
+            grammar:
+              - pattern: "Combien coûte cette robe ?"
+              - pattern: "Je préfère cet anorak-ci."
+              - pattern: "Ces chaussures-là sont trop petites."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: translate }
+          - id: pronoms-cod-en
+            title: I'll Take It
+            description: Replace objects with le, la, les and quantities with en.
+            vocabulary: [le, la, "l'", les, en, prendre, essayer, "J'en voudrais deux.", "Je le prends."]
+            grammar:
+              - pattern: "Cette veste ? Je la prends."
+              - pattern: "Des pommes ? J'en voudrais deux kilos."
+              - pattern: "Tu peux l'essayer dans la cabine."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete, count: 2 }
+          - id: retour-echange
+            title: Returns & Exchanges
+            description: Return or exchange something that doesn't fit or is broken.
+            vocabulary: ["le ticket de caisse", "rembourser", "échanger", "le remboursement", "trop grand", "trop petit", "abîmé", "la caisse"]
+            grammar:
+              - pattern: "Je voudrais échanger ce pantalon, il est trop petit."
+              - pattern: "Est-ce que vous pouvez me rembourser ?"
+              - pattern: "Vous avez le ticket de caisse ?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: returning_an_item
+                goal: Explain what is wrong with an item and ask to exchange it or get a refund.
+
+      - id: sante-et-corps
+        title: Health & the Body
+        description: Name body parts, say what hurts and give health advice.
+        icon: 🩺
+        steps:
+          - id: parties-du-corps
+            title: The Body
+            description: Name the main parts of the body.
+            vocabulary: ["la tête", "le bras", "la main", "la jambe", "le pied", "le dos", "le ventre", "la gorge", "les dents", "les yeux"]
+            grammar:
+              - pattern: "J'ai les yeux bleus."
+              - pattern: "Il a les cheveux longs."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 3 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: avoir-mal-a
+            title: What Hurts?
+            description: Say what hurts with avoir mal au, à la, à l' and aux.
+            vocabulary: ["avoir mal", "au dos", "à la tête", "à la gorge", "au ventre", "aux dents", "aux pieds", malade, fatigué]
+            grammar:
+              - pattern: "J'ai mal à la tête."
+              - pattern: "Elle a mal au dos depuis hier."
+              - pattern: "Tu as mal aux dents ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: chez-le-medecin
+            title: At the Doctor's
+            description: Describe symptoms and say since when you have had them.
+            vocabulary: ["le rendez-vous", "la fièvre", "la toux", "le rhume", "la grippe", "l'ordonnance", "le médicament", "la pharmacie", "depuis quand"]
+            grammar:
+              - pattern: "Depuis quand avez-vous de la fièvre ?"
+              - pattern: "Je tousse depuis trois jours."
+              - pattern: "J'ai un rhume et je suis très fatigué."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+          - id: conseils-imperatif
+            title: Get Well Soon
+            description: Give advice with il faut, tu devrais and the imperative, including reflexive verbs.
+            vocabulary: ["il faut", "tu devrais", "vous devriez", "se reposer", "boire de l'eau", "rester au lit", "prendre un médicament", "Repose-toi !", "Bon rétablissement !"]
+            grammar:
+              - pattern: "Repose-toi et bois beaucoup d'eau."
+              - pattern: "Tu devrais aller chez le médecin."
+              - pattern: "Il faut prendre ce médicament trois fois par jour."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+              - type: dialogue
+                scenario: doctor_visit
+                goal: Describe your symptoms to the doctor and understand the advice you are given.
+
+      - id: projets-de-voyage
+        title: Travel Plans
+        description: Plan a trip, talk about countries and cities, and book a hotel.
+        icon: ✈️
+        steps:
+          - id: vocabulaire-du-voyage
+            title: Getting Ready
+            description: Words for planning and packing for a trip.
+            vocabulary: ["le voyage", "la valise", "le passeport", "le billet", "l'aéroport", "la gare", "le vol", "réserver", "partir en vacances"]
+            grammar:
+              - pattern: "Je pars en vacances la semaine prochaine."
+              - pattern: "J'ai déjà réservé mon billet."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: pays-et-villes
+            title: Countries & Cities
+            description: Use en, au, aux and à with countries and cities.
+            vocabulary: ["en France", "en Italie", "au Japon", "au Canada", "aux États-Unis", "à Paris", "à Londres", "en Espagne"]
+            grammar:
+              - pattern: "Cet été, je vais en Italie et au Portugal."
+              - pattern: "Mon frère habite aux États-Unis, à New York."
+              - pattern: "Tu es déjà allé au Japon ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 3 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: pronom-y
+            title: I'm Going There
+            description: Replace places with the pronoun y.
+            vocabulary: [y, "j'y vais", "on y va", "j'y suis allé", "là-bas", "y rester", "combien de temps"]
+            grammar:
+              - pattern: "Tu vas à Marseille ? Oui, j'y vais en train."
+              - pattern: "On y reste une semaine."
+              - pattern: "Je n'y suis jamais allée."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: reserver-hotel
+            title: Booking a Hotel
+            description: Book a room politely with je voudrais and the conditional.
+            vocabulary: ["une chambre double", "une chambre simple", "une nuit", "le petit-déjeuner", "compris", "la réception", "la clé", "je voudrais", "pourriez-vous"]
+            grammar:
+              - pattern: "Je voudrais réserver une chambre pour deux nuits."
+              - pattern: "Est-ce que le petit-déjeuner est compris ?"
+              - pattern: "Pourriez-vous m'appeler un taxi ?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: hotel_booking
+                goal: Book a hotel room for specific dates and ask what is included.
+
+      - id: le-futur-simple
+        title: The Future
+        description: Talk about the future, conditions and plans with the futur simple.
+        icon: 🔮
+        steps:
+          - id: futur-simple-reguliers
+            title: Will Do
+            description: Form the futur simple of regular verbs from the infinitive.
+            vocabulary: [parler, finir, prendre, "je parlerai", "tu finiras", "il prendra", demain, "l'année prochaine", "un jour"]
+            grammar:
+              - pattern: "L'année prochaine, je parlerai mieux français."
+              - pattern: "Nous finirons le projet demain."
+              - pattern: "Ils prendront le train à huit heures."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: futur-irregulier
+            title: Irregular Futures
+            description: Learn the irregular stems aur-, ser-, fer-, ir-, pourr- and viendr-.
+            vocabulary: ["j'aurai", "je serai", "je ferai", "j'irai", "je pourrai", "je viendrai", "je verrai", "il faudra"]
+            grammar:
+              - pattern: "Demain, il fera beau."
+              - pattern: "Je serai à la maison ce soir."
+              - pattern: "Tu viendras à ma fête samedi ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: si-present-futur
+            title: If This, Then That
+            description: Talk about real conditions with si + présent + futur.
+            vocabulary: [si, "s'il pleut", "s'il fait beau", "avoir le temps", "rester à la maison", "aller à la plage"]
+            grammar:
+              - pattern: "S'il fait beau, nous irons à la plage."
+              - pattern: "Si j'ai le temps, je t'appellerai."
+              - pattern: "Si tu viens, on fera un gâteau."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: quand-futur-projets
+            title: Plans & Hopes
+            description: Use quand + futur and talk about hopes and intentions.
+            vocabulary: [quand, espérer, "avoir l'intention de", "avoir envie de", "plus tard", "dans cinq ans", "trouver un travail", "déménager"]
+            grammar:
+              - pattern: "Quand je serai grand, je serai pilote."
+              - pattern: "J'espère que tu pourras venir."
+              - pattern: "J'ai l'intention de déménager à Lyon."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+              - { type: speak }
+              - type: dialogue
+                scenario: future_plans
+                goal: Talk about your plans and hopes for the next few years.
+
+      - id: quand-j-etais-petit
+        title: When I Was a Child
+        description: Describe your childhood, past habits and how things used to be.
+        icon: 🧸
+        steps:
+          - id: imparfait-formation
+            title: The Imperfect Tense
+            description: Form the imparfait from the nous form of the present.
+            vocabulary: ["je jouais", "tu habitais", "il mangeait", "nous allions", "vous aviez", "ils finissaient", "l'enfance", "petit", "petite"]
+            grammar:
+              - pattern: "Quand j'étais petit, je jouais au foot."
+              - pattern: "Nous habitions à la campagne."
+              - pattern: "Mes parents travaillaient beaucoup."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: imparfait-etre
+            title: I Was
+            description: Use the irregular stem ét- to describe people and places in the past.
+            vocabulary: ["j'étais", "tu étais", "il était", "nous étions", "vous étiez", "ils étaient", timide, sage, bavard]
+            grammar:
+              - pattern: "J'étais très timide à l'école."
+              - pattern: "Notre maison était petite mais jolie."
+              - pattern: "Vous étiez où pendant les vacances ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: imparfait-habitudes
+            title: Used To
+            description: Describe repeated habits in the past.
+            vocabulary: [avant, "d'habitude", "tous les étés", "chaque dimanche", "le mercredi", "à l'époque", "en ce temps-là", "chez mes grands-parents"]
+            grammar:
+              - pattern: "Avant, je me levais à sept heures."
+              - pattern: "Tous les étés, nous allions chez mes grands-parents."
+              - pattern: "D'habitude, ma mère préparait des crêpes le dimanche."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: decrire-le-passe
+            title: How It Used to Be
+            description: Describe scenes and the weather in the past with il y avait and il faisait.
+            vocabulary: ["il y avait", "il faisait beau", "il faisait froid", "il pleuvait", "le village", "la cour de récréation", "le jardin", "le voisin"]
+            grammar:
+              - pattern: "Il y avait un grand jardin derrière la maison."
+              - pattern: "En hiver, il faisait très froid."
+              - pattern: "Dans mon village, il n'y avait pas de cinéma."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: childhood_memories
+                goal: Describe where you lived as a child and what you used to do.
+
+      - id: raconter-des-histoires
+        title: Telling Stories
+        description: Tell stories by combining the passé composé and the imparfait.
+        icon: 📖
+        steps:
+          - id: passe-compose-ou-imparfait
+            title: Which Past Tense?
+            description: Use the imparfait for background and the passé composé for events.
+            vocabulary: ["un jour", hier, "ce matin-là", "la veille", "le lendemain", "à ce moment-là", "pendant", "il était une fois"]
+            grammar:
+              - pattern: "Il faisait beau, alors nous sommes allés au parc."
+              - pattern: "J'étais fatiguée, donc je suis rentrée tôt."
+              - pattern: "Il était une fois une petite fille qui habitait dans la forêt."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: multiple_choice, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: action-interrompue
+            title: Interrupted Actions
+            description: Say what was happening when something else happened.
+            vocabulary: [dormir, sonner, arriver, tomber, "prendre une douche", "regarder la télé", "être en train de", quand]
+            grammar:
+              - pattern: "Je dormais quand le téléphone a sonné."
+              - pattern: "Nous regardions la télé quand Paul est arrivé."
+              - pattern: "Elle prenait une douche quand on a sonné à la porte."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: connecteurs-recit
+            title: Story Connectors
+            description: Link the events of a story with time connectors.
+            vocabulary: ["d'abord", ensuite, puis, soudain, "tout à coup", "pendant que", "à la fin", finalement, enfin]
+            grammar:
+              - pattern: "D'abord, j'ai pris le bus, puis j'ai marché jusqu'à la gare."
+              - pattern: "Tout à coup, il a commencé à pleuvoir."
+              - pattern: "Pendant que je cuisinais, le chat a mangé le poisson."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: listen_type }
+          - id: raconter-une-histoire
+            title: What Happened?
+            description: Tell a short story about something unexpected that happened to you.
+            vocabulary: ["Qu'est-ce qui s'est passé ?", "Tu ne vas pas me croire !", "heureusement", "malheureusement", "la surprise", "perdre", "retrouver", "avoir peur"]
+            grammar:
+              - pattern: "Qu'est-ce qui s'est passé ?"
+              - pattern: "Je marchais dans la rue quand j'ai vu un vieil ami."
+              - pattern: "Heureusement, j'ai retrouvé mon portefeuille."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: telling_a_story
+                goal: Tell a friend about something surprising that happened to you last week.
+
+      - id: experiences-de-vie
+        title: Life Experiences
+        description: Talk about what you have just done, have already done or have never done.
+        icon: 🌍
+        steps:
+          - id: venir-de-infinitif
+            title: Just Done
+            description: Say what you have just done with venir de + infinitive.
+            vocabulary: ["je viens de", "tu viens de", "il vient de", "nous venons de", "ils viennent de", "à l'instant", "tout juste", rentrer]
+            grammar:
+              - pattern: "Je viens de rentrer du travail."
+              - pattern: "Ils viennent de partir."
+              - pattern: "Nous venons d'acheter une voiture."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: deja-jamais-encore
+            title: Already, Never, Not Yet
+            description: Use déjà, ne … jamais, ne … pas encore and ne … plus with the passé composé.
+            vocabulary: [déjà, "ne … jamais", "ne … pas encore", "ne … plus", "une fois", "plusieurs fois", "goûter", "voyager"]
+            grammar:
+              - pattern: "Tu as déjà mangé des escargots ?"
+              - pattern: "Je n'ai jamais pris l'avion."
+              - pattern: "Elle n'a pas encore fini ses études."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: pronominaux-passe-compose
+            title: Reflexives in the Past
+            description: Use être and agreement with pronominal verbs in the passé composé.
+            vocabulary: ["se lever", "se réveiller", "s'habiller", "se coucher", "se promener", "se perdre", "s'amuser", tôt, tard]
+            grammar:
+              - pattern: "Je me suis levé tôt ce matin."
+              - pattern: "Elle s'est bien amusée à la fête."
+              - pattern: "Nous nous sommes perdus dans Paris."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: listen_type, count: 2 }
+          - id: relatifs-qui-que
+            title: The Book That I Read
+            description: Join sentences with the relative pronouns qui and que.
+            vocabulary: [qui, que, "qu'", "le livre", "le film", "la personne", "l'endroit", "le souvenir"]
+            grammar:
+              - pattern: "Le livre que j'ai lu était passionnant."
+              - pattern: "C'est une ville qui a beaucoup de musées."
+              - pattern: "La personne qu'il a rencontrée est italienne."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_select }
+              - type: dialogue
+                scenario: life_experiences
+                goal: Ask and answer questions about places you have visited and things you have or have never done.
+
+      - id: invitations-et-regles
+        title: Invitations & Rules
+        description: Call and message people, invite friends, reply politely and understand rules.
+        icon: 💌
+        steps:
+          - id: pronoms-coi-lui-leur
+            title: Calls & Messages
+            description: Use the indirect object pronouns lui and leur with phone and message verbs.
+            vocabulary: [lui, leur, téléphoner, "envoyer un message", écrire, répondre, "laisser un message", "le portable", "Allô ?"]
+            grammar:
+              - pattern: "Je lui téléphone ce soir."
+              - pattern: "Tu leur as envoyé un message ?"
+              - pattern: "Elle ne m'a pas encore répondu."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: inviter-ca-te-dit
+            title: Inviting Friends
+            description: Invite someone and suggest a time and place.
+            vocabulary: ["Ça te dit de … ?", "Tu es libre samedi ?", "On se retrouve où ?", "Tu veux venir ?", "une soirée", "un anniversaire", "une fête", "boire un verre"]
+            grammar:
+              - pattern: "Ça te dit d'aller au cinéma ce soir ?"
+              - pattern: "Tu es libre samedi après-midi ?"
+              - pattern: "On se retrouve devant la gare à huit heures ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+              - { type: translate, count: 2 }
+          - id: accepter-refuser
+            title: Yes or No, Politely
+            description: Accept or turn down an invitation politely and give a reason.
+            vocabulary: ["Avec plaisir !", "Bonne idée !", "Je veux bien.", "Désolé, je ne peux pas.", "C'est dommage !", "Une autre fois ?", "je suis occupé", "malheureusement"]
+            grammar:
+              - pattern: "Avec plaisir, j'arrive vers neuf heures."
+              - pattern: "Désolée, je ne peux pas, je travaille samedi."
+              - pattern: "C'est gentil, mais une autre fois peut-être ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: speak }
+          - id: regles-il-est-interdit
+            title: Rules
+            description: Understand and explain rules with il faut, il est interdit de and on n'a pas le droit de.
+            vocabulary: ["il faut", "il ne faut pas", "il est interdit de", "on a le droit de", "on n'a pas le droit de", "fumer", "le règlement", "obligatoire"]
+            grammar:
+              - pattern: "Il est interdit de fumer dans le restaurant."
+              - pattern: "On n'a pas le droit de se garer ici."
+              - pattern: "Il faut enlever ses chaussures avant d'entrer."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: party_invitation
+                goal: Invite a friend to a party, agree on a time and explain the house rules.
+
+    checkpoint:
+      title: A2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B1:
+    title: Intermediate
+    description: >
+      Deal with most everyday situations, narrate experiences and events, express wishes, feelings, opinions and plans, and briefly give reasons for them.
+
+    units:
+      - id: recits-au-passe
+        title: Past Tenses Together
+        description: Combine the past tenses to tell what happened, what had happened before and how things were.
+        icon: 🕰️
+        steps:
+          - id: plus-que-parfait
+            title: The Plus-que-parfait
+            description: Say what had already happened before another past event with avoir or être in the imparfait + participle.
+            vocabulary: [avais, étais, avions, étaient, déjà, "pas encore", avant, "quand je suis arrivé", "jamais auparavant"]
+            grammar:
+              - pattern: "Quand je suis arrivé à la gare, le train était déjà parti."
+              - pattern: "Je n'avais jamais vu la mer avant ce voyage."
+              - pattern: "Ils avaient déjà dîné quand nous les avons appelés."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: pc-imparfait-pqp-recit
+            title: Telling a Story in the Past
+            description: Passé composé for events, imparfait for background and plus-que-parfait for earlier events.
+            vocabulary: ["tout à coup", "à ce moment-là", "finalement", pendant que, "un peu plus tard", "heureusement", "malheureusement", "soudain"]
+            grammar:
+              - pattern: "Il faisait beau et nous nous promenions quand tout à coup il a commencé à pleuvoir."
+              - pattern: "Je me suis rendu compte que j'avais oublié mes clés."
+              - pattern: "Pendant que je faisais la cuisine, mon frère a mis la table."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: accord-participe-cod
+            title: Participle Agreement with Avoir
+            description: The past participle agrees with a direct object that comes before avoir.
+            vocabulary: ["les photos", "la lettre", "les clés", "la robe", prises, écrite, ouverte, mise, faites]
+            grammar:
+              - pattern: "Les photos que j'ai prises sont magnifiques."
+              - pattern: "Ta lettre ? Je l'ai lue hier soir."
+              - pattern: "Quelles chaussures as-tu achetées ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice }
+          - id: futur-dans-le-passe
+            title: Plans That Changed
+            description: Talk about what was about to happen with aller in the imparfait, and tell an anecdote.
+            vocabulary: ["j'allais", "nous allions", "être sur le point de", "au dernier moment", "tu sais ce qui m'est arrivé ?", "le pire, c'est que", "sans blague !", "c'est pas vrai !"]
+            grammar:
+              - pattern: "J'allais partir quand le téléphone a sonné."
+              - pattern: "Nous étions sur le point de sortir quand il est arrivé."
+              - pattern: "Le pire, c'est que j'avais laissé mon portable à la maison."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: telling_an_anecdote
+                goal: Tell a friend about something surprising that happened to you, using several past tenses.
+
+      - id: souhaits-sentiments
+        title: Wishes & Feelings
+        description: Express wishes and feelings with the subjonctif présent.
+        icon: 💭
+        steps:
+          - id: subjonctif-reguliers
+            title: Regular Subjunctive
+            description: Form the subjonctif from the ils form of the present (ils parlent → que je parle).
+            vocabulary: ["que je parle", "que tu finisses", "qu'il attende", "que nous partions", "que vous preniez", "qu'ils viennent", "il faut que"]
+            grammar:
+              - pattern: "Il faut que tu finisses tes devoirs."
+              - pattern: "Il faut que nous partions tôt demain."
+              - pattern: "Il faut qu'il attende le bus."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: match }
+              - { type: word_bank, count: 2 }
+          - id: subjonctif-irreguliers
+            title: Irregular Subjunctive
+            description: Learn the irregular forms of faire, aller, être, avoir, pouvoir and savoir.
+            vocabulary: ["que je fasse", "que j'aille", "que tu sois", "qu'il ait", "que nous puissions", "que vous sachiez", "qu'ils aillent"]
+            grammar:
+              - pattern: "Il faut que je fasse les courses."
+              - pattern: "Il faut que vous sachiez la vérité."
+              - pattern: "Il faut que tu sois à l'heure."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: subjonctif-volonte
+            title: Wanting Someone To
+            description: Use vouloir que, souhaiter que and préférer que + subjonctif.
+            vocabulary: ["vouloir que", "souhaiter que", "préférer que", "aimer que", "demander que", "exiger que", "avoir envie que"]
+            grammar:
+              - pattern: "Mes parents veulent que je fasse des études de médecine."
+              - pattern: "Je souhaite que tout se passe bien pour toi."
+              - pattern: "Je préfère que tu viennes demain."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+          - id: emotions-que-subjonctif
+            title: Feelings About Others
+            description: Emotions + que + subjonctif, but the infinitive when the subject is the same.
+            vocabulary: ["être content que", "être ravi que", "être triste que", "avoir peur que", "regretter que", "être déçu que", "être surpris que", dommage]
+            grammar:
+              - pattern: "Je suis content que tu viennes à ma fête."
+              - pattern: "C'est dommage qu'elle ne puisse pas rester."
+              - pattern: "Je suis content de venir à ta fête."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - type: dialogue
+                scenario: good_and_bad_news
+                goal: React to a friend's good and bad news, expressing how you feel and what you hope for them.
+
+      - id: donner-son-avis
+        title: Opinions
+        description: Give and justify your opinion, and agree or disagree politely.
+        icon: 🗣️
+        steps:
+          - id: penser-que-indicatif-subjonctif
+            title: "I Think / I Don't Think"
+            description: Je pense que + indicatif, but je ne pense pas que + subjonctif.
+            vocabulary: ["je pense que", "je crois que", "je trouve que", "je ne pense pas que", "je ne crois pas que", "je doute que", "je suis sûr que"]
+            grammar:
+              - pattern: "Je pense que c'est une bonne idée."
+              - pattern: "Je ne pense pas que ce soit une bonne idée."
+              - pattern: "Je doute qu'il puisse venir ce soir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+          - id: a-mon-avis-selon-moi
+            title: In My Opinion
+            description: Introduce your point of view and give reasons.
+            vocabulary: ["à mon avis", "selon moi", "d'après moi", "pour moi", "personnellement", "en ce qui me concerne", "d'un côté", "de l'autre côté"]
+            grammar:
+              - pattern: "À mon avis, la ville est trop chère pour les étudiants."
+              - pattern: "Selon moi, le télétravail a beaucoup d'avantages."
+              - pattern: "D'un côté c'est pratique, de l'autre côté c'est fatigant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: il-est-important-que
+            title: It's Important That
+            description: Impersonal expressions + que + subjonctif.
+            vocabulary: ["il est important que", "il est nécessaire que", "il est essentiel que", "il vaut mieux que", "il est normal que", "il est possible que", "il est temps que"]
+            grammar:
+              - pattern: "Il est important que tout le monde puisse s'exprimer."
+              - pattern: "Il vaut mieux que tu prennes le train."
+              - pattern: "Il est temps que le gouvernement agisse."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+          - id: etre-d-accord-pas-d-accord
+            title: Agreeing & Disagreeing
+            description: Agree, disagree and partly agree in a discussion.
+            vocabulary: ["je suis d'accord", "je ne suis pas d'accord", "tout à fait", "pas du tout", "tu as raison", "tu as tort", "ça dépend", "c'est vrai, mais"]
+            grammar:
+              - pattern: "Je suis tout à fait d'accord avec toi."
+              - pattern: "C'est vrai, mais je ne crois pas que ce soit si simple."
+              - pattern: "Tu as raison sur ce point, mais ça dépend de la situation."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: friendly_debate
+                goal: Discuss whether cars should be banned from city centres, giving your opinion and reacting to the other person's.
+
+      - id: conseils-demandes
+        title: Advice & Requests
+        description: Give advice and make polite requests with the conditionnel and pronouns.
+        icon: 🤝
+        steps:
+          - id: conditionnel-present
+            title: The Conditionnel Présent
+            description: Futur stem + imparfait endings for softer, polite statements.
+            vocabulary: ["je voudrais", "j'aimerais", "tu devrais", "on pourrait", "il faudrait", "ce serait", "nous aurions", "vous feriez"]
+            grammar:
+              - pattern: "J'aimerais réserver une table pour deux."
+              - pattern: "On pourrait aller au cinéma ce soir."
+              - pattern: "Ce serait sympa de se revoir."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: match }
+              - { type: listen_type }
+          - id: tu-devrais-conseils
+            title: Giving Advice
+            description: Give advice with tu devrais, il faudrait and à ta place.
+            vocabulary: ["tu devrais", "vous devriez", "il faudrait", "tu ferais mieux de", "je te conseille de", "essaie de", "un conseil"]
+            grammar:
+              - pattern: "Tu devrais te coucher plus tôt."
+              - pattern: "Vous feriez mieux de prendre un taxi."
+              - pattern: "Je te conseille de parler à ton chef."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: error_correct }
+          - id: doubles-pronoms
+            title: Double Object Pronouns
+            description: Order two pronouns before the verb, and with the impératif.
+            vocabulary: ["je te le donne", "il me la prête", "je le lui ai dit", "nous les leur envoyons", "dis-le-moi", "donne-la-lui", "ne me le dis pas"]
+            grammar:
+              - pattern: "Tu me prêtes ton vélo ? Oui, je te le prête."
+              - pattern: "J'ai dit la nouvelle à Marie. Je la lui ai dite hier."
+              - pattern: "Dis-le-moi ! Non, ne me le dis pas !"
+            activities:
+              - { type: learn, count: 3 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice, count: 2 }
+          - id: demandes-polies
+            title: Polite Requests
+            description: Ask for favours politely with pourrais-tu, est-ce que vous pourriez and ça vous dérangerait de.
+            vocabulary: ["pourrais-tu", "pourriez-vous", "est-ce que vous pourriez", "ça te dérangerait de", "ça vous ennuierait de", "rendre service", "avec plaisir", "volontiers"]
+            grammar:
+              - pattern: "Pourriez-vous m'envoyer le document, s'il vous plaît ?"
+              - pattern: "Ça te dérangerait de fermer la fenêtre ?"
+              - pattern: "Tu pourrais me le rendre demain ?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: asking_a_neighbour_a_favour
+                goal: Politely ask a neighbour to water your plants while you are away and answer their questions.
+
+      - id: hypotheses-si
+        title: Hypotheses
+        description: Imagine situations and talk about conditions.
+        icon: 🤔
+        steps:
+          - id: si-imparfait-conditionnel
+            title: If I Had…
+            description: Si + imparfait, then conditionnel, for imaginary situations.
+            vocabulary: ["si j'avais", "si j'étais", "si je pouvais", "si on gagnait", "je ferais", "j'irais", "je partirais", "le loto"]
+            grammar:
+              - pattern: "Si j'avais plus de temps, j'apprendrais le piano."
+              - pattern: "Si je gagnais au loto, je ferais le tour du monde."
+              - pattern: "Qu'est-ce que tu ferais si tu étais président ?"
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: a-ta-place
+            title: If I Were You
+            description: Imagine yourself in someone else's situation with à ta place and moi, je.
+            vocabulary: ["à ta place", "à votre place", "si j'étais toi", "moi, je", "dans ton cas", "franchement", "hésiter"]
+            grammar:
+              - pattern: "À ta place, j'accepterais ce travail."
+              - pattern: "Si j'étais toi, je n'hésiterais pas."
+              - pattern: "Dans ton cas, je demanderais conseil à un avocat."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: au-cas-ou
+            title: Just in Case
+            description: Au cas où + conditionnel for precautions.
+            vocabulary: ["au cas où", "un parapluie", "un plan B", "prévoir", "la panne", "le retard", "en cas de"]
+            grammar:
+              - pattern: "Prends un parapluie au cas où il pleuvrait."
+              - pattern: "Je te donne mon numéro au cas où tu aurais un problème."
+              - pattern: "En cas de panne, appelez ce numéro."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: a-condition-que
+            title: On One Condition
+            description: À condition de + infinitif, à condition que + subjonctif.
+            vocabulary: ["à condition de", "à condition que", "pourvu que", "sinon", "sauf si", "d'accord, mais"]
+            grammar:
+              - pattern: "Tu peux sortir à condition de rentrer avant minuit."
+              - pattern: "Je te prête ma voiture à condition que tu fasses le plein."
+              - pattern: "On fera un pique-nique, sauf s'il pleut."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: dream_scenarios
+                goal: Discuss with a friend what you would do if you won a lot of money, and negotiate conditions for a shared plan.
+
+      - id: discours-indirect
+        title: Reported Speech
+        description: Report what other people say, ask and tell you to do.
+        icon: 💬
+        steps:
+          - id: il-dit-que-present
+            title: He Says That…
+            description: Report statements with a present reporting verb; only pronouns and possessives change.
+            vocabulary: ["il dit que", "elle explique que", "ils répondent que", "elle annonce que", "il affirme que", "raconter", "prétendre"]
+            grammar:
+              - pattern: "« Je suis fatigué. » → Il dit qu'il est fatigué."
+              - pattern: "Elle explique qu'elle ne peut pas venir."
+              - pattern: "Ils répondent que leur train a du retard."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: il-a-dit-qu-il-viendrait
+            title: He Said He Would Come
+            description: With a past reporting verb, the tenses shift (présent → imparfait, futur → conditionnel, PC → PQP).
+            vocabulary: ["il a dit que", "elle m'a expliqué que", "ce jour-là", "la veille", "le lendemain", "à ce moment-là"]
+            grammar:
+              - pattern: "Il a dit qu'il viendrait le lendemain."
+              - pattern: "Elle m'a dit qu'elle était fatiguée."
+              - pattern: "Ils ont expliqué qu'ils avaient raté le train."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete, count: 2 }
+          - id: questions-indirectes
+            title: Indirect Questions
+            description: Report questions with si, ce que, ce qui, où and quand, without inversion.
+            vocabulary: ["il demande si", "je me demande", "ce que", "ce qui", "où", "quand", "pourquoi", "savoir si"]
+            grammar:
+              - pattern: "« Tu viens ? » → Il me demande si je viens."
+              - pattern: "Je ne sais pas ce qu'il veut."
+              - pattern: "Elle m'a demandé ce qui s'était passé."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: ordres-de-infinitif
+            title: Reporting Orders
+            description: Report orders and requests with dire / demander de + infinitif.
+            vocabulary: ["dire de", "demander de", "conseiller de", "interdire de", "rappeler de", "ne pas oublier de", "un message"]
+            grammar:
+              - pattern: "« Rappelle-moi ! » → Elle m'a dit de la rappeler."
+              - pattern: "Le médecin m'a conseillé de faire du sport."
+              - pattern: "Il nous a demandé de ne pas faire de bruit."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: passing_on_a_message
+                goal: Pass on to a colleague what your manager said, asked and told you both to do.
+
+      - id: pronoms-relatifs-complexes
+        title: Relative Clauses
+        description: Join ideas with où, dont, ce qui / ce que and lequel.
+        icon: 🔗
+        steps:
+          - id: relatif-ou-temps-lieu
+            title: Où for Place and Time
+            description: Use où after places and also after time expressions (le jour où).
+            vocabulary: ["la ville où", "la maison où", "le jour où", "l'année où", "le moment où", "l'époque où", "le quartier où"]
+            grammar:
+              - pattern: "C'est la ville où j'ai grandi."
+              - pattern: "Je me souviens du jour où nous nous sommes rencontrés."
+              - pattern: "À l'époque où j'étais étudiant, je n'avais pas d'argent."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: relatif-dont
+            title: Dont
+            description: Use dont to replace de + noun (parler de, avoir besoin de, être fier de).
+            vocabulary: [dont, "parler de", "avoir besoin de", "avoir envie de", "être fier de", "se souvenir de", "avoir peur de"]
+            grammar:
+              - pattern: "C'est le livre dont je t'ai parlé."
+              - pattern: "Voici l'outil dont tu as besoin."
+              - pattern: "C'est un projet dont je suis très fier."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: ce-qui-ce-que
+            title: What (Ce qui / Ce que)
+            description: Ce qui as subject, ce que as object, to say "what" or "the thing that".
+            vocabulary: ["ce qui", "ce que", "ce dont", "tout ce que", "ce qui me plaît", "ce que je préfère", "ce qui compte"]
+            grammar:
+              - pattern: "Ce qui me plaît, c'est l'ambiance."
+              - pattern: "Fais ce que tu veux."
+              - pattern: "Ce dont j'ai besoin, c'est de vacances."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: lequel-auquel-duquel
+            title: Lequel After Prepositions
+            description: Use lequel, auquel and duquel after prepositions for things.
+            vocabulary: [lequel, laquelle, lesquels, auquel, "à laquelle", duquel, "près duquel", "avec lequel", "sur laquelle"]
+            grammar:
+              - pattern: "C'est l'ordinateur avec lequel je travaille."
+              - pattern: "La question à laquelle je pense est difficile."
+              - pattern: "Le parc près duquel j'habite est très calme."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: describing_your_hometown
+                goal: Describe the town where you grew up, the places you liked and the people you remember.
+
+      - id: emploi-carriere
+        title: Work & Careers
+        description: Look for a job, write formal emails and go to an interview.
+        icon: 💼
+        steps:
+          - id: cv-lettre-motivation
+            title: CV & Cover Letter
+            description: Present your experience, skills and education in a CV and lettre de motivation.
+            vocabulary: ["le CV", "la lettre de motivation", "l'expérience professionnelle", "les compétences", "la formation", "le stage", "le diplôme", "une offre d'emploi"]
+            grammar:
+              - pattern: "J'ai effectué un stage de six mois dans une agence de communication."
+              - pattern: "Je suis titulaire d'un master en gestion."
+              - pattern: "Je maîtrise l'anglais et l'espagnol."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: match }
+              - { type: image_select, count: 2 }
+              - { type: translate, count: 2 }
+          - id: gerondif-en-travaillant
+            title: The Gérondif
+            description: En + present participle to say how or while you do something.
+            vocabulary: ["en travaillant", "en lisant", "en faisant", "en apprenant", "en étant", "en ayant", "tout en"]
+            grammar:
+              - pattern: "J'ai appris l'anglais en travaillant à Londres."
+              - pattern: "Elle écoute de la musique en faisant son jogging."
+              - pattern: "On progresse en faisant des erreurs."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete }
+          - id: courriel-formel
+            title: Formal Emails
+            description: Use the formal register to open, request and close a professional email.
+            vocabulary: ["Madame, Monsieur,", "je me permets de", "je vous écris au sujet de", "veuillez trouver ci-joint", "dans l'attente de votre réponse", "je vous prie d'agréer", "cordialement"]
+            grammar:
+              - pattern: "Je me permets de vous contacter au sujet de l'offre d'emploi."
+              - pattern: "Veuillez trouver ci-joint mon CV."
+              - pattern: "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: entretien-embauche
+            title: The Job Interview
+            description: Talk about your strengths, weaknesses and motivation in an interview.
+            vocabulary: ["l'entretien d'embauche", "le poste", "le salaire", "les points forts", "les points faibles", "motivé", "travailler en équipe", "le recruteur"]
+            grammar:
+              - pattern: "Pourquoi souhaitez-vous travailler chez nous ?"
+              - pattern: "Mon point fort, c'est que je sais travailler en équipe."
+              - pattern: "J'aimerais évoluer vers un poste à responsabilités."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: speak, count: 2 }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer a recruiter's questions about your experience, strengths and motivation for the position.
+
+      - id: habitudes-mode-de-vie
+        title: Habits & Lifestyle
+        description: Describe how you live, your habits and how you want to change them.
+        icon: 🧘
+        steps:
+          - id: adverbes-en-ment
+            title: Adverbs in -ment
+            description: Form adverbs from the feminine adjective, and -amment / -emment from -ant / -ent.
+            vocabulary: [régulièrement, lentement, facilement, vraiment, constamment, évidemment, récemment, prudemment]
+            grammar:
+              - pattern: "Je fais régulièrement du sport."
+              - pattern: "Il parle constamment de son travail."
+              - pattern: "J'ai récemment arrêté le café."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+          - id: avoir-l-habitude-s-habituer
+            title: Being Used To
+            description: Avoir l'habitude de + infinitif and s'habituer à + noun or infinitif.
+            vocabulary: ["avoir l'habitude de", "s'habituer à", "être habitué à", "d'habitude", "comme d'habitude", "une habitude", "le rythme"]
+            grammar:
+              - pattern: "J'ai l'habitude de me lever tôt."
+              - pattern: "Je ne me suis pas encore habitué au froid."
+              - pattern: "D'habitude, je prends le métro."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: il-faut-que-sante
+            title: Healthy Routines
+            description: Talk about what you need to do for your health with il faut que + subjonctif.
+            vocabulary: ["le sommeil", "l'alimentation", "équilibré", "faire de l'exercice", "boire de l'eau", "le stress", "se détendre", "en forme"]
+            grammar:
+              - pattern: "Il faut que je dorme au moins sept heures par nuit."
+              - pattern: "Il faut qu'on mange plus de légumes."
+              - pattern: "Le médecin dit qu'il faut que je fasse de l'exercice."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: arreter-de-se-mettre-a
+            title: Changing Habits
+            description: Talk about starting and stopping habits with se mettre à, arrêter de and continuer à.
+            vocabulary: ["arrêter de", "se mettre à", "continuer à", "commencer à", "essayer de", "réussir à", "fumer", "la bonne résolution"]
+            grammar:
+              - pattern: "J'ai arrêté de fumer il y a deux ans."
+              - pattern: "Je me suis mis au yoga cette année."
+              - pattern: "J'essaie de passer moins de temps sur mon téléphone."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: lifestyle_change
+                goal: Tell a friend about a habit you changed, how you did it and give them advice.
+
+      - id: medias-technologie
+        title: Media & Technology
+        description: Talk about news, social media and technology, and explain causes.
+        icon: 📱
+        steps:
+          - id: voix-passive
+            title: The Passive Voice
+            description: Être + past participle (with agreement) in the présent and passé composé, with par.
+            vocabulary: ["est publié", "a été inventé", "a été construite", "sont vendus", "par", "l'inventeur", "la découverte"]
+            grammar:
+              - pattern: "Le journal est publié tous les matins."
+              - pattern: "Le téléphone a été inventé par Graham Bell."
+              - pattern: "Ces maisons ont été construites en 1950."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: on-impersonnel-actualites
+            title: The News
+            description: News vocabulary and on as an impersonal subject.
+            vocabulary: ["l'actualité", "les infos", "un article", "le journaliste", "la une", "un reportage", "une source", "on dit que"]
+            grammar:
+              - pattern: "On dit que les prix vont encore augmenter."
+              - pattern: "On parle beaucoup de cette affaire à la télé."
+              - pattern: "Ici, on parle français."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: reseaux-sociaux-numerique
+            title: Social Media & Tech
+            description: Talk about social networks, apps and online life.
+            vocabulary: ["les réseaux sociaux", "une appli", "télécharger", "partager", "publier", "un abonné", "le mot de passe", "en ligne", "une fake news"]
+            grammar:
+              - pattern: "J'ai publié une photo sur Instagram."
+              - pattern: "Il passe trop de temps sur les réseaux sociaux."
+              - pattern: "N'oublie pas de changer ton mot de passe."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank }
+          - id: grace-a-a-cause-de
+            title: Giving Reasons
+            description: Explain causes with parce que, car, grâce à and à cause de.
+            vocabulary: ["parce que", car, "grâce à", "à cause de", "comme", "puisque", "en raison de", "c'est pour ça que"]
+            grammar:
+              - pattern: "Grâce à internet, on peut travailler de n'importe où."
+              - pattern: "Le vol a été annulé à cause de la grève."
+              - pattern: "Comme il pleuvait, nous sommes restés à la maison."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: technology_debate
+                goal: Discuss the advantages and disadvantages of social media, giving reasons for your opinions.
+
+    checkpoint:
+      title: B1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B2:
+    title: Upper Intermediate
+    description: >
+      Understand the main ideas of complex texts, interact with fluency and spontaneity, and argue a viewpoint on a wide range of topics, weighing advantages and disadvantages.
+
+    units:
+      - id: regrets-hypothetiques
+        title: Regrets & Hypotheticals
+        description: Talk about unreal situations in the past and the present, and express regret.
+        icon: 💭
+        steps:
+          - id: conditionnel-passe-forme
+            title: The Past Conditional
+            description: Form the conditionnel passé with avoir or être in the conditional and a past participle.
+            vocabulary: ["j'aurais fait", "tu serais venu", "il aurait dit", "nous serions partis", "vous auriez pris", "elles seraient restées", "à ta place", volontiers]
+            grammar:
+              - pattern: "À ta place, j'aurais accepté son offre."
+              - pattern: "Elle serait venue avec plaisir."
+              - pattern: "Nous aurions préféré partir plus tôt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: si-plus-que-parfait-regrets
+            title: If I Had Known
+            description: Use si + plus-que-parfait with the conditionnel passé for unreal past conditions.
+            vocabulary: ["si j'avais su", "à temps", "l'occasion", "rater le train", "se rendre compte", prévenir, "par hasard", "trop tard"]
+            grammar:
+              - pattern: "Si j'avais su, je ne serais pas venu."
+              - pattern: "Si nous étions partis plus tôt, nous n'aurions pas raté le train."
+              - pattern: "Si tu m'avais prévenu, je t'aurais aidé."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: conditionnels-mixtes-medecin
+            title: Mixed Conditionals
+            description: Link a past condition to a present result, and a present condition to a past result.
+            vocabulary: ["aujourd'hui", "à l'heure actuelle", "être marié", "vivre à l'étranger", "les études", choisir, "accepter un poste", différent]
+            grammar:
+              - pattern: "Si j'avais étudié la médecine, je serais médecin aujourd'hui."
+              - pattern: "Si j'avais accepté ce poste, je vivrais à Londres maintenant."
+              - pattern: "S'il était moins timide, il lui aurait demandé son numéro."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+              - { type: listen_type }
+          - id: aurais-du-aurais-pu
+            title: I Should Have, I Could Have
+            description: Express regret and reproach with j'aurais dû, j'aurais pu and regretter de + infinitif passé.
+            vocabulary: ["j'aurais dû", "j'aurais pu", "tu aurais dû", regretter, "le regret", "la faute", "s'excuser", "écouter les conseils"]
+            grammar:
+              - pattern: "J'aurais dû t'écouter."
+              - pattern: "Tu aurais pu me le dire avant !"
+              - pattern: "Je regrette de ne pas avoir suivi ses conseils."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+              - type: dialogue
+                scenario: talking_about_regrets
+                goal: Tell a friend about a decision you regret and say what you should have done differently.
+
+      - id: deduction-hypotheses
+        title: Deduction & Speculation
+        description: Make guesses about the present and the past, and report unconfirmed information.
+        icon: 🔍
+        steps:
+          - id: devoir-probabilite
+            title: He Must Have Forgotten
+            description: Use devoir in the present and the passé composé to express probability.
+            vocabulary: ["il a dû", "elle doit être", sûrement, probablement, "sans doute", oublier, "se tromper", "les clés"]
+            grammar:
+              - pattern: "Il a dû oublier notre rendez-vous."
+              - pattern: "Elle doit être fatiguée après ce voyage."
+              - pattern: "Ils ont dû se tromper d'adresse."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: futur-anterieur-probabilite
+            title: He Will Have Missed His Train
+            description: Use the futur antérieur to guess what has probably happened.
+            vocabulary: ["il aura raté", "elle sera partie", "ils auront oublié", "le retard", "la panne", "les embouteillages", "être coincé", "ne pas répondre"]
+            grammar:
+              - pattern: "Il n'est pas encore là ; il aura raté son train."
+              - pattern: "Elle ne répond pas, elle sera déjà partie."
+              - pattern: "Ils auront été coincés dans les embouteillages."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: conditionnel-journalistique
+            title: Reported Rumours
+            description: Use the conditionnel journalistique to report unconfirmed news.
+            vocabulary: ["selon", "d'après", "la rumeur", "l'information", "non confirmé", "le ministre", "démissionner", "les sources"]
+            grammar:
+              - pattern: "Le ministre serait malade."
+              - pattern: "Selon nos sources, l'entreprise aurait licencié deux cents salariés."
+              - pattern: "D'après la presse, le président démissionnerait la semaine prochaine."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: il-semble-que-subjonctif
+            title: It Seems That
+            description: Contrast il semble que + subjonctif with il me semble que + indicatif.
+            vocabulary: ["il semble que", "il me semble que", "on dirait que", "avoir l'air", apparemment, "à première vue", "le témoin", "l'indice"]
+            grammar:
+              - pattern: "Il semble que le voleur soit entré par la fenêtre."
+              - pattern: "Il me semble que tu as raison."
+              - pattern: "On dirait qu'il va pleuvoir."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+              - type: dialogue
+                scenario: solving_a_mystery
+                goal: Speculate with a friend about why a colleague has not turned up and what might have happened.
+
+      - id: passif-impersonnel
+        title: Passive & Impersonal
+        description: Shift the focus away from who does an action with the passive and impersonal structures.
+        icon: 🏗️
+        steps:
+          - id: passif-tous-temps
+            title: The Passive in All Tenses
+            description: Form the passive in the present, past, future and conditional with être + participe passé.
+            vocabulary: ["être construit", "a été fondé", "sera inauguré", "avait été vendu", "le pont", "l'architecte", "les travaux", "la cathédrale"]
+            grammar:
+              - pattern: "Le pont a été construit en 1890."
+              - pattern: "Le nouveau musée sera inauguré l'année prochaine."
+              - pattern: "La maison avait été vendue avant notre arrivée."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: passif-par-ou-de
+            title: Par or De?
+            description: Choose par for the agent of an action and de after verbs of feeling and states.
+            vocabulary: ["aimé de", "respecté de", "entouré de", "couvert de", "suivi par", "écrit par", "le complément d'agent", admiré]
+            grammar:
+              - pattern: "Ce roman a été écrit par Victor Hugo."
+              - pattern: "Ce professeur est respecté de tous ses élèves."
+              - pattern: "Le village est entouré de montagnes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: se-faire-voler-velo
+            title: I Had My Bike Stolen
+            description: Use se faire + infinitif and the pronominal passive (ça se mange froid).
+            vocabulary: ["se faire voler", "se faire couper les cheveux", "se faire opérer", "se vendre", "se boire", "se dire", "le vélo", "le portefeuille"]
+            grammar:
+              - pattern: "Je me suis fait voler mon vélo hier soir."
+              - pattern: "Ce plat se mange froid."
+              - pattern: "Ça ne se dit pas en français."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: il-impersonnel-sagit
+            title: Impersonal Il
+            description: Use impersonal il with il est + adjectif + de, il reste, il manque and il s'agit de.
+            vocabulary: ["il est important de", "il est interdit de", "il reste", "il manque", "il s'agit de", "il suffit de", "il vaut mieux", "le formulaire"]
+            grammar:
+              - pattern: "Il est interdit de fumer dans le bâtiment."
+              - pattern: "Il reste encore trois places."
+              - pattern: "Dans ce film, il s'agit d'une famille qui déménage."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: reporting_a_theft
+                goal: Report to the police that your bike was stolen and explain what happened.
+
+      - id: temps-futur-propositions
+        title: Time Clauses & the Future
+        description: Sequence events in the future and the past with time conjunctions.
+        icon: ⏳
+        steps:
+          - id: futur-anterieur-quand
+            title: When I Have Finished
+            description: Use the futur antérieur after quand, dès que, lorsque and une fois que.
+            vocabulary: [quand, "dès que", lorsque, "aussitôt que", "une fois que", terminer, "le diplôme", "le stage"]
+            grammar:
+              - pattern: "Quand j'aurai terminé mes études, je voyagerai."
+              - pattern: "Dès que tu seras arrivé, appelle-moi."
+              - pattern: "Une fois que nous aurons signé le contrat, nous commencerons."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: avant-que-avant-de
+            title: Before
+            description: Contrast avant que + subjonctif (with optional ne explétif) and avant de + infinitif.
+            vocabulary: ["avant que", "avant de", "le ne explétif", "à moins que", "partir", "rentrer", "il fait nuit", "réfléchir"]
+            grammar:
+              - pattern: "Rentrons avant qu'il ne fasse nuit."
+              - pattern: "Réfléchis bien avant de répondre."
+              - pattern: "Je voudrais te parler avant que tu partes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: apres-infinitif-passe
+            title: After Having Done
+            description: Use après + infinitif passé when both actions share the same subject.
+            vocabulary: ["après avoir mangé", "après être sorti", "après s'être levé", "ensuite", "puis", "le petit-déjeuner", "se doucher", "la réunion"]
+            grammar:
+              - pattern: "Après avoir mangé, nous sommes allés nous promener."
+              - pattern: "Après être rentrée, elle s'est couchée."
+              - pattern: "Après s'être levés, ils ont pris leur petit-déjeuner."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: jusqua-ce-que-attendant
+            title: Until & While Waiting
+            description: Use jusqu'à ce que and en attendant que + subjonctif, and en attendant de + infinitif.
+            vocabulary: ["jusqu'à ce que", "en attendant que", "en attendant de", "le délai", "la réponse", patienter, "le colis", "être livré"]
+            grammar:
+              - pattern: "Je resterai ici jusqu'à ce que tu reviennes."
+              - pattern: "En attendant que le colis soit livré, je travaille à la maison."
+              - pattern: "En attendant de recevoir une réponse, il patiente."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+              - { type: speak }
+              - type: dialogue
+                scenario: planning_after_graduation
+                goal: Explain to a friend what you will do once you have finished your studies and what has to happen first.
+
+      - id: articulateurs-logiques
+        title: Linking Ideas
+        description: Connect ideas to express cause, consequence, addition and contrast.
+        icon: 🔗
+        steps:
+          - id: cause-puisque-faute-de
+            title: Expressing Cause
+            description: Express cause with puisque, comme, étant donné que, vu que and faute de.
+            vocabulary: [puisque, comme, "étant donné que", "vu que", "faute de", "en raison de", "la cause", "le manque"]
+            grammar:
+              - pattern: "Comme il pleuvait, nous sommes restés à la maison."
+              - pattern: "Puisque tu es là, aide-moi un peu."
+              - pattern: "Faute de temps, je n'ai pas pu finir le rapport."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: consequence-si-bien-que
+            title: Expressing Consequence
+            description: Express consequence with si bien que, de sorte que, c'est pourquoi and tellement … que.
+            vocabulary: ["si bien que", "de sorte que", "c'est pourquoi", "par conséquent", "tellement … que", "si … que", donc, "la conséquence"]
+            grammar:
+              - pattern: "Il a beaucoup neigé, si bien que les routes sont fermées."
+              - pattern: "J'étais tellement fatigué que je me suis endormi dans le train."
+              - pattern: "Le magasin a fermé, c'est pourquoi j'ai commandé en ligne."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: grace-a-cause-de-nuances
+            title: Thanks To or Because Of?
+            description: Contrast positive grâce à with negative à cause de, and use à force de.
+            vocabulary: ["grâce à", "à cause de", "à force de", "le soutien", "la grève", "la réussite", "l'échec", "le travail acharné"]
+            grammar:
+              - pattern: "Grâce à ton aide, j'ai réussi mon examen."
+              - pattern: "À cause de la grève, le train a été annulé."
+              - pattern: "À force de travailler, elle a obtenu une promotion."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: en-outre-en-revanche
+            title: Adding & Contrasting
+            description: Add and contrast ideas with en outre, par ailleurs, de plus, en revanche and alors que.
+            vocabulary: ["en outre", "par ailleurs", "de plus", "en revanche", "alors que", "tandis que", "par contre", "d'un côté"]
+            grammar:
+              - pattern: "Cet appartement est lumineux ; en outre, il est bien situé."
+              - pattern: "Mon frère adore la ville, alors que moi, je préfère la campagne."
+              - pattern: "Le loyer est élevé ; en revanche, le quartier est très calme."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+              - type: dialogue
+                scenario: choosing_a_flat
+                goal: Compare two flats with a friend, giving reasons and weighing the pros and cons of each.
+
+      - id: but-concession
+        title: Purpose & Concession
+        description: Say why you do things and acknowledge obstacles or opposing facts.
+        icon: 🎯
+        steps:
+          - id: pour-que-afin-que
+            title: So That
+            description: Use pour que / afin que + subjonctif, and pour / afin de + infinitif with the same subject.
+            vocabulary: ["pour que", "afin que", "pour", "afin de", "de manière à", "comprendre", "expliquer", "lentement"]
+            grammar:
+              - pattern: "Je parle lentement pour que tu me comprennes."
+              - pattern: "Elle économise afin de s'acheter une voiture."
+              - pattern: "Je te le répète afin que tu ne l'oublies pas."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: de-peur-que-crainte
+            title: For Fear That
+            description: Express negative purpose with de peur que / de crainte que + subjonctif and de peur de.
+            vocabulary: ["de peur que", "de crainte que", "de peur de", "pour ne pas", "se perdre", "réveiller", "en silence", "le bébé"]
+            grammar:
+              - pattern: "Il marche sur la pointe des pieds de peur que le bébé ne se réveille."
+              - pattern: "Elle a pris un plan de peur de se perdre."
+              - pattern: "Je parle doucement pour ne pas vous déranger."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: bien-que-meme-si
+            title: Although & Even If
+            description: Contrast bien que / quoique + subjonctif with même si + indicatif.
+            vocabulary: ["bien que", quoique, "même si", pourtant, cependant, néanmoins, "malgré tout", "la fatigue"]
+            grammar:
+              - pattern: "Bien qu'il soit malade, il est venu travailler."
+              - pattern: "Même s'il pleut, nous sortirons."
+              - pattern: "Quoiqu'elle ait beaucoup d'argent, elle vit simplement."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: malgre-avoir-beau
+            title: Despite & No Matter How
+            description: Use malgré / en dépit de + nom and avoir beau + infinitif.
+            vocabulary: [malgré, "en dépit de", "avoir beau", "les difficultés", "le mauvais temps", "les efforts", insister, "rien à faire"]
+            grammar:
+              - pattern: "Malgré le mauvais temps, le match a eu lieu."
+              - pattern: "J'ai beau insister, il ne veut rien entendre."
+              - pattern: "En dépit de ses efforts, il n'a pas obtenu le poste."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - { type: speak }
+              - type: dialogue
+                scenario: persuading_a_reluctant_friend
+                goal: Convince a friend to join a project despite their doubts, explaining your reasons and acknowledging the obstacles.
+
+      - id: discours-rapporte-avance
+        title: Advanced Reported Speech
+        description: Report statements, questions and orders accurately in the past.
+        icon: 🗣️
+        steps:
+          - id: concordance-des-temps
+            title: Sequence of Tenses
+            description: Shift tenses after a past reporting verb (présent → imparfait, passé composé → plus-que-parfait, futur → conditionnel).
+            vocabulary: ["il a dit que", "elle a expliqué que", "ils ont annoncé que", "la concordance des temps", "le discours indirect", "la promesse", "promettre", "annoncer"]
+            grammar:
+              - pattern: "Il a dit qu'il l'avait déjà fait."
+              - pattern: "Elle m'a promis qu'elle le ferait le lendemain."
+              - pattern: "Ils ont annoncé qu'ils étaient en retard."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: verbes-introducteurs-nier
+            title: Reporting Verbs
+            description: Choose precise reporting verbs like prétendre, affirmer, nier, reconnaître, avouer and se plaindre que.
+            vocabulary: [prétendre, affirmer, nier, reconnaître, avouer, "se plaindre que", admettre, "répliquer"]
+            grammar:
+              - pattern: "Le suspect a nié avoir volé la voiture."
+              - pattern: "Elle a reconnu qu'elle s'était trompée."
+              - pattern: "Les voisins se sont plaints que la musique était trop forte."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: la-veille-le-lendemain
+            title: The Day Before, the Next Day
+            description: Shift time and place expressions in reported speech (hier → la veille, demain → le lendemain).
+            vocabulary: ["la veille", "le lendemain", "ce jour-là", "la semaine suivante", "la semaine précédente", "à ce moment-là", "là-bas", "deux jours plus tard"]
+            grammar:
+              - pattern: "Il m'a dit qu'il était arrivé la veille."
+              - pattern: "Elle a expliqué qu'elle partirait le lendemain."
+              - pattern: "Ils ont dit qu'ils seraient là-bas la semaine suivante."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: questions-ordres-rapportes
+            title: Reporting Questions & Orders
+            description: Report questions with si, ce que, ce qui and orders with de + infinitif.
+            vocabulary: ["demander si", "ce que", "ce qui", "demander de", "ordonner de", "conseiller de", "supplier de", "interdire de"]
+            grammar:
+              - pattern: "Il m'a demandé si j'avais fini."
+              - pattern: "Elle voulait savoir ce qui s'était passé."
+              - pattern: "Le médecin m'a conseillé de me reposer."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: passing_on_a_message
+                goal: Tell a colleague what your manager said, asked and told you both to do in yesterday's meeting.
+
+      - id: debat-persuasion
+        title: Debate & Persuasion
+        description: Express degrees of certainty, emphasise your point and counter arguments.
+        icon: 🎤
+        steps:
+          - id: doute-subjonctif-certitude
+            title: Doubt & Certainty
+            description: Use the subjonctif after doubt (je doute que, je ne pense pas que) and the indicatif after certainty.
+            vocabulary: ["je doute que", "je ne pense pas que", "je ne crois pas que", "je suis sûr que", "il est certain que", "il est évident que", "sans aucun doute", "l'argument"]
+            grammar:
+              - pattern: "Je doute que cette mesure soit efficace."
+              - pattern: "Je suis sûr qu'il a raison."
+              - pattern: "Je ne pense pas que ce soit une bonne idée."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: possible-ou-probable
+            title: Possible or Probable?
+            description: Contrast il est possible que + subjonctif with il est probable que + indicatif.
+            vocabulary: ["il est possible que", "il se peut que", "il est probable que", "il est peu probable que", "il est impossible que", "les chances", "la prévision", "le résultat"]
+            grammar:
+              - pattern: "Il est possible que le gouvernement change d'avis."
+              - pattern: "Il est probable que les prix vont augmenter."
+              - pattern: "Il est peu probable qu'il vienne ce soir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: mise-en-relief-cest-qui
+            title: Emphasis with C'est … Qui / Que
+            description: Highlight a key element with the mise en relief c'est … qui and c'est … que.
+            vocabulary: ["c'est … qui", "c'est … que", "ce qui", "ce que", "ce dont", "la mise en relief", "le point essentiel", souligner]
+            grammar:
+              - pattern: "C'est le prix qui pose problème, pas la qualité."
+              - pattern: "C'est à vous que je m'adresse."
+              - pattern: "Ce qui me dérange, c'est son manque d'honnêteté."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: error_correct }
+          - id: certes-il-nempeche-que
+            title: Conceding & Countering
+            description: Concede a point and counter it with certes … mais, il n'empêche que and toujours est-il que.
+            vocabulary: ["certes", "il n'empêche que", "toujours est-il que", "il est vrai que", "cela dit", "quand même", "le contre-argument", "réfuter"]
+            grammar:
+              - pattern: "Certes, ce projet coûte cher, mais il créera des emplois."
+              - pattern: "Il est vrai qu'il a de l'expérience ; il n'empêche qu'il a commis une erreur."
+              - pattern: "Cela dit, je comprends ton point de vue."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+              - { type: speak }
+              - type: dialogue
+                scenario: debating_a_city_policy
+                goal: Debate whether cars should be banned from the city centre, conceding some points and defending your view.
+
+      - id: societe-environnement
+        title: Society & the Environment
+        description: Discuss social and environmental issues, propose solutions and interpret figures.
+        icon: 🌍
+        steps:
+          - id: nominalisation-hausse
+            title: Nominalisation
+            description: Turn verbs into nouns (augmenter → la hausse, réduire → la réduction) to sound more formal.
+            vocabulary: ["la hausse", "la baisse", "la réduction", "le réchauffement", "l'augmentation", "la diminution", "la suppression", "la mise en place"]
+            grammar:
+              - pattern: "La hausse des prix inquiète les consommateurs."
+              - pattern: "La réduction des émissions est une priorité."
+              - pattern: "On constate une forte diminution du chômage."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: rechauffement-climatique
+            title: Environmental Issues
+            description: Talk about climate change, pollution and protecting the planet.
+            vocabulary: ["le réchauffement climatique", "les gaz à effet de serre", "les énergies renouvelables", "la biodiversité", "le recyclage", "la sécheresse", "les déchets", "l'empreinte carbone"]
+            grammar:
+              - pattern: "Le réchauffement climatique menace la biodiversité."
+              - pattern: "Il faut développer les énergies renouvelables."
+              - pattern: "Nous produisons de plus en plus de déchets."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: word_select, count: 2 }
+          - id: il-faudrait-que-propositions
+            title: Proposals & Obligations
+            description: Make proposals with il faudrait que + subjonctif, il serait souhaitable de and on devrait.
+            vocabulary: ["il faudrait que", "il serait souhaitable de", "il est urgent de", "on devrait", "proposer", "la mesure", "les pouvoirs publics", "les inégalités"]
+            grammar:
+              - pattern: "Il faudrait que chacun fasse un effort."
+              - pattern: "Il serait souhaitable de réduire la circulation en ville."
+              - pattern: "Les pouvoirs publics devraient lutter contre les inégalités."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete }
+          - id: statistiques-un-tiers
+            title: Statistics
+            description: Describe figures with fractions and percentages (la moitié de, un tiers, augmenter de 10 %).
+            vocabulary: ["la moitié de", "un tiers", "un quart", "la majorité de", "augmenter de", "baisser de", "le pourcentage", "le sondage"]
+            grammar:
+              - pattern: "La moitié des Français trient leurs déchets."
+              - pattern: "Le nombre de cyclistes a augmenté de 10 % en un an."
+              - pattern: "Selon un sondage, un tiers des jeunes souhaitent vivre à la campagne."
+            activities:
+              - { type: learn }
+              - { type: listen_type, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: town_hall_environment_meeting
+                goal: Present figures on a local environmental problem at a town meeting and propose two concrete measures.
+
+      - id: sciences-culture-arts
+        title: Science, Culture & the Arts
+        description: Describe and critique works of art, films and books, and talk about scientific discoveries.
+        icon: 🎨
+        steps:
+          - id: participe-present-adjectif-verbal
+            title: Participle or Adjective?
+            description: Distinguish the participe présent (invariable) from the adjectif verbal (agrees, sometimes spelt differently).
+            vocabulary: [convainquant, convaincant, fatiguant, fatigant, précédant, précédent, provoquant, provocant]
+            grammar:
+              - pattern: "Son argument est très convaincant."
+              - pattern: "Convainquant ses collègues, elle a fait adopter le projet."
+              - pattern: "Ce sont des journées fatigantes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+          - id: decrire-oeuvre-art
+            title: Describing a Work of Art
+            description: Describe a painting or sculpture, its style, colours and the feelings it evokes.
+            vocabulary: ["le tableau", "le peintre", "au premier plan", "à l'arrière-plan", "les couleurs vives", "le portrait", "le paysage", "l'œuvre"]
+            grammar:
+              - pattern: "Au premier plan, on voit une femme assise près d'une fenêtre."
+              - pattern: "Ce tableau dégage une impression de calme."
+              - pattern: "Les couleurs vives rendent la scène très vivante."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: critique-mise-en-scene
+            title: Film & Book Reviews
+            description: Review a film or book, commenting on the plot, the direction and the performances.
+            vocabulary: ["le scénario", "la mise en scène", "l'intrigue", "le personnage principal", "le dénouement", "le jeu des acteurs", "le rebondissement", "le roman"]
+            grammar:
+              - pattern: "L'intrigue est captivante du début à la fin."
+              - pattern: "La mise en scène est soignée, mais le scénario manque d'originalité."
+              - pattern: "Le jeu des acteurs m'a beaucoup ému."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: decouverte-scientifique
+            title: Science & Discovery
+            description: Talk about research, experiments and scientific breakthroughs.
+            vocabulary: ["la découverte", "le chercheur", "la chercheuse", "l'expérience", "le laboratoire", "la recherche", "le vaccin", "faire une avancée"]
+            grammar:
+              - pattern: "Cette découverte a été faite par une équipe de chercheurs français."
+              - pattern: "Les résultats de l'expérience ont surpris les scientifiques."
+              - pattern: "Grâce à ce vaccin, des millions de vies ont été sauvées."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+              - { type: speak }
+              - type: dialogue
+                scenario: reviewing_a_film_together
+                goal: Discuss a film you both saw, giving your opinion on the plot, the direction and the acting.
+
+    checkpoint:
+      title: B2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C1:
+    title: Advanced
+    description: >
+      Understand demanding, longer texts and recognise implicit meaning, express yourself fluently and spontaneously, and use French flexibly and effectively for social, academic and professional purposes.
+
+    units:
+      - id: maitrise-subjonctif
+        title: Subjunctive Mastery
+        description: Use the subjunctive with confidence in complex and nuanced sentences.
+        icon: 🎯
+        steps:
+          - id: subjonctif-passe
+            title: The Past Subjunctive
+            description: Express feelings and judgements about completed actions with the subjonctif passé.
+            vocabulary: ["être ravi que", "regretter que", "s'étonner que", "il est dommage que", "douter que", "avoir peur que", "je suis content que", "il est possible que"]
+            grammar:
+              - pattern: "Je suis ravi que tu sois venu."
+              - pattern: "Je regrette qu'elle ne m'ait pas prévenu."
+              - pattern: "Il est dommage qu'ils soient partis si tôt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: subjonctif-relatives
+            title: Subjunctive in Relative Clauses
+            description: Use the subjunctive after superlatives, le seul, le premier, rien and personne, and for sought-after antecedents.
+            vocabulary: ["le meilleur … que", "le seul qui", "le premier qui", "l'unique", "il n'y a rien qui", "je ne connais personne qui", "chercher quelqu'un qui", "un endroit où"]
+            grammar:
+              - pattern: "C'est le meilleur film que j'aie vu."
+              - pattern: "Je cherche quelqu'un qui puisse m'aider."
+              - pattern: "Il n'y a rien qui me fasse plus plaisir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: conjonctions-ne-expletif
+            title: À moins que, sans que, pourvu que
+            description: Use conjunctions that take the subjunctive, with the ne explétif where it belongs.
+            vocabulary: ["à moins que", "sans que", "pourvu que", "de peur que", "de crainte que", "avant que", "en attendant que", "le ne explétif"]
+            grammar:
+              - pattern: "Nous partirons demain, à moins qu'il ne pleuve."
+              - pattern: "Il est sorti sans que personne s'en aperçoive."
+              - pattern: "Pourvu qu'il fasse beau ce week-end !"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: que-subjonctif-independant
+            title: Que + Subjunctive on Its Own
+            description: Give orders and wishes with que + subjunctive and express indifference with que … ou non.
+            vocabulary: ["qu'il entre !", "que la fête commence !", "qu'il le veuille ou non", "que ce soit … ou", "soit !", "vive …", "ainsi soit-il", "advienne que pourra"]
+            grammar:
+              - pattern: "Qu'il entre !"
+              - pattern: "Qu'il le veuille ou non, il devra signer."
+              - pattern: "Que ce soit à Paris ou à Lyon, les loyers augmentent."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+              - type: dialogue
+                scenario: organising_a_surprise_party
+                goal: Agree on the party plan, setting conditions and wishes with the subjunctive.
+
+      - id: mise-en-relief-ordre
+        title: Emphasis & Word Order
+        description: Highlight information through cleft sentences, dislocation and inversion.
+        icon: 🔦
+        steps:
+          - id: ce-qui-ce-que-cest
+            title: Ce qui … c'est
+            description: Put the key idea in focus with ce qui, ce que and ce dont … c'est.
+            vocabulary: ["ce qui me gêne", "ce que j'aime", "ce dont j'ai besoin", "c'est … qui", "c'est … que", "ce qui compte", "l'essentiel", "le problème"]
+            grammar:
+              - pattern: "Ce qui me gêne, c'est son manque de franchise."
+              - pattern: "Ce dont j'ai besoin, c'est d'un peu de calme."
+              - pattern: "C'est elle qui a eu l'idée, pas moi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: dislocation-emphase
+            title: Left and Right Dislocation
+            description: Front or postpone a topic and pick it up again with a pronoun.
+            vocabulary: ["moi", "toi", "lui", "eux", "ce film", "ça", "en", "y"]
+            grammar:
+              - pattern: "Moi, ce film, je l'ai adoré."
+              - pattern: "Il est fou, ce type."
+              - pattern: "Du chocolat, j'en mange tous les jours."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate }
+          - id: inversion-adverbes
+            title: Inversion after Adverbs
+            description: Invert the subject after peut-être, aussi, sans doute and à peine in formal French.
+            vocabulary: ["peut-être", "sans doute", "aussi", "à peine", "ainsi", "du moins", "encore", "toujours est-il que"]
+            grammar:
+              - pattern: "Peut-être viendra-t-il ce soir."
+              - pattern: "À peine était-elle arrivée que le téléphone a sonné."
+              - pattern: "Le projet était trop cher ; aussi a-t-il été abandonné."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice }
+          - id: ne-que-restriction
+            title: Ne … que and Restriction
+            description: Restrict and emphasise with ne … que, seulement and il n'y a que.
+            vocabulary: ["ne … que", "seulement", "uniquement", "il n'y a que", "rien que", "ne faire que", "tout au plus", "pas plus de"]
+            grammar:
+              - pattern: "Je n'ai que dix minutes à te consacrer."
+              - pattern: "Il n'y a que toi qui puisses le convaincre."
+              - pattern: "Il ne fait que se plaindre."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_select, count: 2 }
+              - type: dialogue
+                scenario: film_club_debate
+                goal: Defend your favourite film using emphasis, dislocation and restriction to stress your points.
+
+      - id: structures-avancees
+        title: Advanced Structures
+        description: Write compact, elegant sentences with participles, past infinitives and formal negation.
+        icon: 🏛️
+        steps:
+          - id: participe-passe-compose
+            title: The Perfect Participle
+            description: Show that one action precedes another with ayant or étant + past participle.
+            vocabulary: ["ayant terminé", "étant arrivé", "s'étant levée", "ayant compris", "n'ayant pas reçu", "étant donné", "une fois", "aussitôt"]
+            grammar:
+              - pattern: "Ayant terminé son rapport, il est parti."
+              - pattern: "Étant arrivée en retard, elle a manqué le début."
+              - pattern: "N'ayant pas reçu de réponse, je me permets de vous relancer."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: proposition-participiale
+            title: Absolute Participle Clauses
+            description: Use participle clauses with their own subject to set the scene concisely.
+            vocabulary: ["le travail fini", "la réunion terminée", "les invités partis", "le soleil couché", "toutes choses égales", "cela dit", "ceci fait", "la nuit tombée"]
+            grammar:
+              - pattern: "Le travail fini, ils sont sortis."
+              - pattern: "La nuit tombée, le village s'endormit."
+              - pattern: "Les invités partis, nous avons enfin pu nous reposer."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: infinitif-passe
+            title: The Past Infinitive
+            description: Sequence actions with après avoir, sans avoir and other past infinitives.
+            vocabulary: ["après avoir", "après être", "sans avoir", "pour avoir", "regretter d'avoir", "être sûr d'avoir", "se souvenir d'avoir", "avant de"]
+            grammar:
+              - pattern: "Après avoir dîné, nous sommes allés au cinéma."
+              - pattern: "Il est parti sans avoir dit au revoir."
+              - pattern: "Elle a été félicitée pour avoir sauvé un enfant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: ne-sans-pas-soutenu
+            title: Ne Without Pas
+            description: Recognise and use ne alone and the ne explétif in formal written French.
+            vocabulary: ["je n'ose", "je ne saurais", "je ne cesse de", "si je ne me trompe", "il ne peut", "plus … que je ne", "craindre que … ne", "je ne sais"]
+            grammar:
+              - pattern: "Je n'ose le dire."
+              - pattern: "Si je ne me trompe, la séance est levée."
+              - pattern: "Il est plus intelligent qu'il ne le paraît."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: formal_literary_reading
+                goal: Discuss a classic text with a professor using formal structures and literary negation.
+
+      - id: nuance-discours
+        title: Hedging & Discourse
+        description: Soften claims, structure arguments and reformulate ideas like a fluent speaker.
+        icon: 🧭
+        steps:
+          - id: attenuation-conditionnel
+            title: Softening with the Conditional
+            description: Hedge statements with il semblerait que, on pourrait penser que and similar forms.
+            vocabulary: ["il semblerait que", "on pourrait penser que", "il se pourrait que", "j'aurais tendance à", "on dirait que", "il paraîtrait que", "je serais tenté de", "à première vue"]
+            grammar:
+              - pattern: "Il semblerait que les résultats soient meilleurs que prévu."
+              - pattern: "On pourrait penser que la crise est terminée."
+              - pattern: "J'aurais tendance à croire qu'il a raison."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: modalisateurs
+            title: Modalisers
+            description: Qualify your statements with a priori, en quelque sorte and dans une certaine mesure.
+            vocabulary: ["a priori", "en quelque sorte", "dans une certaine mesure", "plus ou moins", "en principe", "vraisemblablement", "à proprement parler", "jusqu'à un certain point"]
+            grammar:
+              - pattern: "A priori, rien ne s'oppose à ce projet."
+              - pattern: "C'est, en quelque sorte, un retour aux sources."
+              - pattern: "Dans une certaine mesure, je partage votre avis."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: connecteurs-certes-or
+            title: Certes, en revanche, quant à, or
+            description: Link and contrast ideas with key discourse markers.
+            vocabulary: ["certes … mais", "d'ailleurs", "en revanche", "quant à", "or", "pourtant", "du reste", "en effet"]
+            grammar:
+              - pattern: "Certes, le projet est ambitieux, mais il reste réalisable."
+              - pattern: "Quant à moi, je préfère attendre."
+              - pattern: "Il devait venir ; or, personne ne l'a vu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: reformulation-autrement-dit
+            title: Reformulating
+            description: Clarify and rephrase with autrement dit, en d'autres termes and c'est-à-dire.
+            vocabulary: ["autrement dit", "en d'autres termes", "c'est-à-dire", "à savoir", "en clair", "pour ainsi dire", "ou plutôt", "je veux dire par là"]
+            grammar:
+              - pattern: "Le budget est gelé, autrement dit, aucune embauche cette année."
+              - pattern: "En d'autres termes, il faut tout recommencer."
+              - pattern: "Il est parti, ou plutôt, il a été poussé vers la sortie."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: explaining_a_complex_decision
+                goal: Explain a nuanced decision to a colleague, hedging your claims and reformulating when they are confused.
+
+      - id: monde-professionnel
+        title: Professional Life
+        description: Write formal correspondence, negotiate and give feedback tactfully at work.
+        icon: 💼
+        steps:
+          - id: correspondance-formelle
+            title: Formal Correspondence
+            description: Open, structure and close a formal letter or email with the right formulas.
+            vocabulary: ["je vous saurais gré de", "veuillez trouver ci-joint", "suite à notre entretien", "je me permets de", "dans l'attente de votre réponse", "veuillez agréer", "Madame, Monsieur", "cordialement"]
+            grammar:
+              - pattern: "Je vous saurais gré de bien vouloir me répondre avant vendredi."
+              - pattern: "Veuillez trouver ci-joint le compte rendu de la réunion."
+              - pattern: "Veuillez agréer, Madame, l'expression de mes salutations distinguées."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: reunion-negociation
+            title: Meetings and Negotiation
+            description: Make proposals, reach a compromise and settle a decision in a meeting.
+            vocabulary: ["proposer", "trancher", "un compromis", "une concession", "l'ordre du jour", "faire valoir", "un terrain d'entente", "céder"]
+            grammar:
+              - pattern: "Je propose que nous reportions la décision à lundi."
+              - pattern: "Il va falloir trancher entre ces deux options."
+              - pattern: "Nous pourrions trouver un terrain d'entente."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: presenter-resultats
+            title: Presenting Results
+            description: Present figures, trends and conclusions clearly to an audience.
+            vocabulary: ["le chiffre d'affaires", "une hausse", "une baisse", "progresser", "atteindre", "les objectifs", "un bilan", "au cours du trimestre"]
+            grammar:
+              - pattern: "Le chiffre d'affaires a progressé de 12 % au cours du trimestre."
+              - pattern: "Comme vous pouvez le constater, les objectifs ont été atteints."
+              - pattern: "Ces résultats s'expliquent en grande partie par la hausse des ventes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: speak }
+          - id: critique-avec-tact
+            title: Tactful Criticism
+            description: Give and receive criticism diplomatically and constructively.
+            vocabulary: ["un point à améliorer", "il serait souhaitable que", "je me demande si", "un retour", "constructif", "revoir", "il me semble que", "à mon sens"]
+            grammar:
+              - pattern: "Il serait souhaitable que le rapport soit plus concis."
+              - pattern: "Je me demande si nous ne pourrions pas revoir le calendrier."
+              - pattern: "À mon sens, cette partie mériterait d'être développée."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: annual_performance_review
+                goal: Give a team member balanced feedback, naming weaknesses tactfully and agreeing on goals.
+
+      - id: medias-information
+        title: Media & Information
+        description: Read the news critically, decode headlines and discuss bias and misinformation.
+        icon: 📰
+        steps:
+          - id: conditionnel-information
+            title: The Conditional of Reported News
+            description: Report unconfirmed information with the conditionnel de l'information.
+            vocabulary: ["selon nos sources", "d'après", "aurait été", "serait", "de source sûre", "un porte-parole", "une enquête", "sous réserve"]
+            grammar:
+              - pattern: "Selon nos sources, le ministre aurait démissionné."
+              - pattern: "L'incendie aurait été provoqué par un court-circuit."
+              - pattern: "D'après la police, le suspect serait encore en fuite."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate }
+          - id: titres-nominalises
+            title: Headlines
+            description: Decode and write headlines built on nominalisation.
+            vocabulary: ["la hausse", "la chute", "l'annonce", "la démission", "le report", "la flambée", "la levée", "un gros titre"]
+            grammar:
+              - pattern: "Flambée des prix de l'énergie : le gouvernement réagit."
+              - pattern: "Démission surprise du directeur de la banque."
+              - pattern: "Report de la réforme des retraites à l'automne."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: infox-verification
+            title: Fact-Checking
+            description: Talk about fake news, sources and verification.
+            vocabulary: ["une infox", "vérifier", "une source fiable", "recouper", "démentir", "une rumeur", "la désinformation", "un démenti"]
+            grammar:
+              - pattern: "Avant de partager un article, il faut vérifier la source."
+              - pattern: "L'information a été démentie par le ministère."
+              - pattern: "Il est indispensable de recouper les sources."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: parti-pris-mediatique
+            title: Commenting on Bias
+            description: Analyse how a story is framed and comment on media bias.
+            vocabulary: ["un parti pris", "partial", "impartial", "orienté", "passer sous silence", "le traitement médiatique", "mettre en avant", "l'angle"]
+            grammar:
+              - pattern: "Cet article me paraît assez orienté."
+              - pattern: "Le journal a passé sous silence les chiffres les plus gênants."
+              - pattern: "Tout dépend de l'angle choisi par la rédaction."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: newsroom_editorial_meeting
+                goal: Argue with an editor over how to cover an unconfirmed story fairly.
+
+      - id: science-ethique
+        title: Science, Technology & Ethics
+        description: Discuss AI, data and bioethics, expressing reservations and concessions.
+        icon: 🔬
+        steps:
+          - id: ia-donnees
+            title: AI and Data
+            description: Discuss artificial intelligence, algorithms and personal data.
+            vocabulary: ["l'intelligence artificielle", "les données personnelles", "un algorithme", "la vie privée", "un logiciel", "automatiser", "la cybersécurité", "le traitement des données"]
+            grammar:
+              - pattern: "L'intelligence artificielle transforme déjà de nombreux métiers."
+              - pattern: "Nos données personnelles sont collectées à notre insu."
+              - pattern: "Il faut encadrer l'usage des algorithmes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+          - id: bioethique
+            title: Bioethics
+            description: Debate questions of medical ethics and scientific progress.
+            vocabulary: ["la bioéthique", "le clonage", "la fin de vie", "un essai clinique", "le consentement", "la génétique", "les dérives", "un comité d'éthique"]
+            grammar:
+              - pattern: "Le consentement du patient doit toujours être recueilli."
+              - pattern: "La question de la fin de vie divise la société."
+              - pattern: "Il convient de prévenir les dérives de la génétique."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: encore-faut-il
+            title: Expressing Reservations
+            description: Voice doubts with encore faut-il que, reste à savoir si and similar structures.
+            vocabulary: ["encore faut-il que", "reste à savoir si", "rien ne garantit que", "on peut se demander si", "sous réserve que", "à condition que", "un bémol", "émettre des réserves"]
+            grammar:
+              - pattern: "L'idée est bonne ; encore faut-il qu'elle soit appliquée."
+              - pattern: "Reste à savoir si le public suivra."
+              - pattern: "Rien ne garantit que cette technologie soit sans danger."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: speak }
+          - id: si-adjectif-que
+            title: Si … que and Quelque … que
+            description: Express concession with si … que, aussi … que and quelque … que + subjunctive.
+            vocabulary: ["si … que", "aussi … que", "quelque … que", "pour … que", "tout … que", "quelque peu", "malgré", "néanmoins"]
+            grammar:
+              - pattern: "Si intelligent qu'il soit, il ne peut pas tout savoir."
+              - pattern: "Quelques efforts que nous fassions, le problème persiste."
+              - pattern: "Aussi performante que soit cette machine, elle a ses limites."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: ai_ethics_panel
+                goal: Take part in a panel on AI, conceding strengths while voicing clear reservations.
+
+      - id: societe-politique
+        title: Society & Politics
+        description: Talk about institutions, protests and social debates with nuance.
+        icon: 🗳️
+        steps:
+          - id: institutions-francaises
+            title: French Institutions
+            description: Name the main institutions and the steps of the legislative process.
+            vocabulary: ["l'Assemblée nationale", "le Sénat", "un projet de loi", "voter", "adopter", "un député", "la laïcité", "la Constitution"]
+            grammar:
+              - pattern: "Le projet de loi a été adopté par l'Assemblée nationale."
+              - pattern: "La laïcité est inscrite dans la Constitution."
+              - pattern: "Les députés voteront le texte en deuxième lecture."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate }
+          - id: manifestation-greve
+            title: Protests and Strikes
+            description: Describe protests, strikes and demands.
+            vocabulary: ["une manifestation", "une grève", "revendiquer", "un syndicat", "un cortège", "une pétition", "mobiliser", "les revendications"]
+            grammar:
+              - pattern: "Les syndicats ont appelé à une grève nationale."
+              - pattern: "Les manifestants revendiquent une hausse des salaires."
+              - pattern: "Le cortège a défilé de République à Nation."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: listen_type }
+          - id: quoi-que-qui-que
+            title: Quoi que, qui que, où que
+            description: Express indefinite concession with quoi que, qui que and où que + subjunctive.
+            vocabulary: ["quoi que", "qui que", "où que", "quel que soit", "quelle que soit", "quoique", "d'où que", "de quelque manière que"]
+            grammar:
+              - pattern: "Quoi qu'il dise, je ne le croirai pas."
+              - pattern: "Qui que vous soyez, vous devez respecter la loi."
+              - pattern: "Quelle que soit la décision, nous la respecterons."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice }
+          - id: positions-nuancees
+            title: Nuanced Positions
+            description: Take a balanced stance on a social issue without caricature.
+            vocabulary: ["d'un côté", "de l'autre", "il faut bien reconnaître que", "sans pour autant", "un juste milieu", "nuancer", "à l'inverse", "on ne saurait nier que"]
+            grammar:
+              - pattern: "Il faut bien reconnaître que la réforme a des mérites."
+              - pattern: "On peut soutenir les grévistes sans pour autant approuver les blocages."
+              - pattern: "On ne saurait nier que la situation s'est dégradée."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: dinner_table_political_debate
+                goal: Discuss a controversial reform with friends, defending a nuanced position without offending anyone.
+
+      - id: francais-familier
+        title: Idioms & Colloquial French
+        description: Understand idioms, slang, verlan and the features of everyday spoken French.
+        icon: 🗣️
+        steps:
+          - id: expressions-idiomatiques
+            title: Common Idioms
+            description: Use well-known French idioms in the right context.
+            vocabulary: ["avoir le cafard", "poser un lapin", "coûter les yeux de la tête", "tomber dans les pommes", "avoir un poil dans la main", "mettre son grain de sel", "casser les pieds", "ce n'est pas la mer à boire"]
+            grammar:
+              - pattern: "Il m'a posé un lapin hier soir."
+              - pattern: "Cet appartement coûte les yeux de la tête."
+              - pattern: "Depuis qu'elle est partie, j'ai le cafard."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: multiple_choice }
+          - id: langue-familiere
+            title: Informal French
+            description: Recognise and use everyday informal vocabulary.
+            vocabulary: ["bosser", "un truc", "la bouffe", "c'est galère", "un mec", "le fric", "bouquiner", "flemmarder"]
+            grammar:
+              - pattern: "Je bosse tout le week-end, c'est galère."
+              - pattern: "Passe-moi le truc sur la table."
+              - pattern: "On se fait une bouffe samedi ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+          - id: verlan
+            title: Verlan
+            description: Decode common verlan words and use them appropriately.
+            vocabulary: ["relou", "chelou", "ouf", "une meuf", "un keum", "vénère", "laisse béton", "teubé"]
+            grammar:
+              - pattern: "Il est trop relou, ce mec."
+              - pattern: "C'est chelou, cette histoire."
+              - pattern: "Ce concert était ouf !"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: word_select }
+          - id: oral-spontane
+            title: Spontaneous Spoken French
+            description: Understand dropped ne, ça for cela, on for nous and other spoken features.
+            vocabulary: ["j'sais pas", "y a", "t'as", "ça", "on", "chais pas", "bon ben", "du coup"]
+            grammar:
+              - pattern: "J'sais pas, on verra demain."
+              - pattern: "Y a plus de pain, du coup on va en acheter."
+              - pattern: "T'as vu ça ? C'est dingue !"
+            activities:
+              - { type: learn }
+              - { type: listen_type, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: catching_up_with_a_friend_at_a_bar
+                goal: Chat casually with a friend, understanding slang and replying naturally in spoken French.
+
+      - id: argumentation-ecrit
+        title: Argument & Academic Writing
+        description: Plan and write a structured essay with sources and a clear conclusion.
+        icon: 🎓
+        steps:
+          - id: plan-dissertation
+            title: The Dissertation Plan
+            description: Build a problématique and organise a thèse, antithèse, synthèse plan.
+            vocabulary: ["une problématique", "la thèse", "l'antithèse", "la synthèse", "un plan", "une introduction", "dégager", "annoncer le plan"]
+            grammar:
+              - pattern: "Nous nous demanderons dans quelle mesure le progrès rend l'homme plus libre."
+              - pattern: "Dans un premier temps, nous verrons que…"
+              - pattern: "Il convient tout d'abord de définir les termes du sujet."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: connecteurs-logiques-ecrit
+            title: Logical Connectors
+            description: Order and link arguments with formal connectors.
+            vocabulary: ["en premier lieu", "en second lieu", "de surcroît", "néanmoins", "en somme", "par conséquent", "toutefois", "qui plus est"]
+            grammar:
+              - pattern: "En premier lieu, il convient d'examiner les causes du phénomène."
+              - pattern: "De surcroît, cette mesure coûterait très cher."
+              - pattern: "Néanmoins, cet argument mérite d'être nuancé."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_select }
+          - id: citer-sources
+            title: Quoting Sources
+            description: Introduce quotations and references accurately.
+            vocabulary: ["comme le souligne", "d'après", "selon", "pour reprendre les mots de", "citer", "affirmer", "soutenir", "une citation"]
+            grammar:
+              - pattern: "Comme le souligne Camus, « il faut imaginer Sisyphe heureux »."
+              - pattern: "D'après les historiens, cette période fut décisive."
+              - pattern: "Pour reprendre les mots de Montesquieu, le pouvoir arrête le pouvoir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: match }
+              - { type: listen_type }
+          - id: conclure-dissertation
+            title: Concluding an Essay
+            description: Sum up, answer the problématique and open the debate.
+            vocabulary: ["en définitive", "il apparaît que", "en conclusion", "au terme de", "force est de constater", "ouvrir sur", "en dernière analyse", "pour conclure"]
+            grammar:
+              - pattern: "En définitive, il apparaît que la liberté suppose des limites."
+              - pattern: "Force est de constater que le débat reste ouvert."
+              - pattern: "Au terme de cette analyse, on peut se demander si…"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: oral_exam_defence
+                goal: Defend your essay plan before an examiner and answer their objections with structured arguments.
+
+    checkpoint:
+      title: C1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C2:
+    title: Proficiency
+    description: >
+      Understand with ease virtually everything heard or read, summarise and reconstruct arguments from different sources, and express yourself spontaneously, fluently and precisely, distinguishing finer shades of meaning even in the most complex situations.
+
+    units:
+      - id: registres-de-langue
+        title: Register & Nuance
+        description: Move between formal, standard and colloquial French and pick the right register for every situation.
+        icon: 🎚️
+        steps:
+          - id: soutenu-courant-familier
+            title: Formal, Standard, Colloquial
+            description: Recognise register triplets and the effect each word has on the listener.
+            vocabulary: ["se rendre", "aller", "se barrer", "un ouvrage", "un livre", "un bouquin", "demeurer", "crécher", "un repas", "la bouffe"]
+            grammar:
+              - pattern: "Je me rends à Lyon demain pour affaires."
+              - pattern: "Il a consacré un ouvrage remarquable à cette question."
+              - pattern: "J'ai paumé mon bouquin dans le métro."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: vouvoiement-tutoiement-nuances
+            title: Tu vs Vous Subtleties
+            description: Handle vouvoiement within families, tutoiement at work and the moment of switching.
+            vocabulary: ["vouvoyer", "tutoyer", "se tutoyer", "le vouvoiement", "le tutoiement", "On peut se tutoyer ?", "garder ses distances", "la familiarité"]
+            grammar:
+              - pattern: "Dans certaines familles, les enfants vouvoient encore leurs grands-parents."
+              - pattern: "Ici, tout le monde se tutoie, même la directrice."
+              - pattern: "Je préférerais qu'on se vouvoie, si vous le permettez."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: interrogation-negation-soutenues
+            title: Formal Questions & Negation
+            description: Ask questions with inversion and use literary negation such as ne … point and ne … guère.
+            vocabulary: ["Que voulez-vous ?", "Puis-je … ?", "Auriez-vous l'obligeance de", "Sauriez-vous", "Qu'en pensez-vous ?", "ne … point", "ne … guère", "nul ne"]
+            grammar:
+              - pattern: "Puis-je vous être utile en quoi que ce soit ?"
+              - pattern: "Que voulez-vous dire exactement ?"
+              - pattern: "Je ne saurais vous répondre ; nul ne le sait."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: registre-selon-situation
+            title: Choosing the Right Register
+            description: Adapt your register to a job interview, a formal letter and a chat with friends.
+            vocabulary: ["Veuillez", "Je vous prie d'agréer", "Ça roule ?", "Ça marche", "être de mise", "déplacé", "malvenu", "convenir"]
+            grammar:
+              - pattern: "Ce genre de plaisanterie serait déplacé lors d'un entretien."
+              - pattern: "Veuillez trouver ci-joint mon curriculum vitae."
+              - pattern: "Salut, ça roule ? On se capte ce soir ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: register_switching_day
+                goal: Talk to your boss, a stranger and a close friend in turn, switching register naturally each time.
+
+      - id: modalite-et-certitude
+        title: Modality & Stance
+        description: Express obligation, possibility and degrees of certainty with precision, including literary forms.
+        icon: ⚖️
+        steps:
+          - id: devoir-pouvoir-falloir-nuances
+            title: Devoir, Pouvoir, Falloir
+            description: Use the fine nuances of modal verbs for regret, possibility and probability.
+            vocabulary: ["il aurait dû", "il a dû", "il se peut que", "il n'est pas exclu que", "il faudrait que", "il doit s'agir de", "il ne tient qu'à vous", "il risque de"]
+            grammar:
+              - pattern: "Il aurait dû nous prévenir plus tôt."
+              - pattern: "Il se peut qu'elle ait raison, après tout."
+              - pattern: "Il n'est pas exclu que la réunion soit reportée."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: subjonctif-imparfait-reconnaissance
+            title: Imperfect & Pluperfect Subjunctive
+            description: Recognise the imparfait and plus-que-parfait du subjonctif in literary and formal texts.
+            vocabulary: ["qu'il fût", "qu'il eût", "qu'il fît", "qu'il vînt", "qu'elle sût", "qu'il pût", "qu'il eût fait", "qu'il fût venu"]
+            grammar:
+              - pattern: "Il fallait qu'il fût présent à la cérémonie."
+              - pattern: "Je doutais qu'elle eût compris la leçon."
+              - pattern: "Bien qu'il fût tard, il continua d'écrire."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: conditionnel-passe-deuxieme-forme
+            title: Literary Past Conditional
+            description: Understand the conditionnel passé 2e forme, as in Il eût fallu, in literary French.
+            vocabulary: ["il eût fallu", "on eût dit", "j'eusse aimé", "il eût été préférable", "n'eût été", "eût-il voulu", "le style soutenu", "la langue littéraire"]
+            grammar:
+              - pattern: "Il eût fallu agir bien plus tôt."
+              - pattern: "On eût dit que le temps s'était arrêté."
+              - pattern: "J'eusse aimé vous rencontrer en d'autres circonstances."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: degres-de-certitude
+            title: Degrees of Certainty
+            description: Position yourself precisely between certainty, probability and doubt.
+            vocabulary: ["il est indéniable que", "il est incontestable que", "rien ne permet d'affirmer que", "selon toute vraisemblance", "il y a fort à parier que", "il est douteux que", "à n'en pas douter", "il semblerait que"]
+            grammar:
+              - pattern: "Il est indéniable que la situation s'est améliorée."
+              - pattern: "Rien ne permet d'affirmer que le suspect soit coupable."
+              - pattern: "Il y a fort à parier qu'il ne viendra pas."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: fill_blank }
+              - type: dialogue
+                scenario: expert_panel_certainty
+                goal: Comment on a news story as an expert, carefully signalling how certain you are of each claim.
+
+      - id: langage-figure
+        title: Figurative Language
+        description: Understand and use metaphors, idioms, proverbs and cultural references like a native speaker.
+        icon: 🎭
+        steps:
+          - id: metaphore-comparaison
+            title: Metaphor & Simile
+            description: Tell metaphor from simile and use common figurative descriptions of people.
+            vocabulary: ["être un ours", "comme un poisson dans l'eau", "un cœur de pierre", "une mer de nuages", "têtu comme une mule", "malin comme un singe", "la métaphore", "la comparaison"]
+            grammar:
+              - pattern: "Mon voisin est un vrai ours, il ne dit jamais bonjour."
+              - pattern: "À Paris, elle est comme un poisson dans l'eau."
+              - pattern: "Ce n'est plus une comparaison, c'est une métaphore filée."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: expressions-animaux-corps
+            title: Animal & Body Idioms
+            description: Use idioms built on animals and parts of the body.
+            vocabulary: ["avoir un chat dans la gorge", "se mettre le doigt dans l'œil", "poser un lapin", "avoir le cafard", "coûter les yeux de la tête", "avoir la chair de poule", "casser les pieds", "donner sa langue au chat"]
+            grammar:
+              - pattern: "Excusez-moi, j'ai un chat dans la gorge."
+              - pattern: "Si tu crois qu'il va accepter, tu te mets le doigt dans l'œil."
+              - pattern: "Elle m'a posé un lapin hier soir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: proverbes-et-dictons
+            title: Proverbs & Sayings
+            description: Recognise well-known French proverbs and slip them into conversation.
+            vocabulary: ["Qui vivra verra", "Petit à petit, l'oiseau fait son nid", "Qui ne risque rien n'a rien", "L'habit ne fait pas le moine", "Pierre qui roule n'amasse pas mousse", "vendre la peau de l'ours", "le proverbe", "le dicton"]
+            grammar:
+              - pattern: "Ne t'inquiète pas pour l'avenir : qui vivra verra."
+              - pattern: "Il ne faut pas vendre la peau de l'ours avant de l'avoir tué."
+              - pattern: "Comme dit le proverbe, l'habit ne fait pas le moine."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: madeleine-de-proust-tartuffe
+            title: Literary & Historical Allusions
+            description: Understand expressions drawn from French literature and history.
+            vocabulary: ["une madeleine de Proust", "un vrai Tartuffe", "un Harpagon", "un Rastignac", "Après moi, le déluge", "le pot de terre contre le pot de fer", "une querelle de clocher", "la tour d'ivoire"]
+            grammar:
+              - pattern: "L'odeur du pain grillé, c'est ma madeleine de Proust."
+              - pattern: "Ne te fie pas à ses beaux discours, c'est un vrai Tartuffe."
+              - pattern: "Ce jeune ambitieux est un vrai Rastignac."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice }
+              - type: dialogue
+                scenario: literary_allusions_dinner
+                goal: Follow and join a dinner conversation full of literary allusions without losing the thread.
+
+      - id: rhetorique-persuasion
+        title: Rhetoric & Persuasion
+        description: Use figures of speech, understatement and eloquence to persuade and refute with elegance.
+        icon: 🎤
+        steps:
+          - id: anaphore-gradation-antithese
+            title: Figures of Speech
+            description: Identify anaphora, gradation, antithesis and rhetorical questions in speeches.
+            vocabulary: ["l'anaphore", "la gradation", "l'antithèse", "la question rhétorique", "le chiasme", "l'hyperbole", "l'énumération", "la prétérition"]
+            grammar:
+              - pattern: "Paris outragé ! Paris brisé ! Paris martyrisé ! mais Paris libéré !"
+              - pattern: "Va, cours, vole, et nous venge."
+              - pattern: "Faut-il vraiment rappeler que la liberté a un prix ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select }
+          - id: litote-euphemisme
+            title: Litotes & Euphemism
+            description: Say more by saying less, and soften harsh realities with euphemism.
+            vocabulary: ["la litote", "l'euphémisme", "Ce n'est pas mal", "Va, je ne te hais point", "Il nous a quittés", "les personnes à mobilité réduite", "un demandeur d'emploi", "un non-voyant"]
+            grammar:
+              - pattern: "Va, je ne te hais point."
+              - pattern: "Ce n'est pas mal du tout : c'est même excellent."
+              - pattern: "Son grand-père nous a quittés l'hiver dernier."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: art-oratoire-eloquence
+            title: The Art of the Speech
+            description: Open, build and close a speech with eloquence.
+            vocabulary: ["l'éloquence", "prendre la parole", "l'orateur", "l'exorde", "la péroraison", "capter l'attention", "haranguer", "un discours"]
+            grammar:
+              - pattern: "Permettez-moi de prendre la parole quelques instants."
+              - pattern: "Un bon orateur sait capter l'attention dès l'exorde."
+              - pattern: "Mesdames et Messieurs, si je suis devant vous ce soir, c'est pour vous parler d'avenir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: speak }
+          - id: refutation-elegante
+            title: Refuting Elegantly
+            description: Concede, nuance and refute an argument without being aggressive.
+            vocabulary: ["certes … mais", "loin de moi l'idée de", "je me permets de nuancer", "force est de constater", "il n'en demeure pas moins que", "objecter", "réfuter", "l'argument d'autorité"]
+            grammar:
+              - pattern: "Loin de moi l'idée de vous contredire, mais les chiffres disent autre chose."
+              - pattern: "Certes, l'argument est séduisant ; il n'en demeure pas moins fragile."
+              - pattern: "Force est de constater que cette réforme n'a pas tenu ses promesses."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: elegant_rebuttal_debate
+                goal: Refute your opponent's arguments in a televised debate while staying courteous and precise.
+
+      - id: humour-ironie-jeux-de-mots
+        title: Humour, Irony & Wordplay
+        description: Get the joke, catch the irony and appreciate French wit and wordplay.
+        icon: 😏
+        steps:
+          - id: calembours-comble
+            title: Puns & Wordplay
+            description: Understand puns based on homophones and double meanings.
+            vocabulary: ["un jeu de mots", "un calembour", "un homophone", "la polysémie", "un mot-valise", "le comble", "faire de l'esprit", "un trait d'esprit"]
+            grammar:
+              - pattern: "Quel est le comble pour un électricien ? Ne pas être au courant."
+              - pattern: "Le comble pour un jardinier, c'est de raconter des salades."
+              - pattern: "« Franglais » est un mot-valise formé de « français » et d'« anglais »."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: ironie-antiphrase
+            title: Irony & Antiphrasis
+            description: Recognise irony and antiphrasis from context and tone of voice.
+            vocabulary: ["l'ironie", "l'antiphrase", "Bravo, quelle réussite !", "C'est malin !", "Merci du cadeau !", "Charmant !", "pince-sans-rire", "le ton"]
+            grammar:
+              - pattern: "Bravo, quelle réussite ! Tu as encore raté le train."
+              - pattern: "C'est malin ! Maintenant, on est enfermés dehors."
+              - pattern: "Charmant accueil, vraiment… On se sent tout de suite chez soi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: contrepeterie-reconnaitre
+            title: Spoonerisms
+            description: Recognise the contrepèterie, a French tradition of swapping sounds for a hidden meaning.
+            vocabulary: ["la contrepèterie", "intervertir", "permuter", "une syllabe", "un son", "la solution", "le Canard enchaîné", "le sens caché"]
+            grammar:
+              - pattern: "Une contrepèterie consiste à intervertir des sons pour obtenir une autre phrase."
+              - pattern: "« Sonnez, trompettes ! » devient, par contrepèterie, « Trompez, sonnettes ! »"
+              - pattern: "Le jeu veut que le lecteur trouve la solution lui-même."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: multiple_choice }
+              - { type: listen_type }
+          - id: esprit-second-degre
+            title: Wit & Second Degree
+            description: Navigate l'esprit, le second degré, self-mockery and teasing.
+            vocabulary: ["l'esprit", "le second degré", "prendre au premier degré", "une boutade", "l'autodérision", "l'humour noir", "taquiner", "chambrer"]
+            grammar:
+              - pattern: "Ne le prends pas mal, c'était du second degré."
+              - pattern: "Il a répondu par une boutade pour détendre l'atmosphère."
+              - pattern: "L'autodérision est souvent la marque d'un esprit fin."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: second_degre_banter
+                goal: Trade friendly teasing with French colleagues and show you can take and make a joke au second degré.
+
+      - id: ecrit-administratif-academique
+        title: Academic & Formal Writing
+        description: Write in administrative, legal and academic French with precision and control.
+        icon: 🏛️
+        steps:
+          - id: style-administratif-juridique
+            title: Administrative & Legal Style
+            description: Read and write the set phrases of official letters and contracts.
+            vocabulary: ["Il est porté à votre connaissance que", "ci-après", "ci-joint", "nonobstant", "sous réserve de", "le cas échéant", "en vertu de", "dûment"]
+            grammar:
+              - pattern: "Il est porté à votre connaissance que le délai de recours est expiré."
+              - pattern: "Nonobstant les dispositions qui précèdent, le contrat demeure valable."
+              - pattern: "Le locataire, ci-après dénommé « le preneur », s'engage à payer le loyer."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: nominalisation-alleger
+            title: Nominalisation & Its Alternatives
+            description: Use nominalisation in formal prose and know when to lighten it with verbs.
+            vocabulary: ["la nominalisation", "la mise en œuvre", "la prise en charge", "le renforcement", "la suppression", "l'amélioration", "alléger le style", "un verbe d'action"]
+            grammar:
+              - pattern: "La mise en œuvre de la réforme a entraîné une hausse des coûts."
+              - pattern: "Plus simplement : depuis qu'on applique la réforme, les coûts augmentent."
+              - pattern: "La suppression de ces postes a provoqué la colère des syndicats."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: synthese-de-documents
+            title: Document Synthesis & Summary
+            description: Apply the techniques of the synthèse de documents and the résumé.
+            vocabulary: ["la synthèse de documents", "le résumé", "la contraction de texte", "le corpus", "la problématique", "confronter", "dégager les idées principales", "rester objectif"]
+            grammar:
+              - pattern: "Les trois documents du corpus abordent la question sous des angles différents."
+              - pattern: "Alors que le premier auteur insiste sur le coût, le second met l'accent sur l'éthique."
+              - pattern: "Le résumé doit respecter l'ordre des idées du texte original."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice }
+              - { type: listen_type }
+          - id: or-partant-a-fortiori
+            title: Precise Connectors
+            description: Link ideas rigorously with or, partant, en l'occurrence and a fortiori.
+            vocabulary: ["or", "partant", "en l'occurrence", "a fortiori", "dès lors", "du reste", "en revanche", "toutefois"]
+            grammar:
+              - pattern: "Tout homme est mortel ; or Socrate est un homme."
+              - pattern: "Il a menti à plusieurs reprises ; partant, sa parole n'a plus de valeur."
+              - pattern: "Cette tâche est ardue pour un expert, a fortiori pour un débutant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: thesis_supervisor_meeting
+                goal: Discuss your draft synthesis with your supervisor and justify your choice of connectors.
+
+      - id: litterature-et-style-narratif
+        title: Literature & Style
+        description: Read classic French narrative tenses and analyse literary texts and poetry.
+        icon: 📜
+        steps:
+          - id: passe-simple-passe-anterieur
+            title: Passé Simple & Passé Antérieur
+            description: Recognise the narrative tenses of written French and the sequence they create.
+            vocabulary: ["il entra", "elle fut", "ils eurent", "elle vint", "il dit", "ils prirent", "dès qu'il eut fini", "à peine fut-elle sortie"]
+            grammar:
+              - pattern: "Il entra dans la pièce et s'assit sans un mot."
+              - pattern: "Elle prit la lettre, la lut, puis la déchira."
+              - pattern: "Dès qu'il eut fini son discours, la salle se leva."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: style-indirect-libre
+            title: Free Indirect Speech
+            description: Spot free indirect speech and distinguish it from direct and reported speech.
+            vocabulary: ["le style indirect libre", "le discours direct", "le discours indirect", "la focalisation interne", "le monologue intérieur", "les pensées du personnage", "rapporter", "la voix narrative"]
+            grammar:
+              - pattern: "Elle regarda par la fenêtre. Viendrait-il enfin ? Elle n'en pouvait plus d'attendre."
+              - pattern: "Il annonça qu'il partirait le lendemain."
+              - pattern: "Il partirait demain, c'était décidé ; personne ne le retiendrait."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: analyse-narrateur-registre
+            title: Analysing a Text
+            description: Discuss the narrator, point of view and literary register of a passage.
+            vocabulary: ["le narrateur", "le point de vue", "omniscient", "le registre lyrique", "le registre tragique", "le registre comique", "le champ lexical", "l'incipit"]
+            grammar:
+              - pattern: "Le narrateur omniscient connaît les pensées de tous les personnages."
+              - pattern: "Le champ lexical de la mort renforce le registre tragique de la scène."
+              - pattern: "Dans cet incipit, le point de vue adopté est celui du héros."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: alexandrin-rime
+            title: Poetry Basics
+            description: Count syllables in an alexandrine and describe rhyme and form.
+            vocabulary: ["l'alexandrin", "le vers", "la strophe", "la rime", "la césure", "l'hémistiche", "le sonnet", "les rimes embrassées"]
+            grammar:
+              - pattern: "Un alexandrin compte douze syllabes."
+              - pattern: "La césure partage l'alexandrin en deux hémistiches."
+              - pattern: "Demain, dès l'aube, à l'heure où blanchit la campagne"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: multiple_choice }
+              - type: dialogue
+                scenario: literature_class_commentary
+                goal: Present a short commentary on a poem to your class and answer the teacher's questions.
+
+      - id: idees-et-philosophie
+        title: Ideas & Philosophy
+        description: Discuss abstract ideas, quote famous thinkers and argue with subtle concession.
+        icon: 🦉
+        steps:
+          - id: etre-conscience-libre-arbitre
+            title: Abstract Vocabulary
+            description: Talk about being, consciousness, freedom and free will.
+            vocabulary: ["l'être", "le néant", "la conscience", "la liberté", "le libre arbitre", "l'essence", "l'existence", "autrui", "le déterminisme"]
+            grammar:
+              - pattern: "Le libre arbitre n'est-il qu'une illusion ?"
+              - pattern: "Pour Sartre, l'existence précède l'essence."
+              - pattern: "Avoir conscience de soi, c'est déjà se distinguer d'autrui."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: cogito-citations-celebres
+            title: Famous Quotations
+            description: Recognise and use famous quotations from French thinkers.
+            vocabulary: ["Je pense, donc je suis", "L'enfer, c'est les autres", "L'homme est un roseau pensant", "Il faut cultiver notre jardin", "le cogito", "une citation", "citer", "selon l'auteur"]
+            grammar:
+              - pattern: "Descartes affirme : « Je pense, donc je suis. »"
+              - pattern: "Quand Sartre écrit que l'enfer, c'est les autres, il parle du regard d'autrui."
+              - pattern: "Selon Pascal, l'homme n'est qu'un roseau, mais c'est un roseau pensant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: error_correct }
+          - id: argumenter-sur-l-abstrait
+            title: Arguing About Ideas
+            description: Build a philosophical argument with distinctions, thesis and antithesis.
+            vocabulary: ["il convient de distinguer", "a priori", "en tant que tel", "la thèse", "l'antithèse", "dépasser la contradiction", "en dernière analyse", "poser le problème"]
+            grammar:
+              - pattern: "Il convient de distinguer la liberté de droit et la liberté de fait."
+              - pattern: "A priori, le bonheur semble dépendre des circonstances."
+              - pattern: "En dernière analyse, toute morale repose sur un choix."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+          - id: quand-bien-meme-tout-que
+            title: Concessive Structures
+            description: Concede with pour autant, quand bien même + conditional and tout … que.
+            vocabulary: ["pour autant", "quand bien même", "tout … que", "si … que", "quelque … que", "encore que", "il n'empêche que", "toujours est-il que"]
+            grammar:
+              - pattern: "Quand bien même il s'excuserait, je ne lui pardonnerais pas."
+              - pattern: "Tout intelligent qu'il est, il s'est trompé."
+              - pattern: "Elle a échoué ; elle n'a pas renoncé pour autant."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: cafe_philo_debate
+                goal: Defend a position on free will at a café philo while conceding the strongest objections.
+
+      - id: francophonie-et-identite
+        title: Culture, Language & Identity
+        description: Explore the French-speaking world, its regional varieties and current debates about the language.
+        icon: 🌍
+        steps:
+          - id: belgique-suisse-septante
+            title: Belgium & Switzerland
+            description: Recognise Belgian and Swiss French, from septante and nonante to meal names.
+            vocabulary: ["la francophonie", "septante", "huitante", "nonante", "le dîner (midi)", "le souper", "une drache", "Ça joue ?"]
+            grammar:
+              - pattern: "En Belgique et en Suisse, on dit septante et nonante."
+              - pattern: "À Bruxelles, on dîne à midi et on soupe le soir."
+              - pattern: "Il drache depuis ce matin, prends ton parapluie !"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice }
+          - id: quebec-magasiner-char
+            title: Quebec French
+            description: Understand everyday Quebec French and its distinctive vocabulary.
+            vocabulary: ["un char", "magasiner", "C'est plate", "la fin de semaine", "mon chum", "ma blonde", "C'est correct", "le dépanneur"]
+            grammar:
+              - pattern: "On va magasiner au centre-ville en fin de semaine."
+              - pattern: "Il pleut encore, c'est plate !"
+              - pattern: "Mon chum m'attend dans le char."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: word_select }
+          - id: afrique-essencerie-maquis
+            title: African French
+            description: Discover vocabulary coined in the French of West and Central Africa.
+            vocabulary: ["une essencerie", "grever", "un maquis", "cadeauter", "droit-droit", "une go", "un deuxième bureau", "le nouchi"]
+            grammar:
+              - pattern: "Il faut s'arrêter à l'essencerie avant de quitter Dakar."
+              - pattern: "On se retrouve au maquis ce soir pour manger du poulet braisé."
+              - pattern: "Il m'a cadeauté un beau pagne pour mon anniversaire."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice }
+              - { type: listen_type }
+          - id: courriel-infox-ecriture-inclusive
+            title: Anglicisms & Inclusive Writing
+            description: Understand francisation, the role of the Académie française and the debate on inclusive writing.
+            vocabulary: ["l'Académie française", "la francisation", "un anglicisme", "le courriel", "l'infox", "l'écriture inclusive", "le point médian", "iel"]
+            grammar:
+              - pattern: "Au Québec, on écrit un courriel plutôt qu'un e-mail."
+              - pattern: "On recommande officiellement infox à la place de fake news."
+              - pattern: "Certains écrivent « les étudiant·e·s », d'autres jugent cette graphie difficile à lire."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank }
+              - type: dialogue
+                scenario: language_policy_roundtable
+                goal: Present the arguments on both sides of the inclusive-writing debate in a balanced, neutral way.
+
+      - id: maitrise-et-mediation
+        title: Mastery & Mediation
+        description: Reformulate, interpret, translate and moderate so that others understand each other.
+        icon: 🤝
+        steps:
+          - id: reformuler-en-substance
+            title: Summarising & Reformulating
+            description: Summarise a text and reformulate it clearly for someone else.
+            vocabulary: ["en substance", "autrement dit", "en d'autres termes", "en somme", "l'auteur soutient que", "reformuler", "synthétiser", "l'essentiel"]
+            grammar:
+              - pattern: "En substance, l'auteur soutient que la croissance n'est pas une fin en soi."
+              - pattern: "Autrement dit, il faudrait repenser notre modèle."
+              - pattern: "Si je reformule, vous proposez de reporter le projet ?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: speak }
+          - id: sous-entendu-lire-entre-les-lignes
+            title: Reading Between the Lines
+            description: Explain implicit meaning, insinuations and what is left unsaid.
+            vocabulary: ["le sous-entendu", "l'implicite", "lire entre les lignes", "insinuer", "laisser entendre", "une allusion", "à demi-mot", "Suivez mon regard"]
+            grammar:
+              - pattern: "Quand il dit qu'il est « très pris », il laisse entendre qu'il ne viendra pas."
+              - pattern: "Il faut savoir lire entre les lignes."
+              - pattern: "Elle me l'a fait comprendre à demi-mot."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: error_correct }
+          - id: traduire-expressions-culturelles
+            title: Translating Culture
+            description: Translate culture-bound expressions by adapting rather than copying them.
+            vocabulary: ["l'équivalent", "intraduisible", "le faux ami", "le calque", "l'adaptation", "rendre l'idée", "le contexte culturel", "traduire mot à mot"]
+            grammar:
+              - pattern: "Il n'existe pas d'équivalent exact ; il faut adapter l'expression."
+              - pattern: "Traduire « avoir le cafard » mot à mot n'aurait aucun sens en anglais."
+              - pattern: "Traduire, c'est toujours trahir un peu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: translate, count: 3 }
+              - { type: error_correct }
+              - { type: match }
+          - id: animer-moderer-un-debat
+            title: Moderating a Discussion
+            description: Chair a discussion, give the floor, refocus and sum up.
+            vocabulary: ["Si je peux me permettre", "Pour revenir à", "Résumons", "Je vous laisse la parole", "Laissez-le terminer", "Recentrons le débat", "un tour de table", "le modérateur"]
+            grammar:
+              - pattern: "Si je peux me permettre, nous nous éloignons du sujet."
+              - pattern: "Pour revenir à votre question, deux points méritent d'être soulignés."
+              - pattern: "Résumons : deux positions s'opposent, mais un compromis semble possible."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: moderate_panel_discussion
+                goal: Moderate a heated panel discussion, giving everyone the floor and summing up the positions fairly.
+
+    checkpoint:
+      title: C2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
