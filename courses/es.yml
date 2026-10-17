@@ -561,3 +561,600 @@ levels:
         - { type: listen_select, count: 3 }
         - { type: translate, count: 3 }
         - { type: dialogue }
+
+  A2:
+    title: Elementary
+    description: >
+      Communicate in simple, routine tasks on familiar topics and describe your background, past and plans.
+
+    units:
+      - id: jobs-work
+        title: Jobs & Work
+        description: Talk about jobs, workplaces and your working day.
+        icon: 💼
+        steps:
+          - id: professions
+            title: Professions
+            description: Say what people do; with ser, no article before the job.
+            vocabulary: [médico, médica, enfermero, enfermera, profesor, profesora, camarero, abogado, ingeniera, "el trabajo"]
+            grammar:
+              - pattern: "Soy enfermera."
+              - pattern: "¿A qué te dedicas?"
+              - pattern: "Mi hermano es abogado."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: at-work
+            title: At Work
+            description: Say where and as what you work.
+            vocabulary: ["la oficina", "la empresa", "el hospital", "la tienda", "el jefe", "la jefa", "el compañero", "trabajar como"]
+            grammar:
+              - pattern: "Trabajo como camarero en un restaurante."
+              - pattern: "Trabajo en una empresa grande."
+              - pattern: "¿Dónde trabajas?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: how-often
+            title: How Often?
+            description: Frequency adverbs and expressions for routines at work.
+            vocabulary: [siempre, "a menudo", "a veces", "casi nunca", nunca, "todos los días", "una vez a la semana"]
+            grammar:
+              - pattern: "Siempre llego a las nueve."
+              - pattern: "Nunca trabajo los domingos."
+              - pattern: "A veces como en la oficina."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: job-interview
+            title: A Job Interview
+            description: Say how long you have done something with desde and hace … que.
+            vocabulary: ["la entrevista", "la experiencia", desde, "hace … que", "el sueldo", "a tiempo completo", "a tiempo parcial"]
+            grammar:
+              - pattern: "Trabajo aquí desde 2020."
+              - pattern: "Hace tres años que estudio español."
+              - pattern: "¿Cuánto tiempo hace que trabajas aquí?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer questions about your job, your experience and how long you have worked there.
+
+      - id: comparisons
+        title: Comparisons
+        description: Compare people, things and places.
+        icon: ⚖️
+        steps:
+          - id: mas-menos-que
+            title: More & Less
+            description: Compare with más … que and menos … que.
+            vocabulary: [alto, bajo, caro, barato, rápido, lento, "más … que", "menos … que"]
+            grammar:
+              - pattern: "Madrid es más grande que Sevilla."
+              - pattern: "El tren es menos caro que el avión."
+              - pattern: "Mi hermana es más alta que yo."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: mejor-peor
+            title: Better & Worse
+            description: The irregular comparatives mejor, peor, mayor and menor.
+            vocabulary: [mejor, peor, mayor, menor, bueno, malo]
+            grammar:
+              - pattern: "Este café es mejor que el otro."
+              - pattern: "Mi hermano es mayor que yo."
+              - pattern: "Hoy el tiempo está peor que ayer."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: tan-como
+            title: As … As
+            description: Equal comparisons with tan … como and tanto como.
+            vocabulary: ["tan … como", "tanto como", "tanto … como", igual, parecido, diferente]
+            grammar:
+              - pattern: "Ana es tan simpática como su madre."
+              - pattern: "No trabajo tanto como tú."
+              - pattern: "Tengo tantos libros como Pedro."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: listen_type }
+          - id: el-mas
+            title: The Best of All
+            description: Superlatives with el/la más … de and -ísimo.
+            vocabulary: ["el más", "la más", "el mejor", "el peor", "del mundo", carísimo, buenísimo]
+            grammar:
+              - pattern: "Es la ciudad más bonita de España."
+              - pattern: "Es el mejor restaurante del barrio."
+              - pattern: "La comida está buenísima."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: choosing_a_city
+                goal: Compare two cities with a friend and decide which one is the best to visit.
+
+      - id: at-the-shops
+        title: At the Shops
+        description: Buy things, ask for sizes and colors and return items.
+        icon: 🛍️
+        steps:
+          - id: quantities
+            title: How Much & How Many
+            description: Quantities and containers at the market.
+            vocabulary: ["un kilo de", "medio kilo", "una docena de", "una botella de", "una lata de", "un paquete de", "¿cuánto cuesta?", "¿cuántos?"]
+            grammar:
+              - pattern: "Quería un kilo de tomates, por favor."
+              - pattern: "¿Cuánto cuestan las naranjas?"
+              - pattern: "¿Algo más?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: este-ese-aquel
+            title: This One, That One
+            description: Demonstratives este, ese and aquel.
+            vocabulary: [este, esta, ese, esa, aquel, aquella, estos, esos]
+            grammar:
+              - pattern: "¿Cuánto cuesta esta camisa?"
+              - pattern: "Prefiero ese bolso."
+              - pattern: "Aquellos zapatos son muy caros."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: object-pronouns
+            title: I'll Take It
+            description: Direct object pronouns lo, la, los and las.
+            vocabulary: [lo, la, los, las, "la talla", probarse, "me lo llevo", "el probador"]
+            grammar:
+              - pattern: "¿Lo tiene en azul?"
+              - pattern: "Me la pruebo."
+              - pattern: "Me los llevo."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank }
+          - id: returning-things
+            title: Returning Things
+            description: Return or exchange something that does not fit or does not work.
+            vocabulary: [devolver, cambiar, "el tique", "el recibo", roto, "me queda grande", "me queda pequeño"]
+            grammar:
+              - pattern: "Quiero devolver esta chaqueta."
+              - pattern: "Me queda pequeña. ¿La puedo cambiar?"
+              - pattern: "Aquí tiene el tique."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: shop_counter
+                goal: Explain that something you bought does not fit and ask to exchange it.
+
+      - id: health-body
+        title: Health & the Body
+        description: Say what hurts, see a doctor and give advice.
+        icon: 🩺
+        steps:
+          - id: body-parts
+            title: The Body
+            vocabulary: ["la cabeza", "el brazo", "la mano", "la pierna", "el pie", "la espalda", "el estómago", "la garganta"]
+            grammar:
+              - pattern: "Tengo las manos frías."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: me-duele
+            title: It Hurts
+            description: Say what hurts with doler, which works like gustar.
+            vocabulary: [doler, "me duele", "me duelen", "¿qué te pasa?", "estar enfermo", "estar resfriado"]
+            grammar:
+              - pattern: "Me duele la cabeza."
+              - pattern: "Me duelen los pies."
+              - pattern: "¿Te duele mucho?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: at-the-doctor
+            title: At the Doctor
+            description: Describe symptoms and understand the doctor.
+            vocabulary: ["la fiebre", "la tos", "la gripe", "la receta", "la pastilla", "la farmacia", "tener fiebre"]
+            grammar:
+              - pattern: "Tengo fiebre y tos desde ayer."
+              - pattern: "Tome una pastilla cada ocho horas."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: doctor_visit
+                goal: Tell the doctor your symptoms, say since when you have them and ask what to take.
+          - id: giving-advice
+            title: Giving Advice
+            description: Advise someone with deberías, tienes que and the tú imperative.
+            vocabulary: [deberías, "tienes que", descansa, bebe, toma, "ve al médico", "no fumes"]
+            grammar:
+              - pattern: "Deberías descansar más."
+              - pattern: "Bebe mucha agua."
+              - pattern: "Tienes que ir al médico."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: speak }
+
+      - id: travel-plans
+        title: Travel Plans
+        description: Plan a trip, get around and book a room.
+        icon: ✈️
+        steps:
+          - id: travel-words
+            title: Travel Words
+            vocabulary: ["el viaje", "la maleta", "el billete", "el pasaporte", "el vuelo", "el equipaje", "de ida y vuelta", "las vacaciones"]
+            grammar:
+              - pattern: "Necesito un billete de ida y vuelta."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: ir-a
+            title: Going To
+            description: Talk about plans with ir a + infinitive.
+            vocabulary: ["ir a", "este verano", "el mes que viene", "la próxima semana", visitar, quedarse]
+            grammar:
+              - pattern: "Voy a viajar a México en julio."
+              - pattern: "¿Qué vas a hacer este verano?"
+              - pattern: "Nos vamos a quedar una semana."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: airport-station
+            title: At the Airport & Station
+            description: Check in, find your gate and ask about delays.
+            vocabulary: ["el aeropuerto", "la estación", "la puerta de embarque", "el andén", "facturar", "con retraso", "la salida", "la llegada"]
+            grammar:
+              - pattern: "¿A qué hora sale el tren para Barcelona?"
+              - pattern: "El vuelo sale con retraso."
+              - pattern: "Quiero facturar esta maleta."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate }
+          - id: booking-hotel
+            title: Booking a Hotel
+            description: Ask for a room politely with quería and me gustaría.
+            vocabulary: ["la habitación", individual, doble, "la reserva", "el desayuno", "la noche", "me gustaría", quería]
+            grammar:
+              - pattern: "Quería una habitación doble para dos noches."
+              - pattern: "Me gustaría reservar una mesa."
+              - pattern: "¿El desayuno está incluido?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: hotel_reception
+                goal: Book a room for two nights, ask the price and whether breakfast is included.
+
+      - id: the-future
+        title: The Future
+        description: Make predictions, promises and plans.
+        icon: 🔮
+        steps:
+          - id: futuro-regular
+            title: Future Tense (Regular)
+            description: "The futuro simple: infinitive + é, ás, á, emos, éis, án."
+            vocabulary: [mañana, "pasado mañana", "dentro de", "en el futuro", viajaré, hablarás, vivirá]
+            grammar:
+              - pattern: "Mañana hablaré con el jefe."
+              - pattern: "¿Dónde vivirás el año que viene?"
+              - pattern: "Dentro de dos años terminaremos la carrera."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 3 }
+              - { type: word_bank }
+              - { type: listen_select }
+          - id: futuro-irregular
+            title: Future Tense (Irregular)
+            description: Irregular futures like tendré, haré, podré and saldré.
+            vocabulary: [tendré, haré, podré, saldré, vendré, diré, sabré, querré]
+            grammar:
+              - pattern: "Tendré más tiempo en agosto."
+              - pattern: "¿Qué harás el fin de semana?"
+              - pattern: "No podré venir mañana."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: si-futuro
+            title: If … Then
+            description: Real conditions with si + present + future.
+            vocabulary: [si, "si llueve", "si tengo tiempo", "si puedo", entonces]
+            grammar:
+              - pattern: "Si llueve, nos quedaremos en casa."
+              - pattern: "Si tengo tiempo, te llamaré."
+              - pattern: "¿Qué harás si no encuentras trabajo?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: hopes-plans
+            title: Hopes & Plans
+            description: Talk about intentions and hopes with pensar and esperar + infinitive.
+            vocabulary: [pensar, esperar, "tener ganas de", "el sueño", "algún día", "el plan"]
+            grammar:
+              - pattern: "Pienso estudiar en el extranjero."
+              - pattern: "Espero encontrar un trabajo mejor."
+              - pattern: "Algún día viviré junto al mar."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: new_year_plans
+                goal: Tell a friend your plans and hopes for next year and ask about theirs.
+
+      - id: childhood
+        title: When I Was a Child
+        description: Describe habits and situations in the past with the imperfect.
+        icon: 🧸
+        steps:
+          - id: imperfecto-regular
+            title: The Imperfect (Regular)
+            description: The imperfecto of -ar (-aba) and -er/-ir (-ía) verbs.
+            vocabulary: ["cuando era niño", "de pequeño", jugaba, vivía, comía, tenía, "todos los veranos"]
+            grammar:
+              - pattern: "De pequeño jugaba en la calle."
+              - pattern: "Vivíamos en un pueblo pequeño."
+              - pattern: "¿Qué comías de niño?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 3 }
+              - { type: word_bank }
+              - { type: listen_select }
+          - id: imperfecto-irregular
+            title: Was, Went, Saw
+            description: "The only three irregular imperfects: ser, ir and ver."
+            vocabulary: [era, eras, éramos, iba, íbamos, veía, veíamos]
+            grammar:
+              - pattern: "Cuando era niña, iba al colegio en bici."
+              - pattern: "Veíamos dibujos animados todas las tardes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: soler
+            title: Used To
+            description: Past habits with soler + infinitive and the imperfect.
+            vocabulary: [soler, solía, "normalmente", "antes", "ya no", "todavía"]
+            grammar:
+              - pattern: "Antes solía levantarme muy temprano."
+              - pattern: "Antes fumaba, pero ya no."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: describing-the-past
+            title: Describing the Past
+            description: Describe people, places and how things were.
+            vocabulary: [había, tranquilo, ruidoso, tímido, travieso, "la casa de mis abuelos", "el barrio"]
+            grammar:
+              - pattern: "En mi barrio había un parque muy grande."
+              - pattern: "Mi abuela era muy cariñosa."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: family_photos
+                goal: Look at old photos with a friend and describe what your life was like as a child.
+
+      - id: telling-stories
+        title: Telling Stories
+        description: Tell what happened, and what was going on when it happened.
+        icon: 📖
+        steps:
+          - id: preterite-imperfect
+            title: Preterite or Imperfect?
+            description: Finished events with the preterite, background with the imperfect.
+            vocabulary: ["un día", "aquel día", "hacía sol", "estaba cansado", llegué, decidí]
+            grammar:
+              - pattern: "Hacía sol, así que fuimos a la playa."
+              - pattern: "Estaba cansado y me acosté pronto."
+              - pattern: "Ayer fui al cine; antes iba todas las semanas."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 3 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: estaba-cuando
+            title: I Was … When
+            description: An action in progress (estaba + gerundio) interrupted by an event.
+            vocabulary: [estaba, "estaba durmiendo", "estaba cocinando", cuando, sonó, llamó, empezó]
+            grammar:
+              - pattern: "Estaba duchándome cuando sonó el teléfono."
+              - pattern: "¿Qué estabas haciendo cuando te llamé?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank }
+          - id: story-connectors
+            title: And Then …
+            description: Connectors that move a story along.
+            vocabulary: ["de repente", mientras, "al principio", "al final", entonces, "por eso", "más tarde"]
+            grammar:
+              - pattern: "Mientras caminaba, empezó a llover."
+              - pattern: "De repente, se apagó la luz."
+              - pattern: "Al final, todo salió bien."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: match }
+              - { type: listen_type }
+          - id: telling-a-story
+            title: Tell Me What Happened
+            vocabulary: ["¿qué pasó?", "¡qué susto!", "¡no me digas!", perder, encontrar, "la historia"]
+            grammar:
+              - pattern: "Perdí el autobús porque estaba hablando con mi vecina."
+            activities:
+              - { type: translate, count: 2 }
+              - { type: word_bank }
+              - type: dialogue
+                scenario: coffee_with_a_friend
+                goal: Tell a friend about something unexpected that happened to you and react to their story.
+
+      - id: life-experiences
+        title: Life Experiences
+        description: Talk about what you have and haven't done.
+        icon: 🌍
+        steps:
+          - id: preterito-perfecto
+            title: Have You Ever …?
+            description: The pretérito perfecto with haber + participle (-ado, -ido).
+            vocabulary: [he, has, ha, hemos, han, visitado, comido, vivido]
+            grammar:
+              - pattern: "He visitado Perú dos veces."
+              - pattern: "¿Has comido paella?"
+              - pattern: "Nunca hemos vivido en el extranjero."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 3 }
+              - { type: word_bank }
+              - { type: listen_select }
+          - id: irregular-participles
+            title: Irregular Participles
+            description: Common irregular participles like hecho, visto, dicho and escrito.
+            vocabulary: [hecho, visto, dicho, escrito, puesto, vuelto, abierto, roto]
+            grammar:
+              - pattern: "¿Has visto la última película de Almodóvar?"
+              - pattern: "Todavía no he hecho los deberes."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: ya-todavia
+            title: Already, Not Yet, Ever
+            description: Ya, todavía no, alguna vez and nunca with the perfect.
+            vocabulary: [ya, "todavía no", "alguna vez", nunca, "esta semana", "hoy", "este año"]
+            grammar:
+              - pattern: "¿Ya has terminado?"
+              - pattern: "Todavía no he llamado a mi madre."
+              - pattern: "¿Has estado alguna vez en Cuba?"
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: talking-experiences
+            title: My Experiences
+            description: Share experiences and say when they happened.
+            vocabulary: ["la experiencia", "una vez", "muchas veces", increíble, "nunca jamás", probar]
+            grammar:
+              - pattern: "He probado muchas comidas raras."
+              - pattern: "Una vez subí a un volcán."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: getting_to_know_someone
+                goal: Ask someone about things they have done in their life and share your own experiences.
+
+      - id: invitations-rules
+        title: Invitations & Rules
+        description: Make calls, invite people, ask permission and talk about rules.
+        icon: 📞
+        steps:
+          - id: phone-messages
+            title: Phone Calls & Messages
+            description: Answer the phone and leave a message.
+            vocabulary: ["¿diga?", "¿sí?", "de parte de quién", "un momento", "el mensaje", "el móvil", "llamar más tarde"]
+            grammar:
+              - pattern: "¿Está Laura, por favor?"
+              - pattern: "¿Le puedo dejar un mensaje?"
+              - pattern: "Te llamo más tarde."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: listen_type }
+          - id: invitations
+            title: Invitations
+            description: Invite, accept and politely refuse.
+            vocabulary: ["¿te apetece?", "¿quieres venir?", "¡claro!", "me encantaría", "lo siento, no puedo", quedar, "otro día"]
+            grammar:
+              - pattern: "¿Te apetece ir al cine el sábado?"
+              - pattern: "Me encantaría, pero no puedo."
+              - pattern: "¿Quedamos a las ocho?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: planning_an_evening
+                goal: Invite a friend out, agree on a day and a time, or politely say no.
+          - id: asking-permission
+            title: Asking Permission
+            description: Ask for and give permission with poder and ¿te importa si…?
+            vocabulary: ["¿puedo?", "¿se puede?", "¿te importa si…?", "claro que sí", "por supuesto", "mejor no"]
+            grammar:
+              - pattern: "¿Puedo abrir la ventana?"
+              - pattern: "¿Te importa si llego un poco tarde?"
+              - pattern: "¿Se puede pagar con tarjeta?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+          - id: rules
+            title: Rules
+            description: Obligation and prohibition with hay que, tener que and no se puede.
+            vocabulary: ["hay que", "tener que", "no se puede", "está prohibido", obligatorio, "la norma"]
+            grammar:
+              - pattern: "Hay que llevar el pasaporte."
+              - pattern: "Aquí no se puede fumar."
+              - pattern: "Tenemos que llegar a las ocho."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+
+    checkpoint:
+      title: A2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
