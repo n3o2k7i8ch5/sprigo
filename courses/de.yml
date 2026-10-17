@@ -568,3 +568,3085 @@ levels:
         - { type: listen_select, count: 3 }
         - { type: translate, count: 3 }
         - { type: dialogue }
+
+  A2:
+    title: Elementary
+    description: >
+      Handle routine everyday situations: talk about work, health, shopping and travel, compare things, give reasons and opinions, and describe your past and future plans.
+
+    units:
+      - id: a2-jobs-work
+        title: Jobs & Work
+        description: Talk about your job, your workplace and what you have to do at work.
+        icon: 💼
+        steps:
+          - id: a2-professions
+            title: Professions
+            description: Say what you do; no article before a profession, and most jobs have a feminine form with -in.
+            vocabulary: ["der Lehrer", "die Lehrerin", "der Arzt", "die Ärztin", "der Koch", "die Köchin", "der Verkäufer", "die Verkäuferin", "der Ingenieur", "die Krankenpflegerin"]
+            grammar:
+              - pattern: "Ich bin Lehrerin."
+              - pattern: "Mein Bruder ist Koch."
+              - pattern: "Was sind Sie von Beruf?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: a2-workplace
+            title: Where I Work
+            description: "arbeiten als + profession and arbeiten bei + company; seit + Dativ for how long."
+            vocabulary: ["die Firma", "das Büro", "das Krankenhaus", "die Schule", "der Kollege", "die Kollegin", "der Chef", "die Chefin", seit, "die Abteilung"]
+            grammar:
+              - pattern: "Ich arbeite als Krankenpfleger im Krankenhaus."
+              - pattern: "Sie arbeitet bei Siemens."
+              - pattern: "Ich arbeite seit drei Jahren in dieser Firma."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: a2-must-may-should
+            title: Müssen, Dürfen, Sollen
+            description: Rules and duties at work with the modal verbs müssen, dürfen and sollen; the infinitive goes to the end.
+            vocabulary: [müssen, dürfen, sollen, "früh aufstehen", "Überstunden machen", "die Pause", "die Besprechung", rauchen, pünktlich]
+            grammar:
+              - pattern: "Ich muss jeden Tag um sieben Uhr anfangen."
+              - pattern: "Hier darf man nicht rauchen."
+              - pattern: "Der Chef sagt, ich soll den Bericht heute schreiben."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: a2-job-interview
+            title: The Job Interview
+            description: Answer questions about your experience, skills and working hours.
+            vocabulary: ["die Stelle", "die Bewerbung", "die Erfahrung", "die Arbeitszeit", "das Gehalt", Vollzeit, Teilzeit, "sich bewerben"]
+            grammar:
+              - pattern: "Ich habe zwei Jahre als Verkäuferin gearbeitet."
+              - pattern: "Ich kann gut im Team arbeiten."
+              - pattern: "Wie viele Stunden muss ich pro Woche arbeiten?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer an interviewer's questions about your job experience and ask about the working hours.
+
+      - id: a2-comparisons
+        title: Comparisons
+        description: Compare people, places and things, and say what you like best.
+        icon: ⚖️
+        steps:
+          - id: a2-comparative
+            title: Bigger, Faster, Cheaper
+            description: "Komparativ with -er + als; many short adjectives add an umlaut (alt – älter, groß – größer)."
+            vocabulary: [größer, kleiner, älter, jünger, billiger, teurer, schneller, besser, als]
+            grammar:
+              - pattern: "Berlin ist größer als München."
+              - pattern: "Mein Bruder ist zwei Jahre älter als ich."
+              - pattern: "Der Zug ist schneller als der Bus."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: a2-as-as
+            title: As … As
+            description: "Say two things are equal with so … wie, or different with nicht so … wie."
+            vocabulary: ["so groß wie", "so teuer wie", "nicht so … wie", genauso, fast, viel, interessant, gemütlich]
+            grammar:
+              - pattern: "Anna ist so groß wie ihre Mutter."
+              - pattern: "Das Hotel ist nicht so teuer wie das Hostel."
+              - pattern: "Der Film ist viel interessanter als das Buch."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: a2-superlative
+            title: The Best
+            description: "Superlativ: am -sten after a verb, der/die/das -ste before a noun."
+            vocabulary: ["am größten", "am schnellsten", "am besten", "am liebsten", "der höchste Berg", "die älteste Stadt", "das teuerste Auto", "am meisten"]
+            grammar:
+              - pattern: "Im Winter ist es am kältesten."
+              - pattern: "Die Zugspitze ist der höchste Berg in Deutschland."
+              - pattern: "Welches Handy ist am billigsten?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: a2-preferences
+            title: Gern, Lieber, Am Liebsten
+            description: Say what you like, prefer and like most, and compare your preferences with someone else's.
+            vocabulary: [gern, lieber, "am liebsten", mehr, "die Stadt", "das Land", "der Strand", "die Berge"]
+            grammar:
+              - pattern: "Ich trinke gern Tee, aber lieber Kaffee."
+              - pattern: "Am liebsten fahre ich in die Berge."
+              - pattern: "Wohnst du lieber in der Stadt oder auf dem Land?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: choosing_a_holiday
+                goal: Compare two holiday destinations with a friend and agree on the one you both like best.
+
+      - id: a2-at-the-shops
+        title: At the Shops
+        description: Buy clothes and other things, describe what you want and return items.
+        icon: 🛍️
+        steps:
+          - id: a2-accusative
+            title: The Accusative
+            description: "The direct object takes the accusative; only masculine changes: der → den, ein → einen, kein → keinen."
+            vocabulary: ["der Rock", "der Pullover", "der Mantel", "die Hose", "die Jacke", "das Hemd", "das Kleid", "die Schuhe", kaufen, brauchen]
+            grammar:
+              - pattern: "Ich kaufe den Pullover."
+              - pattern: "Ich brauche einen Mantel."
+              - pattern: "Hast du keinen Regenschirm?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: a2-accusative-pronouns
+            title: I'll Take It
+            description: "Accusative pronouns replace the object: ihn, sie, es; also mich, dich, uns, euch."
+            vocabulary: [ihn, sie, es, mich, dich, uns, euch, nehmen, "anprobieren", "Wie gefällt dir …?"]
+            grammar:
+              - pattern: "Der Mantel ist schön. Ich nehme ihn."
+              - pattern: "Kann ich die Hose anprobieren? – Ja, Sie können sie dort anprobieren."
+              - pattern: "Das Kleid ist zu teuer. Ich kaufe es nicht."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: a2-this-which
+            title: This One or Which One?
+            description: "dieser and welcher take the same endings as der/die/das; adjective endings after ein/eine (ein warmer Mantel, eine warme Jacke)."
+            vocabulary: [dieser, diese, dieses, welcher, welche, welches, warm, bequem, eng, weit]
+            grammar:
+              - pattern: "Welche Jacke gefällt dir? – Diese hier."
+              - pattern: "Ich suche eine warme Jacke und einen bequemen Pullover."
+              - pattern: "Haben Sie dieses Hemd auch in Blau?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: translate, count: 2 }
+          - id: a2-returning-items
+            title: Returning Something
+            description: Explain what is wrong with a purchase and ask for an exchange or your money back.
+            vocabulary: ["die Größe", "der Kassenbon", "die Kasse", umtauschen, zurückgeben, kaputt, "zu klein", "zu groß", "das Geld zurück"]
+            grammar:
+              - pattern: "Ich möchte diese Schuhe umtauschen. Sie sind zu klein."
+              - pattern: "Haben Sie den Kassenbon dabei?"
+              - pattern: "Kann ich mein Geld zurückbekommen?"
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: returning_shoes
+                goal: Return a pair of shoes that are too small and ask for a bigger size or your money back.
+
+      - id: a2-health
+        title: Health & the Body
+        description: Name body parts, say what hurts and understand advice at the doctor's.
+        icon: 🩺
+        steps:
+          - id: a2-body-parts
+            title: The Body
+            description: Learn the main parts of the body and their plurals.
+            vocabulary: ["der Kopf", "der Bauch", "der Rücken", "der Arm", "das Bein", "das Auge", "das Ohr", "der Hals", "die Hand", "der Zahn"]
+            grammar:
+              - pattern: "Der Mensch hat zwei Augen und zwei Ohren."
+              - pattern: "Meine Hände sind kalt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: a2-what-hurts
+            title: What Hurts?
+            description: "Say what hurts with Mir tut … weh / Mir tun … weh or with Schmerzen."
+            vocabulary: ["die Kopfschmerzen", "die Bauchschmerzen", "die Halsschmerzen", "das Fieber", "der Husten", "der Schnupfen", erkältet, krank, wehtun]
+            grammar:
+              - pattern: "Mir tut der Kopf weh."
+              - pattern: "Mir tun die Füße weh."
+              - pattern: "Ich habe seit gestern Fieber und Halsschmerzen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: a2-imperative
+            title: Doctor's Orders
+            description: "Imperativ for Sie (Nehmen Sie …) and du (Nimm …, Trink …); verb first, no -st."
+            vocabulary: ["die Tablette", "das Medikament", "das Rezept", "die Apotheke", nehmen, trinken, bleiben, "sich ausruhen", "im Bett"]
+            grammar:
+              - pattern: "Nehmen Sie dreimal täglich eine Tablette."
+              - pattern: "Bleib heute im Bett und trink viel Tee!"
+              - pattern: "Gehen Sie mit dem Rezept zur Apotheke."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: a2-at-the-doctor
+            title: At the Doctor's
+            description: Make an appointment, describe your symptoms and understand advice with Sie sollten.
+            vocabulary: ["der Termin", "die Praxis", "die Versichertenkarte", "das Wartezimmer", "Sie sollten", "Gute Besserung!", untersuchen, krankgeschrieben]
+            grammar:
+              - pattern: "Ich hätte gern einen Termin für morgen."
+              - pattern: "Sie sollten mehr Wasser trinken und weniger arbeiten."
+              - pattern: "Ich schreibe Sie für drei Tage krank."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: doctor_visit
+                goal: Describe your symptoms to a doctor and understand what you should do to get better.
+
+      - id: a2-travel
+        title: Travel & Places
+        description: Get around stations and hotels, say where things are and where you are going, and make polite requests.
+        icon: 🧳
+        steps:
+          - id: a2-where-to
+            title: Where To? (Wohin)
+            description: "Wechselpräpositionen with movement take the accusative: Wohin? – in den Park, auf den Tisch."
+            vocabulary: [in, auf, an, neben, hinter, vor, über, zwischen, legen, stellen]
+            grammar:
+              - pattern: "Ich gehe in den Supermarkt."
+              - pattern: "Er stellt den Koffer neben das Bett."
+              - pattern: "Wir fahren am Wochenende an den See."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: image_select }
+              - { type: listen_select }
+          - id: a2-where-at
+            title: Where? (Wo)
+            description: "The same prepositions with location take the dative: Wo? – im Park, auf dem Tisch."
+            vocabulary: [liegen, stehen, hängen, sein, "im Zimmer", "auf dem Bahnsteig", "an der Rezeption", "neben dem Bahnhof"]
+            grammar:
+              - pattern: "Der Koffer steht neben dem Bett."
+              - pattern: "Wir waren am Wochenende am See."
+              - pattern: "Das Bild hängt an der Wand. – Ich hänge das Bild an die Wand."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: a2-station-hotel
+            title: Station & Hotel
+            description: Buy a ticket, ask about platforms and delays, and check in at a hotel.
+            vocabulary: ["die Fahrkarte", "der Bahnsteig", "das Gleis", "die Verspätung", umsteigen, "das Einzelzimmer", "das Doppelzimmer", "die Rezeption", "mit Frühstück"]
+            grammar:
+              - pattern: "Von welchem Gleis fährt der Zug nach Hamburg?"
+              - pattern: "Der Zug hat zwanzig Minuten Verspätung."
+              - pattern: "Ich habe ein Doppelzimmer für zwei Nächte reserviert."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: a2-polite-requests
+            title: Polite Requests
+            description: "Use Konjunktiv II for polite requests: Ich hätte gern …, Könnten Sie …?, Würden Sie …?"
+            vocabulary: ["Ich hätte gern", "Könnten Sie", "Würden Sie", "Wäre es möglich", "die Auskunft", "das Zimmer mit Blick", wecken, reservieren]
+            grammar:
+              - pattern: "Ich hätte gern eine Fahrkarte nach Köln, hin und zurück."
+              - pattern: "Könnten Sie mir bitte helfen?"
+              - pattern: "Würden Sie mich morgen um sieben Uhr wecken?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: hotel_check_in
+                goal: Check in at a hotel, politely ask for a quiet room and a wake-up call.
+
+      - id: a2-gifts-celebrations
+        title: Gifts & Celebrations
+        description: Give gifts, talk about festivals and express good wishes.
+        icon: 🎁
+        steps:
+          - id: a2-dative-articles
+            title: Giving Gifts
+            description: "The indirect object (the person) takes the dative: dem/einem, der/einer, den …n."
+            vocabulary: [schenken, geben, bringen, zeigen, "das Geschenk", "die Blumen", "der Gutschein", "die Schokolade"]
+            grammar:
+              - pattern: "Ich schenke meiner Mutter ein Buch."
+              - pattern: "Er gibt dem Kind einen Ball."
+              - pattern: "Wir bringen den Gastgebern Blumen mit."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: a2-dative-pronouns
+            title: To Me, To You
+            description: "Dative pronouns: mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen."
+            vocabulary: [mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen]
+            grammar:
+              - pattern: "Was schenkst du ihm zum Geburtstag?"
+              - pattern: "Kannst du mir das Foto zeigen?"
+              - pattern: "Ich kaufe ihr eine Kette."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: a2-dative-verbs
+            title: Verbs with the Dative
+            description: "Some verbs always take the dative: helfen, gefallen, gehören, danken, gratulieren, schmecken."
+            vocabulary: [helfen, gefallen, gehören, danken, gratulieren, schmecken, passen, antworten]
+            grammar:
+              - pattern: "Das Geschenk gefällt mir sehr."
+              - pattern: "Wem gehört die Tasche? – Sie gehört meiner Schwester."
+              - pattern: "Ich danke dir für die Einladung."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: a2-festivals
+            title: Festivals & Wishes
+            description: Talk about birthdays, Christmas, Easter and New Year, and say the right wishes.
+            vocabulary: ["der Geburtstag", Weihnachten, Ostern, Silvester, "die Hochzeit", "Herzlichen Glückwunsch!", "Frohe Weihnachten!", "Alles Gute!", feiern]
+            grammar:
+              - pattern: "Herzlichen Glückwunsch zum Geburtstag!"
+              - pattern: "An Weihnachten feiern wir mit der ganzen Familie."
+              - pattern: "Ich wünsche dir alles Gute zur Hochzeit."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: word_bank }
+              - type: dialogue
+                scenario: birthday_party
+                goal: Congratulate a friend at their birthday party, give your present and say why you chose it.
+
+      - id: a2-reasons-opinions
+        title: Reasons & Opinions
+        description: Give reasons with weil and denn and say what you think with dass.
+        icon: 💬
+        steps:
+          - id: a2-weil
+            title: Because (weil)
+            description: "weil starts a subordinate clause: the conjugated verb goes to the end."
+            vocabulary: [weil, warum, "keine Zeit", müde, krank, "zu teuer", "viel zu tun", deshalb]
+            grammar:
+              - pattern: "Ich komme heute nicht, weil ich krank bin."
+              - pattern: "Warum lernst du Deutsch? – Weil ich in Wien arbeiten möchte."
+              - pattern: "Sie bleibt zu Hause, weil sie morgen früh aufstehen muss."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: a2-denn-weil
+            title: Denn or Weil?
+            description: "denn keeps normal word order (verb in second position); weil sends the verb to the end."
+            vocabulary: [denn, weil, aber, oder, und, sondern, trotzdem, nämlich]
+            grammar:
+              - pattern: "Ich nehme den Bus, denn mein Auto ist kaputt."
+              - pattern: "Ich nehme den Bus, weil mein Auto kaputt ist."
+              - pattern: "Er trinkt keinen Kaffee, sondern Tee."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: a2-dass
+            title: I Think That …
+            description: "Give opinions with Ich finde / glaube / denke, dass …; the verb goes to the end."
+            vocabulary: [dass, finden, glauben, denken, meinen, wissen, hoffen, "Meiner Meinung nach"]
+            grammar:
+              - pattern: "Ich finde, dass Berlin eine spannende Stadt ist."
+              - pattern: "Ich glaube, dass er heute nicht kommt."
+              - pattern: "Weißt du, dass Paul eine neue Freundin hat?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank }
+              - { type: listen_type }
+          - id: a2-agree-disagree
+            title: Agreeing & Disagreeing
+            description: Agree or disagree politely and back up your opinion with a reason.
+            vocabulary: ["Da hast du recht.", "Das stimmt.", "Das finde ich nicht.", "Ich bin anderer Meinung.", "Ich bin dafür.", "Ich bin dagegen.", "Das ist ein gutes Argument.", vielleicht]
+            grammar:
+              - pattern: "Da hast du recht, aber ich glaube, dass es zu teuer ist."
+              - pattern: "Ich bin dagegen, weil Autos die Luft verschmutzen."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: city_or_countryside_debate
+                goal: Discuss with a friend whether it is better to live in the city or the countryside, giving reasons for your opinion.
+
+      - id: a2-feelings
+        title: Feelings & Daily Life
+        description: Describe your daily routine with reflexive verbs and talk about feelings and interests.
+        icon: 😊
+        steps:
+          - id: a2-reflexive-verbs
+            title: Reflexive Verbs
+            description: "Reflexive verbs use a reflexive pronoun: mich, dich, sich, uns, euch, sich."
+            vocabulary: ["sich waschen", "sich anziehen", "sich duschen", "sich kämmen", "sich beeilen", "sich setzen", "sich ausruhen", mich, dich, sich]
+            grammar:
+              - pattern: "Ich wasche mich und ziehe mich an."
+              - pattern: "Beeil dich, der Bus kommt gleich!"
+              - pattern: "Am Sonntag ruhen wir uns aus."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: image_select }
+              - { type: listen_select }
+          - id: a2-feelings-words
+            title: How Do You Feel?
+            description: Name feelings and moods and say why you feel that way.
+            vocabulary: [glücklich, traurig, nervös, wütend, enttäuscht, zufrieden, gestresst, "Angst haben", überrascht]
+            grammar:
+              - pattern: "Ich bin nervös, weil ich morgen eine Prüfung habe."
+              - pattern: "Sie ist enttäuscht, denn ihr Freund hat sie vergessen."
+              - pattern: "Hast du Angst vor Hunden?"
+            activities:
+              - { type: learn }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: translate }
+          - id: a2-reflexive-prepositions
+            title: Looking Forward To
+            description: "Verbs with fixed prepositions: sich freuen auf (future) / über (now or past), sich interessieren für, sich ärgern über."
+            vocabulary: ["sich freuen auf", "sich freuen über", "sich interessieren für", "sich ärgern über", "sich kümmern um", "sich erinnern an", darauf, dafür]
+            grammar:
+              - pattern: "Ich freue mich auf den Urlaub."
+              - pattern: "Sie hat sich sehr über das Geschenk gefreut."
+              - pattern: "Interessierst du dich für Musik?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: a2-how-was-your-day
+            title: How Was Your Day?
+            description: Tell someone about your day, how you felt and what you are looking forward to.
+            vocabulary: ["der Alltag", anstrengend, entspannt, "sich langweilen", "sich treffen", "Wie geht's dir?", "Was ist los?", "Nicht so gut."]
+            grammar:
+              - pattern: "Ich habe mich heute sehr geärgert."
+              - pattern: "Was ist los? Du siehst müde aus."
+              - pattern: "Am Abend treffe ich mich mit Freunden."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: evening_chat_with_flatmate
+                goal: Tell your flatmate about a stressful day and say what you are looking forward to this week.
+
+      - id: a2-childhood
+        title: When I Was a Child
+        description: Talk about your childhood and tell a short story in the past.
+        icon: 🧸
+        steps:
+          - id: a2-modal-past
+            title: Had To, Could, Wanted
+            description: "Präteritum of modal verbs: musste, konnte, wollte, durfte, sollte — no umlaut, same endings as war."
+            vocabulary: [musste, konnte, wollte, durfte, sollte, mochte, früher, damals]
+            grammar:
+              - pattern: "Als Kind musste ich jeden Tag mein Zimmer aufräumen."
+              - pattern: "Früher konnte ich nicht schwimmen."
+              - pattern: "Wir durften abends nicht fernsehen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: a2-als-ich-kind-war
+            title: When I Was a Child (als)
+            description: "als for one time or a period in the past; the verb goes to the end, then the main clause starts with the verb."
+            vocabulary: [als, "die Kindheit", "der Kindergarten", "die Grundschule", "das Spielzeug", "der Spielplatz", "auf dem Land", aufwachsen]
+            grammar:
+              - pattern: "Als ich Kind war, wohnten wir auf dem Land."
+              - pattern: "Als ich zehn war, bekam ich mein erstes Fahrrad."
+              - pattern: "Ich bin in einem kleinen Dorf aufgewachsen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: a2-telling-a-story
+            title: Telling a Story
+            description: "Order events with zuerst, dann, danach, später, zum Schluss; the verb stays in second position."
+            vocabulary: [zuerst, dann, danach, später, plötzlich, "zum Schluss", "eines Tages", endlich]
+            grammar:
+              - pattern: "Zuerst sind wir zum Strand gefahren, dann haben wir ein Eis gegessen."
+              - pattern: "Plötzlich hat es angefangen zu regnen."
+              - pattern: "Zum Schluss waren alle müde, aber glücklich."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: a2-childhood-memories
+            title: Childhood Memories
+            description: Compare your childhood with today and share a favourite memory.
+            vocabulary: ["die Erinnerung", "der Lieblingslehrer", "das Lieblingsspiel", "die Ferien", streng, "sich erinnern an", heute, früher]
+            grammar:
+              - pattern: "Früher wollte ich Astronaut werden, heute bin ich Lehrer."
+              - pattern: "Ich erinnere mich gern an die Ferien bei meinen Großeltern."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: childhood_memories
+                goal: Tell a new friend where you grew up, what you had to do and what you were allowed to do as a child.
+
+      - id: a2-plans-invitations
+        title: Plans & Invitations
+        description: Talk about the future, make plans with time expressions and invite people or reply to invitations.
+        icon: 📆
+        steps:
+          - id: a2-future-werden
+            title: The Future with Werden
+            description: "werden + infinitive at the end for plans, promises and predictions; the present tense with a time word also works."
+            vocabulary: [werde, wirst, wird, werden, werdet, morgen, nächste, "nächstes Jahr", bald]
+            grammar:
+              - pattern: "Nächstes Jahr werde ich in Deutschland studieren."
+              - pattern: "Morgen wird es regnen."
+              - pattern: "Ich fahre morgen nach Hamburg."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - { type: listen_select }
+          - id: a2-time-prepositions
+            title: When? Time Prepositions
+            description: "im + months/seasons, am + days/dates, um + clock times, in + future period, vor + past period (both with dative)."
+            vocabulary: ["im Sommer", "im Mai", "am Montag", "am Wochenende", "um acht Uhr", "in zwei Wochen", "vor einem Jahr", "seit einem Monat", "von … bis"]
+            grammar:
+              - pattern: "In zwei Wochen fliege ich nach Spanien."
+              - pattern: "Vor einem Jahr habe ich hier angefangen."
+              - pattern: "Am Montag habe ich um neun Uhr einen Termin."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: a2-wenn-clauses
+            title: If and When (wenn)
+            description: "wenn for conditions and repeated events; the verb goes to the end, and the main clause starts with the verb."
+            vocabulary: [wenn, "Zeit haben", "schönes Wetter", "das Picknick", "der Ausflug", grillen, "ins Kino gehen", dann]
+            grammar:
+              - pattern: "Wenn das Wetter schön ist, machen wir ein Picknick."
+              - pattern: "Ich rufe dich an, wenn ich zu Hause bin."
+              - pattern: "Wenn ich Zeit habe, besuche ich dich."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: a2-invitations
+            title: Invitations
+            description: Invite someone, accept or decline politely with a reason, and suggest another time.
+            vocabulary: ["die Einladung", einladen, zusagen, absagen, "Hast du Lust?", "Gern!", "Leider kann ich nicht.", "Wie wäre es mit …?", "Schade!"]
+            grammar:
+              - pattern: "Ich möchte dich zu meiner Party am Samstag einladen."
+              - pattern: "Leider kann ich nicht kommen, weil ich arbeiten muss."
+              - pattern: "Wie wäre es mit nächstem Freitag?"
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: weekend_invitation
+                goal: Invite a friend to an event, react when they decline and agree on another day together.
+
+    checkpoint:
+      title: A2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B1:
+    title: Intermediate
+    description: >
+      Deal with most everyday situations, tell stories about the past, express wishes, opinions and plans, give reasons and advice, and talk about work, health and the media.
+
+    units:
+      - id: b1-telling-stories
+        title: Telling Stories
+        description: Narrate past events in writing and speech with the Präteritum, the Plusquamperfekt and time clauses.
+        icon: 📖
+        steps:
+          - id: b1-praeteritum-regular
+            title: Präteritum of Regular Verbs
+            description: "Regular verbs add -te to the stem in the Präteritum, the tense of written stories and reports."
+            vocabulary: [machte, wohnte, arbeitete, spielte, lernte, sagte, fragte, wartete, damals, früher]
+            grammar:
+              - pattern: "Früher wohnte ich in einem kleinen Dorf."
+              - pattern: "Mein Großvater arbeitete vierzig Jahre bei der Bahn."
+              - pattern: "Sie fragte mich nach dem Weg."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: match }
+              - { type: translate }
+          - id: b1-praeteritum-irregular
+            title: Präteritum of Irregular Verbs
+            description: Irregular verbs change their stem vowel in the Präteritum (gehen – ging, kommen – kam).
+            vocabulary: [ging, kam, sah, fand, gab, fuhr, nahm, sprach, blieb, wusste]
+            grammar:
+              - pattern: "Plötzlich kam ein Mann in den Laden."
+              - pattern: "Wir fuhren mit dem Zug nach Wien und blieben dort eine Woche."
+              - pattern: "Ich wusste nicht, was ich sagen sollte."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: b1-plusquamperfekt
+            title: Plusquamperfekt
+            description: Say what had already happened before another past event with hatte/war + past participle.
+            vocabulary: ["hatte vergessen", "hatte gegessen", "war abgefahren", "war angekommen", schon, "noch nie", vorher, "kurz davor"]
+            grammar:
+              - pattern: "Als ich am Bahnhof ankam, war der Zug schon abgefahren."
+              - pattern: "Ich hatte meinen Schlüssel zu Hause vergessen."
+              - pattern: "Sie hatte vorher noch nie so einen Film gesehen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: b1-nachdem-als-bevor
+            title: Nachdem, Als & Bevor
+            description: "Order events with time clauses: als for one moment in the past, nachdem with the Plusquamperfekt, bevor for what came later."
+            vocabulary: [nachdem, als, bevor, plötzlich, "auf einmal", "zum Glück", leider, schließlich, "am Ende"]
+            grammar:
+              - pattern: "Nachdem wir gegessen hatten, gingen wir spazieren."
+              - pattern: "Als ich ein Kind war, wohnten wir in Hamburg."
+              - pattern: "Bevor ich losfuhr, rief ich meine Mutter an."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: telling_a_story
+                goal: Tell a friend about something surprising that happened to you on a trip, putting the events in the right order.
+
+      - id: b1-wishes-dreams
+        title: Wishes & Dreams
+        description: Talk about wishes, dreams and imagined situations with the Konjunktiv II.
+        icon: 🌠
+        steps:
+          - id: b1-wuerde-infinitiv
+            title: Würde + Infinitive
+            description: Use würde + infinitive to say what you would do in an imagined situation.
+            vocabulary: [würde, würdest, würden, "eine Weltreise machen", "am Meer wohnen", "ein Haus kaufen", "im Lotto gewinnen", lieber]
+            grammar:
+              - pattern: "Ich würde gern eine Weltreise machen."
+              - pattern: "Würdest du lieber am Meer oder in den Bergen wohnen?"
+              - pattern: "An deiner Stelle würde ich das nicht machen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: b1-waere-haette
+            title: Wäre, Hätte & Könnte
+            description: "Sein, haben and the modal verbs have their own Konjunktiv II forms: wäre, hätte, könnte, müsste."
+            vocabulary: [wäre, wärst, hätte, hättest, könnte, müsste, dürfte, "mehr Zeit", "mehr Geld"]
+            grammar:
+              - pattern: "Ich hätte gern mehr Zeit für meine Hobbys."
+              - pattern: "Es wäre schön, wenn du mitkommen könntest."
+              - pattern: "Wir könnten am Wochenende ins Kino gehen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b1-wenn-ich-waere
+            title: If I Were …
+            description: Describe unreal conditions with wenn + Konjunktiv II and their imagined results.
+            vocabulary: [reich, berühmt, unabhängig, "an deiner Stelle", "der Traum", "die Möglichkeit", "sich vorstellen", "das Abenteuer"]
+            grammar:
+              - pattern: "Wenn ich reich wäre, würde ich nicht mehr arbeiten."
+              - pattern: "Wenn ich mehr Zeit hätte, würde ich Gitarre lernen."
+              - pattern: "Was würdest du machen, wenn du im Lotto gewinnen würdest?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b1-irreal-wishes
+            title: If Only …!
+            description: Express wishes that are unlikely or impossible with Wenn … doch nur …! and Ich wünschte, …
+            vocabulary: ["Wenn ich doch nur …!", "Wäre ich doch …!", "Ich wünschte, …", "der Wunsch", "sich wünschen", bloß, schade, "leider nicht"]
+            grammar:
+              - pattern: "Wenn ich doch nur mehr Zeit hätte!"
+              - pattern: "Wäre ich doch bloß nicht so müde!"
+              - pattern: "Ich wünschte, ich könnte besser Deutsch sprechen."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: dream_life_chat
+                goal: Talk with a friend about your dream life and what you would change if you could.
+
+      - id: b1-arguments
+        title: Arguments
+        description: Connect ideas, give reasons and counterarguments, and take part in a discussion.
+        icon: ⚖️
+        steps:
+          - id: b1-obwohl-trotzdem
+            title: Obwohl & Trotzdem
+            description: "Express contrast: obwohl starts a subordinate clause (verb at the end), trotzdem is followed by verb inversion."
+            vocabulary: [obwohl, trotzdem, müde, krank, teuer, anstrengend, "es regnet", "keine Lust"]
+            grammar:
+              - pattern: "Obwohl es regnet, gehen wir spazieren."
+              - pattern: "Es regnet. Trotzdem gehen wir spazieren."
+              - pattern: "Obwohl er krank war, ist er zur Arbeit gegangen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: b1-deshalb-deswegen
+            title: Deshalb & Deswegen
+            description: Give consequences with deshalb, deswegen and darum (verb second), and reasons with denn.
+            vocabulary: [deshalb, deswegen, darum, also, denn, "der Grund", "die Folge", "aus diesem Grund"]
+            grammar:
+              - pattern: "Ich habe verschlafen, deshalb bin ich zu spät gekommen."
+              - pattern: "Der Bus war voll, deswegen bin ich zu Fuß gegangen."
+              - pattern: "Ich lerne Deutsch, denn ich möchte in Wien studieren."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: b1-sondern-aber
+            title: Sondern or Aber?
+            description: "Use sondern to correct a negated statement and aber to add a contrast; also nicht nur … sondern auch and zwar … aber."
+            vocabulary: [sondern, aber, "nicht …, sondern", "kein …, sondern", "nicht nur …, sondern auch", "zwar …, aber"]
+            grammar:
+              - pattern: "Ich trinke keinen Kaffee, sondern Tee."
+              - pattern: "Das Hotel war zwar teuer, aber sehr schön."
+              - pattern: "Sie spricht nicht nur Deutsch, sondern auch Spanisch."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b1-discussion
+            title: Giving Your Opinion
+            description: Present your opinion, weigh pros and cons and react to other people's arguments.
+            vocabulary: ["meiner Meinung nach", "ich finde, dass", einerseits, andererseits, "der Vorteil", "der Nachteil", "das Argument", "ich bin dafür", "ich bin dagegen"]
+            grammar:
+              - pattern: "Meiner Meinung nach ist das Leben in der Stadt zu teuer."
+              - pattern: "Einerseits ist das Auto praktisch, andererseits ist es schlecht für die Umwelt."
+              - pattern: "Ich bin dagegen, weil es zu viel kostet."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: city_or_country_debate
+                goal: Discuss with a friend whether it is better to live in the city or in the countryside, giving reasons and counterarguments.
+
+      - id: b1-advice-requests
+        title: Advice & Polite Requests
+        description: Give advice, make suggestions and ask for information politely with indirect questions.
+        icon: 💡
+        steps:
+          - id: b1-sollte-advice
+            title: Giving Advice with Sollte
+            description: Give advice with the Konjunktiv II of sollen and with An deiner Stelle würde ich …
+            vocabulary: [solltest, sollten, "der Rat", "der Tipp", empfehlen, "sich ausruhen", "zum Arzt gehen", "früher ins Bett gehen"]
+            grammar:
+              - pattern: "Du solltest mehr Wasser trinken."
+              - pattern: "Sie sollten sich ein paar Tage ausruhen."
+              - pattern: "An deiner Stelle würde ich früher ins Bett gehen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: b1-polite-suggestions
+            title: Polite Requests & Suggestions
+            description: Make polite requests with könnten and würden, and suggestions with Wie wäre es mit …?
+            vocabulary: [könnten, würden, "Wie wäre es mit …?", "Was hältst du von …?", "Wäre es möglich, …?", "Würde es Ihnen etwas ausmachen, …?", "die Bitte", "der Vorschlag"]
+            grammar:
+              - pattern: "Könnten Sie mir bitte helfen?"
+              - pattern: "Wie wäre es mit einem Spaziergang?"
+              - pattern: "Würden Sie bitte das Fenster schließen?"
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+          - id: b1-indirect-ob
+            title: Indirect Questions with Ob
+            description: "Turn yes/no questions into indirect questions with ob; the verb goes to the end."
+            vocabulary: [ob, wissen, fragen, "sich fragen", "Wissen Sie, ob …?", "Ich weiß nicht, ob …", sicher, "die Auskunft"]
+            grammar:
+              - pattern: "Wissen Sie, ob der Zug pünktlich ist?"
+              - pattern: "Ich weiß nicht, ob ich morgen Zeit habe."
+              - pattern: "Sie fragt, ob wir mitkommen."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b1-indirect-w
+            title: "Can You Tell Me Where …?"
+            description: Ask for information politely with indirect w-questions (wo, wann, wie, warum, wie viel).
+            vocabulary: ["Können Sie mir sagen, wo …?", "Wissen Sie, wann …?", "Darf ich fragen, wie …?", "Ich möchte wissen, warum …", "die Information", "die Öffnungszeiten", "der Schalter", "die Abfahrt"]
+            grammar:
+              - pattern: "Können Sie mir sagen, wo die nächste Apotheke ist?"
+              - pattern: "Wissen Sie, wann der letzte Bus fährt?"
+              - pattern: "Darf ich fragen, wie viel das kostet?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: information_desk
+                goal: Ask the staff at a train station information desk about times, platforms and prices using polite indirect questions.
+
+      - id: b1-purpose
+        title: Purpose & Plans
+        description: Say why you do things and what you plan to do with um … zu, damit and infinitive clauses.
+        icon: 🎯
+        steps:
+          - id: b1-um-zu
+            title: Um … zu
+            description: "Express purpose with um … zu + infinitive when both parts of the sentence have the same subject."
+            vocabulary: ["um … zu", "das Ziel", "der Zweck", sparen, "fit bleiben", "sich verbessern", "in Ruhe", "die Bibliothek"]
+            grammar:
+              - pattern: "Ich jogge jeden Morgen, um fit zu bleiben."
+              - pattern: "Er fährt mit dem Fahrrad, um Geld zu sparen."
+              - pattern: "Wir gehen in die Bibliothek, um in Ruhe zu lernen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b1-damit
+            title: Damit
+            description: Use damit + subordinate clause for purpose, especially when the two subjects are different.
+            vocabulary: [damit, "der Wecker", verschlafen, pünktlich, rechtzeitig, erklären, "sich erinnern", "die Nachricht"]
+            grammar:
+              - pattern: "Ich spreche langsam, damit du mich verstehst."
+              - pattern: "Sie stellt den Wecker, damit sie nicht verschläft."
+              - pattern: "Wir nehmen ein Taxi, damit wir rechtzeitig ankommen."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: b1-infinitiv-zu
+            title: Infinitive with Zu
+            description: "Use zu + infinitive after verbs like vorhaben, versuchen and vergessen and after expressions like Es ist wichtig; zu goes between prefix and verb in separable verbs."
+            vocabulary: [vorhaben, versuchen, vergessen, anfangen, aufhören, "Lust haben", "es ist wichtig", "es ist schwer", "Zeit haben"]
+            grammar:
+              - pattern: "Ich habe vor, nächstes Jahr in Deutschland zu arbeiten."
+              - pattern: "Es ist wichtig, regelmäßig Sport zu machen."
+              - pattern: "Vergiss nicht, die Tür abzuschließen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: b1-ohne-statt
+            title: Ohne … zu & Statt … zu
+            description: Say what someone does without doing or instead of doing something else, and talk about your plans.
+            vocabulary: ["ohne … zu", "statt … zu", anstatt, "sich verabschieden", planen, "der Plan", "das Vorhaben", "das Auslandsjahr"]
+            grammar:
+              - pattern: "Er ist gegangen, ohne sich zu verabschieden."
+              - pattern: "Statt zu lernen, hat sie den ganzen Abend ferngesehen."
+              - pattern: "Ich plane, nach dem Studium ein Jahr zu reisen."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type, count: 2 }
+              - type: dialogue
+                scenario: planning_next_year
+                goal: Tell a friend about your plans for next year and explain why you want to do each thing.
+
+      - id: b1-relative-clauses
+        title: Relative Clauses
+        description: Describe people, places and things in more detail with relative clauses.
+        icon: 🔗
+        steps:
+          - id: b1-relative-nominative
+            title: "Der Mann, der …"
+            description: "The relative pronoun takes the gender and number of the noun it refers to; the verb goes to the end of the clause."
+            vocabulary: ["der Nachbar", "die Kollegin", "das Restaurant", "die Leute", nett, hilfsbereit, geöffnet, "neben uns"]
+            grammar:
+              - pattern: "Der Mann, der neben uns wohnt, ist sehr nett."
+              - pattern: "Das ist die Kollegin, die mir immer hilft."
+              - pattern: "Ich kenne ein Restaurant, das sonntags geöffnet hat."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: b1-relative-akk-dat
+            title: Accusative & Dative Relative Pronouns
+            description: "The case of the relative pronoun depends on its role in the relative clause: den, dem, der, denen."
+            vocabulary: [den, dem, denen, "der Film", "das Geschenk", "die Freundin", schenken, vertrauen, empfehlen]
+            grammar:
+              - pattern: "Der Film, den wir gestern gesehen haben, war spannend."
+              - pattern: "Das ist die Freundin, der ich das Buch geschenkt habe."
+              - pattern: "Das sind die Leute, denen ich vertraue."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: b1-relative-prepositions
+            title: Prepositions in Relative Clauses
+            description: "The preposition comes before the relative pronoun: mit dem, in der, über das."
+            vocabulary: ["mit dem", "in der", "über das", "für den", "von denen", "der Kollege", "die Stadt", "das Thema", "geboren sein"]
+            grammar:
+              - pattern: "Das ist der Kollege, mit dem ich jeden Tag zur Arbeit fahre."
+              - pattern: "Die Stadt, in der ich geboren bin, liegt an der Donau."
+              - pattern: "Das Thema, über das wir gesprochen haben, ist sehr wichtig."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: b1-wo-was
+            title: Wo & Was
+            description: Use wo for places and was after alles, etwas, nichts and superlatives, then describe your hometown.
+            vocabulary: [wo, was, "alles, was", "etwas, was", "nichts, was", "das Beste, was", "der Ort", "die Gegend"]
+            grammar:
+              - pattern: "Das ist das Café, wo wir uns kennengelernt haben."
+              - pattern: "Alles, was er erzählt, ist interessant."
+              - pattern: "Das ist das Beste, was mir je passiert ist."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: describing_your_hometown
+                goal: Describe your hometown and the people and places that are important to you, using relative clauses.
+
+      - id: b1-passive
+        title: Passive
+        description: Focus on the action rather than the person with the passive in the present and the past.
+        icon: 🏭
+        steps:
+          - id: b1-passiv-praesens
+            title: Passive in the Present
+            description: "Form the present passive with werden + past participle: Das Auto wird repariert."
+            vocabulary: [wird, werden, repariert, geöffnet, geschlossen, verkauft, gesprochen, "die Werkstatt"]
+            grammar:
+              - pattern: "Das Auto wird gerade repariert."
+              - pattern: "In der Schweiz werden vier Sprachen gesprochen."
+              - pattern: "Der Laden wird um neun Uhr geöffnet."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: b1-passiv-praeteritum
+            title: Passive in the Past
+            description: "Form the past passive with wurde + past participle to talk about history and past events."
+            vocabulary: [wurde, wurden, gebaut, erfunden, gegründet, entdeckt, zerstört, "das Jahrhundert", "die Brücke"]
+            grammar:
+              - pattern: "Das Telefon wurde im 19. Jahrhundert erfunden."
+              - pattern: "Die alte Brücke wurde im Krieg zerstört."
+              - pattern: "Wann wurde die Firma gegründet?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b1-passiv-von
+            title: Who Did It? Von + Dative
+            description: Name the person or thing that performs the action with von + dative.
+            vocabulary: [von, "der Architekt", "die Autorin", "die Polizei", "der Dieb", "das Team", entwickeln, festnehmen, schreiben]
+            grammar:
+              - pattern: "Das Buch wurde von einer jungen Autorin geschrieben."
+              - pattern: "Der Dieb wurde von der Polizei festgenommen."
+              - pattern: "Die App wird von einem kleinen Team entwickelt."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b1-processes
+            title: Recipes & Production
+            description: Describe processes step by step with the passive, from cooking a dish to making a product.
+            vocabulary: [schälen, schneiden, mischen, hinzufügen, anschließend, "die Zutat", "der Teig", "die Herstellung", verpacken]
+            grammar:
+              - pattern: "Zuerst werden die Kartoffeln geschält und geschnitten."
+              - pattern: "Dann werden alle Zutaten gut gemischt."
+              - pattern: "Anschließend wird die Schokolade verpackt und verschickt."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: explaining_a_recipe
+                goal: Explain to a friend how a typical dish from your country is prepared, step by step.
+
+      - id: b1-work-careers
+        title: Work & Careers
+        description: Apply for a job, write about your experience and handle a job interview.
+        icon: 💼
+        steps:
+          - id: b1-application
+            title: Application & CV
+            description: Talk and write about a job application, your CV and your qualifications.
+            vocabulary: ["die Bewerbung", "der Lebenslauf", "das Anschreiben", "die Stelle", "die Stellenanzeige", "sich bewerben um", "die Berufserfahrung", "die Kenntnisse", "das Praktikum"]
+            grammar:
+              - pattern: "Ich bewerbe mich um die Stelle als Grafikdesignerin."
+              - pattern: "Ich habe zwei Jahre Berufserfahrung im Verkauf."
+              - pattern: "Im Anhang finden Sie meinen Lebenslauf."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b1-genitive
+            title: The Genitive
+            description: "Show possession and relationships with the genitive: des Unternehmens, der Firma, meines Chefs."
+            vocabulary: ["des Unternehmens", "der Firma", "des Chefs", "der Abteilung", "die Leitung", "der Erfolg", "das Büro", "die Mitarbeiter"]
+            grammar:
+              - pattern: "Frau Weber hat die Leitung der Abteilung übernommen."
+              - pattern: "Der Erfolg des Unternehmens hängt von den Mitarbeitern ab."
+              - pattern: "Das ist das Büro meines Chefs."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b1-genitive-prepositions
+            title: Wegen, Trotz & Während
+            description: Use the genitive prepositions wegen, trotz and während to give reasons, contrasts and time frames.
+            vocabulary: [wegen, trotz, während, innerhalb, "des Streiks", "der Krankheit", "die Arbeitszeit", "die Überstunden"]
+            grammar:
+              - pattern: "Wegen des Streiks konnte ich nicht zur Arbeit fahren."
+              - pattern: "Trotz der vielen Arbeit hat sie pünktlich Feierabend gemacht."
+              - pattern: "Während der Arbeitszeit darf man nicht privat telefonieren."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b1-job-interview
+            title: The Job Interview
+            description: Present your strengths and experience and ask questions in a job interview.
+            vocabulary: ["das Vorstellungsgespräch", "die Stärke", "die Schwäche", "das Gehalt", "die Herausforderung", teamfähig, zuverlässig, flexibel]
+            grammar:
+              - pattern: "Ich arbeite gern im Team und bin sehr zuverlässig."
+              - pattern: "Warum möchten Sie bei uns arbeiten?"
+              - pattern: "Ich suche eine neue Herausforderung."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer an interviewer's questions about your experience, your strengths and your reasons for applying.
+
+      - id: b1-lifestyle
+        title: Lifestyle
+        description: Talk about health, habits and everyday life with verbs that take fixed prepositions.
+        icon: 🧘
+        steps:
+          - id: b1-verbs-prepositions
+            title: Verbs with Prepositions
+            description: "Many verbs go with a fixed preposition and case: warten auf + Akk, denken an + Akk, Angst haben vor + Dat."
+            vocabulary: ["warten auf", "denken an", "sich kümmern um", "sich freuen auf", "sich freuen über", "sich interessieren für", "sich ärgern über", "Angst haben vor", "teilnehmen an"]
+            grammar:
+              - pattern: "Ich warte schon seit zehn Minuten auf den Bus."
+              - pattern: "Sie kümmert sich um ihre kranke Mutter."
+              - pattern: "Wir freuen uns sehr auf den Urlaub."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b1-da-compounds
+            title: Darauf, Daran, Dafür
+            description: "Replace a preposition + thing with a da-compound (darauf, daran), or use it to announce a following clause."
+            vocabulary: [darauf, daran, darum, dafür, darüber, davor, damit, dazu]
+            grammar:
+              - pattern: "Freust du dich auf das Wochenende? Ja, ich freue mich sehr darauf."
+              - pattern: "Ich habe nicht daran gedacht."
+              - pattern: "Ich freue mich darauf, dich bald zu sehen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: b1-wo-compounds
+            title: Worauf, Woran, Worüber
+            description: "Ask about things with wo-compounds (worauf, woran) and about people with preposition + wen/wem."
+            vocabulary: [worauf, woran, worüber, wofür, wovor, womit, "auf wen", "an wen"]
+            grammar:
+              - pattern: "Worauf wartest du?"
+              - pattern: "Woran denkst du gerade?"
+              - pattern: "An wen denkst du?"
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: b1-health-habits
+            title: Health & Habits
+            description: Talk about your daily habits, diet and what you want to change for a healthier life.
+            vocabulary: ["die Gewohnheit", "die Ernährung", "sich gesund ernähren", "sich bewegen", "der Stress", "verzichten auf", "achten auf", abnehmen, zunehmen, "aufhören mit"]
+            grammar:
+              - pattern: "Ich achte darauf, genug zu schlafen."
+              - pattern: "Seit einem Monat verzichte ich auf Zucker."
+              - pattern: "Er hat mit dem Rauchen aufgehört."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: healthy_habits_talk
+                goal: Talk with a friend about your daily habits and what you are trying to change to live more healthily.
+
+      - id: b1-media-technology
+        title: Media & Technology
+        description: Talk about the internet, smartphones and the news, and give your opinion on the media.
+        icon: 📱
+        steps:
+          - id: b1-n-declension
+            title: The N-Declension
+            description: "Some masculine nouns add -n or -en in every case except the nominative singular: den Kunden, dem Studenten."
+            vocabulary: ["der Kunde", "der Student", "der Kollege", "der Nachbar", "der Journalist", "der Präsident", "der Mensch", "der Junge", "der Herr"]
+            grammar:
+              - pattern: "Der Verkäufer hilft dem Kunden."
+              - pattern: "Kennst du den neuen Studenten?"
+              - pattern: "Der Journalist hat den Präsidenten interviewt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: b1-internet-smartphone
+            title: Internet & Smartphones
+            description: Talk about apps, messages and everyday life online.
+            vocabulary: ["das Smartphone", "die App", herunterladen, "das Passwort", "die Nachricht", "das WLAN", aktualisieren, online, "die sozialen Netzwerke"]
+            grammar:
+              - pattern: "Ich habe mir eine neue App heruntergeladen."
+              - pattern: "Kannst du mir das WLAN-Passwort geben?"
+              - pattern: "Viele Jugendliche verbringen jeden Tag mehrere Stunden in sozialen Netzwerken."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: b1-news
+            title: The News
+            description: Talk about how you follow the news and compare with je … desto.
+            vocabulary: ["die Nachrichten", "die Zeitung", "der Artikel", "die Schlagzeile", "der Bericht", "berichten über", "sich informieren über", "die Quelle", glaubwürdig]
+            grammar:
+              - pattern: "Ich informiere mich meistens im Internet über aktuelle Themen."
+              - pattern: "Je mehr ich lese, desto besser verstehe ich die Politik."
+              - pattern: "Man sollte immer prüfen, ob eine Quelle glaubwürdig ist."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: b1-media-opinions
+            title: Opinions on Media
+            description: Discuss the advantages and dangers of smartphones and social media.
+            vocabulary: ["der Einfluss", "die Gefahr", "die Privatsphäre", "der Datenschutz", "die Werbung", abhängig, nützlich, schädlich]
+            grammar:
+              - pattern: "Je länger man am Handy sitzt, desto schlechter schläft man."
+              - pattern: "Ich finde, dass soziale Medien einen großen Einfluss auf junge Leute haben."
+              - pattern: "Ohne mein Smartphone könnte ich nicht leben."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: screen_time_debate
+                goal: Discuss with a friend whether smartphones and social media do more good or harm, giving examples.
+
+    checkpoint:
+      title: B1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B2:
+    title: Upper Intermediate
+    description: >
+      Understand the main ideas of complex texts on concrete and abstract topics, speak fluently and spontaneously, report what others said, and argue a position clearly with its pros and cons.
+
+    units:
+      - id: b2-regrets-hypotheticals
+        title: Regrets & Hypotheticals
+        description: Talk about what would have happened, what you should have done and how things seem.
+        icon: 🤔
+        steps:
+          - id: b2-konjunktiv-ii-past-haben
+            title: Konjunktiv II Past with Hätte
+            description: Imagine a different past with hätte + past participle; the participle goes to the end.
+            vocabulary: [hätte, hättest, hätten, "an deiner Stelle", "in diesem Fall", eigentlich, "zum Glück", leider]
+            grammar:
+              - pattern: "Ich hätte dir gern geholfen, aber ich hatte keine Zeit."
+              - pattern: "An deiner Stelle hätte ich das Angebot angenommen."
+              - pattern: "Hättest du mich angerufen, hätte ich dich abgeholt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: b2-konjunktiv-ii-past-sein
+            title: Konjunktiv II Past with Wäre
+            description: "Verbs of movement and change take wäre + participle: wäre gegangen, wäre geblieben."
+            vocabulary: [wäre, wärst, wären, "rechtzeitig", "verpassen", "zu Hause bleiben", "früher losfahren", "beinahe"]
+            grammar:
+              - pattern: "Wenn wir früher losgefahren wären, hätten wir den Zug nicht verpasst."
+              - pattern: "Ich wäre lieber zu Hause geblieben."
+              - pattern: "Ohne deine Hilfe wäre ich nie so weit gekommen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b2-should-have
+            title: Should Have, Could Have
+            description: "Regrets and reproaches with modals: hätte … machen sollen / können / müssen (double infinitive at the end)."
+            vocabulary: ["bereuen", "der Fehler", "die Gelegenheit", "versäumen", "der Vorwurf", "sich entschuldigen", "Das hättest du mir sagen sollen!", "Schade!"]
+            grammar:
+              - pattern: "Ich hätte mehr für die Prüfung lernen sollen."
+              - pattern: "Du hättest mir das früher sagen können."
+              - pattern: "Wir hätten gar nicht so lange warten müssen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b2-als-ob
+            title: As If
+            description: Describe appearances and false impressions with als ob / als wenn + Konjunktiv II, and react to regrets in conversation.
+            vocabulary: ["als ob", "als wenn", "tun, als ob", "so aussehen, als ob", "der Eindruck", "vortäuschen", "So ein Pech!", "Mach dir keine Vorwürfe."]
+            grammar:
+              - pattern: "Er tut so, als ob er nichts gewusst hätte."
+              - pattern: "Sie sieht aus, als wäre sie die ganze Nacht wach gewesen."
+              - pattern: "Mir kommt es vor, als ob ich ihn schon lange kennen würde."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: missed_opportunity
+                goal: Talk with a friend about a decision you regret and say what you would have done differently.
+
+      - id: b2-deduction-speculation
+        title: Deduction & Speculation
+        description: Express how certain you are about something and pass on what others claim.
+        icon: 🕵️
+        steps:
+          - id: b2-subjective-muessen-koennen
+            title: Must Be, Might Be
+            description: "Modal verbs for assumptions: muss (almost sure), dürfte (probable), kann/könnte (possible), kann nicht (impossible)."
+            vocabulary: [bestimmt, wahrscheinlich, vermutlich, möglicherweise, "auf keinen Fall", "die Vermutung", "die Annahme", "sicher"]
+            grammar:
+              - pattern: "Er ist nicht gekommen. Er muss krank sein."
+              - pattern: "Das dürfte die richtige Adresse sein."
+              - pattern: "Sie kann noch nicht zu Hause sein, ihr Zug kommt erst um acht."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b2-subjective-past
+            title: Must Have, Can't Have
+            description: "Assumptions about the past: modal + Infinitiv Perfekt (muss vergessen haben, kann nicht gegangen sein)."
+            vocabulary: ["vergessen haben", "verschlafen haben", "sich verlaufen haben", "abgereist sein", "die Spur", "der Hinweis", "offensichtlich", "anscheinend"]
+            grammar:
+              - pattern: "Das Licht ist aus. Sie müssen schon gegangen sein."
+              - pattern: "Er kann den Termin nicht vergessen haben, ich habe ihn gestern daran erinnert."
+              - pattern: "Der Dieb dürfte durch das Fenster eingestiegen sein."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: b2-sollen-wollen
+            title: Claims and Rumours
+            description: "Sollen for what others say (Sie soll reich sein) and wollen for what someone claims about themselves (Er will nichts gesehen haben)."
+            vocabulary: ["das Gerücht", "angeblich", "behaupten", "der Zeuge", "die Zeugin", "es heißt, dass", "laut", "Man sagt, dass …"]
+            grammar:
+              - pattern: "Die neue Nachbarin soll sehr reich sein."
+              - pattern: "Der Zeuge will nichts gesehen haben."
+              - pattern: "Das Restaurant soll letztes Jahr geschlossen worden sein."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: b2-futur-assumption
+            title: Futur I and II for Guesses
+            description: Use werden + wohl for guesses about the present (Futur I) and the past (Futur II), and speculate together about a mystery.
+            vocabulary: [wohl, schon, "werden … haben", "werden … sein", "Keine Ahnung.", "Ich schätze, …", "Wer weiß?", "Das wird schon stimmen."]
+            grammar:
+              - pattern: "Er wird wohl im Stau stehen."
+              - pattern: "Sie wird den Bus verpasst haben."
+              - pattern: "Bis Montag werden wir das Projekt abgeschlossen haben."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - type: dialogue
+                scenario: colleague_missing
+                goal: Speculate with a colleague about why a team member hasn't turned up and what might have happened.
+
+      - id: b2-passive-alternatives
+        title: Passive & Alternatives
+        description: Use the passive in more tenses and with modals, describe states, and replace the passive with other structures.
+        icon: ⚙️
+        steps:
+          - id: b2-passive-modals
+            title: Passive with Modal Verbs
+            description: "Modal + participle + werden at the end: muss repariert werden, kann nicht geliefert werden."
+            vocabulary: [reparieren, renovieren, liefern, genehmigen, "die Genehmigung", "die Frist", "dringend", "sofort"]
+            grammar:
+              - pattern: "Die Heizung muss dringend repariert werden."
+              - pattern: "Die Bestellung kann leider erst nächste Woche geliefert werden."
+              - pattern: "Ich glaube, dass der Antrag bis Freitag genehmigt werden muss."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: b2-passive-perfekt
+            title: Perfekt and Plusquamperfekt Passive
+            description: "The passive in the past: ist … worden / war … worden (worden, not geworden)."
+            vocabulary: [worden, bauen, gründen, zerstören, entdecken, erfinden, "das Gebäude", "das Jahrhundert"]
+            grammar:
+              - pattern: "Die Brücke ist im 19. Jahrhundert gebaut worden."
+              - pattern: "Der Täter ist gestern festgenommen worden."
+              - pattern: "Als wir ankamen, war das Konzert schon abgesagt worden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: b2-zustandspassiv
+            title: Process or State?
+            description: "Vorgangspassiv describes the action (wird geöffnet), Zustandspassiv the result (ist geöffnet)."
+            vocabulary: [geöffnet, geschlossen, reserviert, besetzt, "ausverkauft", "erledigt", "gestrichen", "verboten"]
+            grammar:
+              - pattern: "Der Laden wird um neun Uhr geöffnet. Jetzt ist er geöffnet."
+              - pattern: "Der Tisch ist schon für heute Abend reserviert."
+              - pattern: "Rauchen ist hier verboten."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: image_select }
+              - { type: fill_blank }
+          - id: b2-passiversatz
+            title: Alternatives to the Passive
+            description: Express possibility and necessity without werden using sich lassen, adjectives in -bar and sein + zu + infinitive, then solve a problem with a landlord.
+            vocabulary: ["sich lassen", machbar, lösbar, "unvermeidbar", "erreichbar", "der Mangel", "die Mietwohnung", "der Vermieter"]
+            grammar:
+              - pattern: "Das Problem lässt sich leicht lösen."
+              - pattern: "Der Schaden ist nicht reparierbar."
+              - pattern: "Die Miete ist bis zum dritten Werktag zu zahlen."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: landlord_repairs
+                goal: Report several defects in your flat to the landlord and agree on what has to be repaired and by when.
+
+      - id: b2-reported-speech
+        title: Reported Speech
+        description: Report what others said neutrally with Konjunktiv I, as in the news.
+        icon: 📰
+        steps:
+          - id: b2-konjunktiv-i-forms
+            title: Konjunktiv I Forms
+            description: "Konjunktiv I is used mostly in the 3rd person singular: er sei, habe, komme, könne, werde."
+            vocabulary: [sei, habe, komme, könne, müsse, werde, wisse, gebe]
+            grammar:
+              - pattern: "Der Minister sagt, er sei mit dem Ergebnis zufrieden."
+              - pattern: "Sie erklärt, sie habe keine Zeit."
+              - pattern: "Der Sprecher sagt, das Unternehmen könne die Preise nicht senken."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b2-konjunktiv-i-past-future
+            title: Reporting the Past and Future
+            description: "Past: er habe … gemacht / sei … gegangen. Future: er werde … machen. When Konjunktiv I equals the indicative, use Konjunktiv II (sie hätten, sie würden)."
+            vocabulary: ["mitteilen", "erklären", "berichten", "angeben", "die Aussage", "die Pressekonferenz", "der Sprecher", "die Sprecherin"]
+            grammar:
+              - pattern: "Die Polizei teilte mit, der Fahrer sei zu schnell gefahren."
+              - pattern: "Der Trainer erklärte, er werde den Verein verlassen."
+              - pattern: "Die Studenten sagen, sie hätten keine Informationen bekommen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: b2-reporting-verbs
+            title: Reporting Verbs
+            description: "Choose the right verb to report attitude: behaupten, betonen, zugeben, bestreiten, versprechen, fordern."
+            vocabulary: [behaupten, betonen, zugeben, bestreiten, versprechen, fordern, warnen, kritisieren, "darauf hinweisen"]
+            grammar:
+              - pattern: "Der Angeklagte bestreitet, das Geld genommen zu haben."
+              - pattern: "Die Ärztin betonte, dass Bewegung sehr wichtig sei."
+              - pattern: "Die Gewerkschaft fordert, die Löhne müssten steigen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: b2-media-reports
+            title: In the News
+            description: Read and retell short news items with Konjunktiv I, questions (ob / w-word + Konjunktiv) and requests (sollen).
+            vocabulary: ["die Meldung", "die Nachrichten", "laut Angaben", "einem Bericht zufolge", "die Quelle", "die Schlagzeile", "der Journalist", "die Journalistin"]
+            grammar:
+              - pattern: "Laut Angaben der Polizei sei niemand verletzt worden."
+              - pattern: "Die Reporterin fragte, ob die Regierung davon gewusst habe."
+              - pattern: "Er sagte, ich solle ihn morgen zurückrufen."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: retelling_the_news
+                goal: Tell a friend about a news report you heard, reporting what the people involved said.
+
+      - id: b2-linking-ideas
+        title: Linking Ideas
+        description: Connect ideas precisely with two-part connectors and contrastive linkers.
+        icon: 🔗
+        steps:
+          - id: b2-sowohl-weder-entweder
+            title: Both, Neither, Either
+            description: "Pair connectors: sowohl … als auch, weder … noch, entweder … oder, nicht nur … sondern auch."
+            vocabulary: ["sowohl … als auch", "weder … noch", "entweder … oder", "nicht nur … sondern auch", "die Möglichkeit", "die Alternative", "gleichzeitig", "beide"]
+            grammar:
+              - pattern: "Sie spricht sowohl Englisch als auch Spanisch."
+              - pattern: "Ich habe weder Zeit noch Lust."
+              - pattern: "Entweder wir nehmen den Zug, oder wir fahren mit dem Auto."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b2-zwar-aber-je-desto
+            title: Admittedly … But; The More … The More
+            description: "zwar … aber to concede and contrast; je + comparative … desto/umso + comparative (verb at the end in the je-clause)."
+            vocabulary: ["zwar … aber", "je … desto", "je … umso", "der Vorteil", "der Nachteil", "teurer", "besser", "schneller"]
+            grammar:
+              - pattern: "Die Wohnung ist zwar klein, aber sie liegt sehr zentral."
+              - pattern: "Je länger ich in Deutschland lebe, desto besser verstehe ich die Kultur."
+              - pattern: "Je früher wir anfangen, umso schneller sind wir fertig."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: b2-waehrend-wohingegen
+            title: Contrasting Ideas
+            description: "Show contrast with während and wohingegen (subordinating), dagegen and dennoch (adverbs, verb in second position)."
+            vocabulary: [während, wohingegen, dagegen, dennoch, jedoch, allerdings, "im Gegensatz zu", "im Vergleich zu"]
+            grammar:
+              - pattern: "Während mein Bruder gern reist, bleibt meine Schwester lieber zu Hause."
+              - pattern: "Die Stadt ist laut, das Dorf dagegen ist sehr ruhig."
+              - pattern: "Es regnete stark, dennoch fand das Konzert statt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: b2-comparing-options
+            title: Weighing Options
+            description: Compare two options in conversation with the connectors of this unit, including falls, sofern and statt dass.
+            vocabulary: [falls, sofern, "statt dass", "ohne dass", "abwägen", "die Entscheidung", "sich entscheiden für", "infrage kommen"]
+            grammar:
+              - pattern: "Falls es regnet, verschieben wir den Ausflug."
+              - pattern: "Er hat das Problem gelöst, ohne dass jemand es gemerkt hat."
+              - pattern: "Statt dass wir uns streiten, sollten wir einen Kompromiss suchen."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank }
+              - type: dialogue
+                scenario: choosing_a_holiday
+                goal: Compare two holiday options with a partner, weigh their pros and cons, and agree on one.
+
+      - id: b2-participles
+        title: Participles as Adjectives
+        description: Use present and past participles before nouns and as adverbs to write more compactly.
+        icon: 🏃
+        steps:
+          - id: b2-partizip-i
+            title: Present Participle Attributes
+            description: "Partizip I (infinitive + d) describes an ongoing action: der lachende Junge, mit steigenden Preisen; adjective endings apply."
+            vocabulary: [lachend, schlafend, weinend, steigend, wachsend, kommend, "folgend", "fließendes Wasser"]
+            grammar:
+              - pattern: "Das weinende Kind sucht seine Mutter."
+              - pattern: "Wegen der steigenden Preise kaufen viele Leute weniger."
+              - pattern: "In der kommenden Woche habe ich Urlaub."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: b2-partizip-ii
+            title: Past Participle Attributes
+            description: "Partizip II before a noun describes a completed or passive action: das gestohlene Auto, die gekochten Kartoffeln."
+            vocabulary: [gestohlen, gekocht, geöffnet, verloren, gebraucht, "frisch gepresst", "das gestohlene Fahrrad", "die verlorene Zeit"]
+            grammar:
+              - pattern: "Die Polizei hat das gestohlene Auto gefunden."
+              - pattern: "Ich hätte gern einen frisch gepressten Orangensaft."
+              - pattern: "Wir haben ein gebrauchtes Fahrrad gekauft."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: b2-extended-attributes
+            title: Extended Participle Phrases
+            description: "Short phrases between article and noun replace relative clauses: der seit Jahren geplante Umbau = der Umbau, der seit Jahren geplant ist."
+            vocabulary: ["seit Jahren geplant", "im Jahr 2020 gegründet", "viel diskutiert", "lange erwartet", "der Umbau", "die Studie", "die Firma", "die Maßnahme"]
+            grammar:
+              - pattern: "Der seit Jahren geplante Umbau beginnt im Mai."
+              - pattern: "Die im Jahr 2020 gegründete Firma hat schon hundert Mitarbeiter."
+              - pattern: "Die viel diskutierte Studie wurde gestern veröffentlicht."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: b2-partizip-adverb
+            title: Participles as Adverbs
+            description: Describe how something happens with participles used as adverbs, and describe a scene or a person in conversation.
+            vocabulary: [lächelnd, schweigend, singend, "zufrieden", "erschöpft", "überrascht", "aufgeregt", "entspannt"]
+            grammar:
+              - pattern: "Sie kam lächelnd ins Zimmer."
+              - pattern: "Erschöpft fiel er ins Bett."
+              - pattern: "Die Kinder liefen singend durch den Garten."
+            activities:
+              - { type: learn }
+              - { type: image_select }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: witness_description
+                goal: Describe to a police officer what you saw at an accident scene, using participles to describe people and objects.
+
+      - id: b2-nominal-style
+        title: Nominal Style & Noun–Verb Phrases
+        description: Switch between verbal and nominal style and use fixed noun–verb combinations of formal German.
+        icon: 📑
+        steps:
+          - id: b2-nominalisation-time
+            title: From Clause to Noun
+            description: "Turn temporal and causal clauses into prepositional phrases: als er ankam → bei seiner Ankunft, weil es regnete → wegen des Regens."
+            vocabulary: ["die Ankunft", "die Abfahrt", "der Beginn", "das Ende", "bei", "nach", "vor", "während"]
+            grammar:
+              - pattern: "Bei seiner Ankunft war niemand zu Hause."
+              - pattern: "Nach dem Ende des Studiums ist sie nach Wien gezogen."
+              - pattern: "Während des Essens soll man nicht telefonieren."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: b2-nominalisation-cause
+            title: Cause, Condition and Purpose
+            description: "More nominal prepositions: wegen, trotz, bei, ohne and zur/zum + noun (zur Verbesserung = um … zu verbessern)."
+            vocabulary: ["die Verbesserung", "die Erhöhung", "die Verspätung", "der Verzicht", "zur Verbesserung", "trotz", "infolge", "aufgrund"]
+            grammar:
+              - pattern: "Aufgrund der Verspätung haben wir den Anschluss verpasst."
+              - pattern: "Trotz intensiver Suche wurde der Schlüssel nicht gefunden."
+              - pattern: "Zur Verbesserung der Qualität wurden neue Maschinen gekauft."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: b2-funktionsverbgefuege
+            title: Noun–Verb Phrases
+            description: "Funktionsverbgefüge: a noun plus a light verb replaces a simple verb (eine Entscheidung treffen = entscheiden)."
+            vocabulary: ["eine Entscheidung treffen", "eine Frage stellen", "Kritik üben", "in Frage kommen", "zur Verfügung stellen", "in Kraft treten", "Abschied nehmen", "zum Ausdruck bringen"]
+            grammar:
+              - pattern: "Wir müssen bis morgen eine Entscheidung treffen."
+              - pattern: "Die Firma stellt den Mitarbeitern Laptops zur Verfügung."
+              - pattern: "Das neue Gesetz tritt im Januar in Kraft."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+          - id: b2-formal-communication
+            title: Formal Communication
+            description: Use nominal style and noun–verb phrases in formal letters, emails and official conversations.
+            vocabulary: ["in Anspruch nehmen", "Bescheid geben", "einen Antrag stellen", "in Verbindung setzen", "zur Kenntnis nehmen", "die Bearbeitung", "die Rückmeldung", "die Anfrage"]
+            grammar:
+              - pattern: "Ich möchte einen Antrag auf Verlängerung meines Visums stellen."
+              - pattern: "Bitte setzen Sie sich mit unserer Abteilung in Verbindung."
+              - pattern: "Die Bearbeitung Ihrer Anfrage kann bis zu zwei Wochen dauern."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: government_office_appointment
+                goal: Make an application at a public office, ask about the required documents and how long processing will take.
+
+      - id: b2-debate-persuasion
+        title: Debate & Persuasion
+        description: State and justify opinions, weigh arguments, concede points and counter others in a discussion.
+        icon: 🗣️
+        steps:
+          - id: b2-stating-opinion
+            title: Stating Your Position
+            description: Express and justify an opinion with formal phrases.
+            vocabulary: ["der Ansicht sein", "der Meinung sein", "meiner Meinung nach", "Ich bin davon überzeugt, dass …", "Ich vertrete die Ansicht, dass …", "der Standpunkt", "die These", "das Argument"]
+            grammar:
+              - pattern: "Ich bin der Ansicht, dass Homeoffice die Produktivität steigert."
+              - pattern: "Meiner Meinung nach sollte der öffentliche Verkehr kostenlos sein."
+              - pattern: "Ich bin fest davon überzeugt, dass wir mehr in Bildung investieren müssen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: b2-weighing-arguments
+            title: Weighing Pros and Cons
+            description: "Structure an argument: einerseits … andererseits, dafür spricht, dagegen spricht, ein weiterer Punkt ist."
+            vocabulary: ["einerseits … andererseits", "Dafür spricht, dass …", "Dagegen spricht, dass …", "ein weiterer Punkt", "außerdem", "darüber hinaus", "zusammenfassend", "abschließend"]
+            grammar:
+              - pattern: "Einerseits ist das Leben in der Stadt teuer, andererseits gibt es dort mehr Arbeitsplätze."
+              - pattern: "Dafür spricht vor allem, dass man Zeit spart."
+              - pattern: "Zusammenfassend lässt sich sagen, dass die Vorteile überwiegen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b2-conceding-countering
+            title: Conceding and Countering
+            description: Agree in part, then disagree politely and bring a counter-argument.
+            vocabulary: ["Da haben Sie recht, aber …", "Das mag sein, aber …", "Das sehe ich anders.", "Ich gebe zu, dass …", "Ich bezweifle, dass …", "Im Gegenteil!", "der Einwand", "widersprechen"]
+            grammar:
+              - pattern: "Das mag sein, aber man darf die Kosten nicht vergessen."
+              - pattern: "Ich gebe zu, dass das Argument überzeugend klingt, dennoch bin ich skeptisch."
+              - pattern: "Ich bezweifle, dass dieses Verbot wirklich etwas ändern würde."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b2-discussion
+            title: Holding a Discussion
+            description: Take part in a discussion, interrupt politely, keep the floor and reach a compromise.
+            vocabulary: ["Darf ich kurz unterbrechen?", "Lassen Sie mich ausreden.", "Um auf Ihren Punkt zurückzukommen, …", "Wie sehen Sie das?", "der Kompromiss", "sich einigen auf", "die Diskussion", "überzeugen"]
+            grammar:
+              - pattern: "Darf ich kurz etwas dazu sagen?"
+              - pattern: "Um auf Ihren Punkt zurückzukommen: Die Kosten wären viel zu hoch."
+              - pattern: "Könnten wir uns vielleicht auf einen Kompromiss einigen?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: car_free_city_debate
+                goal: Debate whether the city centre should become car-free, defend your position and respond to counter-arguments.
+
+      - id: b2-society-environment
+        title: Society & Environment
+        description: Discuss climate change, sustainability, migration and social change in nominal style and the passive.
+        icon: 🌍
+        steps:
+          - id: b2-climate-change
+            title: Climate Change
+            description: Talk about the causes and consequences of climate change, using the passive and nominal style.
+            vocabulary: ["der Klimawandel", "die Erderwärmung", "der Ausstoß", "das Treibhausgas", "die Dürre", "die Überschwemmung", "der Meeresspiegel", "die Folge"]
+            grammar:
+              - pattern: "Durch den Ausstoß von Treibhausgasen wird die Erde immer wärmer."
+              - pattern: "Infolge der Erderwärmung steigt der Meeresspiegel."
+              - pattern: "Es muss dringend mehr gegen den Klimawandel getan werden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: b2-sustainability
+            title: Sustainability
+            description: Discuss sustainable consumption and what individuals and politicians can do.
+            vocabulary: ["die Nachhaltigkeit", "nachhaltig", "erneuerbare Energien", "der Verbrauch", "die Verschwendung", "verzichten auf", "recyceln", "der ökologische Fußabdruck"]
+            grammar:
+              - pattern: "Viele Verpackungen lassen sich vermeiden."
+              - pattern: "Je weniger Fleisch wir essen, desto kleiner ist unser ökologischer Fußabdruck."
+              - pattern: "Der Ausbau erneuerbarer Energien sollte stärker gefördert werden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: b2-migration
+            title: Migration and Integration
+            description: Talk about migration, integration and life in a new country.
+            vocabulary: ["die Migration", "die Einwanderung", "die Integration", "die Heimat", "die Staatsangehörigkeit", "die Aufenthaltserlaubnis", "sich integrieren", "die Vielfalt"]
+            grammar:
+              - pattern: "Für eine erfolgreiche Integration ist das Erlernen der Sprache entscheidend."
+              - pattern: "Viele Fachkräfte werden aus dem Ausland angeworben."
+              - pattern: "Sie lebt zwar seit zehn Jahren hier, aber ihre Heimat vermisst sie immer noch."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b2-social-change
+            title: A Changing Society
+            description: Discuss social trends such as an ageing population, digitalisation and equality, and propose solutions.
+            vocabulary: ["die Gesellschaft", "der demografische Wandel", "die Digitalisierung", "die Gleichberechtigung", "die Armut", "das Ehrenamt", "die Ungleichheit", "Maßnahmen ergreifen"]
+            grammar:
+              - pattern: "Die Regierung muss Maßnahmen gegen die Armut ergreifen."
+              - pattern: "Der demografische Wandel stellt die Gesellschaft vor große Herausforderungen."
+              - pattern: "Wenn mehr Menschen ein Ehrenamt übernähmen, würde die Gesellschaft davon profitieren."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: neighbourhood_meeting
+                goal: At a neighbourhood meeting, propose a local sustainability project and convince the others to support it.
+
+      - id: b2-science-culture
+        title: Science, Culture & the Arts
+        description: Talk about research and inventions, review films, books and exhibitions, and use the structures of this level.
+        icon: 🔬
+        steps:
+          - id: b2-research
+            title: Research and Studies
+            description: Report the results of studies with reported speech, the passive and nominal style.
+            vocabulary: ["die Forschung", "die Studie", "das Ergebnis", "der Forscher", "die Forscherin", "untersuchen", "nachweisen", "herausfinden", "die Untersuchung"]
+            grammar:
+              - pattern: "Einer neuen Studie zufolge schlafen Jugendliche zu wenig."
+              - pattern: "Die Forscher fanden heraus, dass Bewegung das Gedächtnis verbessert."
+              - pattern: "Es konnte nachgewiesen werden, dass das Medikament wirkt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: b2-inventions
+            title: Inventions and Technology
+            description: Describe inventions and their effects with the past passive, participle attributes and speculation about the future.
+            vocabulary: ["die Erfindung", "der Erfinder", "die Erfinderin", "erfinden", "entwickeln", "der Fortschritt", "die künstliche Intelligenz", "die Auswirkung"]
+            grammar:
+              - pattern: "Der Buchdruck wurde um 1450 von Johannes Gutenberg erfunden."
+              - pattern: "Die von ihr entwickelte Technik wird heute weltweit genutzt."
+              - pattern: "In zwanzig Jahren wird künstliche Intelligenz unseren Alltag verändert haben."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: b2-film-literature
+            title: Film and Literature Reviews
+            description: Summarise the plot of a film or book and evaluate it.
+            vocabulary: ["die Handlung", "die Hauptfigur", "der Regisseur", "die Regisseurin", "der Roman", "spannend", "überzeugend", "handeln von", "die Kritik"]
+            grammar:
+              - pattern: "Der Roman handelt von einer Familie, die nach dem Krieg nach Berlin zieht."
+              - pattern: "Die Hauptfigur wird sehr überzeugend dargestellt."
+              - pattern: "Der Film ist zwar etwas lang, aber durchgehend spannend."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: b2-museum-exhibition
+            title: Museums and Exhibitions
+            description: Describe an exhibition or a work of art, give your impression and recommend it or not.
+            vocabulary: ["die Ausstellung", "das Gemälde", "der Künstler", "die Künstlerin", "das Kunstwerk", "ausgestellt", "beeindruckend", "die Führung"]
+            grammar:
+              - pattern: "In der Ausstellung werden Werke aus drei Jahrhunderten gezeigt."
+              - pattern: "Das ausgestellte Gemälde soll Millionen wert sein."
+              - pattern: "Ich hätte nie gedacht, dass mich moderne Kunst so beeindrucken würde."
+            activities:
+              - { type: learn }
+              - { type: image_select }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: recommending_an_exhibition
+                goal: Tell a friend about an exhibition or film you saw, describe it and persuade them to go or not.
+
+    checkpoint:
+      title: B2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C1:
+    title: Advanced
+    description: >
+      Understand demanding, longer texts and implicit meaning, express yourself fluently and spontaneously, and use German flexibly and precisely in social, academic and professional life.
+
+    units:
+      - id: c1-word-order
+        title: Word Order & Emphasis
+        description: Use German word order deliberately to set the topic, add emphasis and keep long sentences clear.
+        icon: 🔀
+        steps:
+          - id: c1-vorfeld
+            title: Vorfeld & Emphasis
+            description: Almost any constituent can open the sentence; what you put first becomes the topic or carries contrast.
+            vocabulary: [ausgerechnet, gerade, eigentlich, keineswegs, "erst gestern", "den Vertrag", unterschreiben, verstehen]
+            grammar:
+              - pattern: "Den Vertrag hat er erst gestern unterschrieben."
+              - pattern: "Ausgerechnet heute muss der Zug ausfallen."
+              - pattern: "Gelesen habe ich das Buch schon, verstanden habe ich es aber nicht."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c1-mittelfeld
+            title: Mittelfeld Order
+            description: "Pronouns come first; then, as a rule, time, cause, manner and place (TeKaMoLo). Stress and new information shift elements to the right."
+            vocabulary: [rechtzeitig, kurzfristig, überraschend, "aus Versehen", "mit Absicht", "wegen des Streiks", "mit dem Fahrrad", unterwegs]
+            grammar:
+              - pattern: "Ich habe es ihm gestern gegeben."
+              - pattern: "Sie ist heute wegen des Streiks mit dem Fahrrad zur Arbeit gefahren."
+              - pattern: "Gestern hat ihn der Chef überraschend ins Büro gerufen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 3 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-nachfeld
+            title: Nachfeld & Ausklammerung
+            description: Move comparisons, long prepositional phrases and infinitive clauses after the final verb so the sentence stays easy to follow.
+            vocabulary: ["als sonst", "als erwartet", "wie immer", "im Vergleich zu", "Bescheid sagen", "im Anschluss", vergessen, versuchen]
+            grammar:
+              - pattern: "Er hat sich diesmal mehr Zeit genommen als sonst."
+              - pattern: "Wir haben lange diskutiert über die neuen Pläne."
+              - pattern: "Ich habe leider vergessen, dir rechtzeitig Bescheid zu sagen."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+          - id: c1-es-placeholder
+            title: Es as Placeholder
+            description: "Use es to fill the Vorfeld (Es kamen viele Gäste) or to announce a following clause (Ich finde es wichtig, dass …), and know when it disappears."
+            vocabulary: ["es lohnt sich", "es kommt darauf an", "es handelt sich um", "es fällt mir schwer", "es liegt daran, dass", "es ist üblich", "es wurde gefeiert"]
+            grammar:
+              - pattern: "Es haben sich nur wenige Teilnehmer angemeldet."
+              - pattern: "Es wurde bis spät in die Nacht gefeiert."
+              - pattern: "Ich finde es wichtig, dass alle mitreden dürfen."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: correcting_a_misunderstanding
+                goal: Correct a colleague's misunderstanding about a project, putting the corrected information first for emphasis.
+
+      - id: c1-modal-particles
+        title: Modal Particles
+        description: Add attitude and nuance with the small words that make spoken German sound natural.
+        icon: 💬
+        steps:
+          - id: c1-doch-ja
+            title: Doch & Ja
+            description: Ja signals something both speakers know; doch reminds, contradicts gently or makes a suggestion more urgent.
+            vocabulary: [ja, doch, "Das weißt du ja.", "Komm doch mit!", "Das ist ja toll!", "Das ist doch klar.", "Du hast doch gesagt"]
+            grammar:
+              - pattern: "Das habe ich dir doch schon gesagt."
+              - pattern: "Du kennst ihn ja."
+              - pattern: "Komm doch einfach morgen vorbei!"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: fill_blank }
+          - id: c1-halt-eben
+            title: Halt & Eben
+            description: Express that something simply is the way it is, often with a note of resignation.
+            vocabulary: [halt, eben, "nun mal", "Das ist halt so.", "Dann eben nicht.", "Pech gehabt.", "da kann man nichts machen"]
+            grammar:
+              - pattern: "Das ist halt so, da kann man nichts machen."
+              - pattern: "Dann nehmen wir eben den nächsten Zug."
+              - pattern: "Wenn es nicht geht, geht es eben nicht."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: c1-mal-denn-schon
+            title: Mal, Denn & Schon
+            description: Mal softens requests, denn makes questions friendlier or shows surprise, schon reassures or concedes a point.
+            vocabulary: [mal, denn, schon, "Hör mal!", "Warte mal kurz.", "Was ist denn los?", "Wo warst du denn?", "Das wird schon."]
+            grammar:
+              - pattern: "Kannst du mir mal kurz helfen?"
+              - pattern: "Was machst du denn hier?"
+              - pattern: "Keine Sorge, das klappt schon."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: c1-wohl-combinations
+            title: Wohl & Particles in Conversation
+            description: Use wohl for assumptions and combine particles (doch mal, ja auch) naturally in everyday talk.
+            vocabulary: [wohl, "doch mal", "ja auch", "Er ist wohl krank.", "Das wird wohl stimmen.", "Mach doch mal Pause!", "Schau doch mal nach."]
+            grammar:
+              - pattern: "Er wird wohl im Stau stehen."
+              - pattern: "Schau doch mal nach, ob noch Milch da ist."
+              - pattern: "Das hättest du ja auch gleich sagen können."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: flatmate_disagreement
+                goal: Sort out a small disagreement with a flatmate, using modal particles to sound natural rather than blunt.
+
+      - id: c1-participle-phrases
+        title: Extended Participle Phrases
+        description: Read and build the dense participle attributes typical of newspapers, reports and academic texts.
+        icon: 🧩
+        steps:
+          - id: c1-partizip-i-attribute
+            title: Extended Present Participles
+            description: "Expand Partizip I attributes with objects and adverbs placed before the noun: die seit Jahren steigenden Mieten."
+            vocabulary: [steigend, wachsend, zunehmend, führend, entscheidend, bestehend, "die steigenden Mieten", "der wachsende Druck"]
+            grammar:
+              - pattern: "Die seit Jahren steigenden Mieten belasten viele Familien."
+              - pattern: "Der immer stärker wachsende Druck führt zu Stress."
+              - pattern: "Das auf dem Tisch liegende Dokument ist vertraulich."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: c1-partizip-ii-attribute
+            title: Extended Past Participles
+            description: "Partizip II with agent, time and other details before the noun: die von der Regierung beschlossene Reform."
+            vocabulary: [beschlossen, veröffentlicht, durchgeführt, geplant, umstritten, "die Reform", "die Studie", "die Maßnahme"]
+            grammar:
+              - pattern: "Die von der Regierung beschlossene Reform tritt im Januar in Kraft."
+              - pattern: "Die im letzten Jahr veröffentlichte Studie wird oft zitiert."
+              - pattern: "Die bereits durchgeführten Maßnahmen zeigen erste Erfolge."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-gerundivum
+            title: Gerundivum
+            description: "zu + Partizip I as an attribute expresses what must or can be done: die zu lösenden Probleme."
+            vocabulary: ["die zu lösenden Probleme", "die zu erwartenden Kosten", "ein nicht zu unterschätzendes Risiko", "die zu treffende Entscheidung", "die einzuhaltende Frist", "die zu prüfenden Unterlagen"]
+            grammar:
+              - pattern: "Die zu lösenden Probleme sind komplexer als gedacht."
+              - pattern: "Das ist ein nicht zu unterschätzendes Risiko."
+              - pattern: "Die einzuhaltende Frist endet am Freitag."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c1-resolving-participles
+            title: Resolving into Relative Clauses
+            description: Turn dense participle phrases into relative clauses and back, to understand and explain formal texts.
+            vocabulary: ["der Relativsatz", umformulieren, auflösen, verständlich, kompakt, "der Fachtext", "die Satzstruktur", "auf den Punkt bringen"]
+            grammar:
+              - pattern: "Die Reform, die von der Regierung beschlossen wurde, tritt im Januar in Kraft."
+              - pattern: "Die Probleme, die gelöst werden müssen, sind komplexer als gedacht."
+              - pattern: "Das Risiko, das man nicht unterschätzen darf, wird oft übersehen."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: explaining_a_news_text
+                goal: Explain a dense newspaper sentence to a friend by breaking its participle phrases down into relative clauses.
+
+      - id: c1-advanced-connectors
+        title: Advanced Connectors
+        description: Express means, conditions, contrast and restriction precisely with formal connectors.
+        icon: 🔗
+        steps:
+          - id: c1-indem
+            title: Indem & Dadurch, dass
+            description: "Say how something is achieved: indem or dadurch, dass + subordinate clause."
+            vocabulary: [indem, "dadurch, dass", "auf diese Weise", mithilfe, sparen, verbessern, senken, vermeiden]
+            grammar:
+              - pattern: "Man kann Energie sparen, indem man die Heizung herunterdreht."
+              - pattern: "Dadurch, dass wir früher losgefahren sind, haben wir den Stau vermieden."
+              - pattern: "Indem sie täglich übt, verbessert sie ihr Deutsch schnell."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: c1-sofern-soweit
+            title: Sofern, Soweit & Es sei denn
+            description: Set conditions and limits with sofern (provided that), soweit (as far as) and es sei denn (unless).
+            vocabulary: [sofern, soweit, "es sei denn", "vorausgesetzt, dass", "unter der Bedingung, dass", "soweit ich weiß", "im Falle"]
+            grammar:
+              - pattern: "Sofern nichts dazwischenkommt, sind wir um acht da."
+              - pattern: "Soweit ich weiß, ist das Büro morgen geschlossen."
+              - pattern: "Wir gehen wandern, es sei denn, es regnet."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: c1-wohingegen-ungeachtet
+            title: Wohingegen, Insofern als & Ungeachtet
+            description: Contrast with wohingegen, restrict with insofern als, and concede with ungeachtet + genitive.
+            vocabulary: [wohingegen, "insofern als", ungeachtet, dennoch, allerdings, "im Gegensatz dazu", "die Kritik", festhalten]
+            grammar:
+              - pattern: "Mein Bruder liebt Großstädte, wohingegen ich lieber auf dem Land lebe."
+              - pattern: "Die Lösung ist gut, insofern als sie kaum Kosten verursacht."
+              - pattern: "Ungeachtet der Kritik hielt der Minister an seinem Plan fest."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: c1-geschweige-denn
+            title: Geschweige denn & Building Arguments
+            description: Escalate a negative with geschweige denn and combine connectors to build a convincing argument.
+            vocabulary: ["geschweige denn", "nicht einmal", "erst recht nicht", "schon gar nicht", zumal, ohnehin, "abgesehen davon"]
+            grammar:
+              - pattern: "Er spricht kaum Englisch, geschweige denn Chinesisch."
+              - pattern: "Ich habe nicht einmal Zeit zum Frühstücken, geschweige denn für Sport."
+              - pattern: "Das Projekt lohnt sich nicht, zumal die Kosten ohnehin schon zu hoch sind."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: weighing_a_job_offer
+                goal: Discuss with a friend whether to accept a job abroad, using advanced connectors for conditions, contrasts and means.
+
+      - id: c1-hedging-discourse
+        title: Hedging & Discourse
+        description: Soften claims, keep a cautious distance and structure longer contributions clearly.
+        icon: 🎙️
+        steps:
+          - id: c1-softening-claims
+            title: Softening Claims
+            description: Avoid sounding absolute with hedging words like gewissermaßen, tendenziell and weitgehend.
+            vocabulary: [gewissermaßen, tendenziell, vermutlich, weitgehend, eher, möglicherweise, "im Großen und Ganzen", "in gewisser Weise"]
+            grammar:
+              - pattern: "Die Ergebnisse sind tendenziell positiv."
+              - pattern: "Das ist gewissermaßen ein Kompromiss."
+              - pattern: "Im Großen und Ganzen bin ich mit der Lösung zufrieden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c1-konjunktiv-distance
+            title: Konjunktiv II for Distance
+            description: "Make careful, polite statements: es ließe sich argumentieren, ich würde sagen, das dürfte …"
+            vocabulary: ["es ließe sich argumentieren", "ich würde sagen", "es wäre denkbar", "man müsste", "ich hätte gedacht", "das dürfte", "es könnte sein"]
+            grammar:
+              - pattern: "Es ließe sich argumentieren, dass die Maßnahme zu spät kam."
+              - pattern: "Ich würde sagen, dass wir noch mehr Daten brauchen."
+              - pattern: "Das dürfte die Kosten deutlich erhöhen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-structuring-talk
+            title: Structuring a Presentation
+            description: Guide listeners through your points with Zunächst, Darüber hinaus, Des Weiteren and Abschließend.
+            vocabulary: [zunächst, "darüber hinaus", "des Weiteren", "im Folgenden", "zum einen", "zum anderen", abschließend, zusammenfassend, "in diesem Zusammenhang"]
+            grammar:
+              - pattern: "Zunächst möchte ich kurz auf die Ausgangslage eingehen."
+              - pattern: "Darüber hinaus sollte man die Kosten berücksichtigen."
+              - pattern: "Abschließend lässt sich sagen, dass das Projekt ein Erfolg war."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: c1-handling-objections
+            title: Handling Objections
+            description: Present a position, react politely to objections and keep the floor in a discussion.
+            vocabulary: ["Wenn ich kurz einhaken darf", "Da muss ich widersprechen.", "Das ist ein berechtigter Einwand.", "Lassen Sie mich bitte ausreden.", "Um auf Ihre Frage zurückzukommen", "Ich gebe Ihnen insofern recht, als"]
+            grammar:
+              - pattern: "Das ist ein berechtigter Einwand, allerdings sollte man auch die Kosten bedenken."
+              - pattern: "Ich gebe Ihnen insofern recht, als die Umsetzung schwierig ist."
+              - pattern: "Um auf Ihre Frage zurückzukommen: Die Zahlen stammen aus einer aktuellen Studie."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: seminar_presentation
+                goal: Present your view on remote work in a seminar, structure your points clearly and respond politely to an objection.
+
+      - id: c1-professional-life
+        title: Professional Life
+        description: Handle meetings, negotiations and formal correspondence in German working life.
+        icon: 💼
+        steps:
+          - id: c1-meetings
+            title: Meetings
+            description: Lead and take part in meetings, move through the agenda and record decisions.
+            vocabulary: ["die Besprechung", "die Tagesordnung", "der Tagesordnungspunkt", "das Protokoll", "die Frist", vertagen, "zur Sprache bringen", "Einigkeit erzielen"]
+            grammar:
+              - pattern: "Lassen Sie uns zum nächsten Tagesordnungspunkt übergehen."
+              - pattern: "Könnten Sie das bitte ins Protokoll aufnehmen?"
+              - pattern: "Wir sollten die Entscheidung auf nächste Woche vertagen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: c1-negotiation
+            title: Negotiation
+            description: Make offers, ask for room to manoeuvre and reach a compromise.
+            vocabulary: ["das Angebot", "die Verhandlung", "der Kompromiss", "das Zugeständnis", "die Konditionen", "der Spielraum", entgegenkommen, "sich einigen"]
+            grammar:
+              - pattern: "Wir könnten Ihnen beim Preis etwas entgegenkommen, sofern Sie die Menge erhöhen."
+              - pattern: "Gibt es bei den Lieferbedingungen noch Spielraum?"
+              - pattern: "Ich denke, wir können uns auf einen Kompromiss einigen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: c1-formal-emails
+            title: Formal Emails
+            description: "Write formal emails with the right opening, references, requests and closing (Sehr geehrte …, Mit freundlichen Grüßen)."
+            vocabulary: ["Sehr geehrte Damen und Herren", "Mit freundlichen Grüßen", "Bezug nehmend auf", "im Anhang", "die Rückmeldung", baldmöglichst, "zur Verfügung stehen", "Ich wäre Ihnen dankbar, wenn"]
+            grammar:
+              - pattern: "Sehr geehrte Frau Dr. Wagner, vielen Dank für Ihre Nachricht."
+              - pattern: "Bezug nehmend auf unser Telefonat sende ich Ihnen im Anhang das Angebot."
+              - pattern: "Ich wäre Ihnen dankbar, wenn Sie mir bis Montag eine Rückmeldung geben könnten."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: fill_blank, count: 2 }
+          - id: c1-business-nominalstil
+            title: Nominalstil in Business German
+            description: "Turn verbal phrases into the nominal style of reports: nach Abschluss des Projekts, zur Verbesserung der Abläufe."
+            vocabulary: ["die Umsetzung", "die Durchführung", "die Optimierung", "der Abschluss", "die Genehmigung", "die Inbetriebnahme", "nach Rücksprache mit", zwecks]
+            grammar:
+              - pattern: "Nach Abschluss des Projekts erfolgt eine Auswertung."
+              - pattern: "Zur Verbesserung der Abläufe wurde ein neues System eingeführt."
+              - pattern: "Die Umsetzung der Maßnahmen erfolgt nach Rücksprache mit der Geschäftsleitung."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: salary_negotiation
+                goal: Negotiate a raise with your manager, presenting your arguments formally and reaching a compromise.
+
+      - id: c1-media-information
+        title: Media & Information
+        description: Understand news language, report what others say and judge sources critically.
+        icon: 📰
+        steps:
+          - id: c1-konjunktiv-news
+            title: Konjunktiv I in the News
+            description: Recognise and use Konjunktiv I to report statements neutrally, as news agencies do.
+            vocabulary: [erklären, betonen, mitteilen, behaupten, dementieren, "der Sprecher", "die Pressemitteilung", "die Stellungnahme"]
+            grammar:
+              - pattern: "Der Sprecher erklärte, die Verhandlungen seien gescheitert."
+              - pattern: "Die Ministerin betonte, man habe alles getan, um die Krise zu verhindern."
+              - pattern: "Das Unternehmen teilte mit, es werde keine Stellen abbauen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-distancing
+            title: Distancing from Claims
+            description: "Mark information as unconfirmed with angeblich, laut + dative, zufolge and the subjective soll."
+            vocabulary: [angeblich, vermeintlich, laut, zufolge, "nach Angaben", "Berichten zufolge", "wie es heißt", "Bestechungsgelder annehmen"]
+            grammar:
+              - pattern: "Laut einem Bericht der Polizei gab es keine Verletzten."
+              - pattern: "Dem Minister zufolge ist die Lage unter Kontrolle."
+              - pattern: "Der Politiker soll Bestechungsgelder angenommen haben."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: c1-fake-news
+            title: Fake News & Sources
+            description: Talk about false reports, fact checks and how to tell a reliable source from an unreliable one.
+            vocabulary: ["die Falschmeldung", "die Quelle", "der Faktencheck", "die Desinformation", "die Schlagzeile", seriös, glaubwürdig, überprüfen, verbreiten]
+            grammar:
+              - pattern: "Bevor man eine Meldung teilt, sollte man die Quelle überprüfen."
+              - pattern: "Die Nachricht hat sich als Falschmeldung herausgestellt."
+              - pattern: "Seriöse Medien kennzeichnen Meinungsbeiträge deutlich."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete, count: 2 }
+          - id: c1-discussing-news
+            title: Discussing the News
+            description: Evaluate media coverage as balanced or one-sided and discuss filter bubbles and media literacy.
+            vocabulary: ["die Berichterstattung", "die Filterblase", "die Medienkompetenz", "die Meinungsfreiheit", einseitig, ausgewogen, reißerisch, sachlich]
+            grammar:
+              - pattern: "Die Berichterstattung war meiner Meinung nach ziemlich einseitig."
+              - pattern: "In sozialen Netzwerken landet man schnell in einer Filterblase."
+              - pattern: "Die Studie soll gefälscht sein, aber dafür gibt es bisher keine Belege."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: debunking_a_rumor
+                goal: Discuss a viral news story with a friend, report what different sources say and judge how credible it is.
+
+      - id: c1-science-ethics
+        title: Science, Technology & Ethics
+        description: Discuss research, new technologies and the ethical questions they raise.
+        icon: 🔬
+        steps:
+          - id: c1-academic-verbs
+            title: Academic Verbs
+            description: Describe research with verbs like untersuchen, belegen, widerlegen and nachweisen.
+            vocabulary: [untersuchen, belegen, widerlegen, nachweisen, "die Hypothese", "die Erkenntnis", "der Befund", "zu dem Schluss kommen"]
+            grammar:
+              - pattern: "Die Studie untersucht den Zusammenhang zwischen Schlaf und Gedächtnis."
+              - pattern: "Die Ergebnisse belegen, dass regelmäßige Bewegung das Risiko senkt."
+              - pattern: "Diese Hypothese konnte bisher nicht widerlegt werden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: c1-artificial-intelligence
+            title: Artificial Intelligence
+            description: Talk about AI, automation and the question of who is responsible for automated decisions.
+            vocabulary: ["die künstliche Intelligenz", "der Algorithmus", "die Automatisierung", "das Sprachmodell", "der Arbeitsplatz", "die Verantwortung", ersetzen, nachvollziehbar]
+            grammar:
+              - pattern: "Viele befürchten, dass künstliche Intelligenz Arbeitsplätze ersetzen wird."
+              - pattern: "Wer trägt die Verantwortung, wenn ein Algorithmus Fehler macht?"
+              - pattern: "Die Entscheidungen solcher Systeme müssen nachvollziehbar sein."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete }
+          - id: c1-genetics-data
+            title: Genetics & Data Protection
+            description: Discuss genetic engineering, personal data and privacy.
+            vocabulary: ["die Gentechnik", "das Erbgut", "der Eingriff", "der Datenschutz", "personenbezogene Daten", "die Einwilligung", "die Privatsphäre", speichern, missbrauchen]
+            grammar:
+              - pattern: "Eingriffe in das menschliche Erbgut werfen ethische Fragen auf."
+              - pattern: "Personenbezogene Daten dürfen nur mit Einwilligung gespeichert werden."
+              - pattern: "Es besteht die Gefahr, dass die Daten missbraucht werden."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-ethics-debate
+            title: Debating Ethics
+            description: Weigh benefits against risks and take a reasoned position on an ethical question.
+            vocabulary: ["ethisch vertretbar", "die Abwägung", "der Nutzen", "das Risiko", "die Grenze", verantwortungsvoll, überwiegen, "meines Erachtens"]
+            grammar:
+              - pattern: "Ob das ethisch vertretbar ist, muss sorgfältig abgewogen werden."
+              - pattern: "Meines Erachtens überwiegt der Nutzen die Risiken."
+              - pattern: "Einerseits bietet die Technik große Chancen, andererseits birgt sie Gefahren."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: ethics_panel
+                goal: Take part in a panel discussion on using AI in medical diagnosis, weighing benefits against risks.
+
+      - id: c1-society-politics
+        title: Society & Politics
+        description: Understand the German political system and debate social issues in formal language.
+        icon: 🏛️
+        steps:
+          - id: c1-political-system
+            title: The Political System
+            description: Learn how the Bundestag, Bundesrat, government and constitution fit together.
+            vocabulary: ["der Bundestag", "der Bundesrat", "der Bundeskanzler", "die Koalition", "die Opposition", "das Grundgesetz", "die Partei", "der Abgeordnete"]
+            grammar:
+              - pattern: "Der Bundestag wird alle vier Jahre gewählt."
+              - pattern: "Die Regierung wird meist von einer Koalition mehrerer Parteien gebildet."
+              - pattern: "Das Grundgesetz garantiert die Würde des Menschen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select }
+          - id: c1-elections
+            title: Elections & Participation
+            description: Talk about elections, campaigns and how citizens get involved.
+            vocabulary: ["die Bundestagswahl", "die Wahlbeteiligung", "die Stimme", "die Fünfprozenthürde", "der Wahlkampf", "das Wahlprogramm", "die Bürgerinitiative", "sich engagieren"]
+            grammar:
+              - pattern: "Die Wahlbeteiligung war diesmal deutlich höher als bei der letzten Wahl."
+              - pattern: "Kleine Parteien scheitern oft an der Fünfprozenthürde."
+              - pattern: "Viele Bürger engagieren sich in Bürgerinitiativen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: c1-prepositional-phrases
+            title: Formal Prepositional Phrases
+            description: "Use formal prepositional expressions, mostly with the genitive: im Hinblick auf, angesichts, hinsichtlich, im Zuge, zugunsten."
+            vocabulary: ["im Hinblick auf", angesichts, hinsichtlich, "im Zuge", zugunsten, infolge, "im Rahmen", mangels]
+            grammar:
+              - pattern: "Angesichts der steigenden Preise fordern viele Beschäftigte höhere Löhne."
+              - pattern: "Im Hinblick auf die Wahl hat die Partei ihr Programm überarbeitet."
+              - pattern: "Im Zuge der Digitalisierung verändern sich viele Berufe."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c1-social-issues
+            title: Debating Social Issues
+            description: Discuss housing, pensions, inequality and immigration, and argue a position.
+            vocabulary: ["die Wohnungsnot", "die Rente", "die Ungleichheit", "die Chancengleichheit", "der Fachkräftemangel", "die Zuwanderung", "die Mietpreisbremse", fordern]
+            grammar:
+              - pattern: "Angesichts des Fachkräftemangels wird mehr Zuwanderung gefordert."
+              - pattern: "Hinsichtlich der Rente gibt es keinen gesellschaftlichen Konsens."
+              - pattern: "Die Wohnungsnot betrifft vor allem junge Familien in Großstädten."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: town_hall_debate
+                goal: Argue for or against a rent cap at a town hall meeting, supporting your position with formal prepositional phrases.
+
+      - id: c1-idioms-colloquial
+        title: Idioms & Colloquial German
+        description: Understand and use idioms, spoken grammar and slang, and know when standard German is expected.
+        icon: 🗣️
+        steps:
+          - id: c1-redewendungen
+            title: Everyday Idioms
+            description: Learn common idioms like Ich verstehe nur Bahnhof and Da steppt der Bär, and what they really mean.
+            vocabulary: ["Ich verstehe nur Bahnhof.", "Da steppt der Bär.", "Das ist nicht mein Bier.", "Schwein haben", "die Daumen drücken", "auf dem Schlauch stehen", "Tomaten auf den Augen haben", "ins Fettnäpfchen treten"]
+            grammar:
+              - pattern: "Bei seiner Erklärung habe ich nur Bahnhof verstanden."
+              - pattern: "Auf der Party gestern hat der Bär gesteppt."
+              - pattern: "Ich drücke dir für die Prüfung die Daumen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select }
+          - id: c1-idioms-work-life
+            title: Idioms at Work & in Life
+            description: Use idioms that come up in discussions, at work and among friends.
+            vocabulary: ["den Nagel auf den Kopf treffen", "um den heißen Brei herumreden", "etwas auf die lange Bank schieben", "die Kirche im Dorf lassen", "die Nase voll haben", "jemandem auf die Nerven gehen", "unter vier Augen", "Hals- und Beinbruch!"]
+            grammar:
+              - pattern: "Mit dieser Bemerkung hast du den Nagel auf den Kopf getroffen."
+              - pattern: "Hör auf, um den heißen Brei herumzureden!"
+              - pattern: "Wir sollten das Problem nicht länger auf die lange Bank schieben."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: c1-spoken-grammar
+            title: Spoken German
+            description: "Recognise contractions and spoken grammar (gibt's, hab ich, 'nen, dropped subjects) and turn them into standard German."
+            vocabulary: ["gibt's", "geht's", "hab", "'nen", "'ne", "haste", "kannste", "nix"]
+            grammar:
+              - pattern: "Hab ich doch gesagt!"
+              - pattern: "Gibt's hier noch 'nen freien Platz?"
+              - pattern: "Haste mal 'nen Moment Zeit?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_select }
+          - id: c1-slang-vs-standard
+            title: Slang vs Standard
+            description: Understand youth and casual slang and switch to standard German when the situation calls for it.
+            vocabulary: [krass, mega, chillen, abhängen, "Bock haben", Alter, "Läuft bei dir!", "Das ist mir wurscht."]
+            grammar:
+              - pattern: "Hast du Bock, heute Abend was zu machen?"
+              - pattern: "Das Konzert war echt krass."
+              - pattern: "Wir haben am Wochenende einfach nur gechillt."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: weekend_plans_with_friends
+                goal: Chat casually with friends about weekend plans using idioms and slang, then explain one expression in standard German to a newcomer.
+
+    checkpoint:
+      title: C1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C2:
+    title: Proficiency
+    description: >
+      Understand virtually everything you hear or read with ease, summarise and reconstruct arguments from different sources, and express yourself spontaneously, fluently and precisely, distinguishing fine shades of meaning, register and regional variety even in complex situations.
+
+    units:
+      - id: c2-register
+        title: Register
+        description: Move confidently between bureaucratic, colloquial and youth German, and choose the right form of address.
+        icon: 🎚️
+        steps:
+          - id: c2-amtsdeutsch
+            title: Amtsdeutsch
+            description: Recognise and decode bureaucratic style with its nominal chains, passive constructions and stiff prepositions like zwecks and seitens.
+            vocabulary: ["die Inanspruchnahme", "die Zuwiderhandlung", "der Antragsteller", "die Bearbeitungsgebühr", fristgerecht, gemäß, zwecks, seitens, unverzüglich, "die Ausfertigung"]
+            grammar:
+              - pattern: "Bei Zuwiderhandlung wird ein Bußgeld erhoben."
+              - pattern: "Der Antrag ist fristgerecht bei der zuständigen Behörde einzureichen."
+              - pattern: "Zwecks Bearbeitung Ihres Anliegens bitten wir um Zusendung der vollständigen Unterlagen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: c2-umgangssprache
+            title: Umgangssprache
+            description: Everyday colloquial German with contractions, slangy verbs and particles, as spoken among friends and family.
+            vocabulary: [kapieren, "die Kohle", pennen, abhauen, quatschen, "der Kumpel", nerven, "Bock haben", "echt jetzt", öde]
+            grammar:
+              - pattern: "Ich hab null Bock auf die Party."
+              - pattern: "Hast du's kapiert oder soll ich's noch mal erklären?"
+              - pattern: "Komm, lass uns abhauen, hier ist's total öde."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+          - id: c2-jugendsprache
+            title: Jugendsprache
+            description: Understand current youth slang and anglicisms, and know when using them yourself would sound odd.
+            vocabulary: [Digga, cringe, lost, sus, "der Ehrenmann", wild, chillen, "Gönn dir!", lowkey, "die Aura"]
+            grammar:
+              - pattern: "Digga, das war voll cringe."
+              - pattern: "Er ist so ein Ehrenmann, hat mir einfach den Döner bezahlt."
+              - pattern: "Ich bin in Mathe gerade komplett lost."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: listen_type }
+              - { type: multiple_choice, count: 2 }
+          - id: c2-register-switch
+            title: Switching Registers
+            description: Rewrite a message from one register to another and handle du, ihr and Sie with nuance, including offering the Du.
+            vocabulary: [duzen, siezen, "das Du anbieten", "per Du sein", "die Anrede", "die Höflichkeitsform", "Sehr geehrte Damen und Herren", "Liebe Kolleginnen und Kollegen"]
+            grammar:
+              - pattern: "Wollen wir uns nicht duzen? Ich bin Thomas."
+              - pattern: "Seit dem Betriebsausflug sind wir alle per Du."
+              - pattern: "Seid ihr alle einverstanden, oder habt ihr noch Einwände?"
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: register_switch_office
+                goal: Explain an official letter to a friend in everyday language, then reply to the authority in a formal tone.
+
+      - id: c2-regional-varieties
+        title: Regional Varieties
+        description: Understand the standard varieties of Germany, Austria and Switzerland and typical northern and southern forms.
+        icon: 🗺️
+        steps:
+          - id: c2-austriazismen
+            title: Austrian German
+            description: Austriazismen for months, food and everyday life, such as Jänner, Paradeiser and Sackerl.
+            vocabulary: ["der Jänner", "der Paradeiser", "das Sackerl", "die Marille", "der Erdapfel", "das Obers", "der Topfen", heuer, "die Matura", Servus]
+            grammar:
+              - pattern: "Heuer fahren wir im Jänner nach Tirol."
+              - pattern: "Brauchen Sie ein Sackerl für die Paradeiser?"
+              - pattern: "Zum Kaffee nehme ich ein Stück Marillenkuchen mit Schlagobers."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: image_select, count: 2 }
+              - { type: listen_select }
+          - id: c2-helvetismen
+            title: Swiss Standard German
+            description: Helvetismen such as Velo, parkieren and zügeln, and Swiss spelling, which always writes ss instead of ß.
+            vocabulary: ["das Velo", parkieren, "das Trottoir", "der Coiffeur", grillieren, "das Billett", zügeln, "die Glace", merci, Grüezi]
+            grammar:
+              - pattern: "Ich habe mein Velo vor dem Bahnhof parkiert."
+              - pattern: "Nächsten Monat zügeln wir nach Basel."
+              - pattern: "An dieser Strasse gibt es leider kein Trottoir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: c2-north-south
+            title: North vs South
+            description: Greetings, bakery words and grammar that differ across the German-speaking area, like ich bin gesessen in the south.
+            vocabulary: ["Grüß Gott", Moin, Tschüss, "die Semmel", "das Brötchen", "der Sonnabend", "der Metzger", "der Schlachter", "die Stiege"]
+            grammar:
+              - pattern: "Ich bin den ganzen Tag im Büro gesessen."
+              - pattern: "Ich habe den ganzen Tag im Büro gesessen."
+              - pattern: "Moin! Ich hol mal eben Brötchen beim Bäcker."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete }
+          - id: c2-variety-chat
+            title: Talking About Varieties
+            description: Discuss dialects, accents and pluricentric German, and adapt your vocabulary to the place you are in.
+            vocabulary: ["der Dialekt", "die Mundart", "die Standardsprache", "die Varietät", plurizentrisch, "der Akzent", "der Einschlag", "das Schweizerdeutsch"]
+            grammar:
+              - pattern: "Deutsch ist eine plurizentrische Sprache mit mehreren Standardvarietäten."
+              - pattern: "Man hört ihr den Wiener Einschlag sofort an."
+              - pattern: "Das sagt man so eigentlich nur in der Schweiz."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: viennese_cafe
+                goal: Order and chat in a Viennese café using Austrian words, then explain the differences to a friend from Hamburg.
+
+      - id: c2-modality-stance
+        title: Modality & Stance
+        description: Express fine shades of modality, distance yourself from claims and signal your attitude precisely.
+        icon: ⚖️
+        steps:
+          - id: c2-concessive-moegen
+            title: Concessive Mögen
+            description: Use mögen to concede a point before countering it, including inverted concessive clauses with auch.
+            vocabulary: [mögen, "mag sein", "es mag sein, dass", "wie dem auch sei", wenngleich, "zwar … aber", "so … auch", "wie … auch immer"]
+            grammar:
+              - pattern: "Das mag stimmen, aber es ändert nichts am Ergebnis."
+              - pattern: "Mag er auch reich sein, glücklich ist er nicht."
+              - pattern: "Wie teuer es auch sein mag, wir kaufen es."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+          - id: c2-claims-wollen-sollen
+            title: Reported Claims
+            description: Wollen for a claim the subject makes about themselves, sollen for what others say; both with the perfect infinitive.
+            vocabulary: [wollen, sollen, angeblich, vorgeblich, "die Behauptung", "das Gerücht", behaupten, "sich herausstellen", "die Quelle"]
+            grammar:
+              - pattern: "Er will den Täter genau gesehen haben."
+              - pattern: "Der Minister soll von dem Skandal gewusst haben."
+              - pattern: "Sie will nichts davon gewusst haben, was ich allerdings bezweifle."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: c2-brauchen-nicht
+            title: Brauchen nicht zu
+            description: "Absence of necessity with nicht/nur brauchen + zu, contrasted with nicht müssen and nicht dürfen."
+            vocabulary: [brauchen, "nicht zu … brauchen", "nur zu … brauchen", "nicht müssen", "nicht dürfen", "sich erübrigen", überflüssig, entbehrlich]
+            grammar:
+              - pattern: "Du brauchst nicht zu kommen, wir schaffen das allein."
+              - pattern: "Sie brauchen das Formular nur zu unterschreiben."
+              - pattern: "Das Zeugnis braucht nicht beglaubigt zu werden."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete }
+          - id: c2-stance-adverbs
+            title: Stance & Subtle Konjunktiv
+            description: Stance adverbs like freilich, immerhin and allerdings, plus Konjunktiv II for politeness, gentle reproach and irony.
+            vocabulary: [freilich, immerhin, allerdings, ohnehin, gleichwohl, jedenfalls, mithin, "Das wäre ja noch schöner!", "Ich hätte da noch eine Frage."]
+            grammar:
+              - pattern: "Das Hotel war teuer, immerhin war das Frühstück gut."
+              - pattern: "Freilich hat er recht, doch das hilft uns wenig."
+              - pattern: "Du könntest ja auch mal den Müll rausbringen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: nuanced_pushback
+                goal: Push back on a colleague's proposal, conceding some points while making clear exactly where and how strongly you disagree.
+
+      - id: c2-figurative-language
+        title: Figurative Language
+        description: Use metaphors, proverbs, idioms and fresh compounds the way educated native speakers do.
+        icon: 🎨
+        steps:
+          - id: c2-metaphors
+            title: Metaphors
+            description: Common conceptual metaphors and fixed images, and how to recognise them in journalism and speech.
+            vocabulary: ["die Metapher", "der Zahn der Zeit", "das Fass zum Überlaufen bringen", "der Lichtblick", "der Flaschenhals", "die Spitze des Eisbergs", "auf Sand gebaut", "der rote Faden"]
+            grammar:
+              - pattern: "Das war der Tropfen, der das Fass zum Überlaufen brachte."
+              - pattern: "Der Zahn der Zeit hat an dem alten Gebäude genagt."
+              - pattern: "Die gemeldeten Fälle sind nur die Spitze des Eisbergs."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c2-sprichwoerter
+            title: Proverbs
+            description: Classic Sprichwörter and how to weave them naturally into conversation, often only alluding to them.
+            vocabulary: ["das Sprichwort", "Wer A sagt, muss auch B sagen.", "Der Apfel fällt nicht weit vom Stamm.", "Steter Tropfen höhlt den Stein.", "Lügen haben kurze Beine.", "Viele Köche verderben den Brei.", "Hochmut kommt vor dem Fall.", "Wer zuletzt lacht, lacht am besten."]
+            grammar:
+              - pattern: "Wer A sagt, muss auch B sagen – jetzt ziehen wir das durch."
+              - pattern: "Wie heißt es so schön: Steter Tropfen höhlt den Stein."
+              - pattern: "Nicht umsonst sagt man, dass viele Köche den Brei verderben."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: c2-funktionsverbgefuege
+            title: Funktionsverbgefüge vs Idioms
+            description: Tell apart noun-verb collocations, whose meaning lies in the noun, from true idioms with a figurative meaning.
+            vocabulary: ["zur Verfügung stellen", "in Frage kommen", "Kritik üben", "zum Ausdruck bringen", "in Kraft treten", "Rücksicht nehmen", "auf den Punkt bringen", "ins Fettnäpfchen treten", "auf dem Holzweg sein"]
+            grammar:
+              - pattern: "Das neue Gesetz tritt im Januar in Kraft."
+              - pattern: "Die Opposition hat scharfe Kritik an der Entscheidung geübt."
+              - pattern: "Mit diesem Kommentar ist sie voll ins Fettnäpfchen getreten."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank }
+          - id: c2-komposita
+            title: Creative Compounds
+            description: Untranslatable and newly coined compounds, and how German builds new words on the fly.
+            vocabulary: ["die Schnapsidee", "der Kummerspeck", "die Torschlusspanik", "das Fingerspitzengefühl", "der Ohrwurm", "die Verschlimmbesserung", "die Wegwerfgesellschaft", "der Wutbürger", "die Politikverdrossenheit"]
+            grammar:
+              - pattern: "Nach der Trennung hat er ordentlich Kummerspeck angesetzt."
+              - pattern: "Die Reise im Winter mit dem Fahrrad war eine echte Schnapsidee."
+              - pattern: "Diese Reform ist eine klassische Verschlimmbesserung."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: failed_project_story
+                goal: Tell a friend about a project that went wrong, using metaphors, idioms, a proverb and vivid compounds.
+
+      - id: c2-rhetoric
+        title: Rhetoric
+        description: Recognise and use rhetorical devices and build a persuasive speech.
+        icon: 🎤
+        steps:
+          - id: c2-rhetorical-devices
+            title: Rhetorical Devices
+            description: Anapher, Klimax, rhetorical questions, antithesis and parallelism, and the effect each one creates.
+            vocabulary: ["die Anapher", "die Klimax", "die rhetorische Frage", "die Antithese", "der Parallelismus", "die Alliteration", "die Hyperbel", "der Chiasmus", "die Ellipse"]
+            grammar:
+              - pattern: "Wir wollen Frieden, wir wollen Freiheit, wir wollen Gerechtigkeit."
+              - pattern: "Wer von uns hat nicht schon einmal gezweifelt?"
+              - pattern: "Es ist eine Frage der Vernunft, der Verantwortung, ja des Überlebens."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select }
+          - id: c2-famous-speeches
+            title: Famous Speeches
+            description: Famous lines from German political history, by Kennedy, Brandt and Merkel, and what makes them memorable.
+            vocabulary: ["die Rede", "die Ansprache", "der Redner", denkwürdig, eindringlich, aufrütteln, beschwören, "die Wende", "der Mauerfall"]
+            grammar:
+              - pattern: "Ich bin ein Berliner."
+              - pattern: "Jetzt wächst zusammen, was zusammengehört."
+              - pattern: "Wir schaffen das."
+            activities:
+              - { type: learn }
+              - { type: listen_type, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c2-persuasive-structure
+            title: Persuasive Structure
+            description: Structure an argument with thesis, evidence, anticipated objections and a strong conclusion.
+            vocabulary: ["die These", "das Argument", "der Einwand", entkräften, untermauern, "die Schlussfolgerung", "der Appell", kurzum, zugespitzt]
+            grammar:
+              - pattern: "Man mag einwenden, dass dies zu teuer sei; doch was kostet uns das Nichtstun?"
+              - pattern: "Lassen Sie mich mit einer einfachen Frage beginnen."
+              - pattern: "Kurzum: Wir müssen jetzt handeln."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: c2-giving-speech
+            title: Giving a Speech
+            description: Open, structure and close a speech for a formal or festive occasion, and handle interruptions.
+            vocabulary: ["Meine sehr geehrten Damen und Herren", "Liebe Anwesende", "Lassen Sie mich", abschließend, "Ich komme zum Schluss", "in diesem Sinne", "Ich danke Ihnen für Ihre Aufmerksamkeit"]
+            grammar:
+              - pattern: "Lassen Sie mich zum Schluss noch eines sagen."
+              - pattern: "In diesem Sinne erhebe ich mein Glas auf das Brautpaar."
+              - pattern: "Ich danke Ihnen für Ihre Aufmerksamkeit."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: town_hall_speech
+                goal: Give a short persuasive speech at a town meeting and respond calmly to a heckler's objection.
+
+      - id: c2-humour-irony
+        title: Humour, Irony & Wordplay
+        description: Get the joke, catch the irony and play with language yourself.
+        icon: 😏
+        steps:
+          - id: c2-wortspiele
+            title: Wordplay
+            description: Puns built on homonyms and double meanings, as used in headlines, advertising and jokes.
+            vocabulary: ["das Wortspiel", "der Wortwitz", doppeldeutig, zweideutig, "das Teekesselchen", "die Bank", "das Schloss", "der Strauß", "die Birne"]
+            grammar:
+              - pattern: "Die Bank am Fluss ist frei, die Bank in der Stadt leider pleite."
+              - pattern: "Mir geht ein Licht auf, sagte die Birne."
+              - pattern: "Er schenkte ihr einen Strauß – und sie dachte an einen Vogel."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: c2-kalauer
+            title: Kalauer & Jokes
+            description: Groan-worthy puns, Flachwitze and classic joke formats, and how to react when you hear one.
+            vocabulary: ["der Kalauer", "der Flachwitz", "die Pointe", "Kennst du den schon?", "einen Witz reißen", "sich kaputtlachen", schmunzeln, "der Schenkelklopfer"]
+            grammar:
+              - pattern: "Treffen sich zwei Jäger. Beide tot."
+              - pattern: "Was ist grün und klopft an die Tür? Ein Klopfsalat."
+              - pattern: "Die Pointe hat leider niemand verstanden."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_select }
+          - id: c2-ironie
+            title: Irony Markers
+            description: Spot sarcasm and irony from markers like na toll, exaggerated praise and intonation.
+            vocabulary: ["na toll", "na super", "Das hast du ja super hingekriegt!", "Na, das fängt ja gut an.", "Wie originell!", "Herzlichen Glückwunsch!", "Da freut man sich doch.", ironisch]
+            grammar:
+              - pattern: "Na toll, jetzt regnet es auch noch."
+              - pattern: "Das hast du ja super hingekriegt!"
+              - pattern: "Na, das fängt ja gut an."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: c2-understatement
+            title: Understatement
+            description: Dry understatement and litotes, saying less to mean more, as in nicht gerade berauschend.
+            vocabulary: [ausbaufähig, suboptimal, "nicht ganz unproblematisch", "nicht gerade berauschend", "nicht übel", überschaubar, "sich in Grenzen halten", "sagen wir mal"]
+            grammar:
+              - pattern: "Die Präsentation war, sagen wir mal, ausbaufähig."
+              - pattern: "Das Wetter war nicht gerade berauschend."
+              - pattern: "Das Interesse an dem Vortrag hielt sich in Grenzen."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: ironic_banter
+                goal: Exchange ironic and understated remarks with a friend about a disastrous holiday, recognising when they are joking.
+
+      - id: c2-academic-writing
+        title: Academic & Formal Writing
+        description: Write and understand academic and formal texts, cite sources and give expert opinions.
+        icon: 🎓
+        steps:
+          - id: c2-wissenschaftlicher-stil
+            title: Academic Style
+            description: Impersonal constructions, hedging and the typical phrases of German academic prose.
+            vocabulary: ["die Annahme", "die Hypothese", "die Untersuchung", "die Fragestellung", "die Erkenntnis", belegen, erheben, hinsichtlich, "im Hinblick auf", "im Folgenden"]
+            grammar:
+              - pattern: "Es wird davon ausgegangen, dass die Ergebnisse übertragbar sind."
+              - pattern: "Im Folgenden soll gezeigt werden, inwiefern diese These haltbar ist."
+              - pattern: "Hinsichtlich der Methodik ergeben sich einige Einschränkungen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: c2-citing
+            title: Citing Sources
+            description: "Refer to sources with laut, zufolge, gemäß and vgl., and report others' views in Konjunktiv I."
+            vocabulary: [laut, zufolge, gemäß, "vgl.", "ebd.", "nach Ansicht von", "das Zitat", "die Quelle", "das Literaturverzeichnis", zitieren]
+            grammar:
+              - pattern: "Laut einer aktuellen Studie nimmt die Zahl der Pendler weiter zu."
+              - pattern: "Dem Bericht zufolge sei die Lage stabil."
+              - pattern: "Wie Müller (2019, S. 42) betont, ist dieser Befund umstritten; vgl. auch Schmidt (2021)."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice }
+          - id: c2-nominalisierung
+            title: Nominal Style
+            description: Turn verbal clauses into dense nominal phrases and back again, knowing when each style is appropriate.
+            vocabulary: ["die Durchführung", "die Berücksichtigung", "die Umsetzung", "die Verringerung", "die Gewährleistung", "der Abschluss", aufgrund, infolge, "unter Berücksichtigung"]
+            grammar:
+              - pattern: "Nach Abschluss der Untersuchung wurden die Daten ausgewertet."
+              - pattern: "Aufgrund der steigenden Kosten wurde das Projekt eingestellt."
+              - pattern: "Weil die Kosten stiegen, wurde das Projekt eingestellt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: c2-gutachten
+            title: Expert Opinions
+            description: Write and present a Gutachten or Stellungnahme that weighs evidence and makes a clear recommendation.
+            vocabulary: ["das Gutachten", "die Stellungnahme", "der Sachverhalt", "die Empfehlung", "die Einschätzung", abwägen, vertretbar, zusammenfassend, "nach eingehender Prüfung"]
+            grammar:
+              - pattern: "Nach eingehender Prüfung kommen wir zu dem Schluss, dass der Antrag zu befürworten ist."
+              - pattern: "Zusammenfassend lässt sich festhalten, dass die Risiken überschaubar sind."
+              - pattern: "Aus unserer Sicht ist das Vorhaben nur unter Auflagen vertretbar."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - type: dialogue
+                scenario: committee_statement
+                goal: Present and defend your written statement on a proposed policy before a committee that asks critical questions.
+
+      - id: c2-literature-style
+        title: Literature & Style
+        description: Read literary German, from Goethe to Kafka and Thomas Mann, and talk about style and narration.
+        icon: 📚
+        steps:
+          - id: c2-literary-praeteritum
+            title: Literary Präteritum
+            description: The narrative past of fiction with its elevated verbs of perception, movement and speech.
+            vocabulary: [erblickte, gewahrte, verharrte, entgegnete, "wandte sich um", erschrak, schritt, barg, "die Dämmerung"]
+            grammar:
+              - pattern: "Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt."
+              - pattern: "Sie wandte sich um und erblickte den Fremden."
+              - pattern: "Er schwieg lange, dann entgegnete er leise."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: c2-erlebte-rede
+            title: Free Indirect Speech
+            description: Erlebte Rede and inner monologue, where a character's thoughts merge with the narrator's voice.
+            vocabulary: ["die erlebte Rede", "der innere Monolog", "der Erzähler", "die Erzählperspektive", auktorial, personal, "die Figur", "der Bewusstseinsstrom"]
+            grammar:
+              - pattern: "Morgen würde sie es ihm sagen. Ja, morgen ganz bestimmt."
+              - pattern: "Warum hatte er nicht früher angerufen? Es wäre doch so einfach gewesen."
+              - pattern: "War das wirklich ihr Leben? Sie wusste es nicht mehr."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: c2-archaic-forms
+            title: Archaic Forms & Literary Konjunktiv
+            description: Old forms like ward and the dative -e (dem Manne), plus the poetic Konjunktiv of als ob and als hätte.
+            vocabulary: [ward, "dem Manne", "im Hause", "gen Himmel", alsbald, dereinst, fürwahr, jedwede]
+            grammar:
+              - pattern: "Und es ward Licht."
+              - pattern: "Dem Manne kann geholfen werden."
+              - pattern: "Es war, als hätt' der Himmel die Erde still geküsst."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: c2-literary-discussion
+            title: Discussing Literature
+            description: Interpret motifs, narrative perspective and themes, and argue for your reading of a text.
+            vocabulary: ["die Novelle", "der Roman", "das Motiv", "das Leitmotiv", "die Deutung", "die Textstelle", interpretieren, parabelhaft, kafkaesk]
+            grammar:
+              - pattern: "Die Verwandlung lässt sich als Parabel auf die Entfremdung des modernen Menschen lesen."
+              - pattern: "Das Motiv der Zeit zieht sich wie ein roter Faden durch den Zauberberg."
+              - pattern: "Werther scheitert an der Unvereinbarkeit von Gefühl und gesellschaftlicher Ordnung."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: book_club_discussion
+                goal: Discuss a classic German text at a book club, defend your interpretation and respond to a different reading.
+
+      - id: c2-ideas-philosophy
+        title: Ideas & Philosophy
+        description: Discuss abstract ideas and philosophical questions with precise argumentation.
+        icon: 🦉
+        steps:
+          - id: c2-abstract-nouns
+            title: Abstract Concepts
+            description: The core abstract nouns of philosophy and ethics, and famous formulations that use them.
+            vocabulary: ["die Freiheit", "das Bewusstsein", "die Vernunft", "die Würde", "das Gewissen", "die Wahrheit", "die Verantwortung", "das Sein", "der Verstand", "die Moral"]
+            grammar:
+              - pattern: "Die Würde des Menschen ist unantastbar."
+              - pattern: "Freiheit ohne Verantwortung führt ins Chaos."
+              - pattern: "Habe Mut, dich deines eigenen Verstandes zu bedienen!"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: word_select, count: 2 }
+              - { type: listen_select }
+          - id: c2-philosophical-argument
+            title: Philosophical Argument
+            description: Build and test arguments with premises and conclusions, and expose contradictions and circular reasoning.
+            vocabulary: ["die Prämisse", "der Widerspruch", "der Zirkelschluss", "die Voraussetzung", "daraus folgt", folgerichtig, stichhaltig, widerlegen, einleuchten]
+            grammar:
+              - pattern: "Wenn alle Menschen frei sind, folgt daraus, dass sie auch verantwortlich sind."
+              - pattern: "Dieses Argument ist ein Zirkelschluss, da es voraussetzt, was es beweisen will."
+              - pattern: "Es leuchtet mir nicht ein, warum das eine das andere ausschließen sollte."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: c2-concessive-conditional
+            title: Concessive & Conditional Nuance
+            description: Fine distinctions between selbst wenn, sofern, es sei denn, gesetzt den Fall and ungeachtet.
+            vocabulary: ["selbst wenn", "auch wenn", wenngleich, ungeachtet, sofern, "vorausgesetzt, dass", "es sei denn", "gesetzt den Fall", angenommen]
+            grammar:
+              - pattern: "Selbst wenn es keinen freien Willen gäbe, müssten wir so handeln, als ob es ihn gäbe."
+              - pattern: "Gesetzt den Fall, eine Maschine hätte ein Bewusstsein – hätte sie dann auch Rechte?"
+              - pattern: "Ungeachtet aller Einwände halte ich an meiner These fest."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete }
+          - id: c2-debating-ideas
+            title: Debating Big Questions
+            description: Use thought experiments and ethical positions to debate free will, happiness and artificial intelligence.
+            vocabulary: ["der freie Wille", "der Determinismus", "das Gedankenexperiment", "die Ethik", "der Utilitarismus", "die Pflicht", "die künstliche Intelligenz", "zu bedenken geben"]
+            grammar:
+              - pattern: "Stellen wir uns einmal folgendes Gedankenexperiment vor."
+              - pattern: "Aus utilitaristischer Sicht wäre diese Entscheidung durchaus gerechtfertigt."
+              - pattern: "Ich gebe zu bedenken, dass sich Glück kaum messen lässt."
+            activities:
+              - { type: learn }
+              - { type: listen_type }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: philosophy_cafe
+                goal: Debate whether an AI could ever have consciousness, conceding, qualifying and defending your position.
+
+      - id: c2-mastery-mediation
+        title: Mastery & Mediation
+        description: Summarise, paraphrase and mediate texts for others, choosing exactly the right word.
+        icon: 🏆
+        steps:
+          - id: c2-summarising
+            title: Summarising
+            description: Condense a long text into its key points, neutrally and in your own words.
+            vocabulary: [zusammenfassen, "die Zusammenfassung", "die Kernaussage", "im Wesentlichen", "kurz gesagt", thematisieren, "die Auffassung vertreten", "auf den Punkt gebracht"]
+            grammar:
+              - pattern: "Im Wesentlichen geht es in dem Text um die Folgen der Digitalisierung."
+              - pattern: "Der Autor vertritt die Auffassung, dass Bildung der Schlüssel zur Integration sei."
+              - pattern: "Kurz gesagt: Die Reform hat ihr Ziel verfehlt."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete }
+          - id: c2-paraphrasing
+            title: Paraphrasing
+            description: Restate ideas with different words and structures without changing the meaning.
+            vocabulary: [umschreiben, "die Paraphrase", "mit anderen Worten", "anders ausgedrückt", sprich, "das heißt", sinngemäß, wiedergeben, "gemeint sein"]
+            grammar:
+              - pattern: "Mit anderen Worten: Die Firma steht kurz vor der Pleite."
+              - pattern: "Sinngemäß sagte sie, man müsse grundlegend umdenken."
+              - pattern: "Gemeint ist damit, dass jeder selbst entscheiden soll."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: multiple_choice }
+          - id: c2-precise-word-choice
+            title: Precise Word Choice
+            description: Commonly confused pairs like scheinbar vs anscheinend and wohl vs vielleicht, and degrees of certainty.
+            vocabulary: [scheinbar, anscheinend, offenbar, wohl, vielleicht, vermutlich, zweifellos, gewiss, eigentlich]
+            grammar:
+              - pattern: "Er ist anscheinend krank, denn er ist heute nicht zur Arbeit gekommen."
+              - pattern: "Er ist nur scheinbar ruhig, in Wahrheit ist er furchtbar nervös."
+              - pattern: "Sie wird wohl schon zu Hause sein."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: c2-sprachmittlung
+            title: Mediating a Text
+            description: Explain a complex German document to someone else, adapting content and register to their needs.
+            vocabulary: ["die Sprachmittlung", vermitteln, erläutern, verdeutlichen, "im Grunde", "worauf es ankommt", "die Rückfrage", "der Hintergrund"]
+            grammar:
+              - pattern: "Der Brief besagt im Grunde, dass Sie bis Freitag zahlen müssen."
+              - pattern: "Worauf es hier ankommt, ist die Frist, nicht die Höhe des Betrags."
+              - pattern: "Habe ich das richtig verstanden, dass die Kündigung erst im März wirksam wird?"
+            activities:
+              - { type: learn }
+              - { type: listen_type }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: mediating_rental_contract
+                goal: Explain a complicated clause in a German rental contract to a newly arrived friend, summarising, paraphrasing and answering their questions.
+
+    checkpoint:
+      title: C2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
