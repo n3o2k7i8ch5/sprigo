@@ -482,7 +482,9 @@
       "privacy": "Privacy & data"
     },
     "profileDesc": "Name, color and PIN",
-    "edit": "Edit"
+    "edit": "Edit",
+    "betaUpdates": "Beta updates",
+    "betaUpdatesDesc": "Get test versions before everyone else. They can have bugs; you also keep getting every regular release."
   },
   "rail": {
     "label": "Progress",
@@ -663,7 +665,9 @@
     "install": "Update and restart",
     "later": "Later",
     "downloading": "Downloading… {{pct}}%",
-    "madeBy": "Made by Mehmet Özer Özdaş ·"
+    "madeBy": "Made by Mehmet Özer Özdaş ·",
+    "whatsNew": "What's new in Sprigo {{version}}",
+    "gotIt": "Got it"
   },
   "voice": {
     "kokoroDesc": "A more natural voice. It can take a few seconds per sentence, depending on your computer's speed.",

@@ -2,6 +2,7 @@
 # to a draft GitHub release. Push a tag `v<version>` (matching tauri.conf.json), wait for all jobs,
 # then publish the draft: the in-app updater only sees published releases.
 # Manual runs (workflow_dispatch) just build, as a smoke test, without touching releases.
+# A tag with a pre-release part (v1.8.0-1) makes a pre-release: only beta testers get it (channel.yml).
 name: release
 
 on:
@@ -24,9 +25,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ github.ref_name }}
         # The id comes from the create response: listing releases right after creating a draft can miss it
-        # (v1.6.0 got an empty id, so every build skipped its upload).
+        # (v1.6.0 got an empty id, so every build skipped its upload). GitHub appends its PR list to the body:
+        # edit it before publishing, the app shows it in "What's new" (src/releaseNotes.ts drops the download note).
         run: |
-          id=$(gh api "repos/$GITHUB_REPOSITORY/releases" -f tag_name="$TAG" -F draft=true -f name="Sprigo ${TAG#v}" \
+          id=$(gh api "repos/$GITHUB_REPOSITORY/releases" -f tag_name="$TAG" -F draft=true -F prerelease=$([[ $TAG == *-* ]] && echo true || echo false) -F generate_release_notes=true -f name="Sprigo ${TAG#v}" \
             -f body="Downloads for macOS, Windows and Linux. The macOS app is not notarized yet: see the README for the one-time \`xattr\` command." --jq .id)
           [ -n "$id" ] || { echo "no release id" >&2; exit 1; }
           echo "id=$id" >> "$GITHUB_OUTPUT"

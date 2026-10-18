@@ -1,0 +1,27 @@
+# Beta update channel (#41): when a release is published, stable or pre-release, its latest.json becomes the
+# `updater-beta` release's. Beta testers' apps check that file (check_beta in src-tauri/src/lib.rs), so they get
+# betas and stable versions; everyone else stays on releases/latest, which skips pre-releases.
+name: channel
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  beta:
+    if: github.event.release.tag_name != 'updater-beta'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        # ponytail: the last published release wins; publishing an older hotfix after a newer beta parks the channel
+        # on the hotfix (no downgrade, betas resume with the next one). Compare versions here if that starts to matter.
+        run: |
+          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p latest.json -D in
+          gh release view updater-beta -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 ||
+            gh release create updater-beta -R "$GITHUB_REPOSITORY" --prerelease --latest=false --target master \
+              --title "Beta update channel" --notes "The in-app beta channel's latest.json. Not a download: see the releases above."
+          gh release upload updater-beta in/latest.json -R "$GITHUB_REPOSITORY" --clobber

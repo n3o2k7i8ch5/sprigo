@@ -508,7 +508,9 @@
       "privacy": "Privacidad y datos"
     },
     "profileDesc": "Nombre, color y PIN",
-    "edit": "Editar"
+    "edit": "Editar",
+    "betaUpdates": "Actualizaciones beta",
+    "betaUpdatesDesc": "Recibe las versiones de prueba antes que nadie. Pueden tener errores; también sigues recibiendo todas las versiones normales."
   },
   "rail": {
     "label": "Progreso",
@@ -691,7 +693,9 @@
     "install": "Actualizar y reiniciar",
     "later": "Más tarde",
     "downloading": "Descargando… {{pct}}%",
-    "madeBy": "Desarrollado por Mehmet Özer Özdaş ·"
+    "madeBy": "Desarrollado por Mehmet Özer Özdaş ·",
+    "whatsNew": "Novedades de Sprigo {{version}}",
+    "gotIt": "Entendido"
   },
   "voice": {
     "kokoroDesc": "Una voz más natural. Puede tardar unos segundos por frase, según la velocidad de tu equipo.",
