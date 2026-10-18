@@ -146,7 +146,22 @@
     "needLesson": "Termine d'abord une leçon",
     "timeLeft_one": "{{count}} seconde restante",
     "timeLeft_other": "{{count}} secondes restantes",
-    "timeLeft_many": "{{count}} secondes restantes"
+    "timeLeft_many": "{{count}} secondes restantes",
+    "wordsExport": "Exporter en CSV",
+    "wordsImport": "Importer CSV / Anki",
+    "wordsExported_one": "{{count}} mot exporté",
+    "wordsExported_other": "{{count}} mots exportés",
+    "wordsImported": "Importé : {{added}} nouveaux, {{updated}} mis à jour",
+    "wordsFileFailed": "Impossible de lire ou d'écrire le fichier",
+    "wordsSkipped_one": "{{count}} ligne ignorée :",
+    "wordsSkipped_other": "{{count}} lignes ignorées :",
+    "wordsLine": "Ligne {{line}}",
+    "wordsError_columns": "il faut une colonne mot et une colonne traduction",
+    "wordsError_word": "pas de mot",
+    "wordsError_translation": "pas de traduction",
+    "wordsError_schedule": "données de révision invalides",
+    "wordsExported_many": "{{count}} mots exportés",
+    "wordsSkipped_many": "{{count}} lignes ignorées :"
   },
   "league": {
     "title": "Ligue {{name}}",
