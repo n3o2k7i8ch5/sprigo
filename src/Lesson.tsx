@@ -8,7 +8,8 @@ import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, norm
 import { MicButton } from "./Mic";
 import { sttReady } from "./stt";
 import { dueToday } from "./srs";
-import { speak } from "./tts";
+import { prewarm, speak } from "./tts";
+import { SpeakButton } from "./SpeakButton";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
 import { acceptAppeal } from "./appeal";
@@ -128,6 +129,7 @@ export function Lesson({ id }: { id: string }) {
   const it = list[i] as PItem | undefined;
 
   // Auto-play listening items once.
+  useEffect(() => { prewarm(lang).catch(() => {}); }, [lang]); // the local voice loads while the lesson does
   useEffect(() => { if (it && (it.kind === "choice" || it.kind === "input") && it.listen) speak(it.listen, lang); }, [it, lang]);
 
   const quit = () => { closeSheet(); endLesson(); };
@@ -263,7 +265,7 @@ export function Lesson({ id }: { id: string }) {
   const canCheck = !!it && !checking && (it.kind === "choice" ? sel !== null : it.kind === "bank" ? bankSel.length > 0 : it.kind === "input" ? text.trim().length > 0 : false);
   const progress = result ? 100 : list.length ? (i / list.length) * 100 : 0;
   const last = i + 1 >= list.length;
-  const listenBtn = (txt: string) => <button className="prompt-word" onClick={() => speak(txt, lang)}><Icon name="headphones" /> {t("lesson.listen")}</button>;
+  const listenBtn = (txt: string) => <SpeakButton className="prompt-word" text={txt} lang={lang}><Icon name="headphones" /> {t("lesson.listen")}</SpeakButton>;
 
   // Keyboard: one listener maps keys to the same actions as the buttons.
   const hit = it?.kind === "bank" ? bankMatch(it.bank, bankSel, typed) : -1;

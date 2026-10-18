@@ -4,7 +4,8 @@ import { Icon, type IconName } from "../icons";
 import { useApp } from "../store";
 import { useStartLesson } from "../Lesson";
 import { LEGEND_PASS, LEGEND_PRICE, UNIT_TEST_PASS, loadGuide, unitGrammar, unitWords, type Guide } from "../lessons";
-import { speak } from "../tts";
+import { prewarm } from "../tts";
+import { SpeakButton } from "../SpeakButton";
 import { AiSheet } from "./Settings";
 import { LiveButton } from "./Screens";
 import { BIOMES, biomeScene, biomeVars } from "../biomes";
@@ -133,6 +134,7 @@ function GuideSheet({ unitId, level }: { unitId: string; level: Cefr }) {
   const lang = course!.iso;
   const [guide, setGuide] = useState<Guide | null>(null);
   const [err, setErr] = useState("");
+  useEffect(() => { prewarm(lang).catch(() => {}); }, [lang]);
   useEffect(() => {
     if (ai) loadGuide(enrollment!.id, { course: course!, level, native: profile!.native_lang }, unit).then(setGuide, (e) => setErr((e as Error).message));
   }, [unitId]);
@@ -153,10 +155,10 @@ function GuideSheet({ unitId, level }: { unitId: string; level: Cefr }) {
     <h4>{t("learn.guideWords")}</h4>
     <div className="guide-words">
       {words.map((w) => (
-        <button key={w.word} className="card guide-word" onClick={() => speak(w.word, lang)}>
+        <SpeakButton key={w.word} className="card guide-word" text={w.word} lang={lang}>
           <b lang={lang}><Icon name="headphones" /> {w.word}</b>{w.translation && <span className="muted">{w.translation}</span>}
           {w.example && <small lang={lang}>{w.example}</small>}{w.example_translation && <small className="muted">{w.example_translation}</small>}
-        </button>
+        </SpeakButton>
       ))}
     </div>
     {grammar.length > 0 && <h4>{t("learn.guideGrammar")}</h4>}
@@ -164,7 +166,7 @@ function GuideSheet({ unitId, level }: { unitId: string; level: Cefr }) {
       <div key={g.pattern} className="card" style={{ marginBottom: 10 }}>
         <b lang={lang}>{g.pattern}</b>
         {g.explanation && <p className="small" style={{ margin: "4px 0" }}>{g.explanation}</p>}
-        {g.example && <button className="prompt-word" lang={lang} onClick={() => speak(g.example, lang)}><Icon name="headphones" /> {g.example}</button>}
+        {g.example && <SpeakButton className="prompt-word" text={g.example} lang={lang}><Icon name="headphones" /> {g.example}</SpeakButton>}
       </div>
     ))}
     <button className="btn btn-primary btn-block" style={{ marginTop: 12 }} onClick={closeSheet}>{t("lesson.gotIt")}</button>
