@@ -39,6 +39,18 @@ test("drill id round-trips through parseTalkId", () => {
   assert.equal(parseDrill(["planning", encodeURIComponent(JSON.stringify({ topic: " ", planningSec: 30, minutes: 3 }))]), null);
 });
 
+test("planning drill ids reject out-of-range or fractional values", () => {
+  const p = (planningSec: number, minutes: number) => parseDrill(["planning", encodeURIComponent(JSON.stringify({ topic: "x", planningSec, minutes }))]);
+  assert.equal(p(30, 9999), null);
+  assert.equal(p(1.5, 3), null);
+  assert.equal(p(-1, 3), null);
+  assert.equal(p(61, 3), null);
+  assert.equal(p(30, 0), null);
+  assert.equal(p(30, 2.5), null);
+  assert.deepEqual(p(60, 3), { kind: "planning", topic: "x", planningSec: 60, minutes: 3 });
+  assert.deepEqual(p(0, 1), { kind: "planning", topic: "x", planningSec: 0, minutes: 1 });
+});
+
 test("mmss", () => {
   assert.equal(mmss(0), "0:00");
   assert.equal(mmss(65), "1:05");

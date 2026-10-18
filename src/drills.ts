@@ -90,8 +90,9 @@ export function parseDrill(rest: string[]): Drill | null {
     if (round !== 1 && round !== 2 && round !== 3) return null;
     return { kind, topic, planningSec: 0, minutes: FOUR_THREE_TWO_MINUTES[round - 1], round, prev: (Array.isArray(prev) ? prev : []).slice(0, round - 1).map(statOf) };
   }
-  if (typeof planningSec !== "number" || typeof minutes !== "number" || minutes <= 0) return null;
-  return { kind, topic, planningSec: Math.max(0, planningSec), minutes };
+  const int = (v: unknown, lo: number, hi: number): v is number => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi;
+  if (!int(planningSec, 0, 60) || !int(minutes, 1, DRILL_MINUTES)) return null;
+  return { kind, topic, planningSec, minutes };
 }
 
 // ---- Avoidance (#43): did the learner try the drill's goal structure? Voice turns only; typed turns are edited before sending.
