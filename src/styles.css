@@ -306,6 +306,7 @@ button[aria-busy="true"]{cursor:progress}
 [aria-busy="true"] svg{animation:busy 1s ease-in-out .2s infinite}
 @keyframes busy{50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){[aria-busy="true"] svg{animation:none}}
+.listen-row{display:flex;gap:8px;align-self:flex-start}
 .opt-grid{display:grid;gap:12px;grid-template-columns:1fr}
 @media(min-width:520px){.opt-grid.two{grid-template-columns:1fr 1fr}}
 .opt{

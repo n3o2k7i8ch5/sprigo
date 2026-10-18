@@ -17,3 +17,10 @@ test("local speech server: /v1/audio/speech once, whether or not the address end
   assert.equal(r.headers.Authorization, "Bearer local");
   assert.deepEqual(JSON.parse(r.body), { model: "kokoro", voice: "af_heart", input: "Hi", response_format: "mp3" });
 });
+
+test("speed: sent only when not 1; ElevenLabs gets it clamped to 0.7–1.2", () => {
+  assert.equal(JSON.parse(localRequest(LOCAL_TTS, "Hi", 0.8).body).speed, 0.8);
+  assert.equal("speed" in JSON.parse(localRequest(LOCAL_TTS, "Hi", 1).body), false);
+  assert.deepEqual(JSON.parse(elevenRequest("k", "v", "Hola", "es", 0.5).body).voice_settings, { speed: 0.7 });
+  assert.equal("voice_settings" in JSON.parse(elevenRequest("k", "v", "Hola", "es").body), false);
+});

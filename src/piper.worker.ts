@@ -40,6 +40,7 @@ self.onmessage = async ({ data: m }: MessageEvent) => {
     current = m.id;
     try {
       const s = await load(m.voice);
+      (s as unknown as { speed: number }).speed = m.speed ?? 1; // read by our patch of the library (patches/), as length_scale / speed
       const sentences = (m.text as string).match(/[^.!?…\n]+[.!?…]*/g)?.map((x) => x.trim()).filter((x) => /\p{L}|\d/u.test(x)) ?? [];
       for (const text of sentences) {
         const { audio, rate } = await samples(await s.predict(text));

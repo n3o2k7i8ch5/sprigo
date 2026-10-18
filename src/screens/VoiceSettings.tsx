@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useApp } from "../store";
 import { getSetting, isCompanion, isTauri, setSetting } from "../db";
-import { elevenVoice, getElevenKey, loadKokoro, loadPiper, localTts, sayWithEleven, sayWithLocal, setElevenKey, speak, speakingWith, TTS_KEY, ttsProvider, ttsSpeaks, useTtsPreparing, type TtsProvider } from "../tts";
+import { elevenVoice, getElevenKey, loadKokoro, loadPiper, localTts, sayWithEleven, sayWithLocal, setElevenKey, speak, speakingWith, TTS_KEY, ttsProvider, ttsSpeaks, useTtsPreparing, ACCENTS, SPEED, ttsAccent, ttsSpeed, type TtsProvider } from "../tts";
 import { ELEVEN_VOICES, LOCAL_TTS } from "../ttsCloud";
 import { Icon } from "../icons";
 import { deepgramTranscribe, downloadWhisper, getDeepgramKey, listen, pickWhisper, removeWhisper, resetSttReady, setDeepgramKey, sttProvider, sttReady, whisperModels, type Listener, type SttProvider, type WhisperModel } from "../stt";
@@ -75,10 +75,27 @@ function TtsSheet({ initial, onChange }: { initial: TtsProvider; onChange: (v: T
   const [err, setErr] = useState("");
   const [hasKey, setHasKey] = useState(false);
   const [hasLocal, setHasLocal] = useState(false); // a local server was set up once
+  const [speed, setSpeed] = useState(1);
+  const accents = ACCENTS[lang.slice(0, 2)];
+  const [accent, setAccent] = useState<string | undefined>();
   useEffect(() => {
     getElevenKey().then((k) => setHasKey(!!k)).catch(() => {});
     getSetting("tts.local").then((x) => setHasLocal(!!x));
+    ttsSpeed().then(setSpeed);
+    ttsAccent(lang).then(setAccent);
   }, []);
+  const pickSpeed = (x: number) => { setSpeed(x); setSetting("tts.speed", x === 1 ? null : String(x)); };
+  // Piper has a voice per accent: download it now, like picking Piper does.
+  const pickAccent = async (a: string) => {
+    if (pct !== null) return;
+    await setSetting(`tts.accent.${lang.slice(0, 2)}`, a);
+    setAccent(a);
+    if (v !== "piper") return;
+    setErr(""); setPct(0);
+    try { await loadPiper(lang, setPct); }
+    catch (e) { setErr(t("voice.loadFailed", { name: t(ttsName("piper")), error: (e as Error).message })); }
+    setPct(null);
+  };
   const back = () => openSheet(<TtsSheet initial={v} onChange={onChange} />);
   const configureLocal = () => openSheet(<LocalTtsSheet onSaved={() => { onChange("local"); openSheet(<TtsSheet initial="local" onChange={onChange} />); }} onCancel={back} />);
   // ElevenLabs needs its key first: without one, picking it opens the key sheet; the gear always opens it.
@@ -118,6 +135,21 @@ function TtsSheet({ initial, onChange }: { initial: TtsProvider; onChange: (v: T
           </div>
         ))}
       </div>
+      <label className="od-stack" style={gap("4px")}>
+        <span className="small"><b>{t("voice.speed")}</b> <span className="muted">{speed.toFixed(1)}×</span></span>
+        <input type="range" min={SPEED.min} max={SPEED.max} step={0.1} value={speed} onChange={(e) => pickSpeed(Number(e.target.value))} />
+      </label>
+      {accents && (
+        <div className="od-stack" style={gap("6px")}>
+          <span id="tts-accent" className="small"><b>{t("voice.accent")}</b></span>
+          <div className="seg" role="radiogroup" aria-labelledby="tts-accent">
+            {accents.map((a) => {
+              const on = (accent ?? accents[0]) === a;
+              return <button key={a} role="radio" aria-checked={on} disabled={pct !== null} className={`btn ${on ? "btn-blue" : "btn-ghost"}`} onClick={() => pickAccent(a)}>{t(`voice.accent_${a}`)}</button>;
+            })}
+          </div>
+        </div>
+      )}
       {pct !== null && (
         <div className="od-stack" style={gap("6px")} role="status">
           <div className="progress-track"><div className="progress-fill green" style={{ width: `${Math.round(pct * 100)}%` }} /></div>
