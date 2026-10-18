@@ -206,6 +206,17 @@ export async function reviewWord(enrollmentId: number, word: string, ok: boolean
     "UPDATE words SET due = $1, stability = $2, difficulty = $3, reps = $4, lapses = $5, state = $6, last_review = $7, updated_at = CURRENT_TIMESTAMP WHERE enrollment_id = $8 AND word = $9",
     [c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review, enrollmentId, word]);
 }
+/** Imported words (#24): new ones take the file's schedule (or start New), existing ones only get the file's translation. */
+export async function importWords(enrollmentId: number, words: { word: string; translation: string; card?: WordCard }[]) {
+  const d = await db(), c = newCard(new Date());
+  const had = new Set((await d.select<{ word: string }>("SELECT word FROM words WHERE enrollment_id = $1", [enrollmentId])).map((r) => r.word));
+  for (const { word, translation, card = c } of words) await d.execute(
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+     ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
+    [enrollmentId, word, translation, card.due, card.stability, card.difficulty, card.reps, card.lapses, card.state, card.last_review]);
+  const added = words.filter((w) => !had.has(w.word)).length;
+  return { added, updated: words.length - added };
+}
 export async function listWords(enrollmentId: number): Promise<Word[]> {
   const rows = await (await db()).select<{ word: string; translation: string } & WordCard>(
     `SELECT word, translation, ${CARD_COLS} FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word`, [enrollmentId]);

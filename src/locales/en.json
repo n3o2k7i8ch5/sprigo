@@ -138,7 +138,20 @@
     "timedDesc": "Mixed questions from your lessons — 2 minutes",
     "needLesson": "Finish a lesson first",
     "timeLeft_one": "{{count}} second left",
-    "timeLeft_other": "{{count}} seconds left"
+    "timeLeft_other": "{{count}} seconds left",
+    "wordsExport": "Export CSV",
+    "wordsImport": "Import CSV / Anki",
+    "wordsExported_one": "Exported {{count}} word",
+    "wordsExported_other": "Exported {{count}} words",
+    "wordsImported": "Imported: {{added}} new, {{updated}} updated",
+    "wordsFileFailed": "Couldn't read or write the file",
+    "wordsSkipped_one": "{{count}} row was skipped:",
+    "wordsSkipped_other": "{{count}} rows were skipped:",
+    "wordsLine": "Line {{line}}",
+    "wordsError_columns": "needs a word and a translation column",
+    "wordsError_word": "no word",
+    "wordsError_translation": "no translation",
+    "wordsError_schedule": "review data isn't valid"
   },
   "league": {
     "title": "{{name}} League",

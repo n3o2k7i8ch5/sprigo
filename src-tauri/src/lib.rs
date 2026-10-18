@@ -248,7 +248,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![list_user_courses, secret_get, secret_set, stt_ready, stt_models, stt_use, stt_remove, stt_download, transcribe, set_background,
             companion::companion_set, companion::companion_status, companion::companion_reply,
             data::data_location, data::set_data_dir, data::dir_ok, data::file_exists, data::lock_read, data::lock_write,
-            data::lock_remove, data::backups_list, data::backups_remove, data::copy_file, data::is_sqlite, data::install_db])
+            data::lock_remove, data::backups_list, data::backups_remove, data::copy_file, data::write_text, data::is_sqlite, data::install_db])
         .build(tauri::generate_context!())
         .expect("error while building tauri application")
         .run(|app, event| match event {

@@ -136,7 +136,20 @@
     "timedDesc": "Derslerinden karışık sorular — 2 dakika",
     "needLesson": "Önce bir ders bitir",
     "timeLeft_one": "{{count}} saniye kaldı",
-    "timeLeft_other": "{{count}} saniye kaldı"
+    "timeLeft_other": "{{count}} saniye kaldı",
+    "wordsExport": "CSV olarak dışa aktar",
+    "wordsImport": "CSV / Anki içe aktar",
+    "wordsExported_one": "{{count}} kelime dışa aktarıldı",
+    "wordsExported_other": "{{count}} kelime dışa aktarıldı",
+    "wordsImported": "İçe aktarıldı: {{added}} yeni, {{updated}} güncellendi",
+    "wordsFileFailed": "Dosya okunamadı veya yazılamadı",
+    "wordsSkipped_one": "{{count}} satır atlandı:",
+    "wordsSkipped_other": "{{count}} satır atlandı:",
+    "wordsLine": "Satır {{line}}",
+    "wordsError_columns": "kelime ve çeviri sütunu gerekli",
+    "wordsError_word": "kelime yok",
+    "wordsError_translation": "çeviri yok",
+    "wordsError_schedule": "tekrar verisi geçersiz"
   },
   "league": {
     "title": "{{name}} Ligi",

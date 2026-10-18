@@ -138,7 +138,20 @@
     "timedDesc": "Gemischte Fragen aus deinen Lektionen – 2 Minuten",
     "needLesson": "Schließe zuerst eine Lektion ab",
     "timeLeft_one": "Noch {{count}} Sekunde",
-    "timeLeft_other": "Noch {{count}} Sekunden"
+    "timeLeft_other": "Noch {{count}} Sekunden",
+    "wordsExport": "Als CSV exportieren",
+    "wordsImport": "CSV / Anki importieren",
+    "wordsExported_one": "{{count}} Wort exportiert",
+    "wordsExported_other": "{{count}} Wörter exportiert",
+    "wordsImported": "Importiert: {{added}} neu, {{updated}} aktualisiert",
+    "wordsFileFailed": "Die Datei konnte nicht gelesen oder geschrieben werden",
+    "wordsSkipped_one": "{{count}} Zeile wurde übersprungen:",
+    "wordsSkipped_other": "{{count}} Zeilen wurden übersprungen:",
+    "wordsLine": "Zeile {{line}}",
+    "wordsError_columns": "braucht eine Wort- und eine Übersetzungsspalte",
+    "wordsError_word": "kein Wort",
+    "wordsError_translation": "keine Übersetzung",
+    "wordsError_schedule": "Wiederholungsdaten ungültig"
   },
   "league": {
     "title": "{{name}}-Liga",
