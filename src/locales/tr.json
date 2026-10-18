@@ -136,7 +136,20 @@
     "timedDesc": "Derslerinden karışık sorular — 2 dakika",
     "needLesson": "Önce bir ders bitir",
     "timeLeft_one": "{{count}} saniye kaldı",
-    "timeLeft_other": "{{count}} saniye kaldı"
+    "timeLeft_other": "{{count}} saniye kaldı",
+    "wordsExport": "CSV olarak dışa aktar",
+    "wordsImport": "CSV / Anki içe aktar",
+    "wordsExported_one": "{{count}} kelime dışa aktarıldı",
+    "wordsExported_other": "{{count}} kelime dışa aktarıldı",
+    "wordsImported": "İçe aktarıldı: {{added}} yeni, {{updated}} güncellendi",
+    "wordsFileFailed": "Dosya okunamadı veya yazılamadı",
+    "wordsSkipped_one": "{{count}} satır atlandı:",
+    "wordsSkipped_other": "{{count}} satır atlandı:",
+    "wordsLine": "Satır {{line}}",
+    "wordsError_columns": "kelime ve çeviri sütunu gerekli",
+    "wordsError_word": "kelime yok",
+    "wordsError_translation": "çeviri yok",
+    "wordsError_schedule": "tekrar verisi geçersiz"
   },
   "league": {
     "title": "{{name}} Ligi",
@@ -465,7 +478,9 @@
       "privacy": "Gizlilik ve veri"
     },
     "profileDesc": "Ad, renk ve PIN",
-    "edit": "Düzenle"
+    "edit": "Düzenle",
+    "betaUpdates": "Beta güncellemeleri",
+    "betaUpdatesDesc": "Test sürümlerini herkesten önce al. Hata içerebilirler; normal sürümleri de almaya devam edersin."
   },
   "rail": {
     "label": "İlerleme",
@@ -532,7 +547,8 @@
     "heard": "Duyulan: “{{text}}”",
     "heardNothing": "Anlaşılmadı — biraz daha yüksek sesle tekrar dene.",
     "cantSpeak": "Şu an konuşamam",
-    "unitPassed": "Ünite geçildi!"
+    "unitPassed": "Ünite geçildi!",
+    "listenSlow": "Yavaş dinle"
   },
   "profiles": {
     "saved": "Profil kaydedildi",
@@ -643,7 +659,9 @@
     "install": "Güncelle ve yeniden başlat",
     "later": "Sonra",
     "downloading": "İndiriliyor… %{{pct}}",
-    "madeBy": "Geliştiren: Mehmet Özer Özdaş ·"
+    "madeBy": "Geliştiren: Mehmet Özer Özdaş ·",
+    "whatsNew": "Sprigo {{version}} ile gelen yenilikler",
+    "gotIt": "Anladım"
   },
   "voice": {
     "kokoroDesc": "Daha doğal bir ses. Bilgisayarının hızına göre cümle başına birkaç saniye sürebilir.",
@@ -704,7 +722,11 @@
     "localDesc": "Kendi çalıştırdığın OpenAI uyumlu bir ses sunucusuna bağlanır (örneğin Docker'da Kokoro-FastAPI, 8880 portu). Cümleler bilgisayarından çıkmaz; ses adı sunucunun kendi adıdır.",
     "localUrl": "Sunucu adresi",
     "localModel": "Model",
-    "localVoice": "Ses"
+    "localVoice": "Ses",
+    "speed": "Hız",
+    "accent": "Aksan",
+    "accent_en-US": "Amerikan",
+    "accent_en-GB": "İngiliz"
   },
   "data": {
     "section": "Veri",

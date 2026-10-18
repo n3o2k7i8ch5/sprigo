@@ -7,6 +7,11 @@ settings:
 overrides:
   sharp: '>=0.35.4'
 
+patchedDependencies:
+  '@mintplex-labs/piper-tts-web@1.0.5':
+    hash: db89da71347aeacd6cee83625cc13a6254c67eb2834a910dab9f186fa49b28eb
+    path: patches/@mintplex-labs__piper-tts-web@1.0.5.patch
+
 importers:
 
   .:
@@ -23,12 +28,15 @@ importers:
       '@ai-sdk/openai-compatible':
         specifier: ^3.0.61
         version: 3.0.62(zod@4.6.5)
+      '@diffusionstudio/piper-wasm':
+        specifier: 1.0.0
+        version: 1.0.0
       '@fontsource/nunito':
         specifier: ^5.3.0
         version: 5.3.0
       '@mintplex-labs/piper-tts-web':
         specifier: ^1.0.5
-        version: 1.0.5(onnxruntime-web@1.18.0)
+        version: 1.0.5(patch_hash=db89da71347aeacd6cee83625cc13a6254c67eb2834a910dab9f186fa49b28eb)(onnxruntime-web@1.18.0)
       '@tauri-apps/api':
         specifier: ^2
         version: 2.12.0
@@ -154,6 +162,9 @@ packages:
   '@babel/runtime@7.29.7':
     resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
+
+  '@diffusionstudio/piper-wasm@1.0.0':
+    resolution: {integrity: sha512-4Hgh7wJ1PuGEVgVi1CpducESnyXwjFRJN4zXjYRpxgquM+Zh6Eqq8ZaiGpCKm4yXvT1Y2SPQXbv0dEckFD9NaQ==}
 
   '@emnapi/runtime@1.11.3':
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
@@ -1065,6 +1076,8 @@ snapshots:
 
   '@babel/runtime@7.29.7': {}
 
+  '@diffusionstudio/piper-wasm@1.0.0': {}
+
   '@emnapi/runtime@1.11.3':
     dependencies:
       tslib: 2.8.1
@@ -1193,7 +1206,7 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@mintplex-labs/piper-tts-web@1.0.5(onnxruntime-web@1.18.0)':
+  '@mintplex-labs/piper-tts-web@1.0.5(patch_hash=db89da71347aeacd6cee83625cc13a6254c67eb2834a910dab9f186fa49b28eb)(onnxruntime-web@1.18.0)':
     dependencies:
       onnxruntime-web: 1.18.0
 

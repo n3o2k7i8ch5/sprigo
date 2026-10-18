@@ -1,7 +1,7 @@
 {
   "name": "sprigo",
   "private": true,
-  "version": "1.6.0",
+  "version": "1.7.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -19,6 +19,7 @@
     "@ai-sdk/google": "^4.0.87",
     "@ai-sdk/openai": "^4.0.83",
     "@ai-sdk/openai-compatible": "^3.0.61",
+    "@diffusionstudio/piper-wasm": "1.0.0",
     "@fontsource/nunito": "^5.3.0",
     "@mintplex-labs/piper-tts-web": "^1.0.5",
     "@tauri-apps/api": "^2",
@@ -53,6 +54,9 @@
   "pnpm": {
     "overrides": {
       "sharp": ">=0.35.4"
+    },
+    "patchedDependencies": {
+      "@mintplex-labs/piper-tts-web@1.0.5": "patches/@mintplex-labs__piper-tts-web@1.0.5.patch"
     }
   }
 }

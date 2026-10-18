@@ -138,7 +138,20 @@
     "timedDesc": "Mixed questions from your lessons — 2 minutes",
     "needLesson": "Finish a lesson first",
     "timeLeft_one": "{{count}} second left",
-    "timeLeft_other": "{{count}} seconds left"
+    "timeLeft_other": "{{count}} seconds left",
+    "wordsExport": "Export CSV",
+    "wordsImport": "Import CSV / Anki",
+    "wordsExported_one": "Exported {{count}} word",
+    "wordsExported_other": "Exported {{count}} words",
+    "wordsImported": "Imported: {{added}} new, {{updated}} updated",
+    "wordsFileFailed": "Couldn't read or write the file",
+    "wordsSkipped_one": "{{count}} row was skipped:",
+    "wordsSkipped_other": "{{count}} rows were skipped:",
+    "wordsLine": "Line {{line}}",
+    "wordsError_columns": "needs a word and a translation column",
+    "wordsError_word": "no word",
+    "wordsError_translation": "no translation",
+    "wordsError_schedule": "review data isn't valid"
   },
   "league": {
     "title": "{{name}} League",
@@ -469,7 +482,9 @@
       "privacy": "Privacy & data"
     },
     "profileDesc": "Name, color and PIN",
-    "edit": "Edit"
+    "edit": "Edit",
+    "betaUpdates": "Beta updates",
+    "betaUpdatesDesc": "Get test versions before everyone else. They can have bugs; you also keep getting every regular release."
   },
   "rail": {
     "label": "Progress",
@@ -538,7 +553,8 @@
     "heard": "Heard: “{{text}}”",
     "heardNothing": "Didn't catch that — try again a little louder.",
     "cantSpeak": "Can't speak now",
-    "unitPassed": "Unit passed!"
+    "unitPassed": "Unit passed!",
+    "listenSlow": "Listen slowly"
   },
   "profiles": {
     "saved": "Profile saved",
@@ -649,7 +665,9 @@
     "install": "Update and restart",
     "later": "Later",
     "downloading": "Downloading… {{pct}}%",
-    "madeBy": "Made by Mehmet Özer Özdaş ·"
+    "madeBy": "Made by Mehmet Özer Özdaş ·",
+    "whatsNew": "What's new in Sprigo {{version}}",
+    "gotIt": "Got it"
   },
   "voice": {
     "kokoroDesc": "A more natural voice. It can take a few seconds per sentence, depending on your computer's speed.",
@@ -710,7 +728,11 @@
     "localDesc": "Connects to an OpenAI-compatible speech server you run yourself (for example Kokoro-FastAPI in Docker, port 8880). Lines stay on your machine; the voice name is the server's own.",
     "localUrl": "Server address",
     "localModel": "Model",
-    "localVoice": "Voice"
+    "localVoice": "Voice",
+    "speed": "Speed",
+    "accent": "Accent",
+    "accent_en-US": "American",
+    "accent_en-GB": "British"
   },
   "data": {
     "section": "Data",

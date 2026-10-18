@@ -31,3 +31,9 @@ test("preference order beats install order; full macOS and Windows names match",
   assert.equal(pickSystemVoice(win, "en-US", "m").voice?.name, "Microsoft David - English (United States)");
   assert.equal(pickSystemVoice([{ name: "Tomas", lang: "en-US" }], "en-US", "m").pitch, 0.8); // "Tom" is a whole name, not a prefix
 });
+
+test("an accent keeps to that region's voices when there are any", () => {
+  assert.equal(pickSystemVoice(voices, "en", "f", "en-GB").voice?.name, "Daniel"); // the only en-GB voice
+  assert.equal(pickSystemVoice(voices, "en", "f", "en-US").voice?.name, "Samantha"); // en_US counts as en-US
+  assert.equal(pickSystemVoice(voices, "en", "f", "en-AU").voice?.name, "Samantha"); // none installed: any English voice
+});

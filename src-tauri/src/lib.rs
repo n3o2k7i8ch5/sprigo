@@ -20,6 +20,35 @@ fn list_user_courses(app: tauri::AppHandle) -> Result<Vec<(String, String)>, Str
     Ok(out)
 }
 
+/// Beta channel (#41): the updater's JS `check()` can't change endpoints, so beta testers check here.
+/// The `updater-beta` release holds the latest.json of the newest published release, pre-releases included
+/// (.github/workflows/channel.yml). Same metadata as the plugin's own `check`, so `new Update(meta)` installs it.
+const BETA_ENDPOINT: &str = "https://github.com/ozerozdas/sprigo/releases/download/updater-beta/latest.json";
+
+#[derive(serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct UpdateMeta {
+    rid: tauri::ResourceId,
+    current_version: String,
+    version: String,
+    body: Option<String>,
+    raw_json: serde_json::Value,
+}
+
+#[tauri::command]
+async fn check_beta(webview: tauri::Webview) -> Result<Option<UpdateMeta>, String> {
+    use tauri_plugin_updater::UpdaterExt;
+    let url = tauri::Url::parse(BETA_ENDPOINT).map_err(|e| e.to_string())?;
+    let updater = webview.updater_builder().endpoints(vec![url]).map_err(|e| e.to_string())?.build().map_err(|e| e.to_string())?;
+    Ok(updater.check().await.map_err(|e| e.to_string())?.map(|u| UpdateMeta {
+        current_version: u.current_version.clone(),
+        version: u.version.clone(),
+        body: u.body.clone(),
+        raw_json: u.raw_json.clone(),
+        rid: webview.resources_table().add(u),
+    }))
+}
+
 /// API keys live in the OS keychain (DECISIONS A6), never in SQLite.
 fn secret_entry(key: &str) -> Result<keyring::Entry, String> {
     keyring::Entry::new("com.ozerozdas.sprigo", key).map_err(|e| e.to_string())
@@ -245,10 +274,10 @@ pub fn run() {
                 }
             }
         })
-        .invoke_handler(tauri::generate_handler![list_user_courses, secret_get, secret_set, stt_ready, stt_models, stt_use, stt_remove, stt_download, transcribe, set_background,
+        .invoke_handler(tauri::generate_handler![list_user_courses, check_beta, secret_get, secret_set, stt_ready, stt_models, stt_use, stt_remove, stt_download, transcribe, set_background,
             companion::companion_set, companion::companion_status, companion::companion_reply,
             data::data_location, data::set_data_dir, data::dir_ok, data::file_exists, data::lock_read, data::lock_write,
-            data::lock_remove, data::backups_list, data::backups_remove, data::copy_file, data::is_sqlite, data::install_db])
+            data::lock_remove, data::backups_list, data::backups_remove, data::copy_file, data::write_text, data::is_sqlite, data::install_db])
         .build(tauri::generate_context!())
         .expect("error while building tauri application")
         .run(|app, event| match event {

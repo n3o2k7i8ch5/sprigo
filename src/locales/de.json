@@ -138,7 +138,20 @@
     "timedDesc": "Gemischte Fragen aus deinen Lektionen – 2 Minuten",
     "needLesson": "Schließe zuerst eine Lektion ab",
     "timeLeft_one": "Noch {{count}} Sekunde",
-    "timeLeft_other": "Noch {{count}} Sekunden"
+    "timeLeft_other": "Noch {{count}} Sekunden",
+    "wordsExport": "Als CSV exportieren",
+    "wordsImport": "CSV / Anki importieren",
+    "wordsExported_one": "{{count}} Wort exportiert",
+    "wordsExported_other": "{{count}} Wörter exportiert",
+    "wordsImported": "Importiert: {{added}} neu, {{updated}} aktualisiert",
+    "wordsFileFailed": "Die Datei konnte nicht gelesen oder geschrieben werden",
+    "wordsSkipped_one": "{{count}} Zeile wurde übersprungen:",
+    "wordsSkipped_other": "{{count}} Zeilen wurden übersprungen:",
+    "wordsLine": "Zeile {{line}}",
+    "wordsError_columns": "braucht eine Wort- und eine Übersetzungsspalte",
+    "wordsError_word": "kein Wort",
+    "wordsError_translation": "keine Übersetzung",
+    "wordsError_schedule": "Wiederholungsdaten ungültig"
   },
   "league": {
     "title": "{{name}}-Liga",
@@ -469,7 +482,9 @@
       "privacy": "Datenschutz & Daten"
     },
     "profileDesc": "Name, Farbe und PIN",
-    "edit": "Bearbeiten"
+    "edit": "Bearbeiten",
+    "betaUpdates": "Beta-Updates",
+    "betaUpdatesDesc": "Testversionen vor allen anderen erhalten. Sie können Fehler haben; reguläre Versionen bekommst du weiterhin."
   },
   "rail": {
     "label": "Fortschritt",
@@ -538,7 +553,8 @@
     "heard": "Gehört: „{{text}}“",
     "heardNothing": "Das habe ich nicht verstanden – versuche es etwas lauter.",
     "cantSpeak": "Sprechen gerade nicht möglich",
-    "unitPassed": "Einheit bestanden!"
+    "unitPassed": "Einheit bestanden!",
+    "listenSlow": "Langsam anhören"
   },
   "profiles": {
     "saved": "Profil gespeichert",
@@ -649,7 +665,9 @@
     "install": "Aktualisieren und neu starten",
     "later": "Später",
     "downloading": "Wird heruntergeladen… {{pct}} %",
-    "madeBy": "Entwickelt von Mehmet Özer Özdaş ·"
+    "madeBy": "Entwickelt von Mehmet Özer Özdaş ·",
+    "whatsNew": "Neu in Sprigo {{version}}",
+    "gotIt": "Verstanden"
   },
   "voice": {
     "kokoroDesc": "Eine natürlichere Stimme. Je nach Geschwindigkeit deines Computers kann sie pro Satz einige Sekunden brauchen.",
@@ -710,7 +728,11 @@
     "localDesc": "Verbindet sich mit einem OpenAI-kompatiblen Sprachserver, den du selbst betreibst (zum Beispiel Kokoro-FastAPI in Docker, Port 8880). Die Sätze bleiben auf deinem Rechner; der Stimmenname ist der des Servers.",
     "localUrl": "Serveradresse",
     "localModel": "Modell",
-    "localVoice": "Stimme"
+    "localVoice": "Stimme",
+    "speed": "Tempo",
+    "accent": "Akzent",
+    "accent_en-US": "Amerikanisch",
+    "accent_en-GB": "Britisch"
   },
   "data": {
     "section": "Daten",

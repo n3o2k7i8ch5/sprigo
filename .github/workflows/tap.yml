@@ -9,6 +9,7 @@ on:
 
 jobs:
   bump-cask:
+    if: ${{ !github.event.release.prerelease }} # betas and the updater-beta channel stay out of Homebrew
     runs-on: ubuntu-latest
     steps:
       - name: Update Casks/sprigo.rb

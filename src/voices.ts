@@ -11,10 +11,13 @@ const NAMES: Record<string, { f: string[]; m: string[] }> = {
 };
 const has = (voice: string, name: string) => new RegExp(`(^|[\\s(])${name}([\\s(-]|$)`, "i").test(voice);
 
-/** The most preferred installed voice of `gender`, else the language's first voice with a pitch shift. */
-export function pickSystemVoice<T extends V>(voices: T[], lang: string, gender?: "f" | "m"): { voice?: T; pitch: number } {
+/** The most preferred installed voice of `gender`, else the language's first voice with a pitch shift.
+ *  `accent` (e.g. "en-GB") keeps to that region's voices when any are installed. */
+export function pickSystemVoice<T extends V>(voices: T[], lang: string, gender?: "f" | "m", accent?: string): { voice?: T; pitch: number } {
   const code = lang.slice(0, 2).toLowerCase();
-  const ofLang = voices.filter((v) => v.lang.slice(0, 2).toLowerCase() === code);
+  const all = voices.filter((v) => v.lang.slice(0, 2).toLowerCase() === code);
+  const region = accent && all.filter((v) => v.lang.replace("_", "-").toLowerCase() === accent.toLowerCase());
+  const ofLang = region && region.length ? region : all;
   if (!gender) return { voice: ofLang[0], pitch: 1 };
   const wanted = [...(NAMES[code]?.[gender] ?? []), ...ANY[gender]];
   for (const n of wanted) {

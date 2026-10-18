@@ -146,7 +146,22 @@
     "needLesson": "Termine d'abord une leçon",
     "timeLeft_one": "{{count}} seconde restante",
     "timeLeft_other": "{{count}} secondes restantes",
-    "timeLeft_many": "{{count}} secondes restantes"
+    "timeLeft_many": "{{count}} secondes restantes",
+    "wordsExport": "Exporter en CSV",
+    "wordsImport": "Importer CSV / Anki",
+    "wordsExported_one": "{{count}} mot exporté",
+    "wordsExported_other": "{{count}} mots exportés",
+    "wordsImported": "Importé : {{added}} nouveaux, {{updated}} mis à jour",
+    "wordsFileFailed": "Impossible de lire ou d'écrire le fichier",
+    "wordsSkipped_one": "{{count}} ligne ignorée :",
+    "wordsSkipped_other": "{{count}} lignes ignorées :",
+    "wordsLine": "Ligne {{line}}",
+    "wordsError_columns": "il faut une colonne mot et une colonne traduction",
+    "wordsError_word": "pas de mot",
+    "wordsError_translation": "pas de traduction",
+    "wordsError_schedule": "données de révision invalides",
+    "wordsExported_many": "{{count}} mots exportés",
+    "wordsSkipped_many": "{{count}} lignes ignorées :"
   },
   "league": {
     "title": "Ligue {{name}}",
@@ -493,7 +508,9 @@
       "privacy": "Confidentialité et données"
     },
     "profileDesc": "Nom, couleur et PIN",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "betaUpdates": "Mises à jour bêta",
+    "betaUpdatesDesc": "Recevez les versions de test avant tout le monde. Elles peuvent contenir des bugs ; vous recevez aussi toutes les versions normales."
   },
   "rail": {
     "label": "Progression",
@@ -564,7 +581,8 @@
     "heard": "Entendu : « {{text}} »",
     "heardNothing": "Je n'ai pas compris — réessaie un peu plus fort.",
     "cantSpeak": "Impossible de parler maintenant",
-    "unitPassed": "Unité validée !"
+    "unitPassed": "Unité validée !",
+    "listenSlow": "Écouter lentement"
   },
   "profiles": {
     "saved": "Profil enregistré",
@@ -675,7 +693,9 @@
     "install": "Mettre à jour et redémarrer",
     "later": "Plus tard",
     "downloading": "Téléchargement… {{pct}} %",
-    "madeBy": "Développé par Mehmet Özer Özdaş ·"
+    "madeBy": "Développé par Mehmet Özer Özdaş ·",
+    "whatsNew": "Nouveautés de Sprigo {{version}}",
+    "gotIt": "Compris"
   },
   "voice": {
     "kokoroDesc": "Une voix plus naturelle. Elle peut mettre quelques secondes par phrase, selon la vitesse de ton ordinateur.",
@@ -736,7 +756,11 @@
     "localDesc": "Se connecte à un serveur vocal compatible OpenAI que tu fais tourner toi-même (par exemple Kokoro-FastAPI dans Docker, port 8880). Les phrases restent sur ta machine ; le nom de la voix est celui du serveur.",
     "localUrl": "Adresse du serveur",
     "localModel": "Modèle",
-    "localVoice": "Voix"
+    "localVoice": "Voix",
+    "speed": "Vitesse",
+    "accent": "Accent",
+    "accent_en-US": "Américain",
+    "accent_en-GB": "Britannique"
   },
   "data": {
     "section": "Données",

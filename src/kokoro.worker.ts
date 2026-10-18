@@ -35,7 +35,7 @@ self.onmessage = async ({ data: m }: MessageEvent) => {
       const text = new lib!.TextSplitterStream();
       text.push(m.text);
       text.close();
-      for await (const { audio } of k.stream(text, { voice: m.voice })) {
+      for await (const { audio } of k.stream(text, { voice: m.voice, speed: m.speed ?? 1 })) {
         if (current !== m.id) return;
         const a = audio.audio as Float32Array;
         post({ type: "chunk", id: m.id, audio: a, rate: audio.sampling_rate }, [a.buffer]);

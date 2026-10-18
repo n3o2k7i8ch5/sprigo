@@ -2,6 +2,7 @@
 // Device setting "tts" ("tts.phone" on the phone): "system" | "piper" | "kokoro" | "elevenlabs" | "local". Piper and Kokoro run in workers (src/piper.worker.ts, src/kokoro.worker.ts)
 // and stream one sentence at a time, so the first sentence plays while the rest is made. ElevenLabs and a local OpenAI-compatible
 // speech server ("local", e.g. Kokoro-FastAPI) return the whole line as MP3.
+import { useSyncExternalStore } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { getSetting, isCompanion, isTauri } from "./db";
@@ -43,17 +44,35 @@ const PIPER: Record<string, Record<"f" | "m", string>> = {
   es: { f: "es_ES-sharvard-medium", m: "es_ES-davefx-medium" },
   tr: { f: "tr_TR-dfki-medium", m: "tr_TR-fahrettin-medium" },
 };
-const piperVoice = (lang: string, gender: "f" | "m" = "f") => PIPER[lang.slice(0, 2)]?.[gender];
+// Accents (#35): where an engine has a voice for one, it is used; elsewhere the language's default voice speaks.
+const PIPER_ACCENT: Record<string, Record<"f" | "m", string>> = { "en-GB": { f: "en_GB-cori-medium", m: "en_GB-alan-medium" } };
+const KOKORO_ACCENT: Record<string, Record<"f" | "m", string>> = { "en-GB": { f: "bf_emma", m: "bm_george" } };
+const piperVoice = (lang: string, gender: "f" | "m" = "f", accent?: string) => (accent && PIPER_ACCENT[accent]?.[gender]) || PIPER[lang.slice(0, 2)]?.[gender];
+
+/** Speech speed, device setting "tts.speed": ElevenLabs' 0.7–1.2, so every engine takes the same range. `slow` is the slow replay. */
+export const SPEED = { min: 0.7, max: 1.2, slow: 0.7 };
+export const ttsSpeed = async () => { const v = Number(await getSetting("tts.speed")); return v >= SPEED.min && v <= SPEED.max ? v : 1; };
+/** The accents a course language offers (device setting "tts.accent.<lang>"); unset = the engines' default voice. */
+// ponytail: English only; Piper's two es-MX voices don't say which is female, add es-MX when one is known
+export const ACCENTS: Record<string, string[]> = { en: ["en-US", "en-GB"] };
+export const ttsAccent = async (lang: string) => {
+  const code = lang.slice(0, 2), v = await getSetting(`tts.accent.${code}`);
+  return v && ACCENTS[code]?.includes(v) ? v : undefined;
+};
 /** Can `p` speak `lang`? Kokoro is English only, Piper has the voices above; the rest are assumed to (they fall back if not). */
 export const ttsSpeaks = (p: TtsProvider, lang: string) => (p === "kokoro" ? lang.startsWith("en") : p === "piper" ? !!piperVoice(lang) : true);
 
 /** The engine and its voice for this language, or null for the system voice. */
-async function engineFor(lang: string, voice?: Voice, p?: TtsProvider): Promise<[Exclude<TtsProvider, "system">, string] | null> {
+async function engineFor(lang: string, voice?: Voice, p?: TtsProvider, accent?: string): Promise<[Exclude<TtsProvider, "system">, string] | null> {
   p ??= await ttsProvider();
   if (p === "elevenlabs") return ["elevenlabs", await elevenVoice(voice?.gender)];
   if (p === "local") return ["local", JSON.stringify(await localTts())];
-  if (p === "kokoro" && lang.startsWith("en")) return ["kokoro", voice?.kokoro ?? (voice?.gender === "m" ? "am_michael" : "af_heart")];
-  const v = p === "piper" && piperVoice(lang, voice?.gender);
+  if (p === "kokoro" && lang.startsWith("en")) {
+    const g = voice?.gender ?? "f", region = accent && KOKORO_ACCENT[accent];
+    // A character's own Kokoro voice stays when it already has the accent (its first letter: a = American, b = British).
+    return ["kokoro", region ? (voice?.kokoro?.[0] === region.f[0] ? voice.kokoro : region[g]) : voice?.kokoro ?? (g === "m" ? "am_michael" : "af_heart")];
+  }
+  const v = p === "piper" && piperVoice(lang, voice?.gender, accent);
   return v ? ["piper", v] : null;
 }
 
@@ -106,12 +125,12 @@ function load(e: Engine, voice: string, onProgress: (p: number) => void = () => 
 
 export const loadKokoro = (onProgress?: (p: number) => void) => load("kokoro", "", onProgress);
 /** Loads the Piper voice for a language (the female one unless told otherwise). */
-export const loadPiper = (lang: string, onProgress?: (p: number) => void, gender?: "f" | "m") =>
-  load("piper", piperVoice(lang, gender) ?? PIPER.en.f, onProgress);
+export const loadPiper = async (lang: string, onProgress?: (p: number) => void, gender?: "f" | "m") =>
+  load("piper", piperVoice(lang, gender, await ttsAccent(lang)) ?? PIPER.en.f, onProgress);
 
 /** Starts loading the local voice this language will use, so the first line is not waiting on the model. */
 export async function prewarm(lang: string, voice?: Voice) {
-  const got = await engineFor(lang, voice);
+  const got = await engineFor(lang, voice, undefined, await ttsAccent(lang));
   if (got && (got[0] === "piper" || got[0] === "kokoro")) await load(got[0], got[0] === "kokoro" ? "" : got[1]);
 }
 
@@ -133,6 +152,7 @@ export function stopSpeaking() {
   speechSynthesis.cancel();
   for (const s of sources) try { s.stop(); } catch { /* already ended */ }
   sources = [];
+  prep(null);
   if (pending) { pending.cancel(); pending = undefined; Object.values(workers).forEach((w) => w.postMessage({ type: "cancel" })); }
   finish();
 }
@@ -149,16 +169,25 @@ function systemVoices(): Promise<SpeechSynthesisVoice[]> {
 }
 
 let onStart: ((at: number) => void) | undefined; // the current speak's `started`
-const begun = (at = performance.now()) => { const f = onStart; onStart = undefined; f?.(at); };
+const begun = (at = performance.now()) => { prep(null); const f = onStart; onStart = undefined; f?.(at); };
 
-async function system(text: string, lang: string, gender: "f" | "m" | undefined, mine: number, done: () => void) {
+// The line a speak is still getting ready (voice model loading, first sentence being made); null once audio starts or it ends.
+let preparing: string | null = null;
+const prepSubs = new Set<() => void>();
+const prep = (text: string | null) => { if (preparing !== text) { preparing = text; prepSubs.forEach((f) => f()); } };
+/** Listen buttons: true while `text` waits on its voice, so they look busy and a second click does nothing. */
+export const useTtsPreparing = (text: string) =>
+  useSyncExternalStore((f) => { prepSubs.add(f); return () => { prepSubs.delete(f); }; }, () => preparing) === text;
+
+async function system(text: string, lang: string, gender: "f" | "m" | undefined, mine: number, done: () => void, speed: number, accent?: string) {
   const voices = await systemVoices();
   if (mine !== seq) return; // cut while waiting
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = lang;
-  const { voice, pitch } = pickSystemVoice(voices, lang, gender);
+  u.lang = accent ?? lang;
+  const { voice, pitch } = pickSystemVoice(voices, lang, gender, accent);
   if (voice) u.voice = voice;
   u.pitch = pitch;
+  u.rate = speed;
   u.onstart = () => begun();
   u.onend = u.onerror = done;
   speechSynthesis.speak(u);
@@ -194,8 +223,8 @@ const audioCtx = async (mine: number) => {
 };
 
 /** Plays local-engine audio for `text`; resolves once the first sentence plays, throws before that to fall back. */
-async function viaWorker(e: Engine, text: string, voice: string, mine: number, done: () => void) {
-  const key = `${e}:${voice}\n${text}`;
+async function viaWorker(e: Engine, text: string, voice: string, mine: number, done: () => void, speed: number) {
+  const key = `${e}:${voice}:${speed}\n${text}`;
   const ctx = await audioCtx(mine);
   if (!ctx) return;
   const { play, end } = player(ctx, mine, done);
@@ -222,7 +251,7 @@ async function viaWorker(e: Engine, text: string, voice: string, mine: number, d
         }
       },
     };
-    worker(e).postMessage({ type: "speak", id: mine, text, voice });
+    worker(e).postMessage({ type: "speak", id: mine, text, voice, speed });
   });
 }
 
@@ -245,10 +274,10 @@ async function viaBytes(cacheKey: string, req: () => Promise<ByteRequest>, mine:
   end();
 }
 
-const elevenLine = (text: string, lang: string, voice: string, key?: string) => () =>
+const elevenLine = (text: string, lang: string, voice: string, key?: string, speed = 1) => () =>
   (key ? Promise.resolve(key) : getElevenKey()).then((k) => {
     if (!k) throw new Error("No ElevenLabs key");
-    return elevenRequest(k, voice, text, lang);
+    return elevenRequest(k, voice, text, lang, speed);
   });
 
 /** Settings' test for the local server: no fallback, so an unreachable server throws; resolves once audio starts. */
@@ -275,22 +304,24 @@ const fellBack = () => { if (!noticed) { noticed = true; fallbackSubs.forEach((f
 const STILL_LOADING = "Piper voice still loading"; // a first download: the next lines use it, not worth a notice
 
 /** One voice at a time: a new call cuts the previous one. Resolves when this speech ends or is cut.
- *  Falls back to the system voice if the local engine fails before any audio. `started` gets the time its audio begins. */
-export async function speak(text: string, lang: string, voice?: Voice, started?: (at: number) => void): Promise<void> {
+ *  Falls back to the system voice if the local engine fails before any audio. `started` gets the time its audio begins.
+ *  `speed` overrides the learner's setting (the slow replay). */
+export async function speak(text: string, lang: string, voice?: Voice, started?: (at: number) => void, speed?: number): Promise<void> {
   stopSpeaking();
   onStart = started;
   const mine = seq;
+  prep(text);
   let done!: () => void;
-  const over = new Promise<void>((ok) => { done = ok; });
+  const over = new Promise<void>((ok) => { done = () => { if (mine === seq) prep(null); ok(); }; });
   finish = done;
-  const want = await ttsProvider();
-  const local = await engineFor(lang, voice, want);
+  const [want, rate, accent] = await Promise.all([ttsProvider(), speed ?? ttsSpeed(), ttsAccent(lang)]);
+  const local = await engineFor(lang, voice, want, accent);
   if (local) {
     try {
       lastEngine = local[0];
-      if (local[0] === "elevenlabs") await viaBytes(`elevenlabs:${local[1]}\n${text}`, elevenLine(text, lang, local[1]), mine, done);
-      else if (local[0] === "local") await viaBytes(`local:${local[1]}\n${text}`, async () => localRequest(JSON.parse(local[1]), text), mine, done);
-      else await viaWorker(local[0], text, local[1], mine, done);
+      if (local[0] === "elevenlabs") await viaBytes(`elevenlabs:${local[1]}:${rate}\n${text}`, elevenLine(text, lang, local[1], undefined, rate), mine, done);
+      else if (local[0] === "local") await viaBytes(`local:${local[1]}:${rate}\n${text}`, async () => localRequest(JSON.parse(local[1]), text, rate), mine, done);
+      else await viaWorker(local[0], text, local[1], mine, done, rate);
       return over;
     } catch (e) {
       console.error(e);
@@ -299,7 +330,7 @@ export async function speak(text: string, lang: string, voice?: Voice, started?:
   } else if (want !== "system") fellBack(); // e.g. Kokoro or Piper has no voice for this language
   lastEngine = "system";
   if (mine !== seq) return over;
-  await system(text, lang, voice?.gender, mine, done);
+  await system(text, lang, voice?.gender, mine, done, rate, accent);
   return over;
 }
 

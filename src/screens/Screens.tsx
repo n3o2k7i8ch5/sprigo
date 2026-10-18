@@ -7,6 +7,7 @@ import { useSpeakBlock } from "../Mic";
 import { msLeft, rivalXp, zones, PROMOTE, DEMOTE, TIERS } from "../league";
 import * as db from "../db";
 import { dueToday } from "../srs";
+import { parseWords, toCsv, type CsvError } from "../wordsCsv";
 import { LISTEN_MIN_WORDS, MADNESS_MIN_WORDS } from "../activities";
 import { DOUBLE_XP_MS, rollDay, today } from "../progress";
 import { LEGEND_PRICE, unitGrammar } from "../lessons";
@@ -89,12 +90,13 @@ export function Practice() {
   const { toast, enrollment, lessonId, openSheet } = useApp();
   const start = useStartLesson();
   const [data, setData] = useState<{ mistakes: number; words: db.Word[]; timed: number }>({ mistakes: 0, words: [], timed: 0 });
-  // Reloads when a practice session closes (lessonId → null).
+  const [loaded, reload] = useState(0);
+  // Reloads when a practice session closes (lessonId → null) or words were imported.
   useEffect(() => {
     if (!enrollment || lessonId) return;
     Promise.all([db.listMistakes(enrollment.id), db.listWords(enrollment.id), db.cachedLessonItems(enrollment.id)])
       .then(([m, words, cached]) => setData({ mistakes: m.length, words, timed: cached.length }));
-  }, [enrollment?.id, lessonId]);
+  }, [enrollment?.id, lessonId, loaded]);
   const { mistakes, words, timed } = data;
   const due = dueToday(words, new Date()).length;
   const speakBlock = useSpeakBlock();
@@ -128,6 +130,7 @@ export function Practice() {
           "clock", "var(--red-tint)", "var(--orange)", t("practice.timed"), timed ? t("practice.timedDesc") : t("practice.needLesson"))}
       </div>
       <h2 className="section-title">{t("practice.myWords")} <span className="muted small" style={{ fontWeight: 700 }}>({words.length})</span></h2>
+      {enrollment && <WordsFile enrollment={enrollment} words={words} onImported={() => reload((n) => n + 1)} />}
       {!words.length && <p className="muted small">{t("practice.noWords")}</p>}
       <div className="od-cluster" style={{ "--od-gap": "10px" } as React.CSSProperties}>
         {words.map((w) => {
@@ -141,6 +144,60 @@ export function Practice() {
         })}
       </div>
     </>
+  );
+}
+
+/** Export and import of the word list as CSV, Anki-compatible (#24). */
+function WordsFile({ enrollment, words, onImported }: { enrollment: db.Enrollment; words: db.Word[]; onImported: () => void }) {
+  const { t } = useTranslation();
+  const { toast, openSheet } = useApp();
+  const pick = useRef<HTMLInputElement>(null);
+  const exportCsv = async () => {
+    const csv = toCsv(words), name = `sprigo-words-${enrollment.course_iso}-${today()}.csv`;
+    if (db.isTauri) {
+      const to = await (await import("@tauri-apps/plugin-dialog")).save({ defaultPath: name, filters: [{ name: "CSV", extensions: ["csv"] }] });
+      if (!to) return;
+      await (await import("@tauri-apps/api/core")).invoke("write_text", { path: to, text: csv });
+    } else {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    toast(t("practice.wordsExported", { count: words.length }));
+  };
+  const importFile = async (file: File) => {
+    const { words: found, errors } = parseWords(await file.text());
+    const { added, updated } = await db.importWords(enrollment.id, found);
+    onImported();
+    const done = t("practice.wordsImported", { added, updated });
+    if (errors.length) openSheet(<ImportErrors done={done} errors={errors} />);
+    else toast(done);
+  };
+  return (
+    <div className="od-cluster" style={{ "--od-gap": "8px", marginBottom: 12 } as React.CSSProperties}>
+      <button className="btn btn-ghost" disabled={!words.length} onClick={() => exportCsv().catch((e) => { console.error("export words", e); toast(t("practice.wordsFileFailed")); })}>{t("practice.wordsExport")}</button>
+      <button className="btn btn-ghost" onClick={() => pick.current?.click()}>{t("practice.wordsImport")}</button>
+      <input ref={pick} type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain" hidden
+        onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) importFile(f).catch((err) => { console.error("import words", err); toast(t("practice.wordsFileFailed")); }); }} />
+    </div>
+  );
+}
+
+/** Rows an import skipped, with their line in the file. */
+function ImportErrors({ done, errors }: { done: string; errors: CsvError[] }) {
+  const { t } = useTranslation();
+  const { closeSheet } = useApp();
+  return (
+    <div className="od-stack" style={{ "--od-gap": "10px" } as React.CSSProperties}>
+      <h3 style={{ textAlign: "center" }}>{done}</h3>
+      <p className="small">{t("practice.wordsSkipped", { count: errors.length })}</p>
+      <ul className="small" style={{ maxHeight: 240, overflow: "auto", margin: 0, textAlign: "left" }}>
+        {errors.map((e) => <li key={e.line}>{t("practice.wordsLine", { line: e.line })}: {t(`practice.wordsError_${e.reason}`)}</li>)}
+      </ul>
+      <button className="btn btn-primary btn-block" onClick={closeSheet}>{t("sheet.close")}</button>
+    </div>
   );
 }
 

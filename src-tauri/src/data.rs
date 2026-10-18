@@ -172,6 +172,12 @@ pub fn copy_file(from: String, to: String) -> Result<(), String> {
     std::fs::copy(from, to).map(|_| ()).map_err(err)
 }
 
+/// Writes a text file the learner picked in a save dialog (word list CSV, #24).
+#[tauri::command]
+pub fn write_text(path: String, text: String) -> Result<(), String> {
+    std::fs::write(path, text).map_err(err)
+}
+
 /// Only SQLite files can be imported.
 #[tauri::command]
 pub fn is_sqlite(path: String) -> bool {

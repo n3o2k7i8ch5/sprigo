@@ -9,7 +9,7 @@ import { getSetting, isCompanion, isTauri, setSetting } from "../db";
 import { setCompanion, tailscaleStatus, type TailscaleStatus } from "../companion";
 import { CourseFlag, CourseSheet, NATIVE, ProfileForm, useLangName } from "./Profiles";
 import { notifyAllowed } from "../notify";
-import { findUpdate, UpdateSheet } from "../Update";
+import { betaOn, findUpdate, UpdateSheet } from "../Update";
 import { DataSection } from "./DataSettings";
 import { InfoTip, SttRow, TtsRow } from "./VoiceSettings";
 import { Icon, type IconName } from "../icons";
@@ -287,19 +287,22 @@ function VersionRow() {
   const { openSheet, toast } = useApp();
   const [version, setVersion] = useState("dev");
   const [busy, setBusy] = useState(false);
-  useEffect(() => { if (isTauri) import("@tauri-apps/api/app").then((a) => a.getVersion()).then(setVersion); }, []);
+  const [beta, setBeta] = useState<boolean | null>(null);
+  useEffect(() => { if (isTauri) { import("@tauri-apps/api/app").then((a) => a.getVersion()).then(setVersion); betaOn().then(setBeta); } }, []);
   const check = async () => {
     setBusy(true);
     const u = await findUpdate();
     setBusy(false);
     u ? openSheet(<UpdateSheet update={u} />) : toast(t("update.none"));
   };
-  return (
+  return (<>
     <div className="card od-row" style={gap("12px")}>
       <b className="od-fill">{t("update.version", { version })}</b>
       <InfoTip label={t("voice.about", { name: t("update.section") })}>{t("update.desc")}</InfoTip>
       <button className="btn btn-ghost" disabled={busy} onClick={check}>{t("update.check")}</button>
     </div>
+    {beta !== null && <ToggleRow k="betaUpdates" initial={beta} onChange={(on) => setSetting("update.beta", on ? "1" : null)} />}
+    </>
   );
 }
 
@@ -395,7 +398,7 @@ export function Settings() {
         </>}
       </div>
 
-      {!isCompanion && <div style={{ marginTop: 28 }}><VersionRow /></div>}
+      {!isCompanion && <div className="od-stack" style={{ marginTop: 28, ...gap("10px") }}><VersionRow /></div>}
       <p className="muted small" style={{ textAlign: "center", marginTop: 8 }}>
         {t("update.madeBy")} <a href={AUTHOR_URL} onClick={(e) => { e.preventDefault(); void openLink(AUTHOR_URL); }}>mehmetozer.dev</a>
       </p>
