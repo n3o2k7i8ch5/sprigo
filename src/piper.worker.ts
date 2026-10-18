@@ -3,6 +3,13 @@
 import { TtsSession } from "@mintplex-labs/piper-tts-web";
 
 const post = (m: unknown, transfer: Transferable[] = []) => (self as unknown as Worker).postMessage(m, transfer);
+// Shipped with the app instead of the library's CDN defaults (~29 MB a cold start, #74). Only the voice model is downloaded.
+// The webview is not cross-origin isolated, so onnxruntime runs single-threaded and only asks for ort-wasm-simd.wasm.
+const wasmPaths = {
+  onnxWasm: { "ort-wasm-simd.wasm": new URL("../node_modules/onnxruntime-web/dist/ort-wasm-simd.wasm", import.meta.url).href },
+  piperWasm: new URL("../node_modules/@diffusionstudio/piper-wasm/build/piper_phonemize.wasm", import.meta.url).href,
+  piperData: new URL("../node_modules/@diffusionstudio/piper-wasm/build/piper_phonemize.data", import.meta.url).href,
+};
 const sessions = new Map<string, Promise<TtsSession>>();
 let current = 0;
 
@@ -12,7 +19,7 @@ function load(voice: string) {
     // The library keeps one session and would only swap the voice id, not the model: start a fresh one per voice.
     (TtsSession as unknown as { _instance: unknown })._instance = null;
     const progress = (p: { loaded: number; total: number }) => { if (p.total) post({ type: "progress", voice, p: p.loaded / p.total }); };
-    s = TtsSession.create({ voiceId: voice as never, progress });
+    s = TtsSession.create({ voiceId: voice as never, progress, wasmPaths: wasmPaths as never });
     s.catch(() => sessions.delete(voice));
     sessions.set(voice, s);
   }

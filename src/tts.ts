@@ -2,6 +2,7 @@
 // Device setting "tts" ("tts.phone" on the phone): "system" | "piper" | "kokoro" | "elevenlabs" | "local". Piper and Kokoro run in workers (src/piper.worker.ts, src/kokoro.worker.ts)
 // and stream one sentence at a time, so the first sentence plays while the rest is made. ElevenLabs and a local OpenAI-compatible
 // speech server ("local", e.g. Kokoro-FastAPI) return the whole line as MP3.
+import { useSyncExternalStore } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { getSetting, isCompanion, isTauri } from "./db";
@@ -133,6 +134,7 @@ export function stopSpeaking() {
   speechSynthesis.cancel();
   for (const s of sources) try { s.stop(); } catch { /* already ended */ }
   sources = [];
+  prep(null);
   if (pending) { pending.cancel(); pending = undefined; Object.values(workers).forEach((w) => w.postMessage({ type: "cancel" })); }
   finish();
 }
@@ -149,7 +151,15 @@ function systemVoices(): Promise<SpeechSynthesisVoice[]> {
 }
 
 let onStart: ((at: number) => void) | undefined; // the current speak's `started`
-const begun = (at = performance.now()) => { const f = onStart; onStart = undefined; f?.(at); };
+const begun = (at = performance.now()) => { prep(null); const f = onStart; onStart = undefined; f?.(at); };
+
+// The line a speak is still getting ready (voice model loading, first sentence being made); null once audio starts or it ends.
+let preparing: string | null = null;
+const prepSubs = new Set<() => void>();
+const prep = (text: string | null) => { if (preparing !== text) { preparing = text; prepSubs.forEach((f) => f()); } };
+/** Listen buttons: true while `text` waits on its voice, so they look busy and a second click does nothing. */
+export const useTtsPreparing = (text: string) =>
+  useSyncExternalStore((f) => { prepSubs.add(f); return () => { prepSubs.delete(f); }; }, () => preparing) === text;
 
 async function system(text: string, lang: string, gender: "f" | "m" | undefined, mine: number, done: () => void) {
   const voices = await systemVoices();
@@ -280,8 +290,9 @@ export async function speak(text: string, lang: string, voice?: Voice, started?:
   stopSpeaking();
   onStart = started;
   const mine = seq;
+  prep(text);
   let done!: () => void;
-  const over = new Promise<void>((ok) => { done = ok; });
+  const over = new Promise<void>((ok) => { done = () => { if (mine === seq) prep(null); ok(); }; });
   finish = done;
   const want = await ttsProvider();
   const local = await engineFor(lang, voice, want);

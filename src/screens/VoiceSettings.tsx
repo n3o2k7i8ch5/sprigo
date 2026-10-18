@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useApp } from "../store";
 import { getSetting, isCompanion, isTauri, setSetting } from "../db";
-import { elevenVoice, getElevenKey, loadKokoro, loadPiper, localTts, sayWithEleven, sayWithLocal, setElevenKey, speak, speakingWith, TTS_KEY, ttsProvider, ttsSpeaks, type TtsProvider } from "../tts";
+import { elevenVoice, getElevenKey, loadKokoro, loadPiper, localTts, sayWithEleven, sayWithLocal, setElevenKey, speak, speakingWith, TTS_KEY, ttsProvider, ttsSpeaks, useTtsPreparing, type TtsProvider } from "../tts";
 import { ELEVEN_VOICES, LOCAL_TTS } from "../ttsCloud";
 import { Icon } from "../icons";
 import { deepgramTranscribe, downloadWhisper, getDeepgramKey, listen, pickWhisper, removeWhisper, resetSttReady, setDeepgramKey, sttProvider, sttReady, whisperModels, type Listener, type SttProvider, type WhisperModel } from "../stt";
@@ -69,6 +69,7 @@ function TtsSheet({ initial, onChange }: { initial: TtsProvider; onChange: (v: T
   const { course, closeSheet, openSheet } = useApp();
   const langName = useLangName();
   const lang = course?.iso ?? "en";
+  const hello = HELLO[lang] ?? HELLO.en, testing = useTtsPreparing(hello);
   const [v, setV] = useState(initial);
   const [pct, setPct] = useState<number | null>(null); // a local voice downloading
   const [err, setErr] = useState("");
@@ -125,7 +126,7 @@ function TtsSheet({ initial, onChange }: { initial: TtsProvider; onChange: (v: T
       )}
       {err && <p className="small" role="status" style={{ color: "var(--red)", overflowWrap: "anywhere" }}>{err}</p>}
       <div className="od-stack sheet-actions" style={gap("8px")}>
-        <button className="btn btn-blue btn-block" disabled={pct !== null} onClick={() => speak(HELLO[lang] ?? HELLO.en, lang, { gender: "f" })}>{t("voice.listen")}</button>
+        <button className="btn btn-blue btn-block" disabled={pct !== null || testing} aria-busy={testing} onClick={() => speak(hello, lang, { gender: "f" })}>{t("voice.listen")}</button>
         <button className="btn btn-ghost btn-block" onClick={closeSheet}>{t("sheet.cancel")}</button>
       </div>
     </div>
