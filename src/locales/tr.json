@@ -478,7 +478,9 @@
       "privacy": "Gizlilik ve veri"
     },
     "profileDesc": "Ad, renk ve PIN",
-    "edit": "Düzenle"
+    "edit": "Düzenle",
+    "betaUpdates": "Beta güncellemeleri",
+    "betaUpdatesDesc": "Test sürümlerini herkesten önce al. Hata içerebilirler; normal sürümleri de almaya devam edersin."
   },
   "rail": {
     "label": "İlerleme",
@@ -657,7 +659,9 @@
     "install": "Güncelle ve yeniden başlat",
     "later": "Sonra",
     "downloading": "İndiriliyor… %{{pct}}",
-    "madeBy": "Geliştiren: Mehmet Özer Özdaş ·"
+    "madeBy": "Geliştiren: Mehmet Özer Özdaş ·",
+    "whatsNew": "Sprigo {{version}} ile gelen yenilikler",
+    "gotIt": "Anladım"
   },
   "voice": {
     "kokoroDesc": "Daha doğal bir ses. Bilgisayarının hızına göre cümle başına birkaç saniye sürebilir.",

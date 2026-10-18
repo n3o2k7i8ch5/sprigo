@@ -8,7 +8,7 @@ import { today } from "./progress";
 import { nudgeDue, nudgeMessage } from "./nudge";
 import { keepInBackground, notify } from "./notify";
 import { takeOver, resetDataDir } from "./datadir";
-import { findUpdate, UpdateSheet } from "./Update";
+import { findUpdate, UpdateSheet, whatsNew, WhatsNewSheet } from "./Update";
 import type { Update } from "@tauri-apps/plugin-updater";
 import { Chat, Story } from "./Talk";
 import { TutorCall } from "./TutorCall";
@@ -141,8 +141,14 @@ export default function App() {
     document.documentElement.dataset.motion = s.reduceMotion ? "reduce" : "full";
   }, [s.soundOn, s.reduceMotion]);
 
-  // Quiet update check once per launch, after sign-in so the sheet has somewhere to show.
-  useEffect(() => { if (profile) findUpdate().then((u) => u && openSheet(<UpdateSheet update={u} />)); }, [!!profile]);
+  // Once per launch, after sign-in so the sheet has somewhere to show: what's new after an update, else a quiet update check.
+  useEffect(() => {
+    if (profile) whatsNew().then(async (n) => {
+      if (n) return openSheet(<WhatsNewSheet {...n} />);
+      const u = await findUpdate();
+      if (u) openSheet(<UpdateSheet update={u} />);
+    });
+  }, [!!profile]);
 
   // ponytail: a PIN-locked profile never auto-signs in, so its reminder only fires once someone signs in
   useEffect(() => { keepInBackground(!!profile && s.reminderOn); }, [profile?.id, s.reminderOn]);
