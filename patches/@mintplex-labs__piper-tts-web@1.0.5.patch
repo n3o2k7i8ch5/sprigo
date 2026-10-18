@@ -1,0 +1,13 @@
+diff --git a/dist/piper-tts-web.js b/dist/piper-tts-web.js
+index 250fa0133830669eb6c0c215ae494cb9eb7db4bf..d7a6ac2a6dc32f38a458a40bec90c32f689083b2 100644
+--- a/dist/piper-tts-web.js
++++ b/dist/piper-tts-web.js
+@@ -387,7 +387,7 @@ predictChunk_fn = async function(text) {
+   });
+   const speakerId = 0;
+   const noiseScale = __privateGet(this, _modelConfig).inference.noise_scale;
+-  const lengthScale = __privateGet(this, _modelConfig).inference.length_scale;
++  const lengthScale = __privateGet(this, _modelConfig).inference.length_scale / (this.speed || 1);
+   const noiseW = __privateGet(this, _modelConfig).inference.noise_w;
+   const session = __privateGet(this, _ortSession);
+   const feeds = {

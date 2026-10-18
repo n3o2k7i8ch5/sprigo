@@ -532,7 +532,8 @@
     "heard": "Duyulan: “{{text}}”",
     "heardNothing": "Anlaşılmadı — biraz daha yüksek sesle tekrar dene.",
     "cantSpeak": "Şu an konuşamam",
-    "unitPassed": "Ünite geçildi!"
+    "unitPassed": "Ünite geçildi!",
+    "listenSlow": "Yavaş dinle"
   },
   "profiles": {
     "saved": "Profil kaydedildi",
@@ -704,7 +705,11 @@
     "localDesc": "Kendi çalıştırdığın OpenAI uyumlu bir ses sunucusuna bağlanır (örneğin Docker'da Kokoro-FastAPI, 8880 portu). Cümleler bilgisayarından çıkmaz; ses adı sunucunun kendi adıdır.",
     "localUrl": "Sunucu adresi",
     "localModel": "Model",
-    "localVoice": "Ses"
+    "localVoice": "Ses",
+    "speed": "Hız",
+    "accent": "Aksan",
+    "accent_en-US": "Amerikan",
+    "accent_en-GB": "İngiliz"
   },
   "data": {
     "section": "Veri",

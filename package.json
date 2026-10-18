@@ -54,6 +54,9 @@
   "pnpm": {
     "overrides": {
       "sharp": ">=0.35.4"
+    },
+    "patchedDependencies": {
+      "@mintplex-labs/piper-tts-web@1.0.5": "patches/@mintplex-labs__piper-tts-web@1.0.5.patch"
     }
   }
 }

@@ -8,7 +8,7 @@ import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, norm
 import { MicButton } from "./Mic";
 import { sttReady } from "./stt";
 import { dueToday } from "./srs";
-import { prewarm, speak } from "./tts";
+import { prewarm, speak, SPEED } from "./tts";
 import { SpeakButton } from "./SpeakButton";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
@@ -265,7 +265,12 @@ export function Lesson({ id }: { id: string }) {
   const canCheck = !!it && !checking && (it.kind === "choice" ? sel !== null : it.kind === "bank" ? bankSel.length > 0 : it.kind === "input" ? text.trim().length > 0 : false);
   const progress = result ? 100 : list.length ? (i / list.length) * 100 : 0;
   const last = i + 1 >= list.length;
-  const listenBtn = (txt: string) => <SpeakButton className="prompt-word" text={txt} lang={lang}><Icon name="headphones" /> {t("lesson.listen")}</SpeakButton>;
+  const listenBtn = (txt: string) => (
+    <div className="listen-row">
+      <SpeakButton className="prompt-word" text={txt} lang={lang}><Icon name="headphones" /> {t("lesson.listen")}</SpeakButton>
+      <SpeakButton className="prompt-word" text={txt} lang={lang} speed={SPEED.slow} aria-label={t("lesson.listenSlow")} title={t("lesson.listenSlow")}>{SPEED.slow}×</SpeakButton>
+    </div>
+  );
 
   // Keyboard: one listener maps keys to the same actions as the buttons.
   const hit = it?.kind === "bank" ? bankMatch(it.bank, bankSel, typed) : -1;

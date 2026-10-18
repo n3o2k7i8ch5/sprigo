@@ -564,7 +564,8 @@
     "heard": "Se oyó: “{{text}}”",
     "heardNothing": "No te he entendido: inténtalo de nuevo un poco más alto.",
     "cantSpeak": "No puedo hablar ahora",
-    "unitPassed": "¡Unidad superada!"
+    "unitPassed": "¡Unidad superada!",
+    "listenSlow": "Escuchar despacio"
   },
   "profiles": {
     "saved": "Perfil guardado",
@@ -736,7 +737,11 @@
     "localDesc": "Se conecta a un servidor de voz compatible con OpenAI que ejecutas tú (por ejemplo Kokoro-FastAPI en Docker, puerto 8880). Las frases no salen de tu equipo; el nombre de la voz es el del servidor.",
     "localUrl": "Dirección del servidor",
     "localModel": "Modelo",
-    "localVoice": "Voz"
+    "localVoice": "Voz",
+    "speed": "Velocidad",
+    "accent": "Acento",
+    "accent_en-US": "Estadounidense",
+    "accent_en-GB": "Británico"
   },
   "data": {
     "section": "Datos",
