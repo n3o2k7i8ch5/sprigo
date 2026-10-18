@@ -182,12 +182,12 @@ export function madnessItems(words: PracticeWord[], boards = 20): Item[] {
   }));
 }
 
-/** Weakest words first: hear the word, pick it among 3 other known words. */
-export function listenItems(words: PracticeWord[], prompt: string, n = 6): Item[] {
-  if (words.length < LISTEN_MIN_WORDS) return [];
+/** Weakest words first: hear the word, pick it among 3 other known words (from `pool`, by default the same words). */
+export function listenItems(words: PracticeWord[], prompt: string, n = 6, pool = words): Item[] {
+  if (pool.length < LISTEN_MIN_WORDS) return [];
   const weakest = shuffle(words).sort((a, b) => a.strength - b.strength).slice(0, n);
   return weakest.map((w) => {
-    const options = shuffle([w.word, ...shuffle(words.filter((o) => o.word !== w.word)).slice(0, 3).map((o) => o.word)]);
+    const options = shuffle([w.word, ...shuffle(pool.filter((o) => o.word !== w.word)).slice(0, 3).map((o) => o.word)]);
     return { kind: "choice", prompt, context: "", big: false, listen: w.word, options, answer: options.indexOf(w.word) };
   });
 }

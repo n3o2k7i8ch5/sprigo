@@ -6,6 +6,7 @@ import { useStartLesson } from "../Lesson";
 import { useSpeakBlock } from "../Mic";
 import { msLeft, rivalXp, zones, PROMOTE, DEMOTE, TIERS } from "../league";
 import * as db from "../db";
+import { dueToday } from "../srs";
 import { LISTEN_MIN_WORDS, MADNESS_MIN_WORDS } from "../activities";
 import { DOUBLE_XP_MS, rollDay, today } from "../progress";
 import { LEGEND_PRICE, unitGrammar } from "../lessons";
@@ -95,6 +96,7 @@ export function Practice() {
       .then(([m, words, cached]) => setData({ mistakes: m.length, words, timed: cached.length }));
   }, [enrollment?.id, lessonId]);
   const { mistakes, words, timed } = data;
+  const due = dueToday(words, new Date()).length;
   const speakBlock = useSpeakBlock();
   const card = (onClick: () => void, icon: IconName, bg: string, fg: string, title: string, desc: string) => (
     <button className="card row-item" onClick={onClick}>
@@ -115,6 +117,9 @@ export function Practice() {
         {card(() => speakBlock ? toast(t(speakBlock)) : words.length ? start("practice-speak") : toast(t("practice.needWords", { count: 1 })),
           "mic", "var(--sky)", "var(--blue)", t("practice.speak"), speakBlock ? t(speakBlock) : words.length ? t("practice.speakDesc") : t("practice.needWords", { count: 1 }))}
         {card(() => speakBlock ? toast(t(speakBlock)) : openSheet(<DrillsSheet />), "clock", "var(--sky)", "var(--blue)", t("practice.drills"), speakBlock ? t(speakBlock) : t("practice.drillsDesc"))}
+        {card(() => words.length < LISTEN_MIN_WORDS ? toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })) : due ? start("practice-due") : toast(t("practice.noDue")),
+          "refresh", "var(--green-tint)", "var(--green)", t("practice.due"),
+          words.length < LISTEN_MIN_WORDS ? t("practice.needWords", { count: LISTEN_MIN_WORDS }) : due ? t("practice.dueDesc", { count: due }) : t("practice.noDue"))}
         {card(() => words.length >= LISTEN_MIN_WORDS ? start("practice-listen") : toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })),
           "headphones", "var(--purple-tint)", "var(--purple-dark)", t("practice.listen"), words.length >= LISTEN_MIN_WORDS ? t("practice.listenDesc", { count: Math.min(6, words.length) }) : t("practice.needWords", { count: LISTEN_MIN_WORDS }))}
         {card(() => words.length >= MADNESS_MIN_WORDS ? start("practice-madness") : toast(t("practice.needWords", { count: MADNESS_MIN_WORDS })),

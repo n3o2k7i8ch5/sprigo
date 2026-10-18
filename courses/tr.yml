@@ -1,4 +1,4 @@
-# Turkish course (A1 only). Hierarchy: levels (CEFR) > units > steps > activities.
+# Turkish course (A1–C2). Hierarchy: levels (CEFR) > units > steps > activities.
 # Activities name only a type (+ optional count and hints like scenario/goal); the AI writes the content
 # from the step's title, description, vocabulary, grammar and the level. Types: see src/course.ts.
 # Turkish has no articles and no grammatical gender; grammar steps follow suffixes and vowel harmony
@@ -529,6 +529,3131 @@ levels:
       activities:
         - { type: word_select, count: 3 }
         - { type: fill_blank, count: 3 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  A2:
+    title: Elementary
+    description: >
+      Communicate in simple, routine tasks on familiar topics and describe your background, past and plans,
+      building longer suffix chains with case endings, the aorist, the future and the first hearsay forms.
+
+    units:
+      - id: jobs-work-a2
+        title: Jobs & Work
+        description: Talk about jobs, workplaces and your working day.
+        icon: 💼
+        steps:
+          - id: professions-dir
+            title: Professions (-dir)
+            description: Say what people do with personal endings on nouns and the general/formal -dir/-dır/-dur/-dür (-tir after hard consonants).
+            vocabulary: [doktor, hemşire, öğretmen, garson, avukat, mühendis, aşçı, şoför, meslek]
+            grammar:
+              - pattern: "Ben hemşireyim."
+              - pattern: "Ne iş yapıyorsun?"
+              - pattern: "Ağabeyim avukattır."
+              - pattern: "Mesleğiniz nedir?"
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: workplace-olarak
+            title: At Work (olarak)
+            description: Say where you work with the locative and in what role with olarak.
+            vocabulary: [ofis, şirket, hastane, mağaza, patron, müdür, "iş arkadaşı", "olarak çalışmak"]
+            grammar:
+              - pattern: "Bir restoranda garson olarak çalışıyorum."
+              - pattern: "Büyük bir şirkette çalışıyorum."
+              - pattern: "Nerede çalışıyorsun?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: aorist-routines
+            title: Routines with the Aorist (-r, -ir, -er)
+            description: The aorist for habits and routines (kalkarım, giderim, gelir) and its negative -mez/-maz (çalışmam), with frequency words.
+            vocabulary: ["her zaman", genellikle, genelde, bazen, "neredeyse hiç", "hiçbir zaman", "her gün", "haftada bir"]
+            grammar:
+              - pattern: "Genelde erken kalkarım."
+              - pattern: "Her sabah otobüsle işe giderim."
+              - pattern: "Öğle yemeğini bazen ofiste yerim."
+              - pattern: "Pazar günleri çalışmam."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: den-beri-interview
+            title: A Job Interview (-den beri, -dır)
+            description: Say how long you have done something with -den beri and a duration + -dir (üç yıldır), keeping the verb in the present.
+            vocabulary: ["iş görüşmesi", deneyim, maaş, "tam zamanlı", "yarı zamanlı", "-den beri", "kaç yıldır", "ne zamandan beri"]
+            grammar:
+              - pattern: "2020'den beri burada çalışıyorum."
+              - pattern: "Üç yıldır Türkçe öğreniyorum."
+              - pattern: "Ne zamandan beri bu şirkettesiniz?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer questions about your job, your experience and how long you have worked there.
+
+      - id: comparisons-a2
+        title: Comparisons
+        description: Compare people, things and places.
+        icon: ⚖️
+        steps:
+          - id: daha-comparative
+            title: More & Less (-den daha)
+            description: Compare with the ablative -den/-dan (-ten/-tan) plus daha or daha az.
+            vocabulary: [uzun, kısa, pahalı, ucuz, hızlı, yavaş, daha, "daha az"]
+            grammar:
+              - pattern: "İstanbul Ankara'dan daha büyük."
+              - pattern: "Tren uçaktan daha ucuz."
+              - pattern: "Kız kardeşim benden daha uzun."
+              - pattern: "Bu yol ötekinden daha az kalabalık."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: kadar-equal
+            title: As … As (kadar)
+            description: Equal comparisons with kadar; pronouns take the genitive (benim kadar, senin kadar).
+            vocabulary: [kadar, "benim kadar", "senin kadar", "onun kadar", aynı, farklı]
+            grammar:
+              - pattern: "Ali babası kadar uzun."
+              - pattern: "Ben senin kadar çok çalışmıyorum."
+              - pattern: "Bu çanta öteki kadar pahalı değil."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: gibi-benzemek
+            title: Like & Look Like (gibi, -e benzemek)
+            description: Similarity with gibi (benim gibi, bunun gibi) and benzemek with the dative.
+            vocabulary: [gibi, "benim gibi", "bunun gibi", benzemek, benzer, ikiz]
+            grammar:
+              - pattern: "Tıpkı annesi gibi konuşuyor."
+              - pattern: "Kardeşim babama çok benziyor."
+              - pattern: "Burası masal gibi bir yer."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: listen_type }
+          - id: en-superlative
+            title: The Most (en)
+            description: Superlatives with en and a genitive group (Türkiye'nin en büyük şehri).
+            vocabulary: [en, "en iyi", "en kötü", "en büyük", "dünyanın en", "en sevdiğim"]
+            grammar:
+              - pattern: "Türkiye'nin en kalabalık şehri İstanbul'dur."
+              - pattern: "Burası mahallenin en iyi lokantası."
+              - pattern: "En sevdiğim yemek mantı."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: choosing_a_city
+                goal: Compare two cities with a friend and decide which one is the best to visit.
+
+      - id: at-the-shops-a2
+        title: At the Shops
+        description: Buy things, ask where to find them and return items.
+        icon: 🛍️
+        steps:
+          - id: market-quantities
+            title: How Much & How Many
+            description: Quantities, containers and prices at the market.
+            vocabulary: ["bir kilo", "yarım kilo", "bir düzine", "bir şişe", "bir kutu", "bir paket", "kaç lira?", "tanesi kaç lira?"]
+            grammar:
+              - pattern: "Bir kilo domates istiyorum, lütfen."
+              - pattern: "Portakalın kilosu kaç lira?"
+              - pattern: "Başka bir şey ister misiniz?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+          - id: accusative-yi
+            title: The Definite Object (-i, -yi)
+            description: The accusative -(y)i/-ı/-u/-ü for a definite object (bunu, şunu, gömleği), versus a bare indefinite object (ekmek aldım).
+            vocabulary: [bunu, şunu, onu, "bu gömleği", denemek, unutmak, beğenmek, almak]
+            grammar:
+              - pattern: "Bu gömleği deneyebilir miyim?"
+              - pattern: "Bunu alıyorum."
+              - pattern: "Ekmek aldım ama sütü unuttum."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+          - id: ablative-shops
+            title: From Where? (-den, -dan)
+            description: The ablative -den/-dan (-ten/-tan after hard consonants) for where you buy or come from.
+            vocabulary: [pazar, manav, kasap, fırın, bakkal, eczane, market, "-den almak"]
+            grammar:
+              - pattern: "Ekmeği her sabah fırından alıyorum."
+              - pattern: "Kasaptan yarım kilo kıyma aldım."
+              - pattern: "Bu elbiseyi hangi mağazadan aldın?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: word_bank }
+          - id: returning-items-iade
+            title: Returning Things
+            description: Return or exchange something that does not fit or does not work.
+            vocabulary: ["iade etmek", değiştirmek, fiş, beden, bozuk, "büyük gelmek", "küçük gelmek", dar]
+            grammar:
+              - pattern: "Bu ceketi iade etmek istiyorum."
+              - pattern: "Bana küçük geldi, değiştirebilir miyim?"
+              - pattern: "Fişiniz var mı?"
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: shop_counter
+                goal: Explain that something you bought does not fit and ask to exchange it.
+
+      - id: health-body-a2
+        title: Health & the Body
+        description: Say what hurts, see a doctor and give advice.
+        icon: 🩺
+        steps:
+          - id: body-parts-tr
+            title: The Body
+            vocabulary: [baş, kol, el, bacak, ayak, sırt, mide, boğaz, diş, göz]
+            grammar:
+              - pattern: "Ellerim çok soğuk."
+              - pattern: "Gözlerim yoruldu."
+            activities:
+              - { type: learn, count: 3 }
+              - { type: image_select, count: 2 }
+              - { type: match }
+              - { type: listen_select }
+          - id: agriyor-symptoms
+            title: What Hurts? (Başım ağrıyor)
+            description: The body part takes the possessive and the verb agrees with it (Başım ağrıyor), plus common symptoms.
+            vocabulary: [ağrımak, ağrı, ateş, öksürük, "nezle olmak", "grip olmak", hasta, "midem bulanıyor"]
+            grammar:
+              - pattern: "Başım ağrıyor."
+              - pattern: "Ateşim var."
+              - pattern: "Dünden beri boğazım ağrıyor."
+              - pattern: "Galiba grip oldum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: listen_type }
+          - id: doctor-imperative-yin
+            title: At the Doctor (-in, -yin)
+            description: The polite imperative -(y)in/-ın/-un/-ün (oturun, bekleyin) for instructions from a doctor or pharmacist.
+            vocabulary: [muayene, ilaç, reçete, randevu, "günde üç kez", "tok karnına", "aç karnına", dinlenmek]
+            grammar:
+              - pattern: "Lütfen oturun."
+              - pattern: "Ağzınızı açın, lütfen."
+              - pattern: "Bu ilacı günde üç kez tok karnına alın."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: advice-meli
+            title: You Should… (-meli, -malı)
+            description: Give advice with -meli/-malı and its negative -memeli/-mamalı; wish someone well with Geçmiş olsun.
+            vocabulary: ["geçmiş olsun", "bol su", "erken yatmak", "çok yaşa", sağlıklı, iyileşmek]
+            grammar:
+              - pattern: "Biraz dinlenmelisin."
+              - pattern: "Bol su içmelisin."
+              - pattern: "Bu kadar geç yatmamalısın."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: at_the_doctor
+                goal: Describe your symptoms to the doctor and understand the advice and the medicine you are given.
+
+      - id: travel-plans-a2
+        title: Travel Plans
+        description: Plan a trip, book a room and talk about dates and distances.
+        icon: ✈️
+        steps:
+          - id: mak-istiyorum
+            title: I Want To… (-mek istiyorum)
+            description: The infinitive -mek/-mak with istemek to say what you want or do not want to do.
+            vocabulary: [tatil, seyahat, "yurt dışı", gezmek, görmek, deniz, plaj, "-mek istemek"]
+            grammar:
+              - pattern: "Bu yaz Kapadokya'ya gitmek istiyorum."
+              - pattern: "Tatilde ne yapmak istiyorsun?"
+              - pattern: "Bu sefer otelde kalmak istemiyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select, count: 2 }
+          - id: mayi-dusunuyorum
+            title: Thinking of… (-meyi düşünüyorum)
+            description: The verbal noun -me/-ma with the accusative (gitmeyi, etmeyi) after düşünmek and planlamak.
+            vocabulary: [düşünmek, planlamak, "karar vermek", belki, henüz, "emin değilim", "-meyi düşünmek"]
+            grammar:
+              - pattern: "Ağustosta Bodrum'a gitmeyi düşünüyorum."
+              - pattern: "Trenle seyahat etmeyi planlıyoruz."
+              - pattern: "Henüz karar vermedim."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: booking-a-room
+            title: Booking a Room
+            description: Ask for a room, prices and what is included.
+            vocabulary: [rezervasyon, "tek kişilik oda", "çift kişilik oda", "kahvaltı dahil", gece, resepsiyon, "boş oda", ayırtmak]
+            grammar:
+              - pattern: "Üç gecelik bir oda ayırtmak istiyorum."
+              - pattern: "Boş odanız var mı?"
+              - pattern: "Kahvaltı dahil mi?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+              - { type: speak }
+          - id: den-ye-kadar
+            title: From … Until (-den … -e kadar)
+            description: Ranges of time and place with -den … -(y)e kadar; kadar after the dative means "until/as far as".
+            vocabulary: ["-e kadar", "-den … -e kadar", "sabahtan akşama kadar", "pazartesiden cumaya kadar", yolculuk, sürmek, havalimanı]
+            grammar:
+              - pattern: "Cumadan pazara kadar İzmir'deyiz."
+              - pattern: "Havalimanından otele kadar taksiyle gittik."
+              - pattern: "Yolculuk ne kadar sürüyor?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: travel_agency
+                goal: Plan a trip with a travel agent, giving your dates, budget and the kind of hotel you want.
+
+      - id: future-acak
+        title: The Future
+        description: Talk about plans, promises and predictions.
+        icon: 🔮
+        steps:
+          - id: future-acak-positive
+            title: Will (-ecek, -acak)
+            description: The future -(y)ecek/-(y)acak; k softens to ğ before a vowel (gideceğim) and gitmek becomes gid-.
+            vocabulary: [yarın, "gelecek hafta", haftaya, seneye, yakında, "bu akşam", "öbür gün", taşınmak]
+            grammar:
+              - pattern: "Yarın sinemaya gideceğim."
+              - pattern: "Gelecek hafta İzmir'e taşınacağız."
+              - pattern: "Bu akşam yağmur yağacak."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: future-acak-negative
+            title: Won't (-meyecek, -mayacak)
+            description: The negative future -meyecek/-mayacak for refusals and promises.
+            vocabulary: ["bir daha", artık, asla, "söz veriyorum", "geç kalmak", "tatile çıkmak"]
+            grammar:
+              - pattern: "Bir daha geç kalmayacağım, söz veriyorum."
+              - pattern: "Bu yıl tatile çıkmayacağız."
+              - pattern: "Ahmet artık sigara içmeyecek."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: future-acak-questions
+            title: Will You…? (-ecek misin?)
+            description: Future questions with the separate particle (gelecek misin?) and with question words.
+            vocabulary: ["ne zaman", nereye, kiminle, kaçta, "-ecek misin", "-acak mısın"]
+            grammar:
+              - pattern: "Yarın bize gelecek misin?"
+              - pattern: "Hafta sonu ne yapacaksınız?"
+              - pattern: "Toplantı kaçta başlayacak?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: plans-predictions-a2
+            title: Plans & Predictions
+            description: Soften or strengthen predictions with sanırım, herhalde, kesin and inşallah.
+            vocabulary: [sanırım, herhalde, galiba, kesin, belki, inşallah, mutlaka, "gelecek yıl"]
+            grammar:
+              - pattern: "Sanırım bu yaz Türkiye'ye geleceğim."
+              - pattern: "Herhalde yarın kar yağacak."
+              - pattern: "İnşallah sınavı geçeceğim."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - { type: translate }
+              - type: dialogue
+                scenario: new_year_plans
+                goal: Tell a friend your plans for next year and ask about theirs.
+
+      - id: childhood-a2
+        title: When I Was a Child
+        description: Describe your childhood and how things used to be.
+        icon: 🧸
+        steps:
+          - id: ken-when-i-was
+            title: When I Was… (-ken)
+            description: The suffix -ken (-yken after vowels) on nouns and adjectives (çocukken, öğrenciyken); it never changes for vowel harmony.
+            vocabulary: [çocukken, küçükken, gençken, öğrenciyken, utangaç, yaramaz, ilkokul, yurt]
+            grammar:
+              - pattern: "Çocukken çok utangaçtım."
+              - pattern: "Öğrenciyken Ankara'da yaşadım."
+              - pattern: "Gençken saçlarım uzundu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: past-habit-irdi
+            title: I Used to… (-irdi, -mezdi)
+            description: Past habits with the aorist + -di (giderdik, okurdu) and the negative -mezdi/-mazdı.
+            vocabulary: [eskiden, "her yaz", "bütün gün", "top oynamak", "bisiklete binmek", masal, köy, dede]
+            grammar:
+              - pattern: "Eskiden her yaz köye, dedemlere giderdik."
+              - pattern: "Annem bize her akşam masal okurdu."
+              - pattern: "Eskiden kahve içmezdim."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: then-and-now-tr
+            title: Then & Now
+            description: Contrast the past with today using eskiden, o zamanlar and artık.
+            vocabulary: ["o zamanlar", artık, şimdi, değişmek, "eskisi gibi", sessiz, kalabalık, mahalle]
+            grammar:
+              - pattern: "O zamanlar bu mahalle çok sessizdi."
+              - pattern: "Eskiden burada bir sinema vardı."
+              - pattern: "Artık hiçbir şey eskisi gibi değil."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+              - { type: listen_type }
+          - id: childhood-memories
+            title: Childhood Memories
+            vocabulary: [anı, oyuncak, bayram, "en yakın arkadaşım", özlemek, hatırlamak, "çocukluk"]
+            grammar:
+              - pattern: "Bayramlarda yeni kıyafetler giyerdik."
+              - pattern: "Çocukluğumu çok özlüyorum."
+              - pattern: "İlkokul öğretmenimi hiç unutmadım."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+              - { type: translate }
+              - type: dialogue
+                scenario: childhood_memories
+                goal: Tell a friend what you used to do as a child and ask about their childhood.
+
+      - id: telling-stories-a2
+        title: Telling Stories
+        description: Tell what happened, in order, with background and events.
+        icon: 📖
+        steps:
+          - id: past-continuous-iyordu
+            title: Was Doing (-iyordu)
+            description: The past continuous -(i)yordu for background and interrupted actions, next to -di for events.
+            vocabulary: ["o sırada", "tam o sırada", birden, aniden, uyumak, beklemek, "telefon çalmak"]
+            grammar:
+              - pattern: "Ben yemek yapıyordum, birden telefon çaldı."
+              - pattern: "Saat sekizde ne yapıyordun?"
+              - pattern: "Dışarıda kar yağıyordu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: listen_select }
+          - id: diktan-sonra
+            title: After… (-dikten sonra)
+            description: After an action with -dikten/-dıktan sonra (-tikten after hard consonants), and after a noun with -den sonra.
+            vocabulary: ["-dikten sonra", "ondan sonra", "yemekten sonra", "işten sonra", "dersten sonra", bitmek, dönmek]
+            grammar:
+              - pattern: "Kahvaltı yaptıktan sonra işe gittim."
+              - pattern: "Film bittikten sonra eve döndük."
+              - pattern: "İşten sonra spora gidiyorum."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank }
+          - id: madan-once
+            title: Before… (-meden önce)
+            description: Before an action with -meden/-madan önce, and before a noun with -den önce.
+            vocabulary: ["-meden önce", "yemekten önce", "yola çıkmak", "kapıyı kilitlemek", yatmak, "el yıkamak"]
+            grammar:
+              - pattern: "Evden çıkmadan önce kapıyı kilitledim."
+              - pattern: "Yemekten önce ellerini yıka."
+              - pattern: "Yatmadan önce biraz kitap okurum."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: story-connectors-tr
+            title: Telling a Story
+            description: Order events and react with connectors like önce, sonra, birden, neyse ki and sonunda.
+            vocabulary: ["bir gün", önce, sonra, birden, "neyse ki", maalesef, sonunda, sırılsıklam]
+            grammar:
+              - pattern: "Bir gün parkta yürüyordum."
+              - pattern: "Birden yağmur başladı."
+              - pattern: "Neyse ki yanımda şemsiye vardı."
+              - pattern: "Sonunda eve sırılsıklam döndük."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - { type: translate }
+              - type: dialogue
+                scenario: telling_a_story
+                goal: Tell a friend about something surprising that happened to you, from the setting to the end.
+
+      - id: experiences-hearsay
+        title: Experiences & Hearsay
+        description: Talk about what you have done and pass on news you heard.
+        icon: 🌍
+        steps:
+          - id: hic-ever-di
+            title: Have You Ever…? (Hiç … mi?)
+            description: Life experience with hiç, daha önce and -di (Hiç … gittin mi?).
+            vocabulary: [hiç, "daha önce", "hiçbir zaman", "bir kez", "birkaç kez", defalarca, "sıcak hava balonu"]
+            grammar:
+              - pattern: "Hiç Kapadokya'ya gittin mi?"
+              - pattern: "Daha önce hiç baklava yemedim."
+              - pattern: "Bir kez sıcak hava balonuna bindim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: fill_blank }
+          - id: henuz-coktan
+            title: Already & Not Yet (henüz, çoktan)
+            description: Say what has or has not happened yet with henüz, daha, çoktan, az önce and şimdiye kadar.
+            vocabulary: [henüz, daha, çoktan, zaten, "az önce", "şimdiye kadar"]
+            grammar:
+              - pattern: "Henüz bitirmedim."
+              - pattern: "Daha kahvaltı yapmadım."
+              - pattern: "Film çoktan başladı."
+              - pattern: "Şimdiye kadar on ülke gezdim."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: hearsay-mis-intro
+            title: I Heard That… (-miş)
+            description: A first look at -miş/-mış/-muş/-müş for news you heard or found out, versus -di for what you saw yourself.
+            vocabulary: ["duydum ki", meğer, galiba, haber, dedikodu, evlenmek, kapanmak, "işe başlamak"]
+            grammar:
+              - pattern: "Ali evlenmiş!"
+              - pattern: "Duydum ki Ayşe yeni bir işe başlamış."
+              - pattern: "Dün gece çok yağmur yağmış."
+              - pattern: "Meğer o restoran kapanmış."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: sentence_complete }
+          - id: life-experiences-a2
+            title: Life Experiences
+            vocabulary: [deneyim, "ilk kez", unutulmaz, inanılmaz, denemek, "hayatımda", manzara]
+            grammar:
+              - pattern: "Hayatımda hiç bu kadar güzel bir manzara görmedim."
+              - pattern: "Uçağa ilk kez geçen yıl bindim."
+            activities:
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+              - { type: translate }
+              - type: dialogue
+                scenario: getting_to_know_someone
+                goal: Ask someone about things they have done in their life, share your own experiences and pass on some news.
+
+      - id: invitations-rules-a2
+        title: Invitations & Rules
+        description: Make calls, invite people, ask permission and talk about rules.
+        icon: 📞
+        steps:
+          - id: phone-calls-tr
+            title: Phone Calls & Messages
+            description: Answer the phone, ask for someone and leave a message.
+            vocabulary: [alo, "kim arıyor?", "bir dakika", "hatta kalın", mesaj, "cep telefonu", meşgul, "geri aramak"]
+            grammar:
+              - pattern: "Alo, Mehmet Bey'le görüşebilir miyim?"
+              - pattern: "Kendisi şu an toplantıda."
+              - pattern: "Mesaj bırakmak ister misiniz?"
+              - pattern: "Sizi sonra ararım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: listen_type }
+          - id: offers-aorist-elim-mi
+            title: Offers & Invitations (-ir misin?, -elim mi?)
+            description: Offer with an aorist question (Çay içer misin?), suggest with -(y)elim mi?/-(y)alım mı?, accept or politely refuse.
+            vocabulary: ["ister misin?", olur, tabii, "çok isterim", maalesef, "başka zaman", buluşmak, "işim var"]
+            grammar:
+              - pattern: "Çay içer misin?"
+              - pattern: "Cumartesi sinemaya gidelim mi?"
+              - pattern: "Çok isterim ama bu akşam işim var."
+              - pattern: "Saat sekizde buluşalım mı?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: planning_an_evening
+                goal: Invite a friend out, agree on a day and a time, or politely say no.
+          - id: ebilir-miyim-permission
+            title: May I…? (-ebilir miyim?)
+            description: Ask for and give permission with -(y)ebilir miyim?/-(y)abilir miyim? and answer with tabii, buyurun.
+            vocabulary: ["-ebilir miyim?", "tabii ki", elbette, buyurun, "rahatsız etmek", pencere, kart]
+            grammar:
+              - pattern: "Pencereyi açabilir miyim?"
+              - pattern: "Kartla ödeyebilir miyim?"
+              - pattern: "Bir şey sorabilir miyim?"
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+          - id: rules-yasak-zorunda
+            title: Rules (yasak, -mek zorunda)
+            description: Prohibition with yasak and obligation with -mek zorunda and -mem lazım.
+            vocabulary: [yasak, zorunlu, kural, "-mek zorunda", lazım, gerek, "sigara içmek", "fotoğraf çekmek"]
+            grammar:
+              - pattern: "Burada sigara içmek yasak."
+              - pattern: "Pasaportunuzu göstermek zorundasınız."
+              - pattern: "Yarın erken kalkmam lazım."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+
+    checkpoint:
+      title: A2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B1:
+    title: Intermediate
+    description: >
+      Deal with most everyday situations, narrate experiences and events with the full set of past tenses, express wishes, regrets, opinions and plans, report what others said, and briefly give reasons using participles, nominalised clauses and converbs.
+
+    units:
+      - id: past-tenses-b1
+        title: Past Tenses Together
+        description: Combine -di, -miş, -iyordu and -mişti to tell what happened, what you heard and what had happened before.
+        icon: 🕰️
+        steps:
+          - id: witnessed-di-vs-heard-mis
+            title: Witnessed or Heard? (-di vs -miş)
+            description: Use -di for what you saw or know first-hand and -miş for what you heard or only just found out.
+            vocabulary: [görmek, duymak, haber, meğer, galiba, "haberin var mı", "bana söylediler", "bilmiyordum"]
+            grammar:
+              - pattern: "Ali dün İzmir'e gitti; onu otogara ben bıraktım."
+              - pattern: "Ali İzmir'e taşınmış, annesinden duydum."
+              - pattern: "Meğer sınav ertelenmiş, hiç haberim yoktu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: background-iyordu-di
+            title: Background and Events (-iyordu + -di)
+            description: Set the scene with -iyordu or -ken and interrupt it with a sudden event in -di.
+            vocabulary: [aniden, birdenbire, "bir anda", "tam o sırada", "o sırada", derken, "telefon çaldı", "elektrik kesildi"]
+            grammar:
+              - pattern: "Ders çalışıyordum, tam o sırada telefon çaldı."
+              - pattern: "Yağmur yağıyordu ve sokakta kimse yoktu."
+              - pattern: "Biz yemek yerken elektrik kesildi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: pluperfect-misti
+            title: Had Already Happened (-mişti)
+            description: Say what had happened before another past event with -mişti, -mıştı, -muştu, -müştü.
+            vocabulary: [çoktan, zaten, henüz, "daha önce", "o güne kadar", "hiç", kalkmak, bitmek]
+            grammar:
+              - pattern: "İstasyona vardığımızda tren çoktan kalkmıştı."
+              - pattern: "O güne kadar hiç deniz görmemiştim."
+              - pattern: "Onları aradığımızda yemeği zaten yemişlerdi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: telling-anecdote-b1
+            title: Telling an Anecdote
+            description: Tell a short personal story mixing the past tenses and react to someone else's.
+            vocabulary: ["Başıma ne geldi, biliyor musun?", "Düşünsene!", "Olamaz!", "Yok artık!", "en kötüsü de", "neyse ki", sonunda, "çok şaşırdım"]
+            grammar:
+              - pattern: "Geçen gün başıma ne geldi, biliyor musun?"
+              - pattern: "En kötüsü de telefonumu evde unutmuştum."
+              - pattern: "Neyse ki sonunda bir taksi bulduk."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: telling_an_anecdote
+                goal: Tell a friend about something funny or surprising that happened to you, using -di, -iyordu, -mişti and -miş.
+
+      - id: conditionals-sa-b1
+        title: Real Conditionals
+        description: Talk about real conditions with -sa/-se on verbs, nouns and other tenses.
+        icon: 🔀
+        steps:
+          - id: aorist-conditional-irsa
+            title: If It Rains (-(ı)rsa)
+            description: "Aorist + -sa for real future conditions: yağarsa, kalkarsan, istersen."
+            vocabulary: [eğer, "yağmur yağarsa", "vaktim olursa", istersen, "erken kalkarsan", "geç kalırsan", "işler bitmezse", ama]
+            grammar:
+              - pattern: "Yarın yağmur yağarsa pikniğe gitmeyiz."
+              - pattern: "Erken kalkarsan otobüsü yakalarsın."
+              - pattern: "Eğer istersen seni havalimanından alırım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: varsa-yoksa-nouns
+            title: If There Is (varsa, -(y)sa with Nouns)
+            description: Add -(y)sa to nouns, adjectives, var and yok (vaktin varsa, hastaysan, evdeysen).
+            vocabulary: [varsa, yoksa, "vaktin varsa", hastaysan, evdeysen, "sorun yoksa", mümkünse, gerekirse]
+            grammar:
+              - pattern: "Vaktin varsa akşam bize uğra."
+              - pattern: "Hastaysan bugün işe gitme."
+              - pattern: "Mümkünse yarın sabah arayın."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: tense-conditionals-diyse
+            title: If It Has Happened (-diyse, -iyorsa, -ecekse)
+            description: Combine -sa with other tenses to talk about facts you assume (geldiyse, geliyorsa, gelecekse).
+            vocabulary: [bitirdiysen, anlamadıysan, "geldiyse", çalışıyorsa, biliyorsan, gelecekse, "o zaman", "o halde"]
+            grammar:
+              - pattern: "Ödevini bitirdiysen dışarı çıkabilirsin."
+              - pattern: "Ali de gelecekse daha büyük bir masa ayıralım."
+              - pattern: "Bu kadar çalışıyorsa sınavı kesin geçer."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: plans-with-conditions-sa-bile
+            title: Plans with Conditions (-sa bile, yoksa)
+            description: Make flexible plans with -sa bile, yoksa, olmazsa and ne olursa olsun.
+            vocabulary: ["yağsa bile", yoksa, olmazsa, "ne olursa olsun", "duruma göre", "belli olmaz", bakarız, "haber veririm"]
+            grammar:
+              - pattern: "Yağmur yağsa bile yürüyüşe çıkacağız."
+              - pattern: "Acele et, yoksa uçağı kaçıracağız."
+              - pattern: "Ne olursa olsun seni arayacağım."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: planning_a_weekend_trip
+                goal: Plan a weekend trip with a friend and agree on what to do if the weather or plans change.
+
+      - id: wishes-regrets-b1
+        title: Wishes & Regrets
+        description: Express wishes with keşke, regrets with -saydı, and hopes and good wishes.
+        icon: 🌠
+        steps:
+          - id: keske-sa-wishes
+            title: Keşke + -sa (Wishes)
+            description: Wish for something different now or in the future with keşke + -sa.
+            vocabulary: [keşke, "zamanım olsa", "burada olsan", bilsem, zengin, "daha çok", tatil, "deniz kenarı"]
+            grammar:
+              - pattern: "Keşke şimdi deniz kenarında olsak."
+              - pattern: "Keşke daha çok boş zamanım olsa."
+              - pattern: "Keşke sen de bizimle gelsen."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: keske-saydi-regrets
+            title: Keşke + -saydı (Regrets)
+            description: Talk about past regrets with keşke + -saydı/-seydi.
+            vocabulary: [pişman, "pişman olmak", dinleseydim, gitseydim, söyleseydin, fırsat, kaçırmak, "çok geç"]
+            grammar:
+              - pattern: "Keşke o işi kabul etseydim."
+              - pattern: "Keşke bana daha önce söyleseydin."
+              - pattern: "Keşke annemi dinleseydim, şimdi çok pişmanım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: good-wishes-sin
+            title: Good Wishes (-sın, -sin)
+            description: Use set phrases with the third-person optative -sın/-sin/-sun/-sün for everyday occasions.
+            vocabulary: ["Kolay gelsin", "Hayırlı olsun", "Afiyet olsun", "Sıhhatler olsun", "Başın sağ olsun", "Gözün aydın", "Güle güle kullan", "Ellerine sağlık"]
+            grammar:
+              - pattern: "Yeni evin hayırlı olsun!"
+              - pattern: "Kolay gelsin, yardım edebilir miyim?"
+              - pattern: "Sınavın iyi geçsin!"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete }
+          - id: hopes-umarim
+            title: Hopes (umarım, inşallah)
+            description: Express hopes with umarım and inşallah + aorist, and gladness with iyi ki.
+            vocabulary: [umarım, inşallah, dilerim, şans, "bol şans", başarılar, "iyi ki", "her şey gönlünce olsun"]
+            grammar:
+              - pattern: "Umarım yarın hava güzel olur."
+              - pattern: "İnşallah sınavı geçersin."
+              - pattern: "İyi ki geldin, seni çok özlemiştim."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - type: dialogue
+                scenario: wishing_a_friend_luck
+                goal: Wish a friend luck before a job interview, say what you hope will happen and share a regret of your own.
+
+      - id: opinions-b1
+        title: Opinions
+        description: Give and justify opinions, and agree or disagree politely.
+        icon: 💬
+        steps:
+          - id: bence-bana-gore
+            title: In My Opinion (bence, bana göre)
+            description: Give opinions with bence, bana göre and bana kalırsa, and ask with sence.
+            vocabulary: [bence, "bana göre", "bana kalırsa", sence, "bence de", kesinlikle, "emin değilim", "pek sanmam"]
+            grammar:
+              - pattern: "Bence bu film çok sıkıcıydı."
+              - pattern: "Sence hangisi daha güzel?"
+              - pattern: "Bana kalırsa bu fiyat biraz pahalı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select }
+          - id: digini-dusunuyorum
+            title: I Think That... (-dığını düşünüyorum)
+            description: Turn a clause into an object with -dığını/-(y)acağını before düşünmek, sanmak, inanmak and emin olmak.
+            vocabulary: [düşünüyorum, sanıyorum, sanmıyorum, inanıyorum, eminim, haklı, doğru, yanlış]
+            grammar:
+              - pattern: "Onun haklı olduğunu düşünüyorum."
+              - pattern: "Bu planın işe yarayacağına inanıyorum."
+              - pattern: "Ali'nin bugün geleceğini sanmıyorum."
+              - pattern: "Doğru karar verdiğimizden eminim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: agreeing-disagreeing-b1
+            title: Agreeing & Disagreeing
+            description: Agree, partly agree or disagree politely.
+            vocabulary: [katılıyorum, katılmıyorum, haklısın, "bence de", "bir bakıma", "öyle mi düşünüyorsun?", "sana katılıyorum ama", "o kadar emin değilim"]
+            grammar:
+              - pattern: "Sana tamamen katılıyorum."
+              - pattern: "Bir bakıma haklısın ama ben öyle düşünmüyorum."
+              - pattern: "Bu konuda sana katılmıyorum."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: word_bank }
+          - id: giving-reasons-cunku
+            title: Giving Reasons (çünkü, bu yüzden)
+            description: Back up your opinion with çünkü, bu yüzden, ayrıca and üstelik.
+            vocabulary: [çünkü, "bu yüzden", "bu nedenle", "o yüzden", öncelikle, ayrıca, üstelik, "sonuç olarak"]
+            grammar:
+              - pattern: "Bu şehirde yaşamak istemem, çünkü çok kalabalık."
+              - pattern: "Trafik çok yoğundu, bu yüzden geç kaldım."
+              - pattern: "Öncelikle ucuz, üstelik çok kullanışlı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: city_or_town_debate
+                goal: Discuss whether it is better to live in a big city or a small town, giving reasons and reacting to the other person's opinion.
+
+      - id: reported-speech-b1
+        title: Reported Speech
+        description: Report what people said, asked and wanted with -dığını, -(y)acağını and diye.
+        icon: 🗣️
+        steps:
+          - id: reported-digini-soyledi
+            title: He Said That... (-dığını söyledi)
+            description: Report statements with -dığını/-(y)acağını + söyledi, anlattı, haber verdi.
+            vocabulary: [söyledi, anlattı, açıkladı, yazdı, "haber verdi", hatırlattı, "yorgun olduğunu", "geleceğini"]
+            grammar:
+              - pattern: "Ayşe yorgun olduğunu söyledi."
+              - pattern: "Mehmet yarın geleceğini haber verdi."
+              - pattern: "Öğretmen sınavın zor olacağını söyledi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: quoting-diye-dedi
+            title: Quoting with dedi and diye
+            description: Quote someone's exact words with dedi, and with diye before sordu, bağırdı and other verbs.
+            vocabulary: [dedi, diye, sordu, bağırdı, fısıldadı, "cevap verdi", "dedi ki", "ne dedi?"]
+            grammar:
+              - pattern: 'Annem "Geç kalma!" dedi.'
+              - pattern: 'Ali "Yarın gelemem" diye mesaj attı.'
+              - pattern: 'Garson "Ne içersiniz?" diye sordu.'
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+              - { type: sentence_complete }
+          - id: reported-questions-ip-medigini
+            title: Reported Questions (-ıp -madığını)
+            description: Report and embed questions with question word + -dığını and with -ıp -madığını.
+            vocabulary: [sormak, "merak ediyorum", bilmiyorum, hatırlamıyorum, nerede, "ne zaman", neden, "gelip gelmeyeceğini"]
+            grammar:
+              - pattern: "Saatin kaç olduğunu sordu."
+              - pattern: "Toplantıya gelip gelmeyeceğini merak ediyorum."
+              - pattern: "Nerede oturduğunu hatırlamıyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: passing-on-message-b1
+            title: Passing On a Message
+            description: Take a message and pass it on accurately, including requests (-masını istedi).
+            vocabulary: ["mesaj bırakmak", "selam söylemek", iletmek, "not almak", "geri aramak", "söylememi istedi", "rica etti", unutma]
+            grammar:
+              - pattern: "Ahmet Bey aradı, onu geri aramanızı rica etti."
+              - pattern: "Ayşe sana selam söyledi."
+              - pattern: "Toplantının yarın saat onda olduğunu iletmemi istedi."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select, count: 2 }
+              - type: dialogue
+                scenario: taking_a_phone_message
+                goal: Take a phone message for a colleague and then pass it on accurately, reporting what the caller said and asked.
+
+      - id: relative-clauses-b1
+        title: Relative Clauses
+        description: Describe people, things and places with the participles -(y)an, -dık and -(y)acak.
+        icon: 🔗
+        steps:
+          - id: subject-participle-yan
+            title: The One Who... (-(y)an)
+            description: Build subject relative clauses with -an/-en (bekleyen adam, Türkçe konuşan rehber).
+            vocabulary: [bekleyen, konuşan, oturan, çalışan, gelen, "kapıda duran", "yanımda oturan", "simit satan"]
+            grammar:
+              - pattern: "Kapıda bekleyen adam kim?"
+              - pattern: "Türkçe konuşan bir rehber arıyoruz."
+              - pattern: "Bu evde oturan aile çok sessiz."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: object-participle-dik
+            title: The One I... (-dığım, -dığın)
+            description: Build object relative clauses with -dık + possessive (okuduğum kitap, gittiğimiz restoran).
+            vocabulary: ["okuduğum kitap", "aldığın ayakkabı", "izlediğimiz film", "tanıdığım biri", "doğduğum şehir", "sevdiğim yemek", "söylediğin şey", "gittiğimiz restoran"]
+            grammar:
+              - pattern: "Dün izlediğimiz film çok güzeldi."
+              - pattern: "Okuduğum kitabı sana veririm."
+              - pattern: "Bu, doğduğum şehir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: future-participle-yacak
+            title: Things to Come (-(y)acak as an Adjective)
+            description: Use -(y)acak/-(y)ecek before nouns for future or intended things (gelecek misafirler, yapacak bir şey).
+            vocabulary: [yiyecek, içecek, "gelecek hafta", "okuyacağım kitap", "yapacak bir şey", "oturacak yer", "giyecek bir şey", "gidecek yer"]
+            grammar:
+              - pattern: "Yarın gelecek misafirler için yemek hazırlıyorum."
+              - pattern: "Yapacak başka bir şey yok."
+              - pattern: "Parti için giyecek bir şeyim yok."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - { type: listen_type }
+          - id: describing-places-participles
+            title: Describing People and Places
+            description: Combine participles to describe your neighbourhood, home and the people in it.
+            vocabulary: ["denize bakan", "eskiden oturduğumuz", "çocukluğumun geçtiği", "herkesin tanıdığı", "en sevdiğim", manzaralı, mahalle, komşu]
+            grammar:
+              - pattern: "Çocukluğumun geçtiği mahalle çok değişti."
+              - pattern: "Denize bakan bir ev arıyoruz."
+              - pattern: "Sana bahsettiğim kafe burası."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: showing_your_neighbourhood
+                goal: Show a visitor around your neighbourhood and describe the places and people in it using relative clauses.
+
+      - id: advice-requests-b1
+        title: Advice & Requests
+        description: Give advice, ask others to do things and make polite requests.
+        icon: 🙏
+        steps:
+          - id: advice-san-iyi-olur
+            title: You'd Better... (-san iyi olur)
+            description: Give soft advice with -san iyi olur, stronger advice with -malısın, and suggestions with neden ... -mıyorsun?
+            vocabulary: ["iyi olur", dinlensen, "doktora gitsen", "erken yatsan", tavsiye, öneri, "bence", "neden denemiyorsun?"]
+            grammar:
+              - pattern: "Biraz dinlensen iyi olur."
+              - pattern: "Bence doktora gitmelisin."
+              - pattern: "Neden biraz yürüyüş yapmıyorsun?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+              - { type: error_correct }
+          - id: masini-istiyorum
+            title: I Want You To... (-masını istiyorum)
+            description: Ask someone else to do something with -ma + possessive + accusative (gelmeni, olmamızı, doldurmanızı).
+            vocabulary: [istiyorum, "rica ederim", bekliyorum, gelmeni, "yardım etmeni", "sessiz olmanızı", "erken gelmesini", aramasını]
+            grammar:
+              - pattern: "Yarın erken gelmeni istiyorum."
+              - pattern: "Öğretmen sessiz olmamızı istedi."
+              - pattern: "Bu formu doldurmanızı rica ederim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: polite-requests-acaba
+            title: Polite Requests (acaba, zahmet olmazsa)
+            description: Soften requests with acaba, zahmet olmazsa, -abilir misiniz and the aorist question (açar mısınız?).
+            vocabulary: [acaba, "zahmet olmazsa", "mümkün mü", "rica etsem", "yardımcı olabilir misiniz", "bir dakikanız var mı", "açar mısınız", "kusura bakmayın"]
+            grammar:
+              - pattern: "Acaba pencereyi açabilir misiniz?"
+              - pattern: "Zahmet olmazsa tuzu uzatır mısınız?"
+              - pattern: "Senden bir şey rica edebilir miyim?"
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete }
+          - id: asking-for-advice-b1
+            title: Asking for and Giving Advice
+            description: Explain a problem, ask what to do and respond to suggestions.
+            vocabulary: ["Ne yapmalıyım?", "Sence ne yapayım?", "Senin yerinde olsam", "Sen olsan ne yapardın?", "tavsiye ederim", "hiç fikrim yok", "iyi fikir", "bir deneyeyim"]
+            grammar:
+              - pattern: "Sence ne yapayım?"
+              - pattern: "Senin yerinde olsam onunla konuşurdum."
+              - pattern: "Bu kursu sana tavsiye ederim."
+            activities:
+              - { type: learn }
+              - { type: fill_blank }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: asking_for_advice
+                goal: Explain a problem to a friend, ask for advice and react to their suggestions.
+
+      - id: work-careers-b1
+        title: Work & Careers
+        description: Talk about career goals, reasons and job applications with -mak için and -dığı için.
+        icon: 💼
+        steps:
+          - id: purpose-mak-icin
+            title: In Order To (-mak için)
+            description: Say why you do something with the infinitive + için.
+            vocabulary: ["iş bulmak", "deneyim kazanmak", "para biriktirmek", "terfi almak", "kendimi geliştirmek", staj, sertifika, "yabancı dil"]
+            grammar:
+              - pattern: "Deneyim kazanmak için staj yapıyorum."
+              - pattern: "İngilizcemi geliştirmek için kursa gidiyorum."
+              - pattern: "İş bulmak için birkaç şirkete başvurdum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+              - { type: translate }
+          - id: reason-digi-icin
+            title: Because (-dığı için)
+            description: Give reasons with -dığı için and -(y)acağı için (maaşı düşük olduğu için, yorulduğum için).
+            vocabulary: [maaş, "fazla mesai", "çalışma saatleri", "iş yükü", yorucu, esnek, "istifa etmek", "işten ayrılmak"]
+            grammar:
+              - pattern: "Maaşı düşük olduğu için işten ayrıldı."
+              - pattern: "Çok yorulduğum için toplantıya gelemedim."
+              - pattern: "Çalışma saatleri esnek olduğu için bu işi seviyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: sentence_complete }
+          - id: job-application-b1
+            title: Applying for a Job
+            description: Read job ads and talk about your CV and experience.
+            vocabulary: [özgeçmiş, "ön yazı", başvuru, "iş ilanı", deneyim, pozisyon, "iş görüşmesi", başvurmak]
+            grammar:
+              - pattern: "Bu pozisyona başvurmak istiyorum."
+              - pattern: "Özgeçmişimi e-postayla gönderdim."
+              - pattern: "Beş yıldır bu sektörde çalışıyorum."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: listen_type }
+              - { type: translate }
+              - { type: error_correct }
+          - id: job-interview-b1
+            title: The Job Interview
+            description: Answer common interview questions about yourself, your strengths and your goals.
+            vocabulary: ["güçlü yönler", "zayıf yönler", "takım çalışması", sorumluluk, hedef, "Kendinizden bahseder misiniz?", "Neden bu şirket?", "Ne zaman başlayabilirsiniz?"]
+            grammar:
+              - pattern: "Kendinizden biraz bahseder misiniz?"
+              - pattern: "Takım çalışmasını sevdiğim için bu pozisyonun bana uygun olduğunu düşünüyorum."
+              - pattern: "Beş yıl sonra kendinizi nerede görüyorsunuz?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: job_interview
+                goal: Answer an interviewer's questions about your experience, strengths and why you want the job, giving reasons with -dığı için.
+
+      - id: habits-lifestyle-b1
+        title: Habits & Lifestyle
+        description: Talk about starting, giving up and getting used to habits with -maya başlamak, -mayı bırakmak and alışmak.
+        icon: 🧘
+        steps:
+          - id: maya-baslamak
+            title: Starting Something (-maya başlamak)
+            description: Talk about new habits with -maya başlamak, -maya çalışmak and -maya karar vermek.
+            vocabulary: [başlamak, "karar vermek", "spor yapmak", "sağlıklı beslenmek", "erken kalkmak", düzenli, "her sabah", yürüyüş]
+            grammar:
+              - pattern: "Geçen ay spor yapmaya başladım."
+              - pattern: "Sağlıklı beslenmeye çalışıyorum."
+              - pattern: "Her sabah yürüyüş yapmaya karar verdim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: mayi-birakmak
+            title: Giving Something Up (-mayı bırakmak)
+            description: Talk about quitting habits with -mayı bırakmak and -dan vazgeçmek.
+            vocabulary: [bırakmak, vazgeçmek, "sigara içmek", şeker, kafein, "kötü alışkanlık", artık, denemek]
+            grammar:
+              - pattern: "Babam geçen yıl sigara içmeyi bıraktı."
+              - pattern: "Artık gece geç saatte yemek yememeye çalışıyorum."
+              - pattern: "Şekerden vazgeçmek çok zor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: getting-used-alismak
+            title: Getting Used To (-maya alışmak)
+            description: Say what you are used to or still getting used to with -(y)a alışmak and alışkın olmak.
+            vocabulary: [alışmak, alışkanlık, "alışkın olmak", "zor geldi", zamanla, "yavaş yavaş", hâlâ, "yeni şehir"]
+            grammar:
+              - pattern: "Erken kalkmaya hâlâ alışamadım."
+              - pattern: "Yavaş yavaş İstanbul trafiğine alıştım."
+              - pattern: "Ben acı yemeklere alışkınım."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+          - id: healthy-lifestyle-b1
+            title: A Healthy Lifestyle
+            description: Compare your old and new habits and talk about health goals.
+            vocabulary: [sağlıklı, "dengeli beslenme", uyku, stres, egzersiz, "kilo vermek", "formda kalmak", "su içmek"]
+            grammar:
+              - pattern: "Günde en az iki litre su içmeye çalışıyorum."
+              - pattern: "Stresi azaltmak için meditasyon yapıyorum."
+              - pattern: "Eskiden çok fast food yerdim, şimdi evde yemek yapıyorum."
+            activities:
+              - { type: learn }
+              - { type: fill_blank }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: healthy_habits_chat
+                goal: Tell a friend which habits you have started, given up or got used to, and encourage them to try one.
+
+      - id: media-technology-b1
+        title: Media & Technology
+        description: Talk about devices, the internet and the news with the converbs -arak and -ınca.
+        icon: 📱
+        steps:
+          - id: converb-arak
+            title: By Doing (-arak)
+            description: Say how something is done with -arak/-erek (dizi izleyerek, gülerek).
+            vocabulary: [indirmek, yüklemek, paylaşmak, uygulama, internet, "arama yapmak", kullanmak, "zaman kazanmak"]
+            grammar:
+              - pattern: "Türkçeyi dizi izleyerek öğrendim."
+              - pattern: "Biletleri internetten alarak zaman kazandık."
+              - pattern: "Gülerek odaya girdi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+              - { type: error_correct }
+          - id: converb-inca
+            title: When / As Soon As (-ınca)
+            description: Link two actions with -(y)ınca/-(y)ince/-(y)unca/-(y)ünce (eve gelince, haberi duyunca).
+            vocabulary: ["eve gelince", "haberi duyunca", "telefon çalınca", "şarj bitince", "açınca", bildirim, mesaj, şarj]
+            grammar:
+              - pattern: "Eve gelince seni ararım."
+              - pattern: "Haberi duyunca çok şaşırdım."
+              - pattern: "Bilgisayarı açınca bir hata mesajı çıktı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: tech-problems-b1
+            title: Tech Problems
+            description: Describe what went wrong with a device and how you fixed it.
+            vocabulary: [şifre, "şarj aleti", güncellemek, donmak, bağlantı, "internet gitti", çalışmıyor, "yeniden başlatmak"]
+            grammar:
+              - pattern: "Şifremi unuttum, giriş yapamıyorum."
+              - pattern: "Bilgisayar dondu, yeniden başlatınca düzeldi."
+              - pattern: "Telefonu güncelleyerek sorunu çözdüm."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: image_select }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+          - id: news-social-media-b1
+            title: News & Social Media
+            description: Talk about how you follow the news and use social media, and weigh up pros and cons.
+            vocabulary: [haber, gazete, "sosyal medya", takipçi, paylaşım, "yorum yapmak", "sahte haber", gündem]
+            grammar:
+              - pattern: "Haberleri genelde telefondan okuyorum."
+              - pattern: "Bu haberi paylaşmadan önce kaynağını kontrol et."
+              - pattern: "Sosyal medyada çok zaman geçirdiğimi düşünüyorum."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: social_media_debate
+                goal: Discuss the advantages and disadvantages of social media with a friend and say how you use it yourself.
+
+    checkpoint:
+      title: B1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  B2:
+    title: Upper Intermediate
+    description: >
+      Understand the main ideas of complex texts, interact with fluency and spontaneity, and argue a viewpoint on a wide range of topics, weighing advantages and disadvantages. Grammar centres on voice (passive and causative), unreal conditionals, deduction with -DIr and -mIş olmalı, and subordinate clauses built from -DIk, -mA and converbs.
+
+    units:
+      - id: passive-voice-il
+        title: Passive Voice (-Il / -In)
+        description: Shift the focus from who does something to what is done.
+        icon: 📰
+        steps:
+          - id: passive-il-in-forms
+            title: Forming the Passive (-Il, -In, -nIl)
+            description: Add -Il after consonants, -n after vowels and -In after stems ending in l (yapıldı, okundu, bulundu); one-syllable vowel stems take -nIl (yenildi, denildi).
+            vocabulary: [yapılmak, yazılmak, okunmak, bulunmak, satılmak, görülmek, açılmak, söylenmek, çevrilmek]
+            grammar:
+              - pattern: "Bu köprü 1973'te yapıldı."
+              - pattern: "Kitap yirmi dile çevrildi."
+              - pattern: "Kaybolan cüzdanım otobüste bulundu."
+              - pattern: "Mektup okunmadan çöpe atıldı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+              - { type: listen_type }
+          - id: passive-agent-tarafindan
+            title: By Whom? (tarafından)
+            description: Name the doer of a passive action with tarafından.
+            vocabulary: [tarafından, "inşa edilmek", "keşfedilmek", kurulmak, seçilmek, yönetilmek, tasarlanmak, mimar, belediye]
+            grammar:
+              - pattern: "Süleymaniye Camii Mimar Sinan tarafından inşa edildi."
+              - pattern: "Penisilin Alexander Fleming tarafından keşfedildi."
+              - pattern: "Yeni belediye başkanı halk tarafından seçildi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+          - id: impersonal-passive-ilir
+            title: Impersonal Passive (Burada sigara içilmez)
+            description: Use the passive aorist of intransitive verbs to state customs, rules and general truths.
+            vocabulary: ["sigara içilmez", girilmez, geçilmez, "ikram edilir", gelenek, kural, adet, "dikkat edilmeli"]
+            grammar:
+              - pattern: "Burada sigara içilmez."
+              - pattern: "Camiye ayakkabıyla girilmez."
+              - pattern: "Bayramlarda büyüklerin eli öpülür."
+              - pattern: "Türkiye'de misafire hemen çay ikram edilir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+              - { type: listen_type }
+          - id: passive-in-the-news
+            title: Passives in the News
+            description: Understand and use passive verbs in news headlines and reports.
+            vocabulary: [haber, manşet, açıklandı, yakalandı, ertelendi, "iptal edildi", "kabul edildi", soruşturma, yetkililer]
+            grammar:
+              - pattern: "Maç yoğun kar nedeniyle ertelendi."
+              - pattern: "Yeni yasa Meclis'te kabul edildi."
+              - pattern: "Şüpheliler kısa sürede yakalandı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: discussing_the_news
+                goal: Tell a friend about a news story you read, using passive verbs to say what was done.
+
+      - id: causative-dir-t
+        title: Causative (-DIr / -t)
+        description: Make, let or have someone do something.
+        icon: 🛠️
+        steps:
+          - id: causative-dir-t-forms
+            title: Making Someone Do It (-DIr, -t)
+            description: Add -t to polysyllabic stems ending in a vowel, r or l (bekletmek, okutmak, oturtmak) and -DIr to most others (yaptırmak, güldürmek), plus irregulars like pişirmek and çıkarmak.
+            vocabulary: [yaptırmak, okutmak, bekletmek, güldürmek, öldürmek, pişirmek, bitirmek, çıkarmak, düşürmek]
+            grammar:
+              - pattern: "Beni yarım saat beklettin!"
+              - pattern: "Öğretmen bize her hafta bir kitap okutuyor."
+              - pattern: "Bu film herkesi çok güldürdü."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: causative-services
+            title: Getting Things Done (saçımı kestirdim)
+            description: Say what you had someone else do for you, at the hairdresser, the tailor or the mechanic.
+            vocabulary: ["saç kestirmek", yıkatmak, "tamir ettirmek", boyatmak, temizletmek, diktirmek, kuaför, terzi, usta]
+            grammar:
+              - pattern: "Dün saçımı kestirdim."
+              - pattern: "Arabamı yıkatmam lazım."
+              - pattern: "Bu takımı terziye diktirdim."
+              - pattern: "Bilgisayarımı tamir ettirdim."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: causative-causee-case
+            title: Who Does It? (Dative or Accusative)
+            description: Mark the person made to act with the dative when the verb has an object (bana yazdırdı) and the accusative when it has none (bebeği uyuttu).
+            vocabulary: [uyutmak, yedirmek, içirmek, giydirmek, oturtmak, öğretmek, zorlamak, "izin vermek"]
+            grammar:
+              - pattern: "Anne bebeği uyuttu."
+              - pattern: "Çocuğa ilacını zor içirdik."
+              - pattern: "Müdür raporu bana yeniden yazdırdı."
+              - pattern: "Küçükken bana zorla ıspanak yedirirlerdi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: sentence_complete }
+          - id: causative-passive-tirildi
+            title: Causative + Passive (yaptırıldı)
+            description: Combine the causative and the passive to say something was commissioned or had done.
+            vocabulary: [yaptırılmak, onarılmak, "ev sahibi", kiracı, tadilat, müteahhit, sözleşme, masraf]
+            grammar:
+              - pattern: "Bu cami 16. yüzyılda Kanuni tarafından yaptırıldı."
+              - pattern: "Ev sahibi tadilatı kendi ustasına yaptırdı."
+              - pattern: "Masrafları kiracıya ödetmek istiyorlar."
+            activities:
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: translate }
+              - type: dialogue
+                scenario: arranging_home_repairs
+                goal: Explain to your landlord what needs fixing and agree on who will have it done and pay for it.
+
+      - id: hypotheticals-saydi
+        title: Hypotheticals (-sAydI … -(I)rdI)
+        description: Talk about unreal situations in the present and the past, and express regret.
+        icon: 💭
+        steps:
+          - id: unreal-present-sa-irdi
+            title: If Things Were Different (-sA … -(I)rdI)
+            description: Pair -sA with the past aorist -(I)rdI for imaginary situations in the present.
+            vocabulary: ["yerinde olsam", "vaktim olsa", "param olsa", gezerdim, alırdım, "kabul etmezdim", fırsat, imkân]
+            grammar:
+              - pattern: "Zengin olsam bütün dünyayı gezerdim."
+              - pattern: "Yerinde olsam o işi kabul etmezdim."
+              - pattern: "Vaktim olsa sana yardım ederdim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete }
+          - id: unreal-past-saydi
+            title: If I Had Known (-sAydI)
+            description: Use -sAydI with -(I)rdI for conditions in the past that did not happen.
+            vocabulary: [bilseydim, "erken çıksaydık", "haber verseydin", "treni kaçırmak", "fırsatı kaçırmak", zamanında, "farkına varmak", "başka türlü"]
+            grammar:
+              - pattern: "Bilseydim sana söylerdim."
+              - pattern: "Erken çıksaydık treni kaçırmazdık."
+              - pattern: "Haber verseydin seni havalimanından alırdım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - { type: error_correct }
+              - { type: translate }
+          - id: mixed-hypotheticals-saydi
+            title: Mixed Hypotheticals
+            description: Link a past condition to a present result (Tıp okusaydım şimdi doktor olurdum).
+            vocabulary: [şimdi, "bugün", "yurt dışında yaşamak", "meslek seçmek", tercih, "o zaman", "hayatım farklı olurdu", "o işi kabul etmek"]
+            grammar:
+              - pattern: "Tıp okusaydım şimdi doktor olurdum."
+              - pattern: "O işi kabul etseydim şimdi Londra'da yaşıyor olurdum."
+              - pattern: "Bu kadar utangaç olmasaydım ona çoktan açılırdım."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+              - { type: listen_type }
+          - id: regret-keske-saydi
+            title: Expressing Regret (keşke -sAydI)
+            description: Express regret with keşke -sAydI and pişman olmak.
+            vocabulary: [keşke, "pişman olmak", "hata yapmak", "özür dilemek", "geri almak", "elimde olsa", "kendimi suçlamak", "boş ver"]
+            grammar:
+              - pattern: "Keşke sınava daha iyi hazırlansaydım."
+              - pattern: "Keşke o gün evden hiç çıkmasaydım."
+              - pattern: "Ona öyle söylediğime çok pişmanım."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+              - type: dialogue
+                scenario: talking_about_regrets
+                goal: Tell a friend about a decision you regret and say what you would have done differently.
+
+      - id: deduction-speculation-b2
+        title: Deduction & Speculation
+        description: Make guesses and deductions about the present and the past.
+        icon: 🔍
+        steps:
+          - id: guessing-dir-herhalde
+            title: Probably So (-DIr, herhalde)
+            description: Use the -DIr suffix with herhalde, galiba and muhtemelen to make guesses about the present.
+            vocabulary: [herhalde, galiba, muhtemelen, "büyük ihtimalle", sanırım, tahmin, "tahmin etmek", yorgun]
+            grammar:
+              - pattern: "Telefonu açmıyor, herhalde toplantıdadır."
+              - pattern: "Bütün gün çalıştın, yorgunsundur."
+              - pattern: "Saat on bir oldu, çocuklar uyumuştur."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: must-have-mis-olmali
+            title: Must Have Done (-mIş olmalı)
+            description: Draw firm conclusions about the past with -mIş olmalı.
+            vocabulary: [olmalı, "unutmuş olmalı", "kaçırmış olmalı", iz, kanıt, kesin, "emin olmak", "başka bir açıklama"]
+            grammar:
+              - pattern: "Kapı açık; biri içeri girmiş olmalı."
+              - pattern: "Hâlâ gelmedi, otobüsü kaçırmış olmalı."
+              - pattern: "Anahtarlarımı arabada unutmuş olmalıyım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: error_correct }
+              - { type: translate }
+          - id: might-belki-abilir
+            title: Maybe and Might (belki, -(y)Abilir)
+            description: Express possibility with belki, -(y)Abilir and -mIş olabilir, and impossibility with olamaz.
+            vocabulary: [belki, olabilir, olası, ihtimal, şüphe, "pek sanmıyorum", olamaz, imkânsız]
+            grammar:
+              - pattern: "Belki yarın yağmur yağar."
+              - pattern: "Trafikte kalmış olabilir."
+              - pattern: "O kadar emin olma, yanılıyor olabilirsin."
+              - pattern: "Bu imza onun olamaz."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: word_bank }
+              - { type: listen_type }
+          - id: solving-a-mystery-b2
+            title: Solving a Mystery
+            description: Combine deduction structures to discuss what might have happened.
+            vocabulary: [ipucu, şüpheli, tanık, "olay yeri", "ortadan kaybolmak", "iz bırakmak", kesinlikle, mantıklı]
+            grammar:
+              - pattern: "Hırsız arka pencereden girmiş olmalı."
+              - pattern: "Komşu o saatte evde olamaz, işteydi."
+              - pattern: "Bunu yapan kesinlikle tanıdık biri."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: discussing_a_mystery
+                goal: Speculate with a friend about what happened and agree on the most likely explanation.
+
+      - id: time-clauses-b2
+        title: Time Clauses
+        description: Link events in time with -DIğIndA, -DIkçA, -(I)r -mAz and -(y)AlI.
+        icon: ⏳
+        steps:
+          - id: when-digi-zaman
+            title: When It Happened (-DIğIndA)
+            description: Say when something happened with -DIğIndA and -DIğI zaman.
+            vocabulary: [geldiğimde, gördüğünde, duyduğumda, "o sırada", "tam o anda", aniden, "olduğu zaman", "çocukken"]
+            grammar:
+              - pattern: "Eve geldiğimde herkes uyuyordu."
+              - pattern: "Türkiye'ye geldiğinde kaç yaşındaydın?"
+              - pattern: "Yağmur yağdığı zaman evde kalmayı severim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: the-more-dikca
+            title: The More… (-DIkçA)
+            description: Show that one thing grows or repeats as another does with -DIkçA.
+            vocabulary: ["zaman geçtikçe", "fırsat buldukça", okudukça, gittikçe, giderek, "her geçen gün", alışmak, "rahat etmek"]
+            grammar:
+              - pattern: "Türkçe konuştukça daha rahat ediyorum."
+              - pattern: "Fırsat buldukça annemi ziyaret ederim."
+              - pattern: "Yaşlandıkça babama daha çok benziyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: as-soon-as-ir-maz
+            title: As Soon As (-(I)r -mAz)
+            description: Say that one action followed another immediately with the doubled aorist -(I)r -mAz.
+            vocabulary: ["gelir gelmez", "duyar duymaz", "biter bitmez", "uyanır uyanmaz", hemen, "ilk iş", derhal, anında]
+            grammar:
+              - pattern: "Eve gelir gelmez duşa girdim."
+              - pattern: "Haberi duyar duymaz bizi aradı."
+              - pattern: "Uçak iner inmez telefonumu açtım."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct }
+              - { type: listen_type }
+          - id: since-ali-digindan-beri
+            title: Since (-(y)AlI, -DIğIndAn beri)
+            description: Say how long it has been since something happened with -(y)AlI and -DIğIndAn beri.
+            vocabulary: [taşınalı, görmeyeli, "başladığımdan beri", "o günden beri", "uzun zamandır", "yıllar oldu", "ne zamandır", özlemek]
+            grammar:
+              - pattern: "İstanbul'a taşınalı üç yıl oldu."
+              - pattern: "Seni görmeyeli ne kadar değişmişsin!"
+              - pattern: "Bu işe başladığımdan beri hiç tatil yapmadım."
+            activities:
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - { type: speak }
+              - type: dialogue
+                scenario: catching_up_with_an_old_friend
+                goal: Meet a friend you haven't seen for years and tell each other what has changed since then.
+
+      - id: linking-ideas-b2
+        title: Linking Ideas
+        description: Express contrast and concession and connect arguments smoothly.
+        icon: ⚖️
+        steps:
+          - id: despite-masina-ragmen
+            title: Despite (-mAsInA rağmen)
+            description: Express concession with -mAsInA rağmen and noun + -A rağmen.
+            vocabulary: [rağmen, "her şeye rağmen", "buna rağmen", "yine de", çaba, başaramamak, umut, vazgeçmek]
+            grammar:
+              - pattern: "Yağmur yağmasına rağmen maça gittik."
+              - pattern: "Çok çalışmasına rağmen sınavı geçemedi."
+              - pattern: "Her şeye rağmen umudumuzu kaybetmedik."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: although-digi-halde
+            title: Even Though (-DIğI halde, -sA da)
+            description: Contrast expectation and reality with -DIğI halde, (her ne kadar) -sA da and -sA bile.
+            vocabulary: [halde, "her ne kadar", "söz vermek", "bile bile", aslında, şaşırtıcı, "pahalı olsa da", "istese bile"]
+            grammar:
+              - pattern: "Söz verdiği halde gelmedi."
+              - pattern: "Her ne kadar yorgun olsam da partiye gideceğim."
+              - pattern: "İstese bile bunu yapamaz."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete }
+              - { type: error_correct }
+          - id: whereas-oysa-ise
+            title: Whereas (oysa, -(y)ken, ise)
+            description: Contrast two people or facts with oysa, halbuki, -(y)ken and ise.
+            vocabulary: [oysa, halbuki, "öte yandan", aksine, "tam tersine", ise, fark, benzer]
+            grammar:
+              - pattern: "Herkes gelecek sanıyordum, oysa yarısı gelmedi."
+              - pattern: "Ben kahve severken eşim sadece çay içer."
+              - pattern: "Kardeşim çok sessizdir; bense çok konuşkanım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - { type: translate }
+              - { type: listen_type }
+          - id: connecting-arguments-b2
+            title: Connecting Arguments (üstelik, dolayısıyla)
+            description: Add points and draw conclusions with üstelik, ayrıca, hem … hem de and dolayısıyla.
+            vocabulary: [üstelik, ayrıca, "bunun yanı sıra", "hem … hem de", "ne … ne de", "bu yüzden", dolayısıyla, "sonuç olarak"]
+            grammar:
+              - pattern: "Ev hem merkezde hem de oldukça ucuz; üstelik deniz manzarası var."
+              - pattern: "Ne asansörü var ne de otoparkı."
+              - pattern: "Kira çok yüksek, dolayısıyla taşınmayı düşünüyoruz."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: comparing_two_apartments
+                goal: Weigh the pros and cons of two flats with a friend and decide which one to rent.
+
+      - id: purpose-reason-b2
+        title: Purpose & Reason
+        description: Explain why you do things and what you do them for.
+        icon: 🎯
+        steps:
+          - id: so-that-sin-diye
+            title: So That (-sIn diye, -mAk için)
+            description: Express purpose with -sIn diye, -mAsI için and -mAk için.
+            vocabulary: [diye, için, amacıyla, üşümek, uyanmak, "rahatsız etmek", "duymak", "geç kalmamak"]
+            grammar:
+              - pattern: "Çocuklar uyanmasın diye sessizce konuştuk."
+              - pattern: "Herkes duysun diye yüksek sesle okudu."
+              - pattern: "Kimse üşümesin diye pencereyi kapattım."
+              - pattern: "Geç kalmamak için erken çıktım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+          - id: because-digindan
+            title: Because (-DIğIndAn, -DIğI için)
+            description: Give reasons with -DIğIndAn, -DIğI için, madem and ne de olsa.
+            vocabulary: ["hasta olduğundan", "kapalı olduğu için", çünkü, zira, madem, "ne de olsa", rötar, aktarma]
+            grammar:
+              - pattern: "Hasta olduğundan toplantıya katılamadı."
+              - pattern: "Uçağım rötar yaptığı için aktarmayı kaçırdım."
+              - pattern: "Madem bu kadar istiyorsun, git."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+              - { type: listen_type }
+          - id: due-to-nedeniyle
+            title: Due To, Thanks To (nedeniyle, sayesinde, yüzünden)
+            description: Give causes with nouns, choosing between neutral nedeniyle, positive sayesinde and negative yüzünden.
+            vocabulary: [nedeniyle, "-den dolayı", sebebiyle, sayesinde, yüzünden, "neden olmak", "yol açmak", "hava koşulları"]
+            grammar:
+              - pattern: "Kötü hava koşulları nedeniyle uçuşlar iptal edildi."
+              - pattern: "Senin sayende işi zamanında bitirdik."
+              - pattern: "Trafik yüzünden toplantıya geç kaldım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+          - id: explaining-decisions-b2
+            title: Explaining Your Decisions
+            description: Combine purpose and reason clauses to justify a choice.
+            vocabulary: [karar, amaç, gerekçe, "tercih etmek", "ikna etmek", "para biriktirmek", "uzun vadede", "kolay olmadı"]
+            grammar:
+              - pattern: "Daha iyi bir iş bulmak amacıyla Ankara'ya taşındım."
+              - pattern: "Hem para biriktirmek hem de sağlıklı kalmak için bisiklete binmeye başladım."
+              - pattern: "Bu kararı ailem rahat etsin diye verdim."
+            activities:
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: translate }
+              - type: dialogue
+                scenario: explaining_a_big_decision
+                goal: Explain to a relative why you made a big life decision and answer their doubts.
+
+      - id: debate-persuasion-b2
+        title: Debate & Persuasion
+        description: State and defend opinions, challenge others and persuade.
+        icon: 🗣️
+        steps:
+          - id: stating-a-position-b2
+            title: Stating Your Position
+            description: Give opinions with varying strength using bana kalırsa, kanımca and açıkçası.
+            vocabulary: ["bana kalırsa", kanımca, "bana göre", açıkçası, görüş, tutum, "kesinlikle katılıyorum", "kısmen katılıyorum"]
+            grammar:
+              - pattern: "Bana kalırsa bu yasa çok geç çıktı."
+              - pattern: "Kanımca en önemli sorun eğitim."
+              - pattern: "Açıkçası bu konuda size katılmıyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete }
+              - { type: speak }
+          - id: agreeing-disagreeing-b2
+            title: Agreeing and Disagreeing
+            description: Concede a point and then challenge it politely.
+            vocabulary: [haklısın, katılmak, "itiraz etmek", abartmak, "doğru olabilir ama", "o kadar emin değilim", "işin aslı", "bir de şöyle bak"]
+            grammar:
+              - pattern: "Haklısın ama işin bir de öbür tarafı var."
+              - pattern: "Söylediklerin doğru olabilir, fakat bence biraz abartıyorsun."
+              - pattern: "İşin aslı, bu proje başından beri yanlış planlandı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+              - { type: listen_type }
+          - id: persuading-someone-b2
+            title: Persuading Someone
+            description: Persuade with rhetorical questions, -sAnA and reassurance.
+            vocabulary: ["inan bana", "bir düşünsene", "en kötü ihtimalle", "ne kaybedersin", avantaj, dezavantaj, fayda, "pişman olmazsın"]
+            grammar:
+              - pattern: "Bir düşünsene, ne kaybedersin ki?"
+              - pattern: "İnan bana, pişman olmazsın."
+              - pattern: "Neden denemiyorsun? En kötü ihtimalle beğenmezsin."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - { type: speak }
+              - { type: translate }
+          - id: formal-debate-b2
+            title: Formal Debate
+            description: Structure a formal argument with opening, evidence, counter-argument and conclusion.
+            vocabulary: [öncelikle, belirtmek, rakamlar, "karşı görüş", savunmak, "öte yandan", "özetlemek gerekirse", "sonuç olarak"]
+            grammar:
+              - pattern: "Öncelikle şunu belirtmek isterim ki konu sanıldığı kadar basit değil."
+              - pattern: "Rakamlara bakıldığında durumun ciddi olduğu görülüyor."
+              - pattern: "Özetlemek gerekirse bu öneri hem pahalı hem de gereksiz."
+            activities:
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: debating_a_city_policy
+                goal: Argue for or against closing the city centre to cars and respond to the other side's points.
+
+      - id: society-environment-b2
+        title: Society & the Environment
+        description: Discuss environmental and social problems and possible solutions.
+        icon: 🌍
+        steps:
+          - id: climate-change-b2
+            title: Climate Change
+            description: Describe causes and effects of climate change and say what should be done with -mAlI and the passive.
+            vocabulary: ["iklim değişikliği", "küresel ısınma", kuraklık, "sera gazı", "fosil yakıt", "karbon salımı", erimek, "yenilenebilir enerji"]
+            grammar:
+              - pattern: "Küresel ısınma yüzünden kuraklık giderek artıyor."
+              - pattern: "Fosil yakıt kullanımı azaltılmalı."
+              - pattern: "Buzullar her geçen yıl daha hızlı eriyor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - { type: listen_type }
+          - id: recycling-habits-b2
+            title: Recycling & Everyday Habits
+            description: Talk about what you do to waste less at home.
+            vocabulary: ["geri dönüşüm", atık, israf, "tek kullanımlık", "bez çanta", tasarruf, ambalaj, "musluğu kapatmak"]
+            grammar:
+              - pattern: "Plastik şişeleri geri dönüşüm kutusuna atıyorum."
+              - pattern: "Dişlerimi fırçalarken musluğu kapatmaya dikkat ediyorum."
+              - pattern: "Poşet yerine bez çanta kullanmak lazım."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete }
+              - { type: error_correct }
+              - { type: speak }
+          - id: social-issues-b2
+            title: Social Issues
+            description: Discuss unemployment, inequality and migration using formal vocabulary.
+            vocabulary: [işsizlik, eşitsizlik, yoksulluk, göç, "konut sorunu", "fırsat eşitliği", "toplumsal cinsiyet eşitliği", "sosyal yardım"]
+            grammar:
+              - pattern: "Gençler arasında işsizlik oranı yükseliyor."
+              - pattern: "Kadınların iş hayatına katılımı artırılmalı."
+              - pattern: "Kira artışları yüzünden birçok aile şehir dışına taşınmak zorunda kaldı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice }
+              - { type: translate, count: 2 }
+          - id: city-problems-b2
+            title: Problems in the City
+            description: Describe urban problems and propose solutions with conditionals and the passive.
+            vocabulary: ["hava kirliliği", "gürültü kirliliği", "çarpık kentleşme", "toplu taşıma", "yeşil alan", "nüfus artışı", "önlem almak", belediye]
+            grammar:
+              - pattern: "Hava kirliliği öyle arttı ki nefes almak zorlaştı."
+              - pattern: "Toplu taşıma yaygınlaştırılırsa trafik azalır."
+              - pattern: "Yeşil alanlar her yıl biraz daha azalıyor."
+            activities:
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - { type: error_correct }
+              - type: dialogue
+                scenario: neighbourhood_meeting
+                goal: Raise a local environmental problem at a neighbourhood meeting and propose a practical solution.
+
+      - id: science-culture-arts-b2
+        title: Science, Culture & the Arts
+        description: Talk about discoveries, films, books and art, and give reasoned opinions.
+        icon: 🎭
+        steps:
+          - id: discoveries-inventions-b2
+            title: Discoveries & Inventions
+            description: Describe discoveries and inventions with the passive and reported results.
+            vocabulary: [buluş, "icat etmek", keşif, araştırma, deney, "bilim insanı", aşı, sonuç]
+            grammar:
+              - pattern: "Matbaa 15. yüzyılda icat edildi."
+              - pattern: "Bu aşı sayesinde milyonlarca insanın hayatı kurtuldu."
+              - pattern: "Araştırmacılar yeni bir tür keşfettiklerini açıkladı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+              - { type: listen_type }
+          - id: films-series-b2
+            title: Films & Series
+            description: Review a film or series and say what worked and what didn't.
+            vocabulary: [senaryo, yönetmen, oyuncu, başrol, uyarlama, sürükleyici, etkileyici, dizi]
+            grammar:
+              - pattern: "Film gerçek bir hikâyeden uyarlanmış."
+              - pattern: "Oyunculuklar çok başarılıydı ama senaryo zayıftı."
+              - pattern: "Dizinin sonu beni çok şaşırttı."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete }
+              - { type: error_correct }
+              - { type: listen_type }
+          - id: books-literature-b2
+            title: Books & Literature
+            description: Describe a book's plot, characters and style.
+            vocabulary: [roman, öykü, yazar, "ana karakter", "olay örgüsü", şiir, akıcı, çeviri]
+            grammar:
+              - pattern: "Romanın ana karakteri savaştan dönen genç bir asker."
+              - pattern: "Bu kitabı okurken zamanın nasıl geçtiğini anlamadım."
+              - pattern: "Yazarın dili sade ama çok etkileyici."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - { type: translate, count: 2 }
+          - id: art-exhibitions-b2
+            title: Art & Exhibitions
+            description: Give and justify opinions about exhibitions, paintings and museums.
+            vocabulary: [sergi, tablo, ressam, eser, heykel, müze, "dikkatimi çekti", "çok etkilendim"]
+            grammar:
+              - pattern: "Sergide en çok dikkatimi çeken tablo bu oldu."
+              - pattern: "Bence bu eser gereğinden fazla övülüyor."
+              - pattern: "Müze cumartesi günleri ücretsiz gezilebiliyor."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: sentence_complete }
+              - type: dialogue
+                scenario: recommending_a_cultural_event
+                goal: Recommend a film, book or exhibition to a friend and explain what impressed you about it.
+
+    checkpoint:
+      title: B2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C1:
+    title: Advanced
+    description: >
+      Understand demanding, longer texts and recognise implicit meaning, express yourself fluently and spontaneously, and use Turkish flexibly and effectively for social, academic and professional purposes.
+
+    units:
+      - id: evidentiality-depth-c1
+        title: Evidentiality in Depth
+        description: Mark what you saw, heard, inferred or doubt with the full range of -mIş forms.
+        icon: 🕵️
+        steps:
+          - id: mis-hearsay-inference-c1
+            title: Hearsay & Inference (-mIş, meğer)
+            description: Report news you heard and realisations you made with -mIş, meğer and anlaşılan.
+            vocabulary: [meğer, anlaşılan, söylenti, "dediklerine göre", "rivayete göre", "haber almak", "farkına varmak", "kulağıma geldi"]
+            grammar:
+              - pattern: "Ahmet dün akşam İzmir'e dönmüş."
+              - pattern: "Meğer kapı baştan beri açıkmış."
+              - pattern: "Dediklerine göre yeni müdür çok sertmiş."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: mismis-disbelief-c1
+            title: Double Evidential (-mIşmIş)
+            description: Voice irony and disbelief about someone's claims with -mIşmIş, güya and sözde.
+            vocabulary: [güya, sözde, "hadi canım", inanırsan, abartmak, "iddia etmek", "palavra atmak", "yalan söylemek"]
+            grammar:
+              - pattern: "Neymiş efendim, ben ona yardım etmemişmişim!"
+              - pattern: "Güya hastaymış da işe gelememiş."
+              - pattern: "Sözde bütün işi o yapmışmış, hadi canım!"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: mis-gibi-pretend-c1
+            title: As If (-mIş gibi, gibi yapmak)
+            description: Describe pretending and unreal comparisons with -(y)mIş gibi and gibi yapmak.
+            vocabulary: ["gibi yapmak", "görmezden gelmek", "duymazdan gelmek", "numara yapmak", "rol yapmak", "hiçbir şey olmamış gibi", davranmak, "rol kesmek"]
+            grammar:
+              - pattern: "Hiçbir şey olmamış gibi davrandı."
+              - pattern: "Beni duymamış gibi yaptı."
+              - pattern: "Uyuyormuş gibi yapıyordu ama her şeyi dinliyordu."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: evidential-tense-chains-c1
+            title: Evidential Tenses (-(I)yormuş, -(y)AcakmIş)
+            description: Pass on gossip and plans you heard about with -(I)yormuş and -(y)AcakmIş.
+            vocabulary: [dedikodu, "kulağıma çalındı", "ağzından kaçırmak", "ortalığa yayılmak", ayrılmak, taşınmak, "terfi almak", "kimseye söylememek"]
+            grammar:
+              - pattern: "Selin'le Kerem ayrılıyormuş, duydun mu?"
+              - pattern: "Ay sonunda İstanbul'dan taşınacaklarmış."
+              - pattern: "Kemal terfi almış ama kimseye söylememiş."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: sharing_office_gossip
+                goal: Pass on news you heard secondhand, making clear what you saw yourself and what you only heard.
+
+      - id: participles-nominalisation-c1
+        title: Participles & Nominalisation
+        description: Pack whole clauses into noun phrases with participles and verbal nouns.
+        icon: 🧩
+        steps:
+          - id: acak-olan-participles-c1
+            title: Complex Participles (-(y)AcAk olan, -mIş olan)
+            description: Build formal noun phrases with -(y)AcAk olan, -mIş olan and -mAktA olan.
+            vocabulary: ["katılacak olanlar", "yapılacak olan", "imzalanmış olan", "yapılmakta olan", "söz konusu", ilgili, mevcut, "geçerliliğini korumak"]
+            grammar:
+              - pattern: "Toplantıya katılacak olanlar saat dokuzda burada olsun."
+              - pattern: "Yapılmakta olan inşaat yüzünden yol kapalı."
+              - pattern: "Daha önce imzalanmış olan sözleşme geçerliliğini koruyor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: dik-acak-noun-clauses-c1
+            title: Noun Clauses (-DIğI, -(y)AcAğI)
+            description: Turn statements and indirect questions into objects with -DIğInI and -(y)AcAğInI.
+            vocabulary: ["kabul etmek", "fark etmek", "emin olmak", hatırlamak, "tahmin etmek", "merak etmek", "belli olmak", "farkında olmak"]
+            grammar:
+              - pattern: "Ne zaman geleceğini hâlâ bilmiyorum."
+              - pattern: "Onun haklı olduğunu kabul etmek zorundayız."
+              - pattern: "Nereye gittiğimizi kimseye söylemedik."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate }
+          - id: ma-is-verbal-nouns-c1
+            title: Verbal Nouns (-mA, -mAk, -(y)Iş)
+            description: Choose between -mA, -mAk and -(y)Iş to talk about actions as things.
+            vocabulary: [yürüyüş, bakış, anlayış, "gidiş geliş", oluşum, gelişme, alışkanlık, "karar alınması"]
+            grammar:
+              - pattern: "Senin bu kadar erken gelmen beni şaşırttı."
+              - pattern: "Yürüyüşü tıpkı babasınınkine benziyor."
+              - pattern: "Bu kararın alınması aylar sürdü."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: stacked-noun-phrases-c1
+            title: Stacked Noun Phrases
+            description: Read and build long, layered noun phrases typical of written Turkish.
+            vocabulary: [planlanmak, tamamlanmak, "emeği geçmek", öngörülmek, hedeflenmek, "yer almak", sağlanmak, "katkıda bulunmak"]
+            grammar:
+              - pattern: "Gelecek yıl açılması planlanan müze şehrin en büyüğü olacak."
+              - pattern: "Kazanın nasıl olduğunu gören kimse yok."
+              - pattern: "Bu projenin tamamlanmasında emeği geçen herkese teşekkür ederiz."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: translate, count: 2 }
+              - type: dialogue
+                scenario: explaining_a_project_timeline
+                goal: Describe the stages of a project and who is responsible for each, using participles and verbal nouns.
+
+      - id: emphasis-word-order-c1
+        title: Emphasis & Word Order
+        description: Shift focus with word order, bile, ise and the many uses of ki.
+        icon: 🔦
+        steps:
+          - id: focus-devrik-cumle-c1
+            title: Focus & Inverted Sentences (devrik cümle)
+            description: Put new information right before the verb and use inverted order in speech.
+            vocabulary: [vurgu, odak, "devrik cümle", özne, yüklem, bizzat, asıl, "tam da"]
+            grammar:
+              - pattern: "Bu kitabı ben değil, Ayşe yazdı."
+              - pattern: "Dün markete Ali gitti, ben gitmedim."
+              - pattern: "Hiç beklemiyordum bunu senden."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: bile-dahi-even-c1
+            title: Even & Too (bile, dahi, de/da)
+            description: Add emphasis and surprise with bile, dahi, hatta and the focus particle de/da.
+            vocabulary: [bile, dahi, hatta, üstelik, "üstüne üstlük", "hiç değilse", "en azından", "de/da"]
+            grammar:
+              - pattern: "Bu soruyu çocuklar bile bilir."
+              - pattern: "Gitmeden önce teşekkür bile etmedi."
+              - pattern: "En yakın arkadaşının dahi bundan haberi yoktu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: ise-oysa-contrast-c1
+            title: Contrast (ise, oysa, halbuki)
+            description: Set two subjects or facts against each other with ise, oysa and halbuki.
+            vocabulary: [ise, oysa, halbuki, "buna karşılık", "öte yandan", "ne var ki", gelgelelim, ancak]
+            grammar:
+              - pattern: "Ben çay severim, eşim ise kahveden vazgeçemez."
+              - pattern: "Herkes erken geldi; Murat ise her zamanki gibi geç kaldı."
+              - pattern: "Yağmur bekliyorduk, oysa hava pırıl pırıldı."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: ki-uses-c1
+            title: The Many Faces of ki
+            description: Use ki for result, surprise, condition and emphasis.
+            vocabulary: ["o kadar ki", "öyle ki", "bir de baktım ki", "madem ki", "nasıl ki", "yeter ki", "belki de", "kim bilir"]
+            grammar:
+              - pattern: "O kadar yorgunum ki ayakta duramıyorum."
+              - pattern: "Kapıyı açtım, bir de baktım ki herkes içeride bekliyor."
+              - pattern: "Ne istersen yaparım, yeter ki sen mutlu ol."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: clearing_up_a_misunderstanding
+                goal: Correct a colleague's wrong assumption, stressing who actually did what and what surprised you.
+
+      - id: converbs-c1
+        title: Converbs
+        description: Link actions without conjunctions using -(y)Ip, -mAdAn, -cAsInA and related forms.
+        icon: 🔗
+        steps:
+          - id: ip-linking-c1
+            title: Linking Actions (-(y)Ip)
+            description: Chain actions that share a subject and tense with -(y)Ip and -mAyIp.
+            vocabulary: ["kalkıp gitmek", "oturup konuşmak", "gidip görmek", "alıp getirmek", "dönüp bakmak", "çıkıp gelmek", "gelip geçmek", çalışmayıp]
+            grammar:
+              - pattern: "Akşam eve gelip hemen yattım."
+              - pattern: "Gel, oturup bunu sakin sakin konuşalım."
+              - pattern: "Sınava çalışmayıp bütün gün dizi izledi."
+              - pattern: "Bir gün kalkıp her şeyi bırakacağım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: madan-maksizin-c1
+            title: Without & Before (-mAdAn, -mAksIzIn)
+            description: Say what happened without or before something else with -mAdAn and formal -mAksIzIn.
+            vocabulary: ["haber vermeden", "izin almadan", "farkında olmadan", "bir şey demeden", "kapıyı çalmadan", düşünmeksizin, durmaksızın, "ara vermeden"]
+            grammar:
+              - pattern: "Kimseye haber vermeden çekip gitti."
+              - pattern: "Ben gelmeden toplantıya başlamayın."
+              - pattern: "Teklifi hiç düşünmeksizin kabul etti."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: casina-manner-c1
+            title: As Though (-cAsInA) & Manner (-ArAk, -A -A)
+            description: Describe how something is done with -cAsInA, -(y)ArAk and doubled -(y)A forms.
+            vocabulary: [yalvarırcasına, koşarcasına, biliyormuşçasına, "ağlaya ağlaya", "koşa koşa", "güle güle", gülerek, isteyerek]
+            grammar:
+              - pattern: "Her şeyi biliyormuşçasına konuşuyor."
+              - pattern: "Bana yalvarırcasına baktı."
+              - pattern: "Çocuk ağlaya ağlaya annesine koştu."
+              - pattern: "Soruyu gülerek cevapladı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: mak-yerine-maktansa-c1
+            title: Instead Of (-mAk yerine, -mAktAnsA, -(y)AcAğInA)
+            description: Contrast what someone does with what they should or would rather do.
+            vocabulary: [yerine, oturmaktansa, beklemektense, "şikâyet edeceğine", "tercih etmek", yeğlemek, vazgeçmek, boşuna]
+            grammar:
+              - pattern: "Şikâyet edeceğine bir çözüm bul."
+              - pattern: "Evde oturmaktansa biraz yürüyüşe çıkalım."
+              - pattern: "Taksiye binmek yerine yürümeyi tercih ettik."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: deciding_between_options
+                goal: Suggest alternatives to a friend's plan and explain what you would rather do and why.
+
+      - id: hedging-discourse-c1
+        title: Hedging & Discourse
+        description: Soften claims, signal uncertainty and steer spoken conversation naturally.
+        icon: 🌫️
+        steps:
+          - id: galiba-herhalde-sanki-c1
+            title: Hedging (galiba, herhalde, sanki)
+            description: Express guesses and impressions with galiba, herhalde, sanki and muhtemelen.
+            vocabulary: [galiba, herhalde, sanki, muhtemelen, "belki de", anlaşılan, "bana kalırsa", "pek emin değilim ama"]
+            grammar:
+              - pattern: "Galiba yanlış otobüse bindik."
+              - pattern: "Sanki biri kapıyı çaldı."
+              - pattern: "Herhalde yolda trafik vardır."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+          - id: softening-sayilir-c1
+            title: Softening Statements (gibi gelmek, sayılır)
+            description: Tone down opinions and judgements with gibi gelmek, sayılır and bir bakıma.
+            vocabulary: ["bana öyle geliyor ki", sayılır, sayılmaz, "bir bakıma", "bir ölçüde", nispeten, kısmen, "az çok"]
+            grammar:
+              - pattern: "Bana öyle geliyor ki bu plan pek tutmayacak."
+              - pattern: "Film fena sayılmazdı ama beklediğim kadar iyi değildi."
+              - pattern: "Bir bakıma haklısın, ama işin bir de öbür yüzü var."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: impersonal-hedges-c1
+            title: Impersonal Hedges (-DIğI söylenebilir)
+            description: Make cautious, impersonal claims with passive forms such as -DIğI söylenebilir and düşünülmektedir.
+            vocabulary: [söylenebilir, düşünülmektedir, "iddia edilebilir", "öne sürülüyor", "kabul edilir", varsayılabilir, tartışmalı, "görünüyor"]
+            grammar:
+              - pattern: "Bu yöntemin daha etkili olduğu söylenebilir."
+              - pattern: "Sorunun kaynağının ekonomik olduğu düşünülmektedir."
+              - pattern: "Sonuçları genellemek pek mümkün görünmüyor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: discourse-markers-c1
+            title: Discourse Markers (hani, yani, neyse)
+            description: Manage spoken conversation with hani, yani, şey, aslında, zaten and neyse.
+            vocabulary: [yani, hani, şey, aslında, zaten, neyse, işte, "nasıl desem"]
+            grammar:
+              - pattern: "Hani geçen hafta konuştuğumuz kitap vardı ya, onu bitirdim."
+              - pattern: "Şey, nasıl desem, biraz geç kalacağım."
+              - pattern: "Neyse, konumuza dönelim."
+            activities:
+              - { type: learn }
+              - { type: listen_type }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: giving_feedback_tactfully
+                goal: Tell a friend what you really think of their business idea without sounding harsh, using hedges and softeners.
+
+      - id: professional-life-c1
+        title: Professional Life
+        description: Work in formal Turkish, from official letters to meetings and interviews.
+        icon: 💼
+        steps:
+          - id: maktadir-formal-present-c1
+            title: Formal Present (-mAktAdIr)
+            description: Describe organisations and ongoing processes in formal writing with -mAktAdIr.
+            vocabulary: ["faaliyet göstermek", "hizmet vermek", yürütmek, sürdürmek, "kabul edilmek", değerlendirilmek, bulunmak, "bu yana"]
+            grammar:
+              - pattern: "Şirketimiz 1985 yılından bu yana faaliyet göstermektedir."
+              - pattern: "Başvurular 30 Kasım'a kadar kabul edilmektedir."
+              - pattern: "Yetkililer konuyu titizlikle incelemektedir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: formal-correspondence-c1
+            title: Formal Correspondence
+            description: Write official e-mails and letters with set phrases and polite requests.
+            vocabulary: [sayın, saygılarımla, "bilgilerinize sunarım", ekte, "gereğini rica ederim", iletmek, "dönüş yapmak", "iyi çalışmalar"]
+            grammar:
+              - pattern: "Sayın Ayşe Demir,"
+              - pattern: "Ekte gönderdiğim raporu incelemenizi rica ederim."
+              - pattern: "Bilgilerinize sunar, iyi çalışmalar dilerim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: meetings-negotiation-c1
+            title: Meetings & Negotiation
+            description: Run a meeting, make offers and set conditions politely.
+            vocabulary: [gündem, "toplantı tutanağı", uzlaşmak, teklif, şartlar, indirim, sözleşme, vade]
+            grammar:
+              - pattern: "Gündemin ilk maddesine geçelim."
+              - pattern: "Bu şartlarla anlaşmamız pek mümkün görünmüyor."
+              - pattern: "Vadeyi altmış güne uzatırsanız teklifinizi değerlendirebiliriz."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: job-interview-c1
+            title: Job Interviews
+            description: Present your experience and strengths in a formal interview.
+            vocabulary: [özgeçmiş, deneyim, pozisyon, sorumluluk, "güçlü yön", "kendini geliştirmek", "maaş beklentisi", referans]
+            grammar:
+              - pattern: "Beş yıldır proje yöneticisi olarak çalışmaktayım."
+              - pattern: "Bu pozisyon için gerekli deneyime sahip olduğumu düşünüyorum."
+              - pattern: "Daha önce uluslararası bir projede yer almış bulunuyorum."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: senior_job_interview
+                goal: Present your experience in a formal register and negotiate your salary expectations.
+
+      - id: media-information-c1
+        title: Media & Information
+        description: Follow and report the news, read headlines and check sources.
+        icon: 📰
+        steps:
+          - id: dik-bildirildi-news-c1
+            title: Reported News (-DIğI bildirildi)
+            description: Report facts from official sources with -DIğI bildirildi, açıklandı and öğrenildi.
+            vocabulary: [bildirmek, açıklamak, öğrenilmek, "gözaltına almak", yetkililer, kaynak, iddia, yalanlamak]
+            grammar:
+              - pattern: "Kazada üç kişinin hafif yaralandığı bildirildi."
+              - pattern: "Toplantının ileri bir tarihe ertelendiği açıklandı."
+              - pattern: "Şüphelinin dün gece gözaltına alındığı öğrenildi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: headline-language-c1
+            title: Headline Language
+            description: Read Turkish headlines with dropped suffixes, nominal style and present-for-future.
+            vocabulary: [zam, indirim, uyarı, "son dakika", açıklama, gündem, manşet, "flaş gelişme"]
+            grammar:
+              - pattern: "Merkez Bankası faizi sabit tuttu"
+              - pattern: "Benzine yeni zam geliyor"
+              - pattern: "Son dakika: İstanbul'da fırtına uyarısı"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_select }
+          - id: quoting-sources-c1
+            title: Quoting & Attributing (göre, diye)
+            description: Attribute statements to sources with -(y)A göre, diye and verbs of saying.
+            vocabulary: [göre, diye, aktarmak, belirtmek, vurgulamak, uyarmak, dayanarak, "adı açıklanmayan"]
+            grammar:
+              - pattern: "Bakanlığın açıklamasına göre okullar pazartesi açılacak."
+              - pattern: "Uzmanlar, önlem alınmazsa durumun kötüleşeceği konusunda uyardı."
+              - pattern: "\"Herkes üzerine düşeni yapmalı\" diye konuştu."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: fact-checking-c1
+            title: Misinformation & Fact-Checking
+            description: Question a story, check its source and explain why it is misleading.
+            vocabulary: ["yalan haber", doğrulamak, "teyit etmek", "sosyal medya", paylaşım, yanıltıcı, asılsız, "kaynak göstermek"]
+            grammar:
+              - pattern: "Bu haberin asılsız olduğu ortaya çıktı."
+              - pattern: "Paylaşmadan önce kaynağını mutlaka teyit edin."
+              - pattern: "İddiaların hiçbiri doğrulanamadı."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: debunking_a_viral_post
+                goal: Explain to a relative why a story they shared is misleading and how to check its source.
+
+      - id: science-tech-ethics-c1
+        title: Science, Technology & Ethics
+        description: Discuss research, new technologies and the ethical questions they raise.
+        icon: 🔬
+        steps:
+          - id: research-findings-c1
+            title: Research Findings
+            description: Report what a study found with -DIğInI ortaya koydu and formal -mAktAdIr.
+            vocabulary: [araştırma, bulgu, deney, veri, örneklem, hipotez, "ortaya koymak", kanıtlamak]
+            grammar:
+              - pattern: "Araştırma, düzenli uykunun hafızayı güçlendirdiğini ortaya koydu."
+              - pattern: "Elde edilen veriler bu hipotezi desteklemektedir."
+              - pattern: "Deneyin farklı örneklemlerle tekrarlanması gerekiyor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: artificial-intelligence-c1
+            title: Artificial Intelligence
+            description: Talk about AI and automation, their possibilities and limits.
+            vocabulary: ["yapay zekâ", algoritma, otomasyon, "veri gizliliği", "kişisel veriler", dönüştürmek, "yerini almak", denetlemek]
+            grammar:
+              - pattern: "Yapay zekânın pek çok mesleğin yerini alabileceği konuşuluyor."
+              - pattern: "Bu algoritmaların nasıl karar verdiği tam olarak bilinmiyor."
+              - pattern: "Kişisel verilerin korunması artık bir zorunluluk."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+          - id: ethical-dilemmas-c1
+            title: Ethical Dilemmas (-mAlI mI?, -mAsI doğru mu?)
+            description: Raise and weigh ethical questions with -mAlI mI, -mAsI doğru mu and passive questions.
+            vocabulary: [etik, ahlaki, sorumluluk, sınır, rıza, "gen düzenleme", "hayvan deneyleri", "kamu yararı"]
+            grammar:
+              - pattern: "Hayvanlar üzerinde deney yapılması etik midir?"
+              - pattern: "Bilimin sınırlarını kim belirlemeli?"
+              - pattern: "Kamu yararı bireysel haklardan önce mi gelir?"
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct }
+              - { type: translate, count: 2 }
+          - id: medical-advances-c1
+            title: Medical Advances
+            description: Explain new treatments, their benefits and their risks.
+            vocabulary: [aşı, tedavi, "klinik araştırma", "yan etki", bağışıklık, teşhis, salgın, ilaç]
+            grammar:
+              - pattern: "Yeni ilacın klinik araştırmaları başarıyla tamamlandı."
+              - pattern: "Erken teşhis sayesinde tedavi şansı artıyor."
+              - pattern: "Aşının ciddi bir yan etkisi gözlemlenmedi."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank, count: 2 }
+              - type: dialogue
+                scenario: discussing_a_medical_breakthrough
+                goal: Explain a new treatment to a sceptical friend and discuss whether its risks are acceptable.
+
+      - id: idioms-colloquial-c1
+        title: Idioms & Colloquial Turkish
+        description: Sound natural in everyday talk with idioms, reactions and colloquial patterns.
+        icon: 🗣️
+        steps:
+          - id: everyday-idioms-c1
+            title: Everyday Idioms
+            description: Use common idioms built on body parts and everyday verbs.
+            vocabulary: ["kafa yormak", "göz atmak", "eli açık", "ağzı sıkı", "pot kırmak", "kulak asmamak", "oluruna bırakmak", "gözden düşmek"]
+            grammar:
+              - pattern: "Bu konuya fazla kafa yorma."
+              - pattern: "Toplantıda pot kırdım, herkes bana baktı."
+              - pattern: "Söylediklerime hiç kulak asmadı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: colloquial-expressions-c1
+            title: Colloquial Expressions
+            description: React and reply the way people do in casual spoken Turkish.
+            vocabulary: ["boş ver", aynen, "hadi ya", "yok artık", "ne alaka", "kafaya takmak", "aklım almıyor", "olur öyle"]
+            grammar:
+              - pattern: "Boş ver, kafana takma."
+              - pattern: "Yok artık, ciddi misin?"
+              - pattern: "Ne alaka şimdi, ben öyle bir şey demedim."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+          - id: reduplication-m-doubling-c1
+            title: Reduplication (masmavi, kitap mitap)
+            description: Intensify adjectives with emphatic prefixes and play down nouns with m-doubling.
+            vocabulary: [masmavi, bembeyaz, sapasağlam, darmadağın, "yavaş yavaş", "güzel güzel", "kitap mitap", "çay may"]
+            grammar:
+              - pattern: "Çay may istemem, sadece su lütfen."
+              - pattern: "Gökyüzü masmavi, deniz çarşaf gibi."
+              - pattern: "Çocuklar odayı darmadağın etmiş."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: social-formulas-c1
+            title: Social Formulas (kolay gelsin, eline sağlık)
+            description: Use the fixed phrases Turks say at work, at the table and in good and bad news.
+            vocabulary: ["kolay gelsin", "eline sağlık", "afiyet olsun", maşallah, inşallah, "Allah korusun", eyvah, "vay be"]
+            grammar:
+              - pattern: "Eyvah, anahtarları evde unuttum!"
+              - pattern: "Maşallah, ne kadar da büyümüş!"
+              - pattern: "Eline sağlık, yemek harika olmuş."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: chatting_with_neighbours
+                goal: Keep a casual chat going with natural reactions, idioms and the right social formulas.
+
+      - id: academic-argument-c1
+        title: Argument & Academic Writing
+        description: Build, structure and defend an argument in formal written and spoken Turkish.
+        icon: 🎓
+        steps:
+          - id: structuring-argument-c1
+            title: Structuring an Argument
+            description: Order your points with connectors such as öncelikle, bunun yanı sıra and sonuç olarak.
+            vocabulary: [öncelikle, "ilk olarak", "bunun yanı sıra", dahası, "son olarak", "sonuç olarak", kısacası, özetle]
+            grammar:
+              - pattern: "Öncelikle sorunun kaynağını doğru tespit etmemiz gerekir."
+              - pattern: "Bunun yanı sıra maliyet de göz ardı edilmemeli."
+              - pattern: "Sonuç olarak bu önerinin uygulanabilir olduğu söylenebilir."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: concession-makla-birlikte-c1
+            title: Concession (her ne kadar, -mAklA birlikte)
+            description: Acknowledge the other side with her ne kadar … -sA da and -mAklA birlikte.
+            vocabulary: ["her ne kadar", "olmakla birlikte", "bununla birlikte", "buna rağmen", "kabul etmek gerekir ki", itiraz, "karşı görüş", "haklı olarak"]
+            grammar:
+              - pattern: "Her ne kadar bu görüş yaygın olsa da bilimsel bir dayanağı yok."
+              - pattern: "Bu yöntem etkili olmakla birlikte oldukça maliyetlidir."
+              - pattern: "Kabul etmek gerekir ki karşı görüşün de haklı yanları var."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: academic-register-c1
+            title: Academic Register (-(I)lmAktAdIr)
+            description: Write impersonally with passive -(I)lmAktAdIr, future -(y)AcAktIr and fixed academic phrases.
+            vocabulary: ["ele almak", incelemek, tartışmak, "kavramsal çerçeve", yöntem, bulgular, "görüldüğü üzere", "bu bağlamda"]
+            grammar:
+              - pattern: "Bu çalışmada göç ve kimlik arasındaki ilişki ele alınmaktadır."
+              - pattern: "Görüldüğü üzere iki değişken arasında güçlü bir ilişki bulunmaktadır."
+              - pattern: "Makalenin ikinci bölümünde bulgular tartışılacaktır."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: defending-thesis-c1
+            title: Presenting & Defending a Thesis
+            description: Present your main argument aloud and handle questions from a panel.
+            vocabulary: [sunum, tez, savunmak, jüri, "soru-cevap", değinmek, "altını çizmek", "dikkatiniz için"]
+            grammar:
+              - pattern: "Sunumuma başlamadan önce hepinize teşekkür etmek istiyorum."
+              - pattern: "Özellikle şu noktanın altını çizmek isterim."
+              - pattern: "Sorunuz için teşekkür ederim; bu konuya kısaca değinmek istiyorum."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: defending_a_thesis
+                goal: Present your main argument to a panel and answer their objections in formal Turkish.
+
+    checkpoint:
+      title: C1 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
+        - { type: listen_select, count: 3 }
+        - { type: translate, count: 3 }
+        - { type: dialogue }
+
+  C2:
+    title: Proficiency
+    description: >
+      Understand with ease virtually everything heard or read, from Yunus Emre to an official petition, summarise and reconstruct arguments from different sources, and express yourself spontaneously, fluently and precisely, choosing the right register, idiom and suffix for every shade of meaning.
+
+    units:
+      - id: register-politeness-c2
+        title: Register & Politeness
+        description: Move between sen and siz, honorifics and courtesy formulas like a native speaker.
+        icon: 🎩
+        steps:
+          - id: sen-siz-honorifics
+            title: Sen, Siz & Honorifics
+            description: Choose sen or siz, and use Bey, Hanım, efendim and hocam correctly.
+            vocabulary: ["sen demek", "siz demek", "senli benli", efendim, hanımefendi, beyefendi, hocam, laubali, "Ahmet Bey", "Ayşe Hanım"]
+            grammar:
+              - pattern: "Artık birbirimize sen diyelim mi, ne dersiniz?"
+              - pattern: "Ahmet Bey, buyurun, şöyle oturun."
+              - pattern: "Hocam, size bir şey sorabilir miyim?"
+              - pattern: "Efendim? Sizi tam duyamadım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: rica-etsem-requests
+            title: Polite Requests (rica etsem, -ebilir miydiniz)
+            description: Soften requests with rica etsem, acaba, zahmet olmazsa and the past of -(y)Abil.
+            vocabulary: ["rica etsem", "zahmet olmazsa", mümkünse, acaba, müsaadenizle, izninizle, "kusura bakmayın", "rahatsız etmek"]
+            grammar:
+              - pattern: "Rica etsem kapıyı kapatabilir misiniz?"
+              - pattern: "Zahmet olmazsa bu belgeyi imzalayabilir miydiniz acaba?"
+              - pattern: "Müsaadenizle ben artık kalkayım."
+              - pattern: "Kusura bakmayın, sizi bu saatte rahatsız ediyorum."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: listen_type }
+          - id: teshrif-honorific-verbs
+            title: Honorific Verbs (teşrif etmek, buyurmak)
+            description: Use elevated verbs to honour the listener and humble verbs for yourself.
+            vocabulary: ["teşrif etmek", buyurmak, "takdim etmek", "arz etmek", lütfetmek, "şeref vermek", "zahmet etmek", "hoş geldiniz"]
+            grammar:
+              - pattern: "Bizi teşrif ettiğiniz için çok teşekkür ederiz."
+              - pattern: "Pardon, ne buyurdunuz?"
+              - pattern: "Size eşimi takdim edeyim."
+              - pattern: "Lütfedip bir göz atarsanız çok sevinirim."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: courtesy-formulas-c2
+            title: Courtesy Formulas (kolay gelsin, başınız sağ olsun)
+            description: Say the right fixed phrase for work, food, illness, loss and good news.
+            vocabulary: ["kolay gelsin", "eline sağlık", "başınız sağ olsun", "hayırlı olsun", "gözün aydın", "güle güle kullanın", "sıhhatler olsun", "Allah rahmet eylesin"]
+            grammar:
+              - pattern: "Başınız sağ olsun, çok üzüldüm."
+              - pattern: "Yeni eviniz hayırlı olsun, güle güle oturun!"
+              - pattern: "Gözün aydın, oğlun askerden dönmüş!"
+            activities:
+              - { type: learn }
+              - { type: word_select, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: visiting_new_neighbours
+                goal: Visit neighbours who have just moved in and had a loss in the family, using the right courtesy formulas for each moment.
+
+      - id: modality-stance-c2
+        title: Modality & Stance
+        description: Colour verbs with suffixes for haste, near misses, imminence and sudden urges.
+        icon: ⚖️
+        steps:
+          - id: iver-quick-action
+            title: Quick & Casual Action (-(y)Iver)
+            description: Make an action sound quick, easy or sudden with -(y)Iver.
+            vocabulary: [bakıvermek, alıvermek, yazıvermek, uğrayıvermek, girivermek, oluvermek, "bir anda", "şıp diye"]
+            grammar:
+              - pattern: "Şu mektuba bir bakıverir misin?"
+              - pattern: "Çarşıya gidiyorsan iki ekmek alıver."
+              - pattern: "Kapıyı açınca kedi içeri giriverdi."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: ayaz-near-miss
+            title: Near Misses (-(y)Ayaz, az kalsın)
+            description: Say something almost happened, with literary -(y)Ayaz or everyday az kalsın.
+            vocabulary: [düşeyazmak, öleyazmak, bayılayazmak, "az kalsın", neredeyse, "kıl payı", "ucu ucuna", "son anda"]
+            grammar:
+              - pattern: "Buzda kayıp düşeyazdım."
+              - pattern: "Korkudan öleyazdık."
+              - pattern: "Az kalsın treni kaçırıyordum."
+              - pattern: "Kazadan kıl payı kurtuldular."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+          - id: mak-uzere-imminent
+            title: About To (-mAk üzere)
+            description: Express that something is about to happen, and formal purpose with -mAk üzere.
+            vocabulary: ["bitmek üzere", "kapanmak üzere", "çıkmak üzere", "dönmek üzere", "tükenmek üzere", eşiğinde, tam, "üzereyken"]
+            grammar:
+              - pattern: "Film bitmek üzere, biraz daha sabret."
+              - pattern: "Tam çıkmak üzereydim ki telefon çaldı."
+              - pattern: "Bakan, zirveye katılmak üzere Ankara'dan ayrıldı."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: asi-urges-curses
+            title: Urges & Curses (-(y)AsI)
+            description: Express sudden urges with -(y)AsI gelmek and curse things with kahrolası.
+            vocabulary: ["uyuyasım var", "gülesim geldi", "çalışasım yok", kahrolası, "kör olası", ölesiye, doyasıya, "içimden gelmiyor"]
+            grammar:
+              - pattern: "Bugün hiç çalışasım yok."
+              - pattern: "Onu o kılıkta görünce gülesim geldi."
+              - pattern: "Kahrolası trafik yüzünden yine geç kaldım."
+              - pattern: "Tatilde doyasıya dinlendik."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_select }
+              - type: dialogue
+                scenario: lazy_sunday_banter
+                goal: Chat with a flatmate on a lazy Sunday about what you feel like doing (or not), using -(y)AsI and -(y)Iver.
+
+      - id: figurative-deyimler
+        title: Figurative Language (deyimler)
+        description: Understand and use Turkish idioms built on the body, emotions and everyday images.
+        icon: 🎭
+        steps:
+          - id: body-part-deyimler
+            title: Body-Part Idioms
+            description: Use idioms built on göz, kulak, el, dil and burun.
+            vocabulary: ["göz atmak", "kulak asmamak", "burnu büyük", "eli açık", "ağzı sıkı", "dilinin ucunda olmak", "elini çabuk tutmak", "gözden düşmek"]
+            grammar:
+              - pattern: "Uyarılarıma hiç kulak asmadı."
+              - pattern: "Adı dilimin ucunda ama bir türlü hatırlayamıyorum."
+              - pattern: "Elini çabuk tut, dükkân kapanmak üzere."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: emotion-deyimler
+            title: Emotion Idioms
+            description: Describe joy, fear and anger with vivid idioms.
+            vocabulary: ["içi içine sığmamak", "ödü kopmak", "tepesi atmak", "küplere binmek", "ağzı kulaklarında", "yüreği ağzına gelmek", "burnundan solumak", "içi rahat etmek"]
+            grammar:
+              - pattern: "Haberi alınca içi içine sığmadı."
+              - pattern: "Faturayı görünce küplere bindi."
+              - pattern: "Sonuçlar açıklanana kadar ödüm koptu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_select }
+          - id: everyday-metaphor-deyimler
+            title: Everyday Metaphors
+            description: Read and use metaphorical idioms about exaggeration, conflict and evasion.
+            vocabulary: ["pireyi deve yapmak", "bardağı taşıran son damla", "yangına körükle gitmek", "suya sabuna dokunmamak", "dereden tepeden konuşmak", "lafı dolandırmak", "tuzu biberi olmak", "işi yokuşa sürmek"]
+            grammar:
+              - pattern: "Pireyi deve yapma, o kadar da önemli değil."
+              - pattern: "Bu karar bardağı taşıran son damla oldu."
+              - pattern: "Yazar, suya sabuna dokunmayan bir dil kullanmış."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: deyimler-in-context
+            title: Using Idioms Naturally
+            description: Weave idioms into conversation without overdoing it, matching register.
+            vocabulary: ["ağzından kaçırmak", "çam devirmek", "ipe un sermek", "eli kulağında", "nabzına göre şerbet vermek", "göz yummak", "kafa ütülemek", "işi oluruna bırakmak"]
+            grammar:
+              - pattern: "Toplantıda yine çam devirdi, herkes sus pus oldu."
+              - pattern: "Yardım istedim ama ipe un serdi."
+              - pattern: "Yaz tatili eli kulağında."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: gossip_over_tea
+                goal: Retell a colleague's embarrassing mishap to a friend over tea, using at least three idioms naturally.
+
+      - id: proverbs-atasozleri
+        title: Proverbs & Sayings (atasözleri)
+        description: Understand, quote and adapt Turkish proverbs and their timeless grammar.
+        icon: 📜
+        steps:
+          - id: atasozleri-patience-thrift
+            title: Proverbs of Patience & Thrift
+            description: Learn proverbs about saving, patience and haste.
+            vocabulary: [atasözü, tutumlu, sabır, acele, yorgan, saman, damla, göl, şeytan]
+            grammar:
+              - pattern: "Damlaya damlaya göl olur."
+              - pattern: "Ayağını yorganına göre uzat."
+              - pattern: "Sakla samanı, gelir zamanı."
+              - pattern: "Acele işe şeytan karışır."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: listen_select, count: 2 }
+              - { type: fill_blank }
+          - id: atasozleri-people
+            title: Proverbs about People
+            description: Learn proverbs about friends, neighbours and influence.
+            vocabulary: [dost, komşu, kılavuz, üzüm, kararmak, ağaç, eğilmek, "acı söylemek"]
+            grammar:
+              - pattern: "Dost acı söyler."
+              - pattern: "Üzüm üzüme baka baka kararır."
+              - pattern: "Ağaç yaşken eğilir."
+              - pattern: "Görünen köy kılavuz istemez."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: atasozu-grammar-aorist
+            title: Proverb Grammar (aorist, -(y)An, -mAz)
+            description: See how proverbs use the generic aorist, -(y)An participles and negative imperatives.
+            vocabulary: [işlemek, ışıldamak, sürü, kurt, testi, kırılmak, "er geç", meme]
+            grammar:
+              - pattern: "İşleyen demir ışıldar."
+              - pattern: "Sürüden ayrılanı kurt kapar."
+              - pattern: "Su testisi su yolunda kırılır."
+              - pattern: "Ağlamayan çocuğa meme vermezler."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank, count: 2 }
+              - { type: translate }
+          - id: quoting-atasozleri
+            title: Quoting Proverbs in Speech
+            description: Introduce proverbs with derler ya and atalarımız boşuna dememiş.
+            vocabulary: ["derler ya", "hani derler ya", "atalarımız ne demiş", "boşuna dememişler", "ne demişler", "her işte bir hayır vardır", "teselli etmek", "öğüt vermek"]
+            grammar:
+              - pattern: "Atalarımız boşuna dememiş, acele işe şeytan karışır."
+              - pattern: "Hani derler ya, damlaya damlaya göl olur."
+              - pattern: "Her işte bir hayır vardır diyerek kendini teselli etti."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: advising_younger_cousin
+                goal: Give a younger cousin advice about money and friends, backing each point with a fitting proverb.
+
+      - id: rhetoric-persuasion-c2
+        title: Rhetoric & Persuasion
+        description: Persuade with rhetorical questions, emphatic forms and concessive moves.
+        icon: 🎤
+        steps:
+          - id: rhetorical-questions-c2
+            title: Rhetorical Questions (-mAz mI?, ne yapsın)
+            description: Make a point with questions that expect no answer.
+            vocabulary: ["değil mi", "hani", sahi, "kim bilir", "ne yapsın", "nereden bilecek", "yoksa", "olur mu hiç"]
+            grammar:
+              - pattern: "Ben sana söylemedim mi?"
+              - pattern: "Bu kadar emeğe yazık değil mi?"
+              - pattern: "Ne yapsın adamcağız, başka çaresi yoktu."
+              - pattern: "Olur mu hiç öyle şey?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: reduplication-emphasis
+            title: Emphatic Reduplication (ap-, m-)
+            description: Intensify adjectives with emphatic prefixes and play things down with m-doubling.
+            vocabulary: [bembeyaz, kapkara, sapsarı, masmavi, tertemiz, yepyeni, upuzun, çarçabuk, "kitap mitap", "çay may"]
+            grammar:
+              - pattern: "Masmavi bir denizin kıyısında, bembeyaz bir ev."
+              - pattern: "Yepyeni bir sayfa açmak istiyoruz."
+              - pattern: "Kitap mitap umurunda değil, bütün gün telefonla oynuyor."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: translate }
+          - id: kaldi-ki-concession
+            title: Concession & Rebuttal (kaldı ki, şöyle dursun)
+            description: Concede a point and strike back with her ne kadar … -sA da, kaldı ki and şöyle dursun.
+            vocabulary: ["her ne kadar", "kaldı ki", "şöyle dursun", "bir yana", "hâl böyleyken", "olsa olsa", "ne var ki", "üstelik"]
+            grammar:
+              - pattern: "Her ne kadar haklı olsanız da üslubunuz yanlıştı."
+              - pattern: "Destek vermek şöyle dursun, bizi engellediler."
+              - pattern: "Kaldı ki bu bütçeyle böyle bir projeyi bitirmek imkânsız."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: persuasive-speech-c2
+            title: Persuasive Speech (-(y)AlIm, unutmayalım ki)
+            description: Rally an audience with direct address, inclusive -(y)AlIm and strong closings.
+            vocabulary: ["değerli konuklar", "sevgili komşular", "unutmayalım ki", "gelin hep birlikte", "hiç şüphesiz", "altını çizmek", "bir kez daha", "ayağa kaldırmak"]
+            grammar:
+              - pattern: "Gelin, bu mahalleyi hep birlikte yeniden ayağa kaldıralım."
+              - pattern: "Unutmayalım ki her büyük değişim küçük bir adımla başlar."
+              - pattern: "Altını çizmek isterim, bu karar hepimizi ilgilendiriyor."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: neighbourhood_meeting_speech
+                goal: Persuade sceptical residents at a neighbourhood meeting to support turning an empty lot into a park.
+
+      - id: humour-nasreddin-hoca
+        title: Humour, Irony & Wordplay
+        description: Enjoy Nasreddin Hoca, irony, puns and the art of telling a joke.
+        icon: 😄
+        steps:
+          - id: nasreddin-hoca-mis
+            title: Nasreddin Hoca Tales (-mIş narration)
+            description: Follow and retell Hoca tales in the storytelling -mIş past.
+            vocabulary: ["Nasreddin Hoca", fıkra, nükte, hazırcevap, kazan, eşek, "göle maya çalmak", "ya tutarsa"]
+            grammar:
+              - pattern: "Hoca bir gün göle maya çalıyormuş."
+              - pattern: "Görenler sormuşlar, o da 'Ya tutarsa!' demiş."
+              - pattern: "Kazanın doğurduğuna inandın da öldüğüne neden inanmıyorsun?"
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: word_bank }
+          - id: irony-sarcasm-c2
+            title: Irony & Sarcasm
+            description: Spot and use ironic praise, laf sokmak and iğneli sözler.
+            vocabulary: [aferin, "sağ olsun", "eksik olmasın", "tam zamanı", "laf sokmak", "iğneli söz", "taş atmak", "duymazdan gelmek"]
+            grammar:
+              - pattern: "Aferin, yine son gün hatırladın!"
+              - pattern: "Komşu sağ olsun, sabaha kadar matkap çalıştırdı."
+              - pattern: "Toplantıda bana laf soktu ama duymazdan geldim."
+            activities:
+              - { type: learn }
+              - { type: multiple_choice, count: 2 }
+              - { type: listen_type }
+              - { type: translate, count: 2 }
+          - id: homonym-wordplay
+            title: Wordplay & Homonyms
+            description: Play with words like yüz, gül, yaz and çay that carry several meanings.
+            vocabulary: [yüz, gül, yaz, çay, dolu, kır, "kelime oyunu", cinas, espri]
+            grammar:
+              - pattern: "Gülü görünce yüzü güldü."
+              - pattern: "Yaz gelince bana bir kart yaz."
+              - pattern: "Çay kenarında oturup çay içtik."
+              - pattern: "Yetmiş yaşındaki dedem denizde yüz metre yüzdü."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: word_select, count: 2 }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+          - id: telling-fikra
+            title: Telling Jokes (Temel fıkraları)
+            description: Tell a joke with good timing, take a joke and explain a punchline.
+            vocabulary: ["Temel fıkrası", "espri yapmak", "şaka kaldırmak", alınmak, "gülmekten kırılmak", "soğuk espri", "kahkaha atmak", "dalga geçmek"]
+            grammar:
+              - pattern: "Temel ile Dursun bir gün balığa gitmişler."
+              - pattern: "Şakayı kaldıramadı, hemen alındı."
+              - pattern: "Fıkranın sonunda herkes gülmekten kırıldı."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+              - type: dialogue
+                scenario: telling_a_joke_at_dinner
+                goal: Tell a Nasreddin Hoca or Temel joke at a dinner table and explain the punchline to a puzzled guest.
+
+      - id: academic-formal-writing-c2
+        title: Academic & Formal Writing
+        description: Write impersonal academic prose, formal connectors and official petitions.
+        icon: 🎓
+        steps:
+          - id: impersonal-academic-voice
+            title: Impersonal Academic Voice (-DIğI görülmektedir)
+            description: Present research impersonally with the passive and -mAktAdIr.
+            vocabulary: ["ele almak", incelemek, bulgu, veri, varsayım, değerlendirmek, "dikkat çekmek", "söz konusu"]
+            grammar:
+              - pattern: "Bu çalışmada göç olgusu sosyolojik açıdan ele alınmaktadır."
+              - pattern: "Bulgular, katılımcıların çoğunun kararsız olduğunu göstermektedir."
+              - pattern: "Söz konusu verilerin güvenilirliği tartışmaya açıktır."
+            activities:
+              - { type: learn }
+              - { type: error_correct, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: sentence_complete }
+          - id: formal-connectors-takdirde
+            title: Formal Connectors (-mAklA birlikte, -DIğI takdirde)
+            description: Link ideas in formal writing with nitekim, dolayısıyla and -DIğI takdirde.
+            vocabulary: ["bununla birlikte", dolayısıyla, nitekim, "öte yandan", takdirde, itibarıyla, ancak, "buna karşın"]
+            grammar:
+              - pattern: "Faiz oranları düşmekle birlikte enflasyon yüksek seyretmektedir."
+              - pattern: "Başvurunun eksik olduğu takdirde dosya işleme alınmayacaktır."
+              - pattern: "Nitekim son araştırmalar da bu görüşü desteklemektedir."
+              - pattern: "1 Ocak itibarıyla yeni yönetmelik yürürlüğe girmiştir."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: dilekce-official-letters
+            title: Official Petitions (dilekçe)
+            description: Write a dilekçe with the fixed formulas of Turkish official correspondence.
+            vocabulary: [dilekçe, "arz ederim", "gereğinin yapılmasını", "bilgilerinize sunarım", "saygılarımla", ekte, hususunda, tarafıma]
+            grammar:
+              - pattern: "Gereğinin yapılmasını saygılarımla arz ederim."
+              - pattern: "Kaydımın dondurulması hususunda gereğinin yapılmasını arz ederim."
+              - pattern: "Fazladan kesilen ücretin tarafıma iade edilmesini talep ediyorum."
+            activities:
+              - { type: learn }
+              - { type: word_bank, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+          - id: abstracts-summaries-c2
+            title: Abstracts & Summaries
+            description: Summarise aims, method and findings concisely in academic Turkish.
+            vocabulary: [özet, "anahtar kelimeler", amaç, yöntem, "sonuç olarak", özetle, "bu bağlamda", "çalışmanın amacı"]
+            grammar:
+              - pattern: "Bu makalenin amacı, kentsel dönüşümün sosyal etkilerini incelemektir."
+              - pattern: "Yöntem olarak yarı yapılandırılmış görüşmeler kullanılmıştır."
+              - pattern: "Sonuç olarak, önerilen modelin uygulanabilir olduğu söylenebilir."
+            activities:
+              - { type: learn }
+              - { type: translate, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: thesis_defence_committee
+                goal: Defend your thesis's aims and methodology before a committee in formal academic Turkish.
+
+      - id: literature-style-c2
+        title: Literature & Style
+        description: Read Yunus Emre, modern poetry and literary prose, and recognise archaic forms.
+        icon: 📚
+        steps:
+          - id: yunus-emre-old-anatolian
+            title: Yunus Emre & Old Anatolian Turkish
+            description: Read Yunus Emre's verses and notice older forms like -AlUm and -dUr.
+            vocabulary: [aşk, gönül, derviş, ilahi, tasavvuf, kılmak, tanış, "Eski Anadolu Türkçesi"]
+            grammar:
+              - pattern: "Gelin tanış olalım, işi kolay kılalım."
+              - pattern: "Sevelim, sevilelim; bu dünya kimseye kalmaz."
+              - pattern: "Bir ben vardır bende, benden içeru."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: translate }
+          - id: modern-verse-style
+            title: Modern Poetry (Nazım Hikmet)
+            description: Talk about free verse, imagery and theme in modern Turkish poetry.
+            vocabulary: [şiir, dize, kıta, imge, uyak, "serbest ölçü", özlem, memleket, şair]
+            grammar:
+              - pattern: "Nazım Hikmet, şiirlerinde serbest ölçüyü ustalıkla kullanmıştır."
+              - pattern: "Şair, memleket özlemini sade ama güçlü imgelerle anlatır."
+              - pattern: "Bu dizelerde uyak yok, ama ritim çok belirgin."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: speak }
+          - id: archaic-formal-forms
+            title: Archaic & Ottoman Forms (işbu, -Ip, dahi)
+            description: Recognise archaic words and chained -Ip clauses in legal and older texts.
+            vocabulary: [işbu, mezkûr, dahi, "olup", zira, vesaire, keza, mütemadiyen]
+            grammar:
+              - pattern: "İşbu sözleşme iki nüsha olarak düzenlenmiştir."
+              - pattern: "Mezkûr arazi köy halkına ait olup satılamaz."
+              - pattern: "Vakit dahi geç olmuştu."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: match }
+              - { type: error_correct, count: 2 }
+              - { type: translate }
+          - id: devrik-cumle-narration
+            title: Literary Narration (devrik cümle, -DIkçA)
+            description: Recognise inverted sentences, -DIkçA and ne zaman ki in literary prose.
+            vocabulary: ["devrik cümle", anlatıcı, betimleme, "iç monolog", üslup, hüzün, bürünmek, sessizlik]
+            grammar:
+              - pattern: "Gidiyordu adam, ardına bakmadan."
+              - pattern: "Yağmur yağdıkça şehir daha da hüzünleniyordu."
+              - pattern: "Ne zaman ki güneş battı, kasaba derin bir sessizliğe büründü."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: listen_type }
+              - type: dialogue
+                scenario: book_club_discussion
+                goal: Discuss the style of a Turkish novel at a book club, commenting on its narrator, word order and imagery.
+
+      - id: language-identity-c2
+        title: Language & Identity
+        description: Explore the language reform, old and new words, dialects and the Turkic world.
+        icon: 🌍
+        steps:
+          - id: dil-devrimi-reform
+            title: The Language Reform (dil devrimi)
+            description: Talk about the alphabet change, the Türk Dil Kurumu and the öz Türkçe movement.
+            vocabulary: ["harf devrimi", "dil devrimi", "Türk Dil Kurumu", "öz Türkçe", Osmanlıca, "Latin alfabesi", sadeleşme, "uydurma kelime"]
+            grammar:
+              - pattern: "1928'de Arap alfabesinden Latin alfabesine geçildi."
+              - pattern: "Dil devriminden sonra birçok Arapça ve Farsça kelimenin yerine öz Türkçe karşılıklar türetildi."
+              - pattern: "Bazı yeni kelimeler tuttu, bazıları ise unutulup gitti."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: multiple_choice }
+          - id: ottoman-oz-turkce-doublets
+            title: Old & New Words (hürriyet / özgürlük)
+            description: Choose between Arabic or Persian loans and their öz Türkçe counterparts, and feel their connotations.
+            vocabulary: [lisan, dil, mesele, sorun, cevap, yanıt, hürriyet, özgürlük, misal, örnek]
+            grammar:
+              - pattern: "Dedem okula hâlâ mektep diyor."
+              - pattern: "Hürriyet ve özgürlük aynı anlama gelir, ama çağrışımları farklıdır."
+              - pattern: "Konuşmasında mesele yerine bilinçli olarak sorun kelimesini seçti."
+            activities:
+              - { type: learn }
+              - { type: match }
+              - { type: word_select, count: 2 }
+              - { type: error_correct, count: 2 }
+          - id: dialects-agizlar
+            title: Dialects & Accents (ağızlar)
+            description: Recognise regional speech and casual reductions like gidiyom.
+            vocabulary: [ağız, şive, lehçe, aksan, yöresel, "Karadeniz ağzı", uşak, gine]
+            grammar:
+              - pattern: "Karadenizliler çocuğa uşak der."
+              - pattern: "Egeli teyzem yine yerine gine diyor."
+              - pattern: "Günlük konuşmada gidiyorum çoğu zaman gidiyom diye söylenir."
+            activities:
+              - { type: learn }
+              - { type: listen_select, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: multiple_choice }
+          - id: turkic-world-identity
+            title: Turkish & the Turkic World
+            description: Discuss Turkic languages, bilingualism and language as identity.
+            vocabulary: ["Türk dünyası", "Azerbaycan Türkçesi", Kazakça, Özbekçe, anadili, "iki dilli", "dil kimliği", anlaşılabilirlik]
+            grammar:
+              - pattern: "Azerbaycan Türkçesi konuşanlarla rahatça anlaşabiliyoruz."
+              - pattern: "Yurt dışında iki dilli büyüyen çocuklar anadillerini kaybetmemeli."
+              - pattern: "Dil, kimliğin en önemli taşıyıcılarından biridir."
+            activities:
+              - { type: learn }
+              - { type: sentence_complete, count: 2 }
+              - { type: translate }
+              - type: dialogue
+                scenario: language_purism_debate
+                goal: Debate with a friend whether Ottoman loanwords should be avoided or kept alive in modern Turkish.
+
+      - id: mastery-mediation-c2
+        title: Mastery & Mediation
+        description: Mediate between people and texts, and stay in control of any conversation.
+        icon: 🏆
+        steps:
+          - id: reformulating-aktarmak
+            title: Reformulating & Relaying
+            description: Relay and reformulate what others say for a different audience.
+            vocabulary: ["başka bir deyişle", "yanlış anlamadıysam", "demek istediği şu", kısacası, toparlarsak, aktarmak, "sade bir dille", arabuluculuk]
+            grammar:
+              - pattern: "Yanlış anlamadıysam, bütçe bu yıl artırılmayacak."
+              - pattern: "Başka bir deyişle, sözleşmeyi yenilemek istemiyorlar."
+              - pattern: "Söylediklerini müşteriye sade bir dille aktardım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_type, count: 2 }
+              - { type: translate, count: 2 }
+              - { type: sentence_complete }
+          - id: gonul-almak-conflict
+            title: Difficult Conversations
+            description: Criticise tactfully, apologise and smooth things over.
+            vocabulary: ["yanlış anlaşılmak istemem", "sizi anlıyorum", "kalbini kırmak", "gönlünü almak", "arayı bulmak", "üstüne gitmemek", "açık konuşmak gerekirse", "alttan almak"]
+            grammar:
+              - pattern: "Yanlış anlaşılmak istemem ama bu iş böyle yürümez."
+              - pattern: "Kalbini kırmak istemezdim; gönlünü nasıl alabilirim?"
+              - pattern: "Aralarını bulmak için epey uğraştım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: multiple_choice, count: 2 }
+              - { type: error_correct }
+              - { type: speak }
+          - id: nasil-desem-fillers
+            title: Thinking on Your Feet (nasıl desem)
+            description: Buy time, correct slips and improvise answers smoothly.
+            vocabulary: ["nasıl desem", "şöyle söyleyeyim", "dilim sürçtü", "aklımdan çıktı", "lafı toparlamak", "durumu kurtarmak", "kafam durdu", doğaçlama]
+            grammar:
+              - pattern: "Nasıl desem, durum biraz karışık."
+              - pattern: "Pardon, dilim sürçtü; salı değil, çarşamba demek istedim."
+              - pattern: "Bir an kafam durdu ama durumu kurtarmayı başardım."
+            activities:
+              - { type: learn, count: 2 }
+              - { type: listen_select, count: 2 }
+              - { type: sentence_complete, count: 2 }
+              - { type: speak }
+          - id: chairing-toplanti-c2
+            title: Chairing & Moderating
+            description: Open, steer and close a meeting or debate fairly.
+            vocabulary: ["toplantıyı açmak", "söz almak", "söz vermek", gündem, "konumuza dönelim", "kısa tutmak", "oya sunmak", "toplantıyı kapatmak"]
+            grammar:
+              - pattern: "Hoş geldiniz, toplantımızı açıyorum."
+              - pattern: "Söz şimdi Ayşe Hanım'da; lütfen kısa tutalım."
+              - pattern: "Gündemin dışına çıkmayalım, konumuza dönelim."
+            activities:
+              - { type: learn }
+              - { type: fill_blank, count: 2 }
+              - { type: word_bank }
+              - type: dialogue
+                scenario: moderating_panel_debate
+                goal: Moderate a heated panel debate, keeping speakers on topic and summarising the conclusions.
+
+    checkpoint:
+      title: C2 Checkpoint
+      required_score: 80
+      activities:
+        - { type: word_select, count: 3 }
+        - { type: fill_blank, count: 3 }
+        - { type: error_correct, count: 2 }
         - { type: listen_select, count: 3 }
         - { type: translate, count: 3 }
         - { type: dialogue }

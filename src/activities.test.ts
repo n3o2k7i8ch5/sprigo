@@ -86,3 +86,17 @@ test("a choice question that names its own answer is dropped", () => {
   assert.equal(givesAway("Which is right: morning or evening?", opts, 3), false); // both named: still a real choice
   assert.equal(REGISTRY.word_select!.toItem({ prompt: "'evening' means?", options: opts, answer_index: 3 }), null);
 });
+
+test("listening practice can ask a few words and draw wrong options from a larger pool", async () => {
+  const { listenItems } = await import("./activities.ts");
+  const pool = ["a", "b", "c", "d", "e"].map((w, i) => ({ word: w, translation: w.toUpperCase(), strength: i }));
+  const items = listenItems([pool[4]], "?", 10, pool);
+  assert.equal(items.length, 1);
+  const it = items[0];
+  assert.ok(it.kind === "choice");
+  assert.equal(it.listen, "e");
+  assert.equal(new Set(it.options).size, 4);
+  assert.equal(it.options[it.answer], "e");
+  assert.deepEqual(listenItems([], "?", 10, pool), []);
+  assert.deepEqual(listenItems([pool[0]], "?", 10, pool.slice(0, 3)), []);
+});
