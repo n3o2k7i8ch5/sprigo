@@ -6,6 +6,7 @@ import { useBuy } from "./screens/Screens";
 import * as db from "./db";
 import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechScore, type Item } from "./activities";
 import { MicButton } from "./Mic";
+import { answerLang } from "./evalRules";
 import { sttReady } from "./stt";
 import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
@@ -423,6 +424,8 @@ export function Lesson({ id }: { id: string }) {
       <textarea key={i} className="input" rows={3} value={text} disabled={!!fb || checking} autoFocus aria-label={t("lesson.yourAnswer")} placeholder={t("lesson.typeHere")}
         style={{ width: "100%", resize: "none", fontSize: 18 }}
         onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (canCheck) check(); } }} />
+      {speakOk && profile && <MicButton key={`mic${i}`} lang={answerLang(it, lang, profile.native_lang)} disabled={!!fb || checking}
+        onText={(said) => { if (said.trim()) setText((x) => [x.trim(), said.trim()].filter(Boolean).join(" ")); }} />}
     </>
   );
   else body = (
