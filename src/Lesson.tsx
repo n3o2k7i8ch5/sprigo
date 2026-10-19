@@ -6,9 +6,11 @@ import { useBuy } from "./screens/Screens";
 import * as db from "./db";
 import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechScore, type Item } from "./activities";
 import { MicButton } from "./Mic";
+import { answerLang } from "./evalRules";
 import { sttReady } from "./stt";
 import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
+import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
@@ -358,7 +360,7 @@ export function Lesson({ id }: { id: string }) {
     <>
       <h2 className="ex-title">{t("lesson.newPhrase")}</h2>
       <div className="card" style={{ textAlign: "center", padding: 28 }}>
-        <p lang={lang} style={{ fontSize: 30, fontWeight: 900 }}>{it.phrase}</p>
+        <p lang={lang} style={{ fontSize: 30, fontWeight: 900 }}><Words text={it.phrase} lang={lang} /></p>
         <p className="muted" style={{ fontSize: 18, fontWeight: 700, margin: "6px 0 14px" }}>{it.translation}</p>
         {listenBtn(it.phrase)}
         {it.note && <p className="small" style={{ marginTop: 14 }}>{it.note}</p>}
@@ -370,7 +372,7 @@ export function Lesson({ id }: { id: string }) {
       <h2 className="ex-title">{t("lesson.speakTitle")}</h2>
       <p className="ex-sub">{t("lesson.speakSub")}</p>
       <div className="card" style={{ textAlign: "center", padding: 22 }}>
-        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}>{it.phrase}</p>
+        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}><Words text={it.phrase} lang={lang} /></p>
         <p className="muted" style={{ fontWeight: 700, margin: "4px 0 12px" }}>{it.translation}</p>
         {listenBtn(it.phrase)}
       </div>
@@ -387,7 +389,7 @@ export function Lesson({ id }: { id: string }) {
       {it.listen && listenBtn(it.listen)}
       {it.context && (it.big
         ? <div aria-hidden="true" style={{ fontSize: 72, textAlign: "center", margin: "8px 0 16px" }}>{it.context}</div>
-        : <div className="card" lang={lang} style={{ whiteSpace: "pre-wrap", fontWeight: 700, fontSize: 18, marginBottom: 16 }}>{it.context}</div>)}
+        : <div className="card" lang={lang} style={{ whiteSpace: "pre-wrap", fontWeight: 700, fontSize: 18, marginBottom: 16 }}><Words text={it.context} lang={lang} off={!fb} /></div>)}
       <div className="opt-grid">
         {it.options.map((o, oi) => {
           const state = fb ? (oi === it.answer ? "correct" : oi === sel ? "wrong" : "") : oi === sel ? "sel" : "";
@@ -422,6 +424,8 @@ export function Lesson({ id }: { id: string }) {
       <textarea key={i} className="input" rows={3} value={text} disabled={!!fb || checking} autoFocus aria-label={t("lesson.yourAnswer")} placeholder={t("lesson.typeHere")}
         style={{ width: "100%", resize: "none", fontSize: 18 }}
         onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (canCheck) check(); } }} />
+      {speakOk && profile && <MicButton key={`mic${i}`} lang={answerLang(it, lang, profile.native_lang)} disabled={!!fb || checking}
+        onText={(said) => { if (said.trim()) setText((x) => [x.trim(), said.trim()].filter(Boolean).join(" ")); }} />}
     </>
   );
   else body = (

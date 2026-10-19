@@ -8,7 +8,7 @@ import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { invoke } from "@tauri-apps/api/core";
 import { z } from "zod";
 import { isTauri, isCompanion, getSetting, setSetting } from "./db";
-import { retry } from "./retry";
+import { retry, withBackup } from "./retry";
 
 export type ProviderId = "ollama" | "lmstudio" | "openai" | "anthropic" | "gemini" | "openrouter";
 export const PROVIDERS: Record<ProviderId, { label: string; baseURL: string; needsKey: boolean }> = {
@@ -32,6 +32,12 @@ export async function loadAiConfig(): Promise<AiConfig | null> {
   return v ? JSON.parse(v) : null;
 }
 export const saveAiConfig = (c: AiConfig) => setSetting("ai", JSON.stringify(c));
+/** Backup provider (#36): asked when the main one fails. Only one the learner set up, never chosen for them (privacy). */
+export async function loadAiBackup(): Promise<AiConfig | null> {
+  const v = await getSetting("ai.backup");
+  return v ? JSON.parse(v) : null;
+}
+export const saveAiBackup = (c: AiConfig | null) => setSetting("ai.backup", c && JSON.stringify(c));
 
 // ---- API keys ----
 // ponytail: the dev browser preview has no keychain, so it keeps keys in localStorage. Never used in the app.
@@ -103,7 +109,17 @@ const reasoning = (c: AiConfig) =>
   c.provider === "ollama" ? (c.model.startsWith("glm-5.3-flash") ? "low" as const : "none" as const)
   : c.provider === "lmstudio" ? "low" as const : undefined;
 
-let active: { cfg: AiConfig; key: string | null } | null = null;
+type Active = { cfg: AiConfig; key: string | null };
+let active: Active | null = null, backup: Active | null = null;
+let onSwitch = (_from: AiConfig, _to: AiConfig) => {};
+/** Called when a request moves from the main provider to the backup, e.g. to tell the learner. */
+export const onBackupUsed = (f: (from: AiConfig, to: AiConfig) => void) => { onSwitch = f; };
+// ponytail: one backup, an ordered list in Settings if people want more. Any failure switches: the lesson would fail anyway.
+const viaBackup = <T>(cfg: Active | null, fn: (c: Active) => Promise<T>, may?: () => boolean) => {
+  if (!cfg) throw new Error("AI provider is not set up");
+  const b = cfg === active ? backup : null; // explicit configs (bench, eval, tests) never switch
+  return withBackup(cfg, b, fn, (to) => onSwitch(cfg.cfg, to.cfg), may);
+};
 
 /** Loads a local Ollama model before a live call so the first turn is not a cold start (SPR-14). Cloud models answer at once. */
 export function warmUp() {
@@ -111,8 +127,9 @@ export function warmUp() {
   const base = baseOf(active.cfg);
   http(`${base}/api/generate`, { method: "POST", body: JSON.stringify({ model: active.cfg.model, keep_alive: "10m" }) }).catch(() => {});
 }
-export async function activateConfig(cfg: AiConfig | null) {
+export async function activateConfig(cfg: AiConfig | null, backupCfg: AiConfig | null = null) {
   active = cfg && { cfg, key: await getKey(cfg.provider) };
+  backup = cfg && backupCfg && backupCfg.provider !== cfg.provider ? { cfg: backupCfg, key: await getKey(backupCfg.provider) } : null;
 }
 
 /** Pulls the JSON object out of replies wrapped in ```json fences or prose. */
@@ -125,7 +142,9 @@ export function extractJson(text: string): unknown {
 /** Structured generation with the active provider. `loose` parses replies the strict `schema` rejected
  *  (e.g. fills a field the model left out); the schema sent to the provider stays strict for OpenAI's strict mode. */
 export async function generate<S extends z.ZodType>(schema: S, system: string, prompt: string, cfg = active, loose: z.ZodType = schema): Promise<z.infer<S>> {
-  if (!cfg) throw new Error("AI provider is not set up");
+  return viaBackup(cfg, (c) => generateWith(schema, system, prompt, c, loose));
+}
+async function generateWith<S extends z.ZodType>(schema: S, system: string, prompt: string, cfg: Active, loose: z.ZodType): Promise<z.infer<S>> {
   // Some servers ignore response_format (e.g. Ollama cloud models), so the schema is in the prompt too.
   system += `\n\nJSON schema of the reply:\n${JSON.stringify(z.toJSONSchema(schema))}`;
   const once = async () => {
@@ -150,7 +169,11 @@ export async function generate<S extends z.ZodType>(schema: S, system: string, p
  *  (e.g. started speaking). After that a broken reply is not asked again: `loose` fills what it can from `{}`. */
 export async function generateStream<S extends z.ZodType>(schema: S, system: string, prompt: string, onText: (raw: string) => boolean,
   loose: z.ZodType = schema, cfg = active): Promise<z.infer<S>> {
-  if (!cfg) throw new Error("AI provider is not set up");
+  let spoke = false; // once a reply was acted on, a second provider would say it all again
+  return viaBackup(cfg, (c) => streamWith(schema, system, prompt, (raw) => onText(raw) && (spoke = true), loose, c), () => !spoke);
+}
+async function streamWith<S extends z.ZodType>(schema: S, system: string, prompt: string, onText: (raw: string) => boolean,
+  loose: z.ZodType, cfg: Active): Promise<z.infer<S>> {
   system += `\n\nJSON schema of the reply:\n${JSON.stringify(z.toJSONSchema(schema))}`;
   let used = false;
   const once = async () => {
@@ -176,10 +199,11 @@ export async function generateStream<S extends z.ZodType>(schema: S, system: str
 const badReply = (e: unknown) => NoObjectGeneratedError.isInstance(e) || e instanceof z.ZodError || e instanceof SyntaxError ||
   (e instanceof Error && e.message === "no JSON object in the reply");
 
-export async function generatePlain(system: string, prompt: string) {
-  if (!active) throw new Error("AI provider is not set up");
-  const r = await generateText({ model: model(active.cfg, active.key), reasoning: reasoning(active.cfg), system, prompt, maxRetries: 1, abortSignal: AbortSignal.timeout(60_000) });
-  return r.text.trim();
+export function generatePlain(system: string, prompt: string) {
+  return viaBackup(active, async (c) => {
+    const r = await generateText({ model: model(c.cfg, c.key), reasoning: reasoning(c.cfg), system, prompt, maxRetries: 1, abortSignal: AbortSignal.timeout(60_000) });
+    return r.text.trim();
+  });
 }
 
 /** First-run setup suggests this when Ollama runs without models. ponytail: one fixed pick, a size-aware list if people ask */

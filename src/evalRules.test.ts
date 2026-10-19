@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { checkItem, guessLang, lessonMetrics, summarize } from "./evalRules.ts";
+import { answerLang, checkItem, guessLang, lessonMetrics, summarize } from "./evalRules.ts";
 
 const EN_TR = { target: "en", native: "tr" } as const;
 
@@ -96,4 +96,12 @@ test("summarize: a row per type, then the total", () => {
   ]);
   assert.deepEqual(rows.map((r) => [r.type, r.items, r.pass, r.fails.distinct_options, r.natural, r.one_correct]),
     [["match", 2, 50, 1, null, null], ["speak", 1, 100, 0, 4, 100], ["total", 3, 67, 1, 4, 100]]);
+});
+
+test("dictation listens in the answer's language (#26)", () => {
+  const en = "I would like a cup of coffee", tr = "Bir fincan kahve istiyorum lütfen bu sabah";
+  assert.equal(answerLang({ answer: tr, context: en }, "en", "tr"), "tr");
+  assert.equal(answerLang({ answer: en, context: tr }, "en", "tr"), "en");
+  assert.equal(answerLang({ answer: "kahve", context: "the coffee is hot" }, "en", "tr"), "tr"); // short answer: the source decides
+  assert.equal(answerLang({ answer: "coffee", context: "" }, "en", "tr"), "en"); // listen_type
 });

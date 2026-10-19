@@ -636,7 +636,14 @@
     "geminiInfo": "Derslerini ve sohbetlerini Gemini modelleri yazar. İstekler Google'a gider; kullanım sınırı ve ücret anahtarına bağlıdır.",
     "openrouterGood": "Birçok laboratuvarın yüzlerce modeli, tek API anahtarıyla.",
     "openrouterInfo": "OpenRouter'a bağlanır; her isteği seçtiğin modele (OpenAI, Anthropic, Google, açık modeller…) yönlendirir. İstekler OpenRouter'a ve modelin sağlayıcısına gider, OpenRouter anahtarına kullanıma göre ücretlendirilir. Sprigo, mümkün olan modellerde düşünmeyi kapatır; dersler hızlı kalır.",
-    "configure": "{{name}} ayarları"
+    "configure": "{{name}} ayarları",
+    "backup": "Yedek",
+    "backupDesc": "Derslerini ana sağlayıcın yazar. İkinci bir sağlayıcıyı yedek seçersen, ana sağlayıcı hata verdiğinde Sprigo ona sorar.",
+    "saveBackup": "Yedek olarak kullan",
+    "removeBackup": "Yedeği kaldır",
+    "backupSaved": "Yedek sağlayıcı kaydedildi",
+    "backupRemoved": "Yedek sağlayıcı kaldırıldı",
+    "usedBackup": "{{from}} cevap vermedi, {{to}} deneniyor"
   },
   "stt": {
     "idle": "Konuşmak için dokun",
@@ -873,5 +880,38 @@
     "fruitDesc": "Geçtiğin her seviye sınavı bir meyve verir.",
     "toShop": "Mağaza",
     "noteLoading": "Sprigo sana bir not yazıyor…"
+  },
+  "lookup": {
+    "loading": "Bakılıyor…",
+    "failed": "Bu kelimeye bakılamadı. Yapay zekâ bağlantısını kontrol edip tekrar dene.",
+    "add": "Kelimelerime ekle",
+    "inWords": "Kelimelerimde",
+    "added": "Kelimelerime eklendi"
+  },
+  "cards": {
+    "title": "Kartlar",
+    "desc_one": "Bugün {{count}} kart tekrar bekliyor",
+    "desc_other": "Bugün {{count}} kart tekrar bekliyor",
+    "keys": "Space kartı çevirir, 1–4 puanlar. Puanlar derslerle aynı tekrar planını günceller.",
+    "deckDue": "Bugün tekrar edilecekler",
+    "deckAll": "Tüm kelimelerim",
+    "count_one": "{{count}} kart",
+    "count_other": "{{count}} kart",
+    "addTitle": "Kendi kartını ekle",
+    "word": "Kelime",
+    "meaning": "Anlamı",
+    "add": "Kartı ekle",
+    "added": "Kart Kelimelerim'e eklendi",
+    "loading": "Deste karılıyor…",
+    "empty": "Bu destede henüz kart yok.",
+    "flip": "Anlamını göster",
+    "flipHint": "Anlamını hatırla, sonra çevir",
+    "again": "Tekrar",
+    "hard": "Zor",
+    "good": "İyi",
+    "easy": "Kolay",
+    "days_one": "{{count}} gün",
+    "days_other": "{{count}} gün",
+    "done": "Deste bitti!"
   }
 }

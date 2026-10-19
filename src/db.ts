@@ -13,7 +13,7 @@ import { deleteProfileSql } from "./profileDelete";
 import type { Baseline, Conditions, SessionRow, SpeechSummary } from "./speech";
 import { remoteDb, serveCompanion } from "./companion";
 import { evictIds, type Memory, type MemoryOps, type MemorySource } from "./memory";
-import { newCard, review, strengthOf, type WordCard } from "./srs";
+import { grade, newCard, review, strengthOf, type Grade, type WordCard } from "./srs";
 export { NEW_STATS, type Stats };
 
 type Row = Record<string, any>;
@@ -157,6 +157,12 @@ export async function putCached(enrollmentId: number, stepId: string, content: u
   await (await db()).execute("INSERT INTO content_cache(enrollment_id, step_id, content) VALUES ($1, $2, $3) ON CONFLICT DO UPDATE SET content = $3, created_at = CURRENT_TIMESTAMP", [enrollmentId, stepId, JSON.stringify(content)]);
 }
 
+/** Every cached unit guidebook (`guide:<unit>`), for word lookups (#28). */
+export async function cachedGuides<T>(enrollmentId: number) {
+  const r = await (await db()).select<{ content: string }>("SELECT content FROM content_cache WHERE enrollment_id = $1 AND step_id LIKE 'guide:%'", [enrollmentId]);
+  return r.map((x) => JSON.parse(x.content) as T);
+}
+
 /** Levels passed via checkpoint or level test: marks every node of the level done and moves the enrollment on. */
 export async function completeLevel(enrollmentId: number, ids: string[], next: Cefr | null) {
   for (const id of ids) await markDone(enrollmentId, id);
@@ -196,12 +202,12 @@ export async function addWords(enrollmentId: number, pairs: [string, string][]) 
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, w, t, c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review]);
 }
-/** One recall of `word`: right → Good, wrong → Again (src/srs.ts). */
-export async function reviewWord(enrollmentId: number, word: string, ok: boolean) {
+/** One recall of `word`: right → Good, wrong → Again, or a flashcard's own grade (src/srs.ts). */
+export async function reviewWord(enrollmentId: number, word: string, ok: boolean | Grade) {
   const d = await db();
   const [row] = await d.select<WordCard>(`SELECT ${CARD_COLS} FROM words WHERE enrollment_id = $1 AND word = $2`, [enrollmentId, word]);
   if (!row) return;
-  const c = review(row, ok, new Date());
+  const c = typeof ok === "boolean" ? review(row, ok, new Date()) : grade(row, ok, new Date());
   await d.execute(
     "UPDATE words SET due = $1, stability = $2, difficulty = $3, reps = $4, lapses = $5, state = $6, last_review = $7, updated_at = CURRENT_TIMESTAMP WHERE enrollment_id = $8 AND word = $9",
     [c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review, enrollmentId, word]);

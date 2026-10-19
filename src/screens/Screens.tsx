@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Icon, type IconName } from "../icons";
 import { useApp } from "../store";
 import { useStartLesson } from "../Lesson";
+import { CardsSheet } from "../Flashcards";
 import { useSpeakBlock } from "../Mic";
 import { msLeft, rivalXp, zones, PROMOTE, DEMOTE, TIERS } from "../league";
 import * as db from "../db";
@@ -122,6 +123,8 @@ export function Practice() {
         {card(() => words.length < LISTEN_MIN_WORDS ? toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })) : due ? start("practice-due") : toast(t("practice.noDue")),
           "refresh", "var(--green-tint)", "var(--green)", t("practice.due"),
           words.length < LISTEN_MIN_WORDS ? t("practice.needWords", { count: LISTEN_MIN_WORDS }) : due ? t("practice.dueDesc", { count: due }) : t("practice.noDue"))}
+        {card(() => words.length ? openSheet(<CardsSheet onAdded={() => reload((n) => n + 1)} />) : toast(t("practice.needWords", { count: 1 })),
+          "story", "var(--gold-tint)", "var(--gold-dark)", t("cards.title"), words.length ? t("cards.desc", { count: due }) : t("practice.needWords", { count: 1 }))}
         {card(() => words.length >= LISTEN_MIN_WORDS ? start("practice-listen") : toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })),
           "headphones", "var(--purple-tint)", "var(--purple-dark)", t("practice.listen"), words.length >= LISTEN_MIN_WORDS ? t("practice.listenDesc", { count: Math.min(6, words.length) }) : t("practice.needWords", { count: LISTEN_MIN_WORDS }))}
         {card(() => words.length >= MADNESS_MIN_WORDS ? start("practice-madness") : toast(t("practice.needWords", { count: MADNESS_MIN_WORDS })),

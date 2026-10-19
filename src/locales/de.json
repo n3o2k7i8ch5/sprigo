@@ -642,7 +642,14 @@
     "geminiInfo": "Gemini-Modelle schreiben deine Lektionen und Chats. Anfragen gehen an Google; Limits und Preise hängen von deinem Schlüssel ab.",
     "openrouterGood": "Hunderte Modelle vieler Anbieter mit einem API-Schlüssel.",
     "openrouterInfo": "Verbindet sich mit OpenRouter, das jede Anfrage an das gewählte Modell weiterleitet (OpenAI, Anthropic, Google, offene Modelle…). Anfragen gehen an OpenRouter und den Anbieter des Modells; abgerechnet nach Nutzung über deinen OpenRouter-Schlüssel. Sprigo schaltet das Nachdenken des Modells ab, wo es geht, damit Lektionen schnell bleiben.",
-    "configure": "{{name}}-Einstellungen"
+    "configure": "{{name}}-Einstellungen",
+    "backup": "Ersatz",
+    "backupDesc": "Dein Hauptanbieter schreibt deine Lektionen. Wähle einen zweiten als Ersatz, dann fragt Sprigo ihn, wenn der Hauptanbieter ausfällt.",
+    "saveBackup": "Als Ersatz nutzen",
+    "removeBackup": "Ersatz entfernen",
+    "backupSaved": "Ersatzanbieter gespeichert",
+    "backupRemoved": "Ersatzanbieter entfernt",
+    "usedBackup": "{{from}} hat nicht geantwortet, {{to}} wird gefragt"
   },
   "stt": {
     "idle": "Zum Sprechen tippen",
@@ -879,5 +886,38 @@
     "fruitDesc": "Jeder bestandene Level-Test lässt eine Frucht wachsen.",
     "toShop": "Shop",
     "noteLoading": "Sprigo schreibt dir eine Notiz…"
+  },
+  "lookup": {
+    "loading": "Wird nachgeschlagen…",
+    "failed": "Das Wort konnte nicht nachgeschlagen werden. Prüfe die KI-Verbindung und versuch es noch einmal.",
+    "add": "Zu meinen Wörtern",
+    "inWords": "In meinen Wörtern",
+    "added": "Zu Meine Wörter hinzugefügt"
+  },
+  "cards": {
+    "title": "Karteikarten",
+    "desc_one": "{{count}} Karte ist heute fällig",
+    "desc_other": "{{count}} Karten sind heute fällig",
+    "keys": "Leertaste dreht eine Karte um, 1–4 bewerten sie. Bewertungen ändern denselben Wiederholungsplan wie die Lektionen.",
+    "deckDue": "Heute fällig",
+    "deckAll": "Alle meine Wörter",
+    "count_one": "{{count}} Karte",
+    "count_other": "{{count}} Karten",
+    "addTitle": "Eigene Karte hinzufügen",
+    "word": "Wort",
+    "meaning": "Bedeutung",
+    "add": "Karte hinzufügen",
+    "added": "Karte zu Meine Wörter hinzugefügt",
+    "loading": "Stapel wird gemischt…",
+    "empty": "Dieser Stapel hat noch keine Karten.",
+    "flip": "Bedeutung zeigen",
+    "flipHint": "Erinnere dich an die Bedeutung, dann umdrehen",
+    "again": "Nochmal",
+    "hard": "Schwer",
+    "good": "Gut",
+    "easy": "Leicht",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage",
+    "done": "Stapel geschafft!"
   }
 }

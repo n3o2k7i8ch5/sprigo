@@ -4,7 +4,7 @@ import i18n from "./i18n";
 import { useTheme, type ThemePref } from "./theme";
 import { parseCourse, levelsOf, chestId, checkpointId, type Cefr, type Course } from "./course";
 import * as db from "./db";
-import { activateConfig, loadAiConfig, saveAiConfig, type AiConfig } from "./ai";
+import { activateConfig, loadAiBackup, loadAiConfig, onBackupUsed, PROVIDERS, saveAiBackup, saveAiConfig, type AiConfig } from "./ai";
 import type { Enrollment, Profile, Stats } from "./db";
 import { rollDay, today } from "./progress";
 import { FutureSchemaError } from "./migrate";
@@ -47,6 +47,8 @@ type Ctx = {
   ready: boolean;
   bootError: BootError | null;
   ai: AiConfig | null; setAi: (c: AiConfig) => Promise<void>;
+  /** #36: asked when `ai` fails; null = none. */
+  aiBackup: AiConfig | null; setAiBackup: (c: AiConfig | null) => Promise<void>;
   courses: Course[]; courseErrors: string[];
   profile: Profile | null; enrollments: Enrollment[];
   enrollment: Enrollment | null; course: Course | null; done: Set<string>; legendary: Set<string>;
@@ -76,6 +78,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
   const [bootError, setBootError] = useState<BootError | null>(null);
   const [ai, setAiState] = useState<AiConfig | null>(null);
+  const [aiBackup, setAiBackupState] = useState<AiConfig | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [courseErrors, setCourseErrors] = useState<string[]>([]);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -116,9 +119,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         onHandoff((to) => setBootError({ kind: to === "phone" ? "onPhone" : "onDesktop", detail: "" }));
         await db.openDb();
         if (db.isTauri) startHeartbeat((device) => setBootError({ kind: "locked", detail: device }));
-        const cfg = await loadAiConfig();
-        await activateConfig(cfg);
-        setAiState(cfg);
+        const [cfg, bk] = [await loadAiConfig(), await loadAiBackup()];
+        await activateConfig(cfg, bk);
+        setAiState(cfg); setAiBackupState(bk);
         const { courses, errors } = await loadCourses();
         setCourses(courses); setCourseErrors(errors);
         errors.forEach((e) => console.error(e));
@@ -146,11 +149,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toastT.current = window.setTimeout(() => setToastOn(false), 2200);
   }, []);
 
+  useEffect(() => onBackupUsed((from, to) =>
+    toast(i18n.t("ai.usedBackup", { from: PROVIDERS[from.provider].label, to: PROVIDERS[to.provider].label }))), [toast]);
+
   const firstLevel = (iso: string) => levelsOf(courses.find((c) => c.iso === iso)!)[0];
 
   const value: Ctx = {
     ready, bootError, ai,
-    setAi: async (c) => { await saveAiConfig(c); await activateConfig(c); setAiState(c); },
+    setAi: async (c) => {
+      const bk = aiBackup?.provider === c.provider ? null : aiBackup; // the new main provider can't be its own backup
+      await saveAiConfig(c); if (bk !== aiBackup) await saveAiBackup(null);
+      await activateConfig(c, bk); setAiState(c); setAiBackupState(bk);
+    },
+    aiBackup,
+    setAiBackup: async (c) => { await saveAiBackup(c); await activateConfig(ai, c); setAiBackupState(c); },
     courses, courseErrors, profile, enrollments, enrollment, course, done, legendary,
     login,
     logout: async () => {

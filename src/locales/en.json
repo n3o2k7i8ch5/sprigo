@@ -642,7 +642,14 @@
     "geminiInfo": "Gemini models write your lessons and chats. Requests go to Google; usage limits and prices depend on your key.",
     "openrouterGood": "Hundreds of models from many labs behind one API key.",
     "openrouterInfo": "Connects to OpenRouter, which routes each request to the model you pick (OpenAI, Anthropic, Google, open models…). Requests go to OpenRouter and the model's provider; billed by usage on your OpenRouter key. Sprigo turns the model's thinking off where it can, so lessons stay fast.",
-    "configure": "{{name}} settings"
+    "configure": "{{name}} settings",
+    "backup": "Backup",
+    "backupDesc": "Your main provider writes your lessons. Pick a second one as a backup and Sprigo asks it when the main one fails.",
+    "saveBackup": "Use as backup",
+    "removeBackup": "Remove backup",
+    "backupSaved": "Backup provider saved",
+    "backupRemoved": "Backup provider removed",
+    "usedBackup": "{{from}} didn't answer, trying {{to}}"
   },
   "stt": {
     "idle": "Tap to speak",
@@ -879,5 +886,38 @@
     "fruitDesc": "Each level checkpoint you pass grows one fruit.",
     "toShop": "Shop",
     "noteLoading": "Sprigo is writing you a note…"
+  },
+  "lookup": {
+    "loading": "Looking it up…",
+    "failed": "Couldn't look this word up. Check the AI connection and try again.",
+    "add": "Add to my words",
+    "inWords": "In my words",
+    "added": "Added to My words"
+  },
+  "cards": {
+    "title": "Flashcards",
+    "desc_one": "{{count}} card due today",
+    "desc_other": "{{count}} cards due today",
+    "keys": "Space flips a card, 1–4 grade it. Grades update the same review schedule as lessons.",
+    "deckDue": "Due today",
+    "deckAll": "All my words",
+    "count_one": "{{count}} card",
+    "count_other": "{{count}} cards",
+    "addTitle": "Add your own card",
+    "word": "Word",
+    "meaning": "Meaning",
+    "add": "Add card",
+    "added": "Card added to My words",
+    "loading": "Shuffling the deck…",
+    "empty": "No cards in this deck yet.",
+    "flip": "Show meaning",
+    "flipHint": "Recall the meaning, then flip",
+    "again": "Again",
+    "hard": "Hard",
+    "good": "Good",
+    "easy": "Easy",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "done": "Deck done!"
   }
 }

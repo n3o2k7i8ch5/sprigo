@@ -31,6 +31,12 @@ export function guessLang(text: string): Lang | null {
   return ranked[0][1] > ranked[1][1] ? ranked[0][0] : null;
 }
 
+/** The language a typed answer is in (#26: which language dictation listens for). Translations go either way:
+ *  native when the answer reads native or the source reads target; otherwise, and for listen_type, the target. */
+export function answerLang(it: { answer: string; context: string }, target: string, native: string): string {
+  return guessLang(it.answer) === native || guessLang(it.context) === target ? native : target;
+}
+
 const CHOICE = new Set(["word_select", "multiple_choice", "image_select", "listen_select", "fill_blank", "sentence_complete", "error_correct"]);
 
 /** Texts that must be in the course language and in the native language. Options are joined: one word alone is too short to guess. */

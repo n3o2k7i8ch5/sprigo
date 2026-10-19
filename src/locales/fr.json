@@ -670,7 +670,14 @@
     "geminiInfo": "Les modèles Gemini écrivent tes leçons et discussions. Les requêtes vont chez Google ; limites et prix dépendent de ta clé.",
     "openrouterGood": "Des centaines de modèles de nombreux labos avec une seule clé API.",
     "openrouterInfo": "Se connecte à OpenRouter, qui envoie chaque requête au modèle choisi (OpenAI, Anthropic, Google, modèles ouverts…). Les requêtes vont à OpenRouter et au fournisseur du modèle ; facturées à l'usage sur ta clé OpenRouter. Sprigo coupe la réflexion du modèle quand c'est possible, pour que les leçons restent rapides.",
-    "configure": "Réglages {{name}}"
+    "configure": "Réglages {{name}}",
+    "backup": "Secours",
+    "backupDesc": "Ton fournisseur principal écrit tes leçons. Choisis-en un second comme secours : Sprigo lui demandera quand le principal échoue.",
+    "saveBackup": "Utiliser en secours",
+    "removeBackup": "Retirer le secours",
+    "backupSaved": "Fournisseur de secours enregistré",
+    "backupRemoved": "Fournisseur de secours retiré",
+    "usedBackup": "{{from}} n'a pas répondu, essai avec {{to}}"
   },
   "stt": {
     "idle": "Touche pour parler",
@@ -908,5 +915,41 @@
     "fruitDesc": "Chaque test de niveau réussi fait pousser un fruit.",
     "toShop": "Boutique",
     "noteLoading": "Sprigo t'écrit un petit mot…"
+  },
+  "lookup": {
+    "loading": "Recherche…",
+    "failed": "Impossible de chercher ce mot. Vérifie la connexion à l'IA et réessaie.",
+    "add": "Ajouter à mes mots",
+    "inWords": "Dans mes mots",
+    "added": "Ajouté à Mes mots"
+  },
+  "cards": {
+    "title": "Cartes",
+    "desc_one": "{{count}} carte à revoir aujourd'hui",
+    "desc_other": "{{count}} cartes à revoir aujourd'hui",
+    "desc_many": "{{count}} cartes à revoir aujourd'hui",
+    "keys": "Espace retourne la carte, 1–4 la notent. Les notes mettent à jour le même plan de révision que les leçons.",
+    "deckDue": "À revoir aujourd'hui",
+    "deckAll": "Tous mes mots",
+    "count_one": "{{count}} carte",
+    "count_other": "{{count}} cartes",
+    "count_many": "{{count}} cartes",
+    "addTitle": "Ajoute ta propre carte",
+    "word": "Mot",
+    "meaning": "Sens",
+    "add": "Ajouter la carte",
+    "added": "Carte ajoutée à Mes mots",
+    "loading": "On mélange le paquet…",
+    "empty": "Ce paquet n'a pas encore de cartes.",
+    "flip": "Voir le sens",
+    "flipHint": "Rappelle-toi le sens, puis retourne",
+    "again": "À revoir",
+    "hard": "Difficile",
+    "good": "Bien",
+    "easy": "Facile",
+    "days_one": "{{count}} jour",
+    "days_other": "{{count}} jours",
+    "days_many": "{{count}} jours",
+    "done": "Paquet terminé !"
   }
 }

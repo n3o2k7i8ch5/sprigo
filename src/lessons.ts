@@ -1,7 +1,7 @@
 // Lesson generation (DECISIONS C2, C3): cache → one call for the whole step → per-activity fallback.
 import { z } from "zod";
 import { generate, generatePlain, generateStream } from "./ai";
-import { applyMemoryOps, enrollmentProfile, getCached, listMemories, listMistakes, markMemoriesUsed, memoryOn, putCached } from "./db";
+import { applyMemoryOps, cachedGuides, enrollmentProfile, getCached, listMemories, listMistakes, markMemoriesUsed, memoryOn, putCached } from "./db";
 import { REGISTRY, givesAway, langEn, lessonPrompt, mistakeLine, lessonSchema, plannedActivities, shuffleAnswer, systemPrompt, toItems, type Item, type LessonContext } from "./activities";
 import { CHARACTERS, CHAT_MAX_TURNS, CHAT_MIN_TURNS, FREE_GOAL, type CharacterId } from "./characters";
 import { CEFR, levelsOf, type Course, type CourseLevel, type Cefr } from "./course";
@@ -10,6 +10,7 @@ import { cleanOps, looseMemory, memoryPrompt, memorySchema, memorySystem, pickMe
 import { practicePrompt, practiceSchema, toPracticeSet, type PracticeSet } from "./practice";
 import { cleanDebrief, debriefPrompt, debriefSchema, debriefSystem, looseDebrief, looseRoleTurn, rehearsalSystem, roleTurnSchema, type RehearsalBrief } from "./rehearsal";
 import { avoidancePrompt, avoidanceSchema, looseAvoidance } from "./drills";
+import { fromGuides, lookupSchema, wordKey, type Lookup } from "./lookup";
 import { cleanNote, noteFor, noteFresh, notePrompt, noteSystem, NOTE_KEY, type GardenNote, type NoteInfo } from "./gardenNote";
 
 /** `A1:checkpoint` (path node) and `A1:test` (skip-level test) share one flow (DECISIONS B8). */
@@ -275,6 +276,32 @@ export async function loadGuide(enrollmentId: number, c: Base, unit: Unit): Prom
   ].join("\n"));
   await putCached(enrollmentId, key, g);
   return g;
+}
+
+// ---- Word lookup (#28): course guidebooks first, then one AI call, cached per word and enrollment ----
+
+// ponytail: per app run, so a word seen again opens without a db read and a double tap shares one call
+const looked = new Map<string, Promise<Lookup>>();
+
+export function lessonWord(enrollmentId: number, c: Base, word: string, sentence: string): Promise<Lookup> {
+  const key = wordKey(word, c.course.iso), mk = `${enrollmentId}:${key}`;
+  let p = looked.get(mk);
+  if (!p) {
+    p = (async () => {
+      const hit = await getCached<Lookup>(enrollmentId, key) ?? fromGuides(await cachedGuides<Guide>(enrollmentId), word, c.course.iso);
+      if (hit) return hit;
+      const r = await generate(lookupSchema, systemPrompt(c), [
+        `The learner tapped the word "${word}" in: "${sentence}".`,
+        `lemma: its dictionary form. translation: its meaning in this sentence, in ${langEn(c.native)}, 1–4 words. pos: its part of speech, in ${langEn(c.native)}.`,
+        `example: a short new ${c.level} sentence using it, with example_translation.`,
+      ].join("\n"));
+      await putCached(enrollmentId, key, r);
+      return r;
+    })();
+    looked.set(mk, p);
+    p.catch(() => looked.delete(mk)); // a failed lookup can be tried again
+  }
+  return p;
 }
 
 // ---- Tutor call: the tutor's reply to one event ----
