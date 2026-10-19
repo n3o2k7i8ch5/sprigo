@@ -48,7 +48,7 @@ export function Shell({ label, progress, time, onClose, onRegen, body, footer }:
   );
 }
 
-function Loading({ title }: { title: string }) {
+export function Loading({ title }: { title: string }) {
   const { t } = useTranslation();
   const { ai } = useApp();
   return (

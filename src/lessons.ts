@@ -11,6 +11,7 @@ import { practicePrompt, practiceSchema, toPracticeSet, type PracticeSet } from 
 import { cleanDebrief, debriefPrompt, debriefSchema, debriefSystem, looseDebrief, looseRoleTurn, rehearsalSystem, roleTurnSchema, type RehearsalBrief } from "./rehearsal";
 import { avoidancePrompt, avoidanceSchema, looseAvoidance } from "./drills";
 import { fromGuides, lookupSchema, wordKey, type Lookup } from "./lookup";
+import { feedbackPrompt, feedbackSchema, looseFeedback, taskPrompt, taskSchema, writeId, type WritingTask } from "./writing";
 import { cleanNote, noteFor, noteFresh, notePrompt, noteSystem, NOTE_KEY, type GardenNote, type NoteInfo } from "./gardenNote";
 
 /** `A1:checkpoint` (path node) and `A1:test` (skip-level test) share one flow (DECISIONS B8). */
@@ -196,6 +197,19 @@ export async function loadStory(enrollmentId: number, c: Base, unit: Unit, fresh
   await putCached(enrollmentId, key, story);
   return story;
 }
+
+/** Writing practice (#25): one task per (enrollment, level, unit), cached like stories; `fresh` regenerates. */
+export async function loadWritingTask(enrollmentId: number, c: Base, unit: Unit, fresh = false): Promise<WritingTask> {
+  const key = writeId(c.level, unit.id);
+  const cached = fresh ? null : await getCached<WritingTask>(enrollmentId, key);
+  if (cached) return cached;
+  const task = await generate(taskSchema, systemPrompt(c),
+    taskPrompt(unit.title, unit.description ?? "", [...new Set(unit.steps.flatMap((s) => s.vocabulary))]));
+  await putCached(enrollmentId, key, task);
+  return task;
+}
+export const checkWriting = (c: Base, task: string, text: string) =>
+  generate(feedbackSchema, systemPrompt(c), feedbackPrompt(task, text), undefined, looseFeedback);
 
 export type ChatMsg = { from: "ai" | "me"; text: string; translation?: string; correction?: string };
 

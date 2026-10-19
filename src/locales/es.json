@@ -325,6 +325,18 @@
     "done": "¡Historia completada!",
     "tapHint": "Toca una línea para ver su traducción"
   },
+  "write": {
+    "title": "Escritura",
+    "cardDesc": "Escribe unas frases sobre el tema de una unidad y recibe cada error corregido y explicado.",
+    "pick": "¿Sobre qué quieres escribir?",
+    "placeholder": "Escribe aquí…",
+    "feedback": "Tu texto, corregido",
+    "noCorrections": "Ningún error. ¡Muy bien!",
+    "rewritten": "Una versión natural",
+    "hints": "Palabras útiles",
+    "fixPrompt": "Corrige esto",
+    "done": "¡Escritura terminada!"
+  },
   "roleplay": {
     "title": "Roleplay",
     "subtitle": "Chatea con personajes de IA en situaciones de la vida real. Te corrigen los mensajes sobre la marcha.",

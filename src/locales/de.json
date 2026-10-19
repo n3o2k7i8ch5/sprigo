@@ -303,6 +303,18 @@
     "done": "Geschichte abgeschlossen!",
     "tapHint": "Tippe auf eine Zeile für die Übersetzung"
   },
+  "write": {
+    "title": "Schreiben",
+    "cardDesc": "Schreib ein paar Sätze zum Thema einer Einheit und lass jeden Fehler korrigieren und erklären.",
+    "pick": "Worüber möchtest du schreiben?",
+    "placeholder": "Schreib hier…",
+    "feedback": "Dein Text, korrigiert",
+    "noCorrections": "Keine Fehler. Gut gemacht!",
+    "rewritten": "Eine natürliche Fassung",
+    "hints": "Nützliche Wörter",
+    "fixPrompt": "Korrigiere das",
+    "done": "Schreiben geschafft!"
+  },
   "roleplay": {
     "title": "Rollenspiel",
     "subtitle": "Chatte mit KI-Figuren in Alltagssituationen. Sie korrigieren deine Nachrichten direkt.",
