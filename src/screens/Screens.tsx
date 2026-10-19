@@ -4,6 +4,7 @@ import { Icon, type IconName } from "../icons";
 import { useApp } from "../store";
 import { useStartLesson } from "../Lesson";
 import { CardsSheet } from "../Flashcards";
+import { WriteSheet } from "../Write";
 import { useSpeakBlock } from "../Mic";
 import { msLeft, rivalXp, zones, PROMOTE, DEMOTE, TIERS } from "../league";
 import * as db from "../db";
@@ -120,6 +121,7 @@ export function Practice() {
         {/* Speaking: bundled Whisper (DECISIONS D2). */}
         {card(() => speakBlock ? toast(t(speakBlock)) : words.length ? start("practice-speak") : toast(t("practice.needWords", { count: 1 })),
           "mic", "var(--sky)", "var(--blue)", t("practice.speak"), speakBlock ? t(speakBlock) : words.length ? t("practice.speakDesc") : t("practice.needWords", { count: 1 }))}
+        {card(() => openSheet(<WriteSheet />), "pen", "var(--purple-tint)", "var(--purple-dark)", t("write.title"), t("write.cardDesc"))}
         {card(() => speakBlock ? toast(t(speakBlock)) : openSheet(<DrillsSheet />), "clock", "var(--sky)", "var(--blue)", t("practice.drills"), speakBlock ? t(speakBlock) : t("practice.drillsDesc"))}
         {card(() => words.length < LISTEN_MIN_WORDS ? toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })) : due ? start("practice-due") : toast(t("practice.noDue")),
           "refresh", "var(--green-tint)", "var(--green)", t("practice.due"),

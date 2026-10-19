@@ -105,3 +105,21 @@ test("Stories lists earlier levels once the learner moves up", async ({ page }) 
   await units.first().click();
   await expect(page.getByRole("dialog", { name: "ok" }).getByText("Hola").first()).toBeVisible();
 });
+
+test("writing practice corrects the text inline and queues the mistake", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Practice" }).click();
+  await page.getByRole("button", { name: /^Writing/ }).click();
+  await page.locator(".sheet").getByRole("button", { name: /Greetings & Introductions/ }).click();
+  const w = page.getByRole("dialog", { name: "Greetings & Introductions" });
+  await expect(w.getByRole("heading", { name: "Write two sentences about yourself." })).toBeVisible();
+  await w.getByLabel("Your answer").fill("Yo es Ana. Me gusta leer.");
+  await w.getByRole("button", { name: "Check" }).click();
+  await expect(w.locator(".fix del")).toHaveText("Yo es");
+  await expect(w.locator(".fix ins")).toHaveText("Yo soy");
+  await expect(w.getByText("With yo, ser is soy.")).toBeVisible();
+  await w.getByRole("button", { name: "Finish" }).click();
+  await expect(w.getByText("Writing done!")).toBeVisible();
+  await w.getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
+});

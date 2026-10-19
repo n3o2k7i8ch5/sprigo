@@ -325,6 +325,18 @@
     "done": "Histoire terminée !",
     "tapHint": "Touche une ligne pour voir sa traduction"
   },
+  "write": {
+    "title": "Écriture",
+    "cardDesc": "Écris quelques phrases sur le thème d'une unité et reçois chaque erreur corrigée et expliquée.",
+    "pick": "Sur quoi veux-tu écrire ?",
+    "placeholder": "Écris ici…",
+    "feedback": "Ton texte, corrigé",
+    "noCorrections": "Aucune erreur. Bravo !",
+    "rewritten": "Une version naturelle",
+    "hints": "Mots utiles",
+    "fixPrompt": "Corrige ceci",
+    "done": "Écriture terminée !"
+  },
   "roleplay": {
     "title": "Jeux de rôle",
     "subtitle": "Discute avec des personnages IA dans des situations de la vie réelle. Ils corrigent tes messages au fur et à mesure.",

@@ -13,7 +13,8 @@ const FIELDS: Record<string, unknown> = {
   prompt: "Which word means “hello”?", options: ["hola", "adiós", "gracias"], answer_index: 0,
   audio_text: "hola", emoji: "👋", sentence_with_blank: "___, amigo.", sentence_start: "Hola,", wrong_sentence: "Hola amigo es.",
   dialogue_lines: ["Ana: ¡Hola!", "Luis: ¿Qué tal?"], source_sentence: "hello", answer: "hola", accepted_answers: [],
-  text: "¡Hola, Ana!", answer_words: BANK, distractor_words: ["noches"], pairs: PAIRS.map(([target, native]) => ({ target, native })),
+  text: "¡Hola, Ana!", answer_words: BANK,
+  task: "Write two sentences about yourself.", corrections: [{ original: "Yo es", corrected: "Yo soy", why: "With yo, ser is soy." }], rewritten: "Yo soy Ana.", distractor_words: ["noches"], pairs: PAIRS.map(([target, native]) => ({ target, native })),
 };
 
 const jsonType = (v: unknown) => Array.isArray(v) ? "array" : typeof v === "number" ? (Number.isInteger(v) ? "integer" : "number") : typeof v;

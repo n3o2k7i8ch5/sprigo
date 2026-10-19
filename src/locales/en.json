@@ -303,6 +303,18 @@
     "done": "Story complete!",
     "tapHint": "Tap a line for its translation"
   },
+  "write": {
+    "title": "Writing",
+    "cardDesc": "Write a few sentences on a unit's topic and get every mistake corrected and explained.",
+    "pick": "What do you want to write about?",
+    "placeholder": "Write here…",
+    "feedback": "Your text, corrected",
+    "noCorrections": "No mistakes. Well done!",
+    "rewritten": "A natural version",
+    "hints": "Useful words",
+    "fixPrompt": "Correct this",
+    "done": "Writing done!"
+  },
   "roleplay": {
     "title": "Roleplay",
     "subtitle": "Chat with AI characters in real-life scenarios. They correct your messages as you go.",
