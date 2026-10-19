@@ -13,11 +13,13 @@ const FIELDS: Record<string, unknown> = {
   prompt: "Which word means “hello”?", options: ["hola", "adiós", "gracias"], answer_index: 0,
   audio_text: "hola", emoji: "👋", sentence_with_blank: "___, amigo.", sentence_start: "Hola,", wrong_sentence: "Hola amigo es.",
   dialogue_lines: ["Ana: ¡Hola!", "Luis: ¿Qué tal?"], source_sentence: "hello", answer: "hola", accepted_answers: [],
-  answer_words: BANK, distractor_words: ["noches"], pairs: PAIRS.map(([target, native]) => ({ target, native })),
+  text: "¡Hola, Ana!", answer_words: BANK, distractor_words: ["noches"], pairs: PAIRS.map(([target, native]) => ({ target, native })),
 };
 
+const jsonType = (v: unknown) => Array.isArray(v) ? "array" : typeof v === "number" ? (Number.isInteger(v) ? "integer" : "number") : typeof v;
+
 function fill(s: any, key = ""): unknown {
-  if (key in FIELDS) return FIELDS[key];
+  if (key in FIELDS && jsonType(FIELDS[key]) === s.type) return FIELDS[key]; // `answer` is a string in translate, an index in stories
   if (s.anyOf) return fill(s.anyOf[0], key);
   switch (s.type) {
     case "object": return Object.fromEntries(Object.entries(s.properties ?? {}).map(([k, v]) => [k, fill(v, k)]));

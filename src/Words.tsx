@@ -8,14 +8,21 @@ import { tokens, type Lookup } from "./lookup";
 import { SpeakButton } from "./SpeakButton";
 import { Icon } from "./icons";
 
-/** Target-language text whose words open their meaning on tap (#28). `off` while the text would give away a graded answer. */
+/** Target-language text whose words open their meaning on tap (#28); words in the learner's list are marked (#27).
+ *  `off` while the text would give away a graded answer. */
 export function Words({ text, lang, off }: { text: string; lang: string; off?: boolean }) {
+  const { enrollment } = useApp();
   const [at, setAt] = useState<{ word: string; el: HTMLElement } | null>(null);
+  const [known, setKnown] = useState<Set<string>>(new Set());
+  // ponytail: single words only; a saved phrase ("buenos días") isn't marked inside a sentence
+  useEffect(() => {
+    if (enrollment && !off) db.knownWords(enrollment.id).then((ws) => setKnown(new Set(ws.map((w) => w.toLocaleLowerCase(lang)))));
+  }, [enrollment?.id, lang, off, at]); // `at`: a word added from the card shows up once it closes
   if (off) return <>{text}</>;
   const open = (e: React.SyntheticEvent<HTMLElement>, word: string) => { e.stopPropagation(); e.preventDefault(); setAt({ word, el: e.currentTarget }); };
   return <>
     {tokens(text, lang).map((tk, i) => tk.word
-      ? <span key={i} className="tap-word" role="button" tabIndex={0} onClick={(e) => open(e, tk.text)}
+      ? <span key={i} className={known.has(tk.text.toLocaleLowerCase(lang)) ? "tap-word known" : "tap-word"} role="button" tabIndex={0} onClick={(e) => open(e, tk.text)}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") open(e, tk.text); }}>{tk.text}</span>
       : tk.text)}
     {at && <WordCard word={at.word} sentence={text} lang={lang} anchor={at.el} onClose={() => setAt(null)} />}

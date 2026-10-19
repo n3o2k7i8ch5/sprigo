@@ -20,6 +20,7 @@ import { Face } from "../face/Face";
 import { MemoryCard } from "./Memory";
 import { CoachCard } from "./Coach";
 import { achievements, nearest, roman, type Achievement } from "../achievements";
+import { levelsOf, storyId, type Cefr } from "../course";
 
 const iconBox = (bg: string, fg: string, size = 48, radius: number | string = 12): React.CSSProperties => ({
   width: size, height: size, flex: "none", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: radius, background: bg, color: fg,
@@ -397,20 +398,32 @@ export function Stories() {
   const { t } = useTranslation();
   const { toast, course, enrollment, done } = useApp();
   const start = useStartLesson();
-  const units = (enrollment && course?.levels[enrollment.level]?.units) || [];
+  // The current level and every one before it; earlier levels are open in full.
+  const levels = course && enrollment ? levelsOf(course).slice(0, levelsOf(course).indexOf(enrollment.level) + 1) : [];
+  const [level, setLevel] = useState(enrollment?.level);
+  const lv = level && levels.includes(level) ? level : enrollment?.level;
+  const units = (lv && course?.levels[lv]?.units) || [];
   return (
     <>
       <h1 className="section-title">{t("stories.title")}</h1>
       <p className="muted" style={{ marginBottom: 18 }}>{t("stories.subtitle")}</p>
+      {levels.length > 1 && (
+        <label className="od-field" style={{ marginBottom: 14, maxWidth: 200 }}><b>{t("learn.levels")}</b>
+          <select className="select" value={lv} onChange={(e) => setLevel(e.target.value as Cefr)}>
+            {levels.map((l) => <option key={l} value={l}>{l} · {course!.levels[l]!.title}</option>)}
+          </select>
+        </label>
+      )}
       <div className="od-stack" style={{ "--od-gap": "12px" } as React.CSSProperties}>
         {units.map((u, ui) => {
-          // A unit's story opens once the unit is started (the first one is always open).
-          const open = ui === 0 || u.steps.some((st) => done.has(st.id));
-          const read = done.has(`story:${u.id}`);
+          // A unit's story opens once the unit is started (the first one is always open); earlier levels are all open.
+          const open = lv !== enrollment!.level || ui === 0 || u.steps.some((st) => done.has(st.id));
+          const id = storyId(lv!, u.id);
+          const read = done.has(id) || (lv === enrollment!.level && done.has(`story:${u.id}`)); // pre-1.9 id
           return (
-            <button className="card row-item" key={u.id} onClick={() => open ? start(`story:${u.id}`) : toast(t("stories.lockedToast", { unit: ui }))}>
+            <button className="card row-item" key={u.id} onClick={() => open ? start(id) : toast(t("stories.lockedToast", { unit: ui }))}>
               <span style={iconBox(open ? "var(--sky)" : "var(--surface)", open ? "var(--blue)" : "var(--text-faint)")}><Icon name={read ? "check" : open ? "story" : "lock"} /></span>
-              <span className="od-field od-fill"><b>{u.title}</b><span className="muted small">{t("learn.kicker", { level: enrollment!.level, unit: ui + 1 })}{u.description ? ` · ${u.description}` : ""}</span></span>
+              <span className="od-field od-fill"><b>{u.title}</b><span className="muted small">{t("learn.kicker", { level: lv, unit: ui + 1 })}{u.description ? ` · ${u.description}` : ""}</span></span>
               {open && <span className="btn btn-ghost" style={{ pointerEvents: "none" }}>{t(read ? "stories.again" : "stories.read")}</span>}
             </button>
           );

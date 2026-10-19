@@ -33,7 +33,7 @@ test("onboarding creates a profile and sets up local AI", async ({ page }) => {
 async function answer(lesson: ReturnType<Page["getByRole"]>) {
   const button = (name: string) => lesson.getByRole("button", { name, exact: true });
   const opt = (text: string) => lesson.locator(".opt", { hasText: new RegExp(`^\\d?${text}$`) });
-  if (await lesson.getByText("Lesson complete!").isVisible()) return false;
+  if (await lesson.locator(".result-wrap").isVisible()) return false;
   for (const name of ["Continue", "Finish", "Can't speak now"]) if (await button(name).isVisible()) return button(name).click().then(() => true);
   if (await lesson.getByRole("heading", { name: "Match the pairs" }).isVisible()) {
     for (const [a, b] of PAIRS) { await opt(a).click(); await opt(b).click(); }
@@ -67,4 +67,41 @@ test("first lessons run every exercise type", async ({ page }) => {
   await page.getByRole("button", { name: "Learn" }).click();
   await runLesson(page, /Basic Greetings/);
   await runLesson(page, /Introduce Yourself/);
+});
+
+test("a story opens from Stories, marks known words and can be finished", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Learn" }).click();
+  await runLesson(page, /Basic Greetings/); // puts "hola" in the word list
+  await page.getByRole("button", { name: "Stories" }).click();
+  await page.getByRole("button", { name: /Greetings & Introductions/ }).click();
+  const story = page.getByRole("dialog", { name: "ok" }); // the mock's story title
+  await expect(story.locator(".tap-word.known", { hasText: "Hola" }).first()).toBeVisible();
+  for (let i = 0; !(await story.getByText("Story complete!").isVisible()); i++) {
+    expect(i).toBeLessThan(40);
+    const opt = story.locator(".opt", { hasText: /^\d?hola$/ });
+    if (await opt.isVisible() && await opt.isEnabled()) { await opt.click(); await story.getByRole("button", { name: "Check" }).click(); }
+    else await story.getByRole("button", { name: /^(Continue|Finish)$/ }).click();
+  }
+  await story.getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("button", { name: /Greetings & Introductions.*Read again/ })).toBeVisible(); // remembered
+});
+
+test("Stories lists earlier levels once the learner moves up", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Learn" }).click();
+  await page.getByRole("button", { name: "Skip A1 — take the level test" }).click();
+  const exam = page.getByRole("dialog", { name: "Lesson" });
+  for (let i = 0; await answer(exam); i++) expect(i).toBeLessThan(60);
+  await expect(exam.getByText("A1 complete!")).toBeVisible();
+  await exam.getByRole("button", { name: "Done" }).click();
+
+  await page.getByRole("button", { name: "Stories" }).click();
+  const level = page.getByLabel("Levels");
+  await expect(level).toHaveValue("A2");
+  await level.selectOption("A1");
+  const units = page.locator("main .card.row-item");
+  await expect(units.getByText("Read")).toHaveCount(await units.count()); // every A1 story is open
+  await units.first().click();
+  await expect(page.getByRole("dialog", { name: "ok" }).getByText("Hola").first()).toBeVisible();
 });

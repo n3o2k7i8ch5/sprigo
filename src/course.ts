@@ -75,6 +75,12 @@ export function parseCourse(text: string, source: string): Course {
 }
 
 export const levelsOf = (c: Course) => CEFR.filter((l) => c.levels[l]);
+/** Stories (#27) are `story:<level>:<unit>`: unit ids may repeat across levels. Before 1.9 they were `story:<unit>`. */
+export const storyId = (level: Cefr, unit: string) => `story:${level}:${unit}`;
+export function parseStoryId(id: string): { level: Cefr; unit: string } | null {
+  const m = /^story:([A-C][12]):(.+)$/.exec(id);
+  return m ? { level: m[1] as Cefr, unit: m[2] } : null;
+}
 /** "A1" or "A1–C1": shown in the course picker so an A1-only course says so up front. */
 export const levelRange = (c: Course) => { const l = levelsOf(c); return l.length > 1 ? `${l[0]}–${l[l.length - 1]}` : l[0]; };
 

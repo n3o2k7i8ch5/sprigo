@@ -196,6 +196,7 @@ export type Word = { word: string; translation: string; strength: number; card: 
 const CARD_COLS = "due, stability, difficulty, reps, lapses, state, last_review";
 /** New words start as FSRS New cards. Seeing a word again only refreshes its translation: only recall is graded (#20). */
 export async function addWords(enrollmentId: number, pairs: [string, string][]) {
+  known = null;
   const d = await db(), c = newCard(new Date());
   for (const [w, t] of pairs) await d.execute(
     `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -214,6 +215,7 @@ export async function reviewWord(enrollmentId: number, word: string, ok: boolean
 }
 /** Imported words (#24): new ones take the file's schedule (or start New), existing ones only get the file's translation. */
 export async function importWords(enrollmentId: number, words: { word: string; translation: string; card?: WordCard }[]) {
+  known = null;
   const d = await db(), c = newCard(new Date());
   const had = new Set((await d.select<{ word: string }>("SELECT word FROM words WHERE enrollment_id = $1", [enrollmentId])).map((r) => r.word));
   for (const { word, translation, card = c } of words) await d.execute(
@@ -223,6 +225,14 @@ export async function importWords(enrollmentId: number, words: { word: string; t
   const added = words.filter((w) => !had.has(w.word)).length;
   return { added, updated: words.length - added };
 }
+// The list's words, for highlighting them in text (#27). Kept until the list changes.
+// ponytail: only addWords/importWords clear it; clear on profile delete too if enrollment ids get reused
+let known: { id: number; words: Promise<string[]> } | null = null;
+export function knownWords(enrollmentId: number) {
+  if (known?.id !== enrollmentId) known = { id: enrollmentId, words: listWords(enrollmentId).then((ws) => ws.map((w) => w.word)) };
+  return known.words;
+}
+
 export async function listWords(enrollmentId: number): Promise<Word[]> {
   const rows = await (await db()).select<{ word: string; translation: string } & WordCard>(
     `SELECT word, translation, ${CARD_COLS} FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word`, [enrollmentId]);
