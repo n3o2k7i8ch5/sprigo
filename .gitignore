@@ -30,3 +30,7 @@ src-tauri/resources/*.part
 
 # Lesson eval reports (pnpm eval)
 eval/
+
+# Playwright (pnpm test:e2e)
+test-results/
+playwright-report/
