@@ -11,6 +11,7 @@ import { takeOver, resetDataDir } from "./datadir";
 import { findUpdate, UpdateSheet, whatsNew, WhatsNewSheet } from "./Update";
 import type { Update } from "@tauri-apps/plugin-updater";
 import { Chat, Story } from "./Talk";
+import { Flashcards } from "./Flashcards";
 import { TutorCall } from "./TutorCall";
 import { CHARACTERS, parseTalkId, type CharacterId } from "./characters";
 import { Learn } from "./screens/Learn";
@@ -200,6 +201,7 @@ export default function App() {
       <BottomNav />
 
       {lessonId && (lessonId.startsWith("story:") ? <Story unitId={lessonId.slice(6)} />
+        : lessonId.startsWith("cards:") ? <Flashcards key={lessonId} deck={lessonId.slice(6)} />
         : lessonId.startsWith("tutor:") ? (lessonId.slice(6) in CHARACTERS && <TutorCall key={lessonId} who={lessonId.slice(6) as CharacterId} />)
         : /^(chat|call|rehearse|drill):/.test(lessonId) ? (talk && <Chat key={lessonId} talk={talk} />) : <Lesson id={lessonId} />)}
       </>}

@@ -887,5 +887,31 @@
     "add": "Kelimelerime ekle",
     "inWords": "Kelimelerimde",
     "added": "Kelimelerime eklendi"
+  },
+  "cards": {
+    "title": "Kartlar",
+    "desc_one": "Bugün {{count}} kart tekrar bekliyor",
+    "desc_other": "Bugün {{count}} kart tekrar bekliyor",
+    "keys": "Space kartı çevirir, 1–4 puanlar. Puanlar derslerle aynı tekrar planını günceller.",
+    "deckDue": "Bugün tekrar edilecekler",
+    "deckAll": "Tüm kelimelerim",
+    "count_one": "{{count}} kart",
+    "count_other": "{{count}} kart",
+    "addTitle": "Kendi kartını ekle",
+    "word": "Kelime",
+    "meaning": "Anlamı",
+    "add": "Kartı ekle",
+    "added": "Kart Kelimelerim'e eklendi",
+    "loading": "Deste karılıyor…",
+    "empty": "Bu destede henüz kart yok.",
+    "flip": "Anlamını göster",
+    "flipHint": "Anlamını hatırla, sonra çevir",
+    "again": "Tekrar",
+    "hard": "Zor",
+    "good": "İyi",
+    "easy": "Kolay",
+    "days_one": "{{count}} gün",
+    "days_other": "{{count}} gün",
+    "done": "Deste bitti!"
   }
 }

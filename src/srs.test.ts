@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { dueToday, endOfDay, fromRow, fromSql, isDue, newCard, review, strengthOf, toRow, toSql, type WordCard } from "./srs.ts";
+import { CARDS_PER_SESSION, cardQueue, dueToday, endOfDay, fromRow, fromSql, grade, isDue, newCard, previewDays, review, strengthOf, toRow, toSql, type WordCard } from "./srs.ts";
 
 const T0 = new Date("2026-01-01T00:00:00Z");
 const days = (n: number) => new Date(T0.getTime() + n * 86_400_000);
@@ -68,4 +68,22 @@ test("dueToday includes words due later today, puts reviews before New cards, ol
     w("relearning", 3, at(7)),
   ];
   assert.deepEqual(dueToday(words, now).map((x) => x.word), ["overdue", "relearning", "laterToday", "newOld", "newRecent"]);
+});
+
+test("flashcard grades: Easy waits longer than Good, Again comes back first (#23)", () => {
+  const now = new Date("2026-10-19T09:00:00Z");
+  const seen = review(newCard(now), true, now);
+  const later = new Date("2026-10-21T09:00:00Z");
+  const [again, hard, good, easy] = previewDays(seen, later);
+  assert.ok(again <= hard && hard <= good && good < easy, `${again} ${hard} ${good} ${easy}`);
+  assert.deepEqual(grade(seen, 3, later), review(seen, true, later));
+});
+
+test("card queue: due first, then the rest unless due-only, capped", () => {
+  const now = new Date("2026-10-19T09:00:00Z");
+  const w = (word: string, due: string) => ({ word, card: { ...newCard(now), state: 2, due } });
+  const words = [w("later", "2026-11-01 00:00:00"), w("due", "2026-10-18 00:00:00"), w("soon", "2026-10-25 00:00:00")];
+  assert.deepEqual(cardQueue(words, now, true).map((x) => x.word), ["due"]);
+  assert.deepEqual(cardQueue(words, now, false).map((x) => x.word), ["due", "soon", "later"]);
+  assert.equal(cardQueue(Array.from({ length: 30 }, (_, i) => w(`w${i}`, "2026-10-18 00:00:00")), now, false).length, CARDS_PER_SESSION);
 });

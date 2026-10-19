@@ -893,5 +893,31 @@
     "add": "Zu meinen Wörtern",
     "inWords": "In meinen Wörtern",
     "added": "Zu Meine Wörter hinzugefügt"
+  },
+  "cards": {
+    "title": "Karteikarten",
+    "desc_one": "{{count}} Karte ist heute fällig",
+    "desc_other": "{{count}} Karten sind heute fällig",
+    "keys": "Leertaste dreht eine Karte um, 1–4 bewerten sie. Bewertungen ändern denselben Wiederholungsplan wie die Lektionen.",
+    "deckDue": "Heute fällig",
+    "deckAll": "Alle meine Wörter",
+    "count_one": "{{count}} Karte",
+    "count_other": "{{count}} Karten",
+    "addTitle": "Eigene Karte hinzufügen",
+    "word": "Wort",
+    "meaning": "Bedeutung",
+    "add": "Karte hinzufügen",
+    "added": "Karte zu Meine Wörter hinzugefügt",
+    "loading": "Stapel wird gemischt…",
+    "empty": "Dieser Stapel hat noch keine Karten.",
+    "flip": "Bedeutung zeigen",
+    "flipHint": "Erinnere dich an die Bedeutung, dann umdrehen",
+    "again": "Nochmal",
+    "hard": "Schwer",
+    "good": "Gut",
+    "easy": "Leicht",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage",
+    "done": "Stapel geschafft!"
   }
 }

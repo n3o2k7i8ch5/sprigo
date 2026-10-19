@@ -13,7 +13,7 @@ import { deleteProfileSql } from "./profileDelete";
 import type { Baseline, Conditions, SessionRow, SpeechSummary } from "./speech";
 import { remoteDb, serveCompanion } from "./companion";
 import { evictIds, type Memory, type MemoryOps, type MemorySource } from "./memory";
-import { newCard, review, strengthOf, type WordCard } from "./srs";
+import { grade, newCard, review, strengthOf, type Grade, type WordCard } from "./srs";
 export { NEW_STATS, type Stats };
 
 type Row = Record<string, any>;
@@ -202,12 +202,12 @@ export async function addWords(enrollmentId: number, pairs: [string, string][]) 
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, w, t, c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review]);
 }
-/** One recall of `word`: right → Good, wrong → Again (src/srs.ts). */
-export async function reviewWord(enrollmentId: number, word: string, ok: boolean) {
+/** One recall of `word`: right → Good, wrong → Again, or a flashcard's own grade (src/srs.ts). */
+export async function reviewWord(enrollmentId: number, word: string, ok: boolean | Grade) {
   const d = await db();
   const [row] = await d.select<WordCard>(`SELECT ${CARD_COLS} FROM words WHERE enrollment_id = $1 AND word = $2`, [enrollmentId, word]);
   if (!row) return;
-  const c = review(row, ok, new Date());
+  const c = typeof ok === "boolean" ? review(row, ok, new Date()) : grade(row, ok, new Date());
   await d.execute(
     "UPDATE words SET due = $1, stability = $2, difficulty = $3, reps = $4, lapses = $5, state = $6, last_review = $7, updated_at = CURRENT_TIMESTAMP WHERE enrollment_id = $8 AND word = $9",
     [c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review, enrollmentId, word]);

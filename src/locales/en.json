@@ -893,5 +893,31 @@
     "add": "Add to my words",
     "inWords": "In my words",
     "added": "Added to My words"
+  },
+  "cards": {
+    "title": "Flashcards",
+    "desc_one": "{{count}} card due today",
+    "desc_other": "{{count}} cards due today",
+    "keys": "Space flips a card, 1–4 grade it. Grades update the same review schedule as lessons.",
+    "deckDue": "Due today",
+    "deckAll": "All my words",
+    "count_one": "{{count}} card",
+    "count_other": "{{count}} cards",
+    "addTitle": "Add your own card",
+    "word": "Word",
+    "meaning": "Meaning",
+    "add": "Add card",
+    "added": "Card added to My words",
+    "loading": "Shuffling the deck…",
+    "empty": "No cards in this deck yet.",
+    "flip": "Show meaning",
+    "flipHint": "Recall the meaning, then flip",
+    "again": "Again",
+    "hard": "Hard",
+    "good": "Good",
+    "easy": "Easy",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "done": "Deck done!"
   }
 }
