@@ -9,6 +9,7 @@ import { MicButton } from "./Mic";
 import { sttReady } from "./stt";
 import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
+import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
 import { recordSession, today, xpMult } from "./progress";
@@ -358,7 +359,7 @@ export function Lesson({ id }: { id: string }) {
     <>
       <h2 className="ex-title">{t("lesson.newPhrase")}</h2>
       <div className="card" style={{ textAlign: "center", padding: 28 }}>
-        <p lang={lang} style={{ fontSize: 30, fontWeight: 900 }}>{it.phrase}</p>
+        <p lang={lang} style={{ fontSize: 30, fontWeight: 900 }}><Words text={it.phrase} lang={lang} /></p>
         <p className="muted" style={{ fontSize: 18, fontWeight: 700, margin: "6px 0 14px" }}>{it.translation}</p>
         {listenBtn(it.phrase)}
         {it.note && <p className="small" style={{ marginTop: 14 }}>{it.note}</p>}
@@ -370,7 +371,7 @@ export function Lesson({ id }: { id: string }) {
       <h2 className="ex-title">{t("lesson.speakTitle")}</h2>
       <p className="ex-sub">{t("lesson.speakSub")}</p>
       <div className="card" style={{ textAlign: "center", padding: 22 }}>
-        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}>{it.phrase}</p>
+        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}><Words text={it.phrase} lang={lang} /></p>
         <p className="muted" style={{ fontWeight: 700, margin: "4px 0 12px" }}>{it.translation}</p>
         {listenBtn(it.phrase)}
       </div>
@@ -387,7 +388,7 @@ export function Lesson({ id }: { id: string }) {
       {it.listen && listenBtn(it.listen)}
       {it.context && (it.big
         ? <div aria-hidden="true" style={{ fontSize: 72, textAlign: "center", margin: "8px 0 16px" }}>{it.context}</div>
-        : <div className="card" lang={lang} style={{ whiteSpace: "pre-wrap", fontWeight: 700, fontSize: 18, marginBottom: 16 }}>{it.context}</div>)}
+        : <div className="card" lang={lang} style={{ whiteSpace: "pre-wrap", fontWeight: 700, fontSize: 18, marginBottom: 16 }}><Words text={it.context} lang={lang} off={!fb} /></div>)}
       <div className="opt-grid">
         {it.options.map((o, oi) => {
           const state = fb ? (oi === it.answer ? "correct" : oi === sel ? "wrong" : "") : oi === sel ? "sel" : "";

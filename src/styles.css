@@ -628,3 +628,12 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .call-bar{position:relative;isolation:isolate}
 .call-bar::before{content:"";position:absolute;z-index:-1;left:50%;width:100vw;top:-16px;bottom:-16px;transform:translateX(-50%);pointer-events:none;opacity:.14;
   background:var(--bh,transparent);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 40Q100 10 200 34T400 26V60H0Z'/%3E%3C/svg%3E") center/100% 100%;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 40Q100 10 200 34T400 26V60H0Z'/%3E%3C/svg%3E") center/100% 100%}
+
+/* Tap a word (#28) */
+.tap-word{cursor:help;border-radius:4px;text-decoration:underline dotted color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:3px}
+.tap-word:hover,.tap-word:focus-visible{background:var(--surface)}
+.word-card{position:fixed;inset:auto;margin:0;width:min(300px,calc(100vw - 16px));padding:14px;display:grid;gap:6px;
+  background:var(--card);color:var(--text);border:2px solid var(--border);border-radius:16px;box-shadow:0 4px 0 var(--border)}
+.word-card-head{display:flex;align-items:center;gap:8px}
+.word-card-head b{font-size:20px;font-weight:900}
+.word-card-head .icon-btn{margin-left:auto}

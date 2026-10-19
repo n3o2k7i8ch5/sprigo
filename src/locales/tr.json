@@ -873,5 +873,12 @@
     "fruitDesc": "Geçtiğin her seviye sınavı bir meyve verir.",
     "toShop": "Mağaza",
     "noteLoading": "Sprigo sana bir not yazıyor…"
+  },
+  "lookup": {
+    "loading": "Bakılıyor…",
+    "failed": "Bu kelimeye bakılamadı. Yapay zekâ bağlantısını kontrol edip tekrar dene.",
+    "add": "Kelimelerime ekle",
+    "inWords": "Kelimelerimde",
+    "added": "Kelimelerime eklendi"
   }
 }

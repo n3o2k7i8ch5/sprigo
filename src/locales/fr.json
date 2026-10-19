@@ -908,5 +908,12 @@
     "fruitDesc": "Chaque test de niveau réussi fait pousser un fruit.",
     "toShop": "Boutique",
     "noteLoading": "Sprigo t'écrit un petit mot…"
+  },
+  "lookup": {
+    "loading": "Recherche…",
+    "failed": "Impossible de chercher ce mot. Vérifie la connexion à l'IA et réessaie.",
+    "add": "Ajouter à mes mots",
+    "inWords": "Dans mes mots",
+    "added": "Ajouté à Mes mots"
   }
 }
