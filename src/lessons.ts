@@ -4,7 +4,7 @@ import { generate, generatePlain, generateStream } from "./ai";
 import { applyMemoryOps, cachedGuides, enrollmentProfile, getCached, listMemories, listMistakes, markMemoriesUsed, memoryOn, putCached } from "./db";
 import { REGISTRY, givesAway, langEn, lessonPrompt, mistakeLine, lessonSchema, plannedActivities, shuffleAnswer, systemPrompt, toItems, type Item, type LessonContext } from "./activities";
 import { CHARACTERS, CHAT_MAX_TURNS, CHAT_MIN_TURNS, FREE_GOAL, type CharacterId } from "./characters";
-import { CEFR, levelsOf, type Course, type CourseLevel, type Cefr } from "./course";
+import { CEFR, levelsOf, storyId, type Course, type CourseLevel, type Cefr } from "./course";
 import { looseTutor, tutorPrompt, tutorSchema, tutorSystem, type TutorEvent, type TutorMsg } from "./tutor";
 import { cleanOps, looseMemory, memoryPrompt, memorySchema, memorySystem, pickMemories, type MemorySource } from "./memory";
 import { practicePrompt, practiceSchema, toPracticeSet, type PracticeSet } from "./practice";
@@ -175,7 +175,7 @@ export type Story = z.infer<typeof storySchema>;
 
 /** Cached per (enrollment, unit) like lessons; `fresh` regenerates. */
 export async function loadStory(enrollmentId: number, c: Base, unit: Unit, fresh = false): Promise<Story> {
-  const key = `story:${unit.id}`;
+  const key = storyId(c.level, unit.id);
   const cached = fresh ? null : await getCached<Story>(enrollmentId, key);
   if (cached) return cached;
   const steps = unit.steps;

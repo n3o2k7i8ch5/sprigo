@@ -14,6 +14,7 @@ import { Chat, Story } from "./Talk";
 import { Flashcards } from "./Flashcards";
 import { TutorCall } from "./TutorCall";
 import { CHARACTERS, parseTalkId, type CharacterId } from "./characters";
+import { parseStoryId } from "./course";
 import { Learn } from "./screens/Learn";
 import { Garden } from "./screens/Garden";
 import { Settings } from "./screens/Settings";
@@ -128,7 +129,8 @@ export default function App() {
   const langName = useLangName();
   const Screen = SCREENS[route];
   const talk = lessonId && /^(chat|call|rehearse|drill):/.test(lessonId) ? parseTalkId(lessonId) : undefined;
-  const badTalk = talk === null;
+  const story = lessonId?.startsWith("story:") ? parseStoryId(lessonId) : undefined;
+  const badTalk = talk === null || story === null;
   useEffect(() => { if (badTalk) endLesson(); }, [badTalk]);
 
   useEffect(() => {
@@ -200,7 +202,7 @@ export default function App() {
       </div>
       <BottomNav />
 
-      {lessonId && (lessonId.startsWith("story:") ? <Story unitId={lessonId.slice(6)} />
+      {lessonId && (lessonId.startsWith("story:") ? (story && <Story key={lessonId} {...story} />)
         : lessonId.startsWith("cards:") ? <Flashcards key={lessonId} deck={lessonId.slice(6)} />
         : lessonId.startsWith("tutor:") ? (lessonId.slice(6) in CHARACTERS && <TutorCall key={lessonId} who={lessonId.slice(6) as CharacterId} />)
         : /^(chat|call|rehearse|drill):/.test(lessonId) ? (talk && <Chat key={lessonId} talk={talk} />) : <Lesson id={lessonId} />)}
