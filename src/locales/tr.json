@@ -636,7 +636,14 @@
     "geminiInfo": "Derslerini ve sohbetlerini Gemini modelleri yazar. İstekler Google'a gider; kullanım sınırı ve ücret anahtarına bağlıdır.",
     "openrouterGood": "Birçok laboratuvarın yüzlerce modeli, tek API anahtarıyla.",
     "openrouterInfo": "OpenRouter'a bağlanır; her isteği seçtiğin modele (OpenAI, Anthropic, Google, açık modeller…) yönlendirir. İstekler OpenRouter'a ve modelin sağlayıcısına gider, OpenRouter anahtarına kullanıma göre ücretlendirilir. Sprigo, mümkün olan modellerde düşünmeyi kapatır; dersler hızlı kalır.",
-    "configure": "{{name}} ayarları"
+    "configure": "{{name}} ayarları",
+    "backup": "Yedek",
+    "backupDesc": "Derslerini ana sağlayıcın yazar. İkinci bir sağlayıcıyı yedek seçersen, ana sağlayıcı hata verdiğinde Sprigo ona sorar.",
+    "saveBackup": "Yedek olarak kullan",
+    "removeBackup": "Yedeği kaldır",
+    "backupSaved": "Yedek sağlayıcı kaydedildi",
+    "backupRemoved": "Yedek sağlayıcı kaldırıldı",
+    "usedBackup": "{{from}} cevap vermedi, {{to}} deneniyor"
   },
   "stt": {
     "idle": "Konuşmak için dokun",
