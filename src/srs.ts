@@ -1,6 +1,6 @@
 // Spaced repetition (#20): FSRS state per word, scheduled by ts-fsrs. Pure module, tested by src/srs.test.ts.
 // Only per-word recall grades a card (listen, due review); seeing a word in a lesson just creates it.
-import { createEmptyCard, fsrs, Rating, State, type Card } from "ts-fsrs";
+import { createEmptyCard, fsrs, State, type Card, type Grade as FsrsGrade } from "ts-fsrs";
 
 /** The FSRS columns of a `words` row. Dates are SQLite CURRENT_TIMESTAMP text: UTC "YYYY-MM-DD HH:MM:SS". */
 export type WordCard = { due: string; stability: number; difficulty: number; reps: number; lapses: number; state: number; last_review: string | null };
@@ -27,8 +27,14 @@ export function toRow(c: Card): WordCard {
 
 export const newCard = (now: Date) => toRow(createEmptyCard(now));
 
-export const review = (r: WordCard, ok: boolean, now: Date) =>
-  toRow(scheduler.next(fromRow(r), now, ok ? Rating.Good : Rating.Again).card);
+/** FSRS rating: 1 Again, 2 Hard, 3 Good, 4 Easy (flashcards, #23). */
+export type Grade = 1 | 2 | 3 | 4;
+export const grade = (r: WordCard, g: Grade, now: Date) => toRow(scheduler.next(fromRow(r), now, g as number as FsrsGrade).card);
+/** Lessons only know right or wrong: Good or Again. */
+export const review = (r: WordCard, ok: boolean, now: Date) => grade(r, ok ? 3 : 1, now);
+/** Days until the card is due again after each grade, for the flashcard buttons. */
+export const previewDays = (r: WordCard, now: Date) =>
+  ([1, 2, 3, 4] as const).map((g) => Math.max(0, Math.round((fromSql(grade(r, g, now).due).getTime() - now.getTime()) / DAY)));
 
 export const isDue = (r: WordCard, now: Date) => r.state === State.New || fromSql(r.due) <= now;
 
@@ -47,3 +53,10 @@ export function dueToday<T extends { card: WordCard }>(words: T[], now: Date): T
 const BUCKETS = [1, 3, 7, 15];
 export const strengthOf = (r: WordCard) =>
   r.state === State.New ? 1 : 1 + BUCKETS.filter((d) => r.stability >= d).length;
+
+export const CARDS_PER_SESSION = 20; // ponytail: fixed; a setting if learners ask for longer decks
+/** A flashcard session: due cards first (dueToday's order), then, unless `dueOnly`, the rest soonest due first. */
+export function cardQueue<T extends { card: WordCard }>(words: T[], now: Date, dueOnly: boolean): T[] {
+  const due = dueToday(words, now), rest = words.filter((w) => !due.includes(w)).sort((a, b) => (a.card.due < b.card.due ? -1 : 1));
+  return [...due, ...(dueOnly ? [] : rest)].slice(0, CARDS_PER_SESSION);
+}

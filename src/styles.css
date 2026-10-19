@@ -637,3 +637,11 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .word-card-head{display:flex;align-items:center;gap:8px}
 .word-card-head b{font-size:20px;font-weight:900}
 .word-card-head .icon-btn{margin-left:auto}
+
+/* Flashcards (#23) */
+.flashcard{width:100%;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;cursor:pointer}
+.flashcard-front{font-size:34px;font-weight:900}
+.flashcard-back{font-size:22px;font-weight:800;color:var(--blue)}
+.flashcard-grades{width:100%}
+.flashcard-grades .btn{display:flex;flex-direction:column;gap:2px;padding-inline:6px}
+.flashcard-days{font-size:11px;opacity:.8;text-transform:none}
