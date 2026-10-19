@@ -908,5 +908,12 @@
     "fruitDesc": "Cada prueba de nivel que superas hace crecer un fruto.",
     "toShop": "Tienda",
     "noteLoading": "Sprigo te está escribiendo una nota…"
+  },
+  "lookup": {
+    "loading": "Buscando…",
+    "failed": "No se pudo buscar esta palabra. Revisa la conexión con la IA e inténtalo de nuevo.",
+    "add": "Añadir a mis palabras",
+    "inWords": "En mis palabras",
+    "added": "Añadida a Mis palabras"
   }
 }

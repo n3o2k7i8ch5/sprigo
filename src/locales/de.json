@@ -879,5 +879,12 @@
     "fruitDesc": "Jeder bestandene Level-Test lässt eine Frucht wachsen.",
     "toShop": "Shop",
     "noteLoading": "Sprigo schreibt dir eine Notiz…"
+  },
+  "lookup": {
+    "loading": "Wird nachgeschlagen…",
+    "failed": "Das Wort konnte nicht nachgeschlagen werden. Prüfe die KI-Verbindung und versuch es noch einmal.",
+    "add": "Zu meinen Wörtern",
+    "inWords": "In meinen Wörtern",
+    "added": "Zu Meine Wörter hinzugefügt"
   }
 }

@@ -15,6 +15,7 @@ import { recordSession, today, xpMult } from "./progress";
 import { FREE_CONTEXT, summarize, type Conditions, type Utterance } from "./speech";
 import { DRILL_KEEP, FOUR_THREE_TWO_MINUTES, drillConditions, drillId, drillRules, mmss, roundStat, verifyAvoidance, type RoundStat } from "./drills";
 import { inField, keyAction, type KeyState } from "./keys";
+import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
 
 const gap = (g: string) => ({ "--od-gap": g }) as React.CSSProperties;
@@ -208,7 +209,7 @@ export function Story({ unitId }: { unitId: string }) {
         {story.lines.slice(0, lastLine + 1).map((l, li) => (
           <SpeakButton key={li} className="bubble story-line" text={l.text} lang={lang} onClick={() => setShown((s) => new Set(s).add(li))}>
             <b className="small" style={{ color: "var(--blue)" }}>{l.speaker}</b>
-            <span>{l.text}</span>
+            <span><Words text={l.text} lang={lang} /></span>
             {shown.has(li) && <small>{l.translation}</small>}
           </SpeakButton>
         ))}

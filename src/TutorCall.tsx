@@ -19,6 +19,7 @@ import { FILLER_MS, NOTES_MAX, currentUnit, filler, isNoise, mergeInput, partial
 import { recordSession, today, xpMult } from "./progress";
 import * as db from "./db";
 import { PracticePanel } from "./PracticePanel";
+import { Words } from "./Words";
 import { PRACTICE_XP, answer, begin, currentItem, describePractice, findTopic, next, openPractice, practiceTopics, type PracticeState, type Topic } from "./practice";
 import { Done, Failed, Shell, useQuit, usePrewarm, type Result } from "./Talk";
 
@@ -361,7 +362,7 @@ export function TutorCall({ who }: { who: CharacterId }) {
           {talking && engine && <small className="muted small" role="status">{t("ai.speakingWith", { engine: t(`voice.engine.${engine}`) })}</small>}
           {last?.correction.trim() && <p className="call-fix small"><Icon name="spark" /> {last.correction}</p>}
           {captions && lastTutor && <div className="call-transcript" lang={lang} aria-live="polite">
-            <button className="call-line" onClick={() => setShowTr((v) => !v)}>{lastTutor.text}{showTr && last?.translation && <small>{last.translation}</small>}</button>
+            <button className="call-line" onClick={() => setShowTr((v) => !v)}><Words text={lastTutor.text} lang={lang} />{showTr && last?.translation && <small>{last.translation}</small>}</button>
           </div>}
         </section>
         <section className="call-pane me" ref={ring} aria-label={profile?.name}>

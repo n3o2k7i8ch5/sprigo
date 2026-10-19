@@ -879,5 +879,12 @@
     "fruitDesc": "Each level checkpoint you pass grows one fruit.",
     "toShop": "Shop",
     "noteLoading": "Sprigo is writing you a note…"
+  },
+  "lookup": {
+    "loading": "Looking it up…",
+    "failed": "Couldn't look this word up. Check the AI connection and try again.",
+    "add": "Add to my words",
+    "inWords": "In my words",
+    "added": "Added to My words"
   }
 }

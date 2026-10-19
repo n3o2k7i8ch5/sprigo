@@ -157,6 +157,12 @@ export async function putCached(enrollmentId: number, stepId: string, content: u
   await (await db()).execute("INSERT INTO content_cache(enrollment_id, step_id, content) VALUES ($1, $2, $3) ON CONFLICT DO UPDATE SET content = $3, created_at = CURRENT_TIMESTAMP", [enrollmentId, stepId, JSON.stringify(content)]);
 }
 
+/** Every cached unit guidebook (`guide:<unit>`), for word lookups (#28). */
+export async function cachedGuides<T>(enrollmentId: number) {
+  const r = await (await db()).select<{ content: string }>("SELECT content FROM content_cache WHERE enrollment_id = $1 AND step_id LIKE 'guide:%'", [enrollmentId]);
+  return r.map((x) => JSON.parse(x.content) as T);
+}
+
 /** Levels passed via checkpoint or level test: marks every node of the level done and moves the enrollment on. */
 export async function completeLevel(enrollmentId: number, ids: string[], next: Cefr | null) {
   for (const id of ids) await markDone(enrollmentId, id);
