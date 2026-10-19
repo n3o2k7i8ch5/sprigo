@@ -670,7 +670,14 @@
     "geminiInfo": "Los modelos Gemini escriben tus lecciones y chats. Las solicitudes van a Google; límites y precios dependen de tu clave.",
     "openrouterGood": "Cientos de modelos de muchos laboratorios con una sola clave de API.",
     "openrouterInfo": "Se conecta a OpenRouter, que envía cada petición al modelo que elijas (OpenAI, Anthropic, Google, modelos abiertos…). Las peticiones van a OpenRouter y al proveedor del modelo; se cobran por uso en tu clave de OpenRouter. Sprigo desactiva el razonamiento del modelo cuando puede, para que las lecciones sigan siendo rápidas.",
-    "configure": "Ajustes de {{name}}"
+    "configure": "Ajustes de {{name}}",
+    "backup": "Respaldo",
+    "backupDesc": "Tu proveedor principal escribe tus lecciones. Elige otro como respaldo y Sprigo lo usará cuando el principal falle.",
+    "saveBackup": "Usar como respaldo",
+    "removeBackup": "Quitar respaldo",
+    "backupSaved": "Proveedor de respaldo guardado",
+    "backupRemoved": "Proveedor de respaldo quitado",
+    "usedBackup": "{{from}} no respondió, probando con {{to}}"
   },
   "stt": {
     "idle": "Toca para hablar",

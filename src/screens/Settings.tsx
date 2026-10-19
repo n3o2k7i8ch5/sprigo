@@ -191,12 +191,13 @@ const AI_ROWS: { p: ProviderId; icon: IconName; color: string }[] = [
 /** DECISIONS C1/C6: device-wide provider, key in the OS keychain. One row per provider; picking one opens its settings. */
 export function AiSheet() {
   const { t } = useTranslation();
-  const { ai, openSheet, closeSheet } = useApp();
+  const { ai, aiBackup, openSheet, closeSheet } = useApp();
   const [found, setFound] = useState<{ p: ProviderId; models: string[] } | null>(null); // first run: a local server with models
   const configure = (p: ProviderId) => openSheet(<AiConfigSheet provider={p} models={found?.p === p ? found.models : []} />);
   return (
     <div className="od-stack" style={{ ...gap("14px"), textAlign: "left" }}>
       <h3 style={{ textAlign: "center" }}>{t("ai.title")}</h3>
+      {ai && <p className="muted small">{t("ai.backupDesc")}</p>}
       {!ai && <LocalSetup onPick={(p, models) => setFound({ p, models })} />}
       <div className="od-stack" style={gap("8px")} role="radiogroup" aria-label={t("ai.provider")}>
         {AI_ROWS.map(({ p, icon, color }) => (
@@ -204,7 +205,7 @@ export function AiSheet() {
             <button role="radio" aria-checked={ai?.provider === p} onClick={() => ai?.provider !== p && configure(p)}>
               <span className="voice-icon" style={{ color }}><Icon name={icon} /></span>
               <span className="od-field od-fill"><b>{PROVIDERS[p].label}</b>
-                <span className="muted small">{ai?.provider === p ? `${ai.model} · ` : ""}{t(`ai.${p}Good`)}</span></span>
+                <span className="muted small">{ai?.provider === p ? `${ai.model} · ` : aiBackup?.provider === p ? `${t("ai.backup")}: ${aiBackup.model} · ` : ""}{t(`ai.${p}Good`)}</span></span>
             </button>
             <button className="icon-btn" aria-label={t("ai.configure", { name: PROVIDERS[p].label })} onClick={() => configure(p)}><Icon name="gear" /></button>
             <InfoTip label={t("voice.about", { name: PROVIDERS[p].label })}>{t(`ai.${p}Info`)}</InfoTip>
@@ -219,8 +220,9 @@ export function AiSheet() {
 /** One provider's server, key and model; saving makes it the active provider. */
 function AiConfigSheet({ provider, models: found }: { provider: ProviderId; models: string[] }) {
   const { t } = useTranslation();
-  const { ai, setAi, toast, openSheet } = useApp();
-  const mine = ai?.provider === provider ? ai : null;
+  const { ai, setAi, aiBackup, setAiBackup, toast, openSheet } = useApp();
+  const mine = ai?.provider === provider ? ai : aiBackup?.provider === provider ? aiBackup : null;
+  const isBackup = aiBackup?.provider === provider;
   const [baseURL, setBaseURL] = useState(mine?.baseURL ?? PROVIDERS[provider].baseURL);
   const [model, setModel] = useState(mine?.model ?? (found.includes(RECOMMENDED_OLLAMA.model) ? RECOMMENDED_OLLAMA.model : found[0] ?? ""));
   const [key, setKeyState] = useState("");
@@ -243,15 +245,16 @@ function AiConfigSheet({ provider, models: found }: { provider: ProviderId; mode
     } catch (e) { setStatus({ ok: false, msg: `${t("ai.connectFailed")}: ${(e as Error).message}` }); }
     finally { setBusy(false); }
   };
-  const save = async () => {
+  const save = async (asBackup = false) => {
     setBusy(true);
     try {
       if (needsKey) await setKey(provider, key.trim() || null);
-      await setAi(cfg);
-      toast(t("ai.saved"));
+      await (asBackup ? setAiBackup(cfg) : setAi(cfg));
+      toast(t(asBackup ? "ai.backupSaved" : "ai.saved"));
       back();
     } catch (e) { setStatus({ ok: false, msg: (e as Error).message }); setBusy(false); }
   };
+  const unsetBackup = async () => { await setAiBackup(null); toast(t("ai.backupRemoved")); back(); };
 
   return (
     <div className="od-stack" style={{ ...gap("14px"), textAlign: "left" }}>
@@ -274,8 +277,11 @@ function AiConfigSheet({ provider, models: found }: { provider: ProviderId; mode
       <div className="od-stack sheet-actions" style={gap("8px")}>
         <div className="od-row" style={gap("8px")}>
           <button className="btn btn-ghost" disabled={busy || (needsKey && !key.trim())} onClick={test}>{t("ai.test")}</button>
-          <button className="btn btn-primary od-fill" disabled={busy || !cfg.model || (needsKey && !key.trim())} onClick={save}>{t("ai.save")}</button>
+          <button className="btn btn-primary od-fill" disabled={busy || !cfg.model || (needsKey && !key.trim())} onClick={() => save()}>{t("ai.save")}</button>
         </div>
+        {ai && ai.provider !== provider && (isBackup
+          ? <button className="btn btn-ghost btn-block" disabled={busy} onClick={unsetBackup}>{t("ai.removeBackup")}</button>
+          : <button className="btn btn-ghost btn-block" disabled={busy || !cfg.model || (needsKey && !key.trim())} onClick={() => save(true)}>{t("ai.saveBackup")}</button>)}
         <button className="btn btn-ghost btn-block" onClick={back}>{t("sheet.cancel")}</button>
       </div>
     </div>
