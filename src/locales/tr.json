@@ -323,6 +323,16 @@
     "done": "Hikâye tamamlandı!",
     "tapHint": "Çeviri için satıra dokun"
   },
+  "conjugate": {
+    "title": "Fiil çekimi",
+    "desc": "Doğru çekimi yaz: {{tenses}}",
+    "prompt": "Fiilin çekimli hâlini yaz",
+    "cells": {
+      "0": "fiil",
+      "1": "kişi",
+      "2": "zaman"
+    }
+  },
   "write": {
     "title": "Yazma",
     "cardDesc": "Bir ünitenin konusunda birkaç cümle yaz; her hatan düzeltilip açıklansın.",

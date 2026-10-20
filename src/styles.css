@@ -667,3 +667,9 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .acc-rows b{text-align:right}
 .acc-track{height:8px;border-radius:4px;background:var(--surface)}
 .acc-track span{display:block;height:100%;border-radius:4px;background:var(--green)}
+/* Conjugation prompt (#30): verb | person | tense, the card's own border between the cells */
+.ctx-cells{display:grid;grid-template-columns:repeat(3,1fr);padding:0;margin-bottom:16px;font-weight:700;font-size:18px;overflow:hidden}
+.ctx-cells span{padding:16px;text-align:center;overflow-wrap:anywhere}
+.ctx-cells span+span{border-inline-start:2px solid var(--border)}
+.ctx-cells span{display:flex;flex-direction:column;gap:2px}
+.ctx-cells small{font-size:12px;font-weight:600}

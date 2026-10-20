@@ -1,3 +1,4 @@
+import { tensesFor } from "../conjugation";
 import { ProgressCharts } from "../ProgressCharts";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -91,7 +92,7 @@ export function useBuy() {
 
 export function Practice() {
   const { t } = useTranslation();
-  const { toast, enrollment, lessonId, openSheet } = useApp();
+  const { toast, enrollment, lessonId, openSheet, course } = useApp();
   const start = useStartLesson();
   const [data, setData] = useState<{ mistakes: number; words: db.Word[]; timed: number }>({ mistakes: 0, words: [], timed: 0 });
   const [loaded, reload] = useState(0);
@@ -104,6 +105,7 @@ export function Practice() {
   const { mistakes, words, timed } = data;
   const due = dueToday(words, new Date()).length;
   const speakBlock = useSpeakBlock();
+  const conjTenses = course && enrollment ? tensesFor(course.iso, enrollment.level) : [];
   const card = (onClick: () => void, icon: IconName, bg: string, fg: string, title: string, desc: string) => (
     <button className="card row-item" onClick={onClick}>
       <span style={iconBox(bg, fg)}><Icon name={icon} /></span>
@@ -123,6 +125,8 @@ export function Practice() {
         {card(() => speakBlock ? toast(t(speakBlock)) : words.length ? start("practice-speak") : toast(t("practice.needWords", { count: 1 })),
           "mic", "var(--sky)", "var(--blue)", t("practice.speak"), speakBlock ? t(speakBlock) : words.length ? t("practice.speakDesc") : t("practice.needWords", { count: 1 }))}
         {card(() => openSheet(<WriteSheet />), "pen", "var(--purple-tint)", "var(--purple-dark)", t("write.title"), t("write.cardDesc"))}
+        {conjTenses.length > 0 && card(() => start("practice-conjugate"), "dumbbell", "var(--gold-tint)", "var(--gold-dark)", t("conjugate.title"),
+          t("conjugate.desc", { tenses: conjTenses.join(", ") }))}
         {card(() => speakBlock ? toast(t(speakBlock)) : openSheet(<DrillsSheet />), "clock", "var(--sky)", "var(--blue)", t("practice.drills"), speakBlock ? t(speakBlock) : t("practice.drillsDesc"))}
         {card(() => words.length < LISTEN_MIN_WORDS ? toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })) : due ? start("practice-due") : toast(t("practice.noDue")),
           "refresh", "var(--green-tint)", "var(--green)", t("practice.due"),

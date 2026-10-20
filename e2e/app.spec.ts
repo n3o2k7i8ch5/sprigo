@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { ANSWER, BANK, PAIRS, mockOllama } from "./mockAi";
+import { ANSWER, BANK, FORM, PAIRS, mockOllama } from "./mockAi";
 
 test.beforeEach(async ({ page }) => { await mockOllama(page); });
 
@@ -137,4 +137,23 @@ test("the profile charts XP and words after a lesson", async ({ page }) => {
   await expect(acc.filter({ hasText: "Choice" })).toContainText("100%"); // every answer was right
   await expect(acc.filter({ hasText: "Pairs" })).toContainText("100%");
   await expect(page.getByRole("img", { name: "Speaking pace. Nothing yet" })).toBeVisible(); // no voice session in this run
+});
+
+test("a conjugation drill asks the cross-checked forms and queues a miss", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Practice" }).click();
+  await page.getByRole("button", { name: /^Verb forms.*presente/ }).click();
+  const drill = page.getByRole("dialog", { name: "Lesson" });
+  for (let i = 0; !(await drill.locator(".result-wrap").isVisible()); i++) {
+    expect(i).toBeLessThan(20);
+    const next = drill.getByRole("button", { name: /^(Continue|Finish)$/ });
+    if (await next.isVisible()) { await next.click(); continue; }
+    await expect(drill.locator(".ctx-cells span")).toHaveCount(3); // verb | person | tense
+    await expect(drill.locator(".ctx-cells span").last()).toHaveText("presentetense"); // the form, then its caption
+    await drill.getByLabel("Your answer").fill(i ? FORM : "hablo"); // the first one wrong
+    await drill.getByRole("button", { name: "Check", exact: true }).click();
+    await expect(drill.getByText(i ? "Correct!" : FORM).first()).toBeVisible();
+  }
+  await drill.getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
 });
