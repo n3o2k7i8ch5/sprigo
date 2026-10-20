@@ -7,7 +7,7 @@ export type Item =
   | { kind: "learn"; phrase: string; translation: string; note: string }
   | { kind: "choice"; prompt: string; context: string; big: boolean; listen: string; options: string[]; answer: number }
   | { kind: "bank"; prompt: string; answer: string[]; bank: string[] }
-  | { kind: "input"; prompt: string; context: string; listen: string; answer: string; accepted: string[] }
+  | { kind: "input"; prompt: string; context: string; listen: string; answer: string; accepted: string[]; cells?: [string, string, string] } // cells: context shown as 3 boxes (conjugation)
   | { kind: "match"; pairs: [string, string][] }
   | { kind: "speak"; phrase: string; translation: string };
 

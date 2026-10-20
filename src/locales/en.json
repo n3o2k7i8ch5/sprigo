@@ -326,6 +326,16 @@
     "done": "Story complete!",
     "tapHint": "Tap a line for its translation"
   },
+  "conjugate": {
+    "title": "Verb forms",
+    "desc": "Type the right form: {{tenses}}",
+    "prompt": "Type the verb form",
+    "cells": {
+      "0": "verb",
+      "1": "person",
+      "2": "tense"
+    }
+  },
   "write": {
     "title": "Writing",
     "cardDesc": "Write a few sentences on a unit's topic and get every mistake corrected and explained.",

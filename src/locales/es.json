@@ -348,6 +348,16 @@
     "done": "¡Historia completada!",
     "tapHint": "Toca una línea para ver su traducción"
   },
+  "conjugate": {
+    "title": "Formas verbales",
+    "desc": "Escribe la forma correcta: {{tenses}}",
+    "prompt": "Escribe la forma del verbo",
+    "cells": {
+      "0": "verbo",
+      "1": "persona",
+      "2": "tiempo"
+    }
+  },
   "write": {
     "title": "Escritura",
     "cardDesc": "Escribe unas frases sobre el tema de una unidad y recibe cada error corregido y explicado.",

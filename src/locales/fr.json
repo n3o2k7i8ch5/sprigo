@@ -348,6 +348,16 @@
     "done": "Histoire terminée !",
     "tapHint": "Touche une ligne pour voir sa traduction"
   },
+  "conjugate": {
+    "title": "Conjugaison",
+    "desc": "Tape la bonne forme : {{tenses}}",
+    "prompt": "Tape la forme du verbe",
+    "cells": {
+      "0": "verbe",
+      "1": "personne",
+      "2": "temps"
+    }
+  },
   "write": {
     "title": "Écriture",
     "cardDesc": "Écris quelques phrases sur le thème d'une unité et reçois chaque erreur corrigée et expliquée.",

@@ -326,6 +326,16 @@
     "done": "Geschichte abgeschlossen!",
     "tapHint": "Tippe auf eine Zeile für die Übersetzung"
   },
+  "conjugate": {
+    "title": "Verbformen",
+    "desc": "Tippe die richtige Form: {{tenses}}",
+    "prompt": "Tippe die Verbform",
+    "cells": {
+      "0": "Verb",
+      "1": "Person",
+      "2": "Zeitform"
+    }
+  },
   "write": {
     "title": "Schreiben",
     "cardDesc": "Schreib ein paar Sätze zum Thema einer Einheit und lass jeden Fehler korrigieren und erklären.",

@@ -7,6 +7,8 @@ import type { Page } from "@playwright/test";
 export const ANSWER = "hola";
 export const PAIRS = [["hola", "hello"], ["adiós", "goodbye"], ["gracias", "thank you"]] as const;
 export const BANK = ["Buenos", "días"];
+/** Every verb form in a conjugation drill (both blind answers agree, so all 8 are asked). */
+export const FORM = "hablamos";
 
 const FIELDS: Record<string, unknown> = {
   phrase: "hola", sentence: "Buenos días", translation: "hello", note: "A friendly greeting.",
@@ -14,7 +16,7 @@ const FIELDS: Record<string, unknown> = {
   audio_text: "hola", emoji: "👋", sentence_with_blank: "___, amigo.", sentence_start: "Hola,", wrong_sentence: "Hola amigo es.",
   dialogue_lines: ["Ana: ¡Hola!", "Luis: ¿Qué tal?"], source_sentence: "hello", answer: "hola", accepted_answers: [],
   text: "¡Hola, Ana!", answer_words: BANK,
-  task: "Write two sentences about yourself.", corrections: [{ original: "Yo es", corrected: "Yo soy", why: "With yo, ser is soy." }], rewritten: "Yo soy Ana.", distractor_words: ["noches"], pairs: PAIRS.map(([target, native]) => ({ target, native })),
+  task: "Write two sentences about yourself.", corrections: [{ original: "Yo es", corrected: "Yo soy", why: "With yo, ser is soy." }], rewritten: "Yo soy Ana.", distractor_words: ["noches"], forms: Array(8).fill(FORM), pairs: PAIRS.map(([target, native]) => ({ target, native })),
 };
 
 const jsonType = (v: unknown) => Array.isArray(v) ? "array" : typeof v === "number" ? (Number.isInteger(v) ? "integer" : "number") : typeof v;
