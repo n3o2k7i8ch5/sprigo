@@ -1,6 +1,7 @@
-// Profile → Progress (#31): XP per day and words over time as plain SVG, one series each. Data: Stats.xpDays and db.wordDays.
+// Profile → Progress (#31): XP per day, words over time and speaking pace per week as plain SVG, one series each,
+// plus accuracy per exercise type. Data: Stats.xpDays, Stats.accuracy, db.wordDays and db.speechWeeks.
 import { useTranslation } from "react-i18next";
-import { lastDays, runningTotal, today } from "./progress";
+import { lastDays, lastWeeks, runningTotal, today, type Graded, type Stats } from "./progress";
 
 const W = 240, H = 120, L = 26, R = 6, T = 8, B = 18; // viewBox and plot padding
 const PW = W - L - R, PH = H - T - B;
@@ -55,19 +56,45 @@ function bar(x: number, w: number, top: number, base: number) {
   return `M${x},${base}V${top + r}Q${x},${top} ${x + r},${top}H${x + w - r}Q${x + w},${top} ${x + w},${top + r}V${base}Z`;
 }
 
-export function ProgressCharts({ xpDays, wordDays }: { xpDays: Record<string, number>; wordDays: Record<string, number> }) {
+const KINDS: Graded[] = ["choice", "bank", "input", "match", "speak"];
+
+/** Share of right answers per exercise type; types never answered are left out. Bars are HTML: the labels are text anyway. */
+function Accuracy({ acc }: { acc: Stats["accuracy"] }) {
+  const { t } = useTranslation();
+  const rows = KINDS.flatMap((k) => { const [right, total] = acc[k] ?? [0, 0]; return total ? [{ k, total, pct: Math.round((right / total) * 100) }] : []; });
+  return (
+    <figure className="card chart">
+      <figcaption><b>{t("progress.accTitle")}</b><span className="muted small">{t("progress.accSummary")}</span></figcaption>
+      {rows.length ? <ul className="acc-rows">
+        {rows.map((r) => <li key={r.k} title={t("progress.accRow", { pct: r.pct, n: r.total })}>
+          <span className="small">{t(`progress.kinds.${r.k}`)}</span>
+          <span className="acc-track"><span style={{ width: `${r.pct}%` }} /></span>
+          <b className="small">{r.pct}%</b>
+        </li>)}
+      </ul> : <p className="muted small">{t("progress.none")}</p>}
+    </figure>
+  );
+}
+
+export function ProgressCharts({ xpDays, wordDays, accuracy, speech }:
+  { xpDays: Record<string, number>; wordDays: Record<string, number>; accuracy: Stats["accuracy"]; speech: Record<string, number> }) {
   const { t } = useTranslation();
   const end = today();
   const xpRange = lastDays(end, 14), wordRange = lastDays(end, 30);
   const xp = xpRange.map((d) => xpDays[d] ?? 0);
   const words = runningTotal(wordDays, wordRange);
   const added = words[words.length - 1] - (words[0] - (wordDays[wordRange[0]] ?? 0));
+  const weeks = lastWeeks(end, 8), wpm = weeks.map((w) => speech[w] ?? 0), spoken = wpm.filter(Boolean);
   return (
     <div className="od-grid profile-cards" style={{ "--od-cols": 2, "--od-gap": "12px" } as React.CSSProperties}>
       <Chart title={t("progress.xpTitle")} summary={t("progress.xpSummary", { n: xp.reduce((a, b) => a + b, 0) })}
         days={xpRange} values={xp} kind="bar" color="var(--gold-dark)" unit="XP" />
       <Chart title={t("progress.wordsTitle")} summary={t("progress.wordsSummary", { n: words[words.length - 1], added })}
         days={wordRange} values={words} kind="line" color="var(--green)" unit={t("progress.words")} />
+      <Accuracy acc={accuracy} />
+      <Chart title={t("progress.speechTitle")}
+        summary={spoken.length ? t("progress.speechSummary", { n: Math.round(spoken.reduce((a, b) => a + b, 0) / spoken.length) }) : t("progress.none")}
+        days={weeks} values={wpm} kind="bar" color="var(--blue)" unit={t("progress.wpm")} />
     </div>
   );
 }

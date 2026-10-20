@@ -662,3 +662,8 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .chart-table{width:100%;margin-top:6px;border-collapse:collapse}
 .chart-table td{padding:2px 0}
 .chart-table td:last-child{text-align:right}
+.acc-rows{list-style:none;display:flex;flex-direction:column;gap:8px}
+.acc-rows li{display:grid;grid-template-columns:7.5em 1fr 3em;align-items:center;gap:8px}
+.acc-rows b{text-align:right}
+.acc-track{height:8px;border-radius:4px;background:var(--surface)}
+.acc-track span{display:block;height:100%;border-radius:4px;background:var(--green)}

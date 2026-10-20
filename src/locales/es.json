@@ -214,6 +214,20 @@
     "wordsTitle": "Palabras aprendidas",
     "wordsSummary": "{{n}} palabras, {{added}} nuevas en 30 días",
     "words": "palabras",
+    "accTitle": "Precisión por ejercicio",
+    "accSummary": "Respuestas correctas, desde el inicio",
+    "accRow": "{{pct}} % correctas de {{n}} respuestas",
+    "speechTitle": "Ritmo al hablar",
+    "speechSummary": "{{n}} palabras por minuto de media, últimas 8 semanas",
+    "wpm": "ppm",
+    "none": "Nada todavía",
+    "kinds": {
+      "choice": "Opciones",
+      "bank": "Banco de palabras",
+      "input": "Escribir",
+      "match": "Parejas",
+      "speak": "Hablar"
+    },
     "table": "Ver como tabla"
   },
   "profile": {

@@ -13,7 +13,7 @@ import { prewarm, speak, SPEED } from "./tts";
 import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
 import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
-import { recordSession, today, xpMult } from "./progress";
+import { recordSession, tally, today, xpMult, type Graded } from "./progress";
 import { acceptAppeal } from "./appeal";
 import { bankMatch, inField, keyAction, type KeyAction, type KeyState } from "./keys";
 
@@ -196,6 +196,8 @@ export function Lesson({ id }: { id: string }) {
       else if (!ok && !mistakeId) db.addMistake(enrollment.id, item);
     }
     let lost = false;
+    // ponytail: an accepted appeal (F) doesn't fix the tally, the chart keeps the first verdict
+    if (it && it.kind !== "learn" && it.kind !== "match") setS((x) => ({ ...x, accuracy: tally(x.accuracy, it.kind as Graded, ok) }));
     if (ok) setScore((sc) => ({ correct: sc.correct + 1, xp: sc.xp + 10 }));
     else if (s.heartsOn && !limit) {
       lost = true;
@@ -258,6 +260,7 @@ export function Lesson({ id }: { id: string }) {
         return next();
       }
       const ok = matched.misses <= 1; // ponytail: one slip allowed, no heart loss inside match
+      setS((x) => ({ ...x, accuracy: tally(x.accuracy, "match", ok) }));
       if (ok) setScore((sc) => ({ correct: sc.correct + 1, xp: sc.xp + 10 }));
       sfx(ok ? "ok" : "bad");
       setFb({ ok, correct: it.pairs.map((p) => `${p[0]} = ${p[1]}`).join(", "), given: "" });

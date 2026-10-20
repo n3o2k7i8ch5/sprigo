@@ -347,6 +347,8 @@ export function Profile() {
   const { s, xp, profile, done, legendary, enrollment, go, openSheet } = useApp();
   const [words, setWords] = useState(0);
   const [wordDays, setWordDays] = useState<Record<string, number>>({});
+  const [speech, setSpeech] = useState<Record<string, number>>({});
+  useEffect(() => { db.speechWeeks(profile!.id).then(setSpeech); }, [profile!.id]);
   useEffect(() => {
     if (!enrollment) return;
     db.listWords(enrollment.id).then((w) => setWords(w.length));
@@ -385,7 +387,7 @@ export function Profile() {
       </div>
       <h2 className="section-title">{t("progress.title")}</h2>
       {/* today from todayXp too: profiles from before #31 have no xpDays yet */}
-      <ProgressCharts xpDays={{ [s.day]: s.todayXp, ...s.xpDays }} wordDays={wordDays} />
+      <ProgressCharts xpDays={{ [s.day]: s.todayXp, ...s.xpDays }} wordDays={wordDays} accuracy={s.accuracy} speech={speech} />
       <h2 className="section-title">{t("profile.forYou")}</h2>
       <div className="od-grid profile-cards" style={{ "--od-cols": 2, "--od-gap": "12px" } as React.CSSProperties}>
         <CoachCard />
