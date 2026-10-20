@@ -46,7 +46,9 @@ How the app fits together is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); de
    ```bash
    pnpm build   # typecheck + bundle
    pnpm test
+   pnpm test:e2e   # UI flows in Chromium; first time: pnpm exec playwright install chromium
    ```
+   The e2e tests ([`e2e/`](e2e)) drive the dev build with a fake Ollama ([`e2e/mockAi.ts`](e2e/mockAi.ts)), so they need no model.
 4. Open the pull request against **`test`**, not `master`. `test` is tried before it goes live; `master` is what users get through in-app updates.
 
 ### Evaluating lessons

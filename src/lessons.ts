@@ -1,16 +1,18 @@
 // Lesson generation (DECISIONS C2, C3): cache → one call for the whole step → per-activity fallback.
+import { crossChecked, formsPrompt, formsSchema, pickAsks } from "./conjugation";
 import { z } from "zod";
 import { generate, generatePlain, generateStream } from "./ai";
 import { applyMemoryOps, cachedGuides, enrollmentProfile, getCached, listMemories, listMistakes, markMemoriesUsed, memoryOn, putCached } from "./db";
 import { REGISTRY, givesAway, langEn, lessonPrompt, mistakeLine, lessonSchema, plannedActivities, shuffleAnswer, systemPrompt, toItems, type Item, type LessonContext } from "./activities";
 import { CHARACTERS, CHAT_MAX_TURNS, CHAT_MIN_TURNS, FREE_GOAL, type CharacterId } from "./characters";
-import { CEFR, levelsOf, type Course, type CourseLevel, type Cefr } from "./course";
+import { CEFR, levelsOf, storyId, type Course, type CourseLevel, type Cefr } from "./course";
 import { looseTutor, tutorPrompt, tutorSchema, tutorSystem, type TutorEvent, type TutorMsg } from "./tutor";
 import { cleanOps, looseMemory, memoryPrompt, memorySchema, memorySystem, pickMemories, type MemorySource } from "./memory";
 import { practicePrompt, practiceSchema, toPracticeSet, type PracticeSet } from "./practice";
 import { cleanDebrief, debriefPrompt, debriefSchema, debriefSystem, looseDebrief, looseRoleTurn, rehearsalSystem, roleTurnSchema, type RehearsalBrief } from "./rehearsal";
 import { avoidancePrompt, avoidanceSchema, looseAvoidance } from "./drills";
 import { fromGuides, lookupSchema, wordKey, type Lookup } from "./lookup";
+import { feedbackPrompt, feedbackSchema, looseFeedback, taskPrompt, taskSchema, writeId, type WritingTask } from "./writing";
 import { cleanNote, noteFor, noteFresh, notePrompt, noteSystem, NOTE_KEY, type GardenNote, type NoteInfo } from "./gardenNote";
 
 /** `A1:checkpoint` (path node) and `A1:test` (skip-level test) share one flow (DECISIONS B8). */
@@ -163,7 +165,7 @@ export function explain(c: LessonContext, question: string, correct: string, giv
 
 // ---- Stories (one per unit) and roleplay chat (Faz 4) ----
 
-type Base = Pick<LessonContext, "course" | "level" | "native">;
+export type Base = Pick<LessonContext, "course" | "level" | "native">;
 type Unit = CourseLevel["units"][number];
 
 const storySchema = z.object({
@@ -175,7 +177,7 @@ export type Story = z.infer<typeof storySchema>;
 
 /** Cached per (enrollment, unit) like lessons; `fresh` regenerates. */
 export async function loadStory(enrollmentId: number, c: Base, unit: Unit, fresh = false): Promise<Story> {
-  const key = `story:${unit.id}`;
+  const key = storyId(c.level, unit.id);
   const cached = fresh ? null : await getCached<Story>(enrollmentId, key);
   if (cached) return cached;
   const steps = unit.steps;
@@ -196,6 +198,29 @@ export async function loadStory(enrollmentId: number, c: Base, unit: Unit, fresh
   await putCached(enrollmentId, key, story);
   return story;
 }
+
+/** Writing practice (#25): one task per (enrollment, level, unit), cached like stories; `fresh` regenerates. */
+export async function loadWritingTask(enrollmentId: number, c: Base, unit: Unit, fresh = false): Promise<WritingTask> {
+  const key = writeId(c.level, unit.id);
+  const cached = fresh ? null : await getCached<WritingTask>(enrollmentId, key);
+  if (cached) return cached;
+  const task = await generate(taskSchema, systemPrompt(c),
+    taskPrompt(unit.title, unit.description ?? "", [...new Set(unit.steps.flatMap((s) => s.vocabulary))]));
+  await putCached(enrollmentId, key, task);
+  return task;
+}
+/** Conjugation drill (#30): the same forms asked twice, blind; only the ones both answers agree on are kept. Never cached. */
+export async function loadConjugation(c: Base, prompt: string): Promise<Item[]> {
+  const asks = pickAsks(c.course.iso, c.level);
+  const ask = (xs: typeof asks) => generate(formsSchema(xs.length), systemPrompt(c), formsPrompt(c.course.name, xs)).then((r) => r.forms);
+  // The second answer gets the list reversed: a different prompt, so a deterministic model isn't simply asked twice.
+  const [a, b] = await Promise.all([ask(asks), ask([...asks].reverse()).then((f) => f.reverse())]);
+  const items = crossChecked(asks, a, b, prompt);
+  if (!items.length) throw new Error("The AI's verb forms didn't agree. Try again.");
+  return items;
+}
+export const checkWriting = (c: Base, task: string, text: string) =>
+  generate(feedbackSchema, systemPrompt(c), feedbackPrompt(task, text), undefined, looseFeedback);
 
 export type ChatMsg = { from: "ai" | "me"; text: string; translation?: string; correction?: string };
 

@@ -73,4 +73,9 @@ UPDATE words SET
   due = CASE WHEN strength >= 5 THEN datetime(updated_at, '+15 days') WHEN strength = 4 THEN datetime(updated_at, '+7 days')
     WHEN strength = 3 THEN datetime(updated_at, '+3 days') WHEN strength = 2 THEN datetime(updated_at, '+1 day') ELSE CURRENT_TIMESTAMP END`,
   },
+  {
+    v: 6, // #31: when a word was added, for the words-over-time chart. Older words get their best guess (first review or last change).
+    sql: `ALTER TABLE words ADD COLUMN created_at TEXT;
+UPDATE words SET created_at = COALESCE(last_review, updated_at)`,
+  },
 ];

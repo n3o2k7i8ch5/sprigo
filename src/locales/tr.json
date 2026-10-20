@@ -193,6 +193,29 @@
     "doubleXpActive_one": "2× XP · {{count}} dk kaldı",
     "doubleXpActive_other": "2× XP · {{count}} dk kaldı"
   },
+  "progress": {
+    "title": "İlerleme",
+    "xpTitle": "Günlük XP",
+    "xpSummary": "Son 14 günde {{n}} XP",
+    "wordsTitle": "Öğrenilen kelimeler",
+    "wordsSummary": "{{n}} kelime, 30 günde {{added}} yeni",
+    "words": "kelime",
+    "accTitle": "Alıştırmaya göre doğruluk",
+    "accSummary": "Doğru cevaplar, tüm zamanlar",
+    "accRow": "{{n}} cevabın %{{pct}} kadarı doğru",
+    "speechTitle": "Konuşma hızı",
+    "speechSummary": "Son 8 haftada ortalama dakikada {{n}} kelime",
+    "wpm": "kel/dk",
+    "none": "Henüz yok",
+    "kinds": {
+      "choice": "Seçmeli",
+      "bank": "Kelime bankası",
+      "input": "Yazma",
+      "match": "Eşleştirme",
+      "speak": "Konuşma"
+    },
+    "table": "Tablo olarak göster"
+  },
   "profile": {
     "since": "{{date}} tarihinden beri öğreniyor",
     "garden": "Bahçem",
@@ -299,6 +322,28 @@
     "again": "Tekrar oku",
     "done": "Hikâye tamamlandı!",
     "tapHint": "Çeviri için satıra dokun"
+  },
+  "conjugate": {
+    "title": "Fiil çekimi",
+    "desc": "Doğru çekimi yaz: {{tenses}}",
+    "prompt": "Fiilin çekimli hâlini yaz",
+    "cells": {
+      "0": "fiil",
+      "1": "kişi",
+      "2": "zaman"
+    }
+  },
+  "write": {
+    "title": "Yazma",
+    "cardDesc": "Bir ünitenin konusunda birkaç cümle yaz; her hatan düzeltilip açıklansın.",
+    "pick": "Ne hakkında yazmak istersin?",
+    "placeholder": "Buraya yaz…",
+    "feedback": "Düzeltilmiş metnin",
+    "noCorrections": "Hiç hata yok. Harika!",
+    "rewritten": "Doğal bir versiyon",
+    "hints": "İşine yarayacak kelimeler",
+    "fixPrompt": "Bunu düzelt",
+    "done": "Yazma tamam!"
   },
   "roleplay": {
     "title": "Rol Yapma",

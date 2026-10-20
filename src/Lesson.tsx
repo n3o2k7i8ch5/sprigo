@@ -12,8 +12,8 @@ import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
 import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
-import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadLesson, prefetchNext, stepContext } from "./lessons";
-import { recordSession, today, xpMult } from "./progress";
+import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadConjugation, loadLesson, prefetchNext, stepContext, type Base } from "./lessons";
+import { recordSession, tally, today, xpMult, type Graded } from "./progress";
 import { acceptAppeal } from "./appeal";
 import { bankMatch, inField, keyAction, type KeyAction, type KeyState } from "./keys";
 
@@ -23,7 +23,7 @@ export function useStartLesson() {
   const { s, ai, startLesson, openSheet, closeSheet, go } = useApp();
   const buy = useBuy();
   return (id: string) => {
-    if (!ai && !id.startsWith("practice-")) return openSheet(<>
+    if (!ai && (!id.startsWith("practice-") || id === "practice-conjugate")) return openSheet(<>
       <h3>{t("ai.needed")}</h3><p>{t("ai.neededDesc")}</p>
       <button className="btn btn-primary btn-block" onClick={() => { closeSheet(); go("settings"); }}>{t("ai.setUp")}</button>
       <button className="btn btn-ghost btn-block" onClick={closeSheet}>{t("sheet.cancel")}</button>
@@ -58,7 +58,9 @@ export function sfx(kind: "ok" | "bad" | "done") {
 
 /** Items of the practice modes, built from the learner's own data (Faz 3). `mistakeId` links a replayed mistake. */
 type PItem = Item & { mistakeId?: number };
-async function practiceItems(id: string, enrollmentId: number, listenPrompt: string): Promise<PItem[]> {
+async function practiceItems(id: string, enrollmentId: number, prompts: { listen: string; conjugate: string }, base: Base | null): Promise<PItem[]> {
+  const listenPrompt = prompts.listen;
+  if (id === "practice-conjugate") return base ? loadConjugation(base, prompts.conjugate) : [];
   if (id === "practice-mistakes") return (await db.listMistakes<Item>(enrollmentId, 10)).map((m) => ({ ...m.item, mistakeId: m.id }));
   if (id === "practice-listen") return listenItems(await db.listWords(enrollmentId), listenPrompt);
   if (id === "practice-due") {
@@ -117,7 +119,8 @@ export function Lesson({ id }: { id: string }) {
     if (!enrollment || (!ctx && !practice)) return;
     let live = true;
     setLoad({ state: "loading" }); setI(0); reset(); setScore({ correct: 0, xp: 0 });
-    (ctx ? loadLesson(enrollment.id, ctx, gen > 0) : practiceItems(id, enrollment.id, t("practice.listenPrompt")))
+    (ctx ? loadLesson(enrollment.id, ctx, gen > 0) : practiceItems(id, enrollment.id, { listen: t("practice.listenPrompt"), conjugate: t("conjugate.prompt") },
+      course && native ? { course, level: enrollment.level, native } : null))
       .then((items) => live && setLoad({ state: "ready", items }))
       .catch((e) => live && setLoad({ state: "error", msg: (e as Error).message }));
     return () => { live = false; };
@@ -196,6 +199,8 @@ export function Lesson({ id }: { id: string }) {
       else if (!ok && !mistakeId) db.addMistake(enrollment.id, item);
     }
     let lost = false;
+    // ponytail: an accepted appeal (F) doesn't fix the tally, the chart keeps the first verdict
+    if (it && it.kind !== "learn" && it.kind !== "match") setS((x) => ({ ...x, accuracy: tally(x.accuracy, it.kind as Graded, ok) }));
     if (ok) setScore((sc) => ({ correct: sc.correct + 1, xp: sc.xp + 10 }));
     else if (s.heartsOn && !limit) {
       lost = true;
@@ -258,6 +263,7 @@ export function Lesson({ id }: { id: string }) {
         return next();
       }
       const ok = matched.misses <= 1; // ponytail: one slip allowed, no heart loss inside match
+      setS((x) => ({ ...x, accuracy: tally(x.accuracy, "match", ok) }));
       if (ok) setScore((sc) => ({ correct: sc.correct + 1, xp: sc.xp + 10 }));
       sfx(ok ? "ok" : "bad");
       setFb({ ok, correct: it.pairs.map((p) => `${p[0]} = ${p[1]}`).join(", "), given: "" });
@@ -420,7 +426,8 @@ export function Lesson({ id }: { id: string }) {
     <>
       <h2 className="ex-title">{it.prompt}</h2>
       {it.listen && listenBtn(it.listen)}
-      {it.context && <div className="card" style={{ fontWeight: 700, fontSize: 18, marginBottom: 16 }}>{it.context}</div>}
+      {it.cells ? <div className="card ctx-cells">{it.cells.map((c, n) => <span key={n}>{c}<small className="muted">{t(`conjugate.cells.${n}`)}</small></span>)}</div>
+        : it.context && <div className="card" style={{ fontWeight: 700, fontSize: 18, marginBottom: 16 }}>{it.context}</div>}
       <textarea key={i} className="input" rows={3} value={text} disabled={!!fb || checking} autoFocus aria-label={t("lesson.yourAnswer")} placeholder={t("lesson.typeHere")}
         style={{ width: "100%", resize: "none", fontSize: 18 }}
         onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (canCheck) check(); } }} />

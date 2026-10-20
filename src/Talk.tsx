@@ -16,6 +16,7 @@ import { FREE_CONTEXT, summarize, type Conditions, type Utterance } from "./spee
 import { DRILL_KEEP, FOUR_THREE_TWO_MINUTES, drillConditions, drillId, drillRules, mmss, roundStat, verifyAvoidance, type RoundStat } from "./drills";
 import { inField, keyAction, type KeyState } from "./keys";
 import { Words } from "./Words";
+import { storyId, type Cefr } from "./course";
 import { SpeakButton } from "./SpeakButton";
 
 const gap = (g: string) => ({ "--od-gap": g }) as React.CSSProperties;
@@ -47,7 +48,7 @@ export function Shell({ label, progress, time, onClose, onRegen, body, footer }:
   );
 }
 
-function Loading({ title }: { title: string }) {
+export function Loading({ title }: { title: string }) {
   const { t } = useTranslation();
   const { ai } = useApp();
   return (
@@ -119,11 +120,10 @@ export function useQuit(active: boolean) {
 
 // ---- Story: lines appear one by one, comprehension questions in between ----
 
-export function Story({ unitId }: { unitId: string }) {
+export function Story({ level, unit: unitId }: { level: Cefr; unit: string }) {
   const { t } = useTranslation();
   const { course, enrollment, profile, s, setS, completeStep, sheet } = useApp();
-  const level = enrollment?.level;
-  const unit = level && course?.levels[level]?.units.find((u) => u.id === unitId);
+  const unit = course?.levels[level]?.units.find((u) => u.id === unitId);
   const lang = course?.iso ?? "en";
   const [gen, setGen] = useState(0);
   const [story, setStory] = useState<StoryData | null>(null);
@@ -145,7 +145,7 @@ export function Story({ unitId }: { unitId: string }) {
     loadStory(enrollment.id, { course, level, native: profile.native_lang }, unit, gen > 0)
       .then((s) => live && setStory(s), (e) => live && setErr((e as Error).message));
     return () => { live = false; };
-  }, [unitId, gen]);
+  }, [gen]);
 
   // Lines first, each followed by the questions asked after it.
   const seq = story ? story.lines.flatMap((_, li) => [{ line: li } as { line: number; q?: number },
@@ -163,7 +163,7 @@ export function Story({ unitId }: { unitId: string }) {
     if (p + 1 < seq.length) { setP(p + 1); setSel(null); setChecked(false); return; }
     const xp = (10 + correct * 10) * xpMult(s), gems = correct * 2;
     setS((s) => recordSession(s, { xp, gems, kind: "practice" }, today()));
-    completeStep(`story:${unitId}`, xp);
+    completeStep(storyId(level, unitId), xp);
     sfx("done");
     setResult({ xp, gems });
   };

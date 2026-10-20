@@ -632,6 +632,10 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 /* Tap a word (#28) */
 .tap-word{cursor:help;border-radius:4px;text-decoration:underline dotted color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:3px}
 .tap-word:hover,.tap-word:focus-visible{background:var(--surface)}
+.fix del{color:var(--red);text-decoration:line-through}
+.fix ins{color:var(--green-dark);text-decoration:none;font-weight:800}
+.fix sup{color:var(--text-faint);font-weight:800;margin-inline-start:2px}
+.tap-word.known{background:color-mix(in srgb,var(--green) 16%,transparent)}
 .word-card{position:fixed;inset:auto;margin:0;width:min(300px,calc(100vw - 16px));padding:14px;display:grid;gap:6px;
   background:var(--card);color:var(--text);border:2px solid var(--border);border-radius:16px;box-shadow:0 4px 0 var(--border)}
 .word-card-head{display:flex;align-items:center;gap:8px}
@@ -645,3 +649,27 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .flashcard-grades{width:100%}
 .flashcard-grades .btn{display:flex;flex-direction:column;gap:2px;padding-inline:6px}
 .flashcard-days{font-size:11px;opacity:.8;text-transform:none}
+
+/* Progress charts (#31): recessive axes, text in text tokens; no animation, so reduced motion needs nothing */
+.chart{display:flex;flex-direction:column;gap:8px;padding:14px}
+.chart figcaption{display:flex;flex-direction:column;gap:2px}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-axis line{stroke:var(--border);stroke-width:1}
+.chart-axis text{fill:var(--text-muted);font-size:11px;font-weight:700}
+.chart-hit{fill:transparent}
+.chart-hit:hover{fill:color-mix(in srgb,var(--text) 6%,transparent)}
+.chart summary{cursor:pointer;font-weight:700}
+.chart-table{width:100%;margin-top:6px;border-collapse:collapse}
+.chart-table td{padding:2px 0}
+.chart-table td:last-child{text-align:right}
+.acc-rows{list-style:none;display:flex;flex-direction:column;gap:8px}
+.acc-rows li{display:grid;grid-template-columns:7.5em 1fr 3em;align-items:center;gap:8px}
+.acc-rows b{text-align:right}
+.acc-track{height:8px;border-radius:4px;background:var(--surface)}
+.acc-track span{display:block;height:100%;border-radius:4px;background:var(--green)}
+/* Conjugation prompt (#30): verb | person | tense, the card's own border between the cells */
+.ctx-cells{display:grid;grid-template-columns:repeat(3,1fr);padding:0;margin-bottom:16px;font-weight:700;font-size:18px;overflow:hidden}
+.ctx-cells span{padding:16px;text-align:center;overflow-wrap:anywhere}
+.ctx-cells span+span{border-inline-start:2px solid var(--border)}
+.ctx-cells span{display:flex;flex-direction:column;gap:2px}
+.ctx-cells small{font-size:12px;font-weight:600}

@@ -195,6 +195,29 @@
     "doubleXpActive_one": "2× XP · {{count}} min left",
     "doubleXpActive_other": "2× XP · {{count}} min left"
   },
+  "progress": {
+    "title": "Progress",
+    "xpTitle": "XP per day",
+    "xpSummary": "{{n}} XP in the last 14 days",
+    "wordsTitle": "Words learned",
+    "wordsSummary": "{{n}} words, {{added}} new in 30 days",
+    "words": "words",
+    "accTitle": "Accuracy by exercise",
+    "accSummary": "Right answers, all time",
+    "accRow": "{{pct}}% right of {{n}} answers",
+    "speechTitle": "Speaking pace",
+    "speechSummary": "{{n}} words per minute on average, last 8 weeks",
+    "wpm": "wpm",
+    "none": "Nothing yet",
+    "kinds": {
+      "choice": "Choice",
+      "bank": "Word bank",
+      "input": "Typing",
+      "match": "Pairs",
+      "speak": "Speaking"
+    },
+    "table": "Show as table"
+  },
   "profile": {
     "since": "Learning since {{date}}",
     "garden": "My garden",
@@ -302,6 +325,28 @@
     "again": "Read again",
     "done": "Story complete!",
     "tapHint": "Tap a line for its translation"
+  },
+  "conjugate": {
+    "title": "Verb forms",
+    "desc": "Type the right form: {{tenses}}",
+    "prompt": "Type the verb form",
+    "cells": {
+      "0": "verb",
+      "1": "person",
+      "2": "tense"
+    }
+  },
+  "write": {
+    "title": "Writing",
+    "cardDesc": "Write a few sentences on a unit's topic and get every mistake corrected and explained.",
+    "pick": "What do you want to write about?",
+    "placeholder": "Write here…",
+    "feedback": "Your text, corrected",
+    "noCorrections": "No mistakes. Well done!",
+    "rewritten": "A natural version",
+    "hints": "Useful words",
+    "fixPrompt": "Correct this",
+    "done": "Writing done!"
   },
   "roleplay": {
     "title": "Roleplay",

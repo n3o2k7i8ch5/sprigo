@@ -207,6 +207,29 @@
     "doubleXpActive_other": "2× XP · {{count}} min restantes",
     "doubleXpActive_many": "2× XP · {{count}} min restantes"
   },
+  "progress": {
+    "title": "Progression",
+    "xpTitle": "XP par jour",
+    "xpSummary": "{{n}} XP ces 14 derniers jours",
+    "wordsTitle": "Mots appris",
+    "wordsSummary": "{{n}} mots, {{added}} nouveaux en 30 jours",
+    "words": "mots",
+    "accTitle": "Précision par exercice",
+    "accSummary": "Bonnes réponses, depuis le début",
+    "accRow": "{{pct}} % justes sur {{n}} réponses",
+    "speechTitle": "Débit à l’oral",
+    "speechSummary": "{{n}} mots par minute en moyenne, 8 dernières semaines",
+    "wpm": "mpm",
+    "none": "Rien pour l’instant",
+    "kinds": {
+      "choice": "Choix",
+      "bank": "Banque de mots",
+      "input": "Saisie",
+      "match": "Paires",
+      "speak": "Oral"
+    },
+    "table": "Afficher en tableau"
+  },
   "profile": {
     "since": "Apprend depuis le {{date}}",
     "garden": "Mon jardin",
@@ -324,6 +347,28 @@
     "again": "Relire",
     "done": "Histoire terminée !",
     "tapHint": "Touche une ligne pour voir sa traduction"
+  },
+  "conjugate": {
+    "title": "Conjugaison",
+    "desc": "Tape la bonne forme : {{tenses}}",
+    "prompt": "Tape la forme du verbe",
+    "cells": {
+      "0": "verbe",
+      "1": "personne",
+      "2": "temps"
+    }
+  },
+  "write": {
+    "title": "Écriture",
+    "cardDesc": "Écris quelques phrases sur le thème d'une unité et reçois chaque erreur corrigée et expliquée.",
+    "pick": "Sur quoi veux-tu écrire ?",
+    "placeholder": "Écris ici…",
+    "feedback": "Ton texte, corrigé",
+    "noCorrections": "Aucune erreur. Bravo !",
+    "rewritten": "Une version naturelle",
+    "hints": "Mots utiles",
+    "fixPrompt": "Corrige ceci",
+    "done": "Écriture terminée !"
   },
   "roleplay": {
     "title": "Jeux de rôle",

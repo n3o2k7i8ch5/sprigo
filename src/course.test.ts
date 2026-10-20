@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { parseCourse, buildPath, levelRange } from "./course.ts";
+import { parseCourse, buildPath, levelRange, parseStoryId, storyId } from "./course.ts";
 
 const en = readFileSync(new URL("../courses/en.yml", import.meta.url), "utf8");
 
@@ -76,4 +76,10 @@ for (const [iso, levels] of Object.entries(LEVELS)) test(`courses/${iso}.yml has
 
 test("level range: one level alone, several as first–last", () => {
   assert.equal(levelRange(parseCourse(en, "en.yml")), "A1–C2");
+});
+
+test("story ids carry the level, since unit ids repeat across levels (#27)", () => {
+  assert.deepEqual(parseStoryId(storyId("B2", "society-and-environment")), { level: "B2", unit: "society-and-environment" });
+  assert.equal(parseStoryId("story:greetings"), null); // pre-1.9 id: only a progress key now, never opened
+  assert.equal(parseStoryId("story:Z9:greetings"), null);
 });

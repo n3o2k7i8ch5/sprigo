@@ -1,9 +1,12 @@
+import { tensesFor } from "../conjugation";
+import { ProgressCharts } from "../ProgressCharts";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon, type IconName } from "../icons";
 import { useApp } from "../store";
 import { useStartLesson } from "../Lesson";
 import { CardsSheet } from "../Flashcards";
+import { WriteSheet } from "../Write";
 import { useSpeakBlock } from "../Mic";
 import { msLeft, rivalXp, zones, PROMOTE, DEMOTE, TIERS } from "../league";
 import * as db from "../db";
@@ -20,6 +23,7 @@ import { Face } from "../face/Face";
 import { MemoryCard } from "./Memory";
 import { CoachCard } from "./Coach";
 import { achievements, nearest, roman, type Achievement } from "../achievements";
+import { levelsOf, storyId, type Cefr } from "../course";
 
 const iconBox = (bg: string, fg: string, size = 48, radius: number | string = 12): React.CSSProperties => ({
   width: size, height: size, flex: "none", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: radius, background: bg, color: fg,
@@ -88,7 +92,7 @@ export function useBuy() {
 
 export function Practice() {
   const { t } = useTranslation();
-  const { toast, enrollment, lessonId, openSheet } = useApp();
+  const { toast, enrollment, lessonId, openSheet, course } = useApp();
   const start = useStartLesson();
   const [data, setData] = useState<{ mistakes: number; words: db.Word[]; timed: number }>({ mistakes: 0, words: [], timed: 0 });
   const [loaded, reload] = useState(0);
@@ -101,6 +105,7 @@ export function Practice() {
   const { mistakes, words, timed } = data;
   const due = dueToday(words, new Date()).length;
   const speakBlock = useSpeakBlock();
+  const conjTenses = course && enrollment ? tensesFor(course.iso, enrollment.level) : [];
   const card = (onClick: () => void, icon: IconName, bg: string, fg: string, title: string, desc: string) => (
     <button className="card row-item" onClick={onClick}>
       <span style={iconBox(bg, fg)}><Icon name={icon} /></span>
@@ -119,6 +124,9 @@ export function Practice() {
         {/* Speaking: bundled Whisper (DECISIONS D2). */}
         {card(() => speakBlock ? toast(t(speakBlock)) : words.length ? start("practice-speak") : toast(t("practice.needWords", { count: 1 })),
           "mic", "var(--sky)", "var(--blue)", t("practice.speak"), speakBlock ? t(speakBlock) : words.length ? t("practice.speakDesc") : t("practice.needWords", { count: 1 }))}
+        {card(() => openSheet(<WriteSheet />), "pen", "var(--purple-tint)", "var(--purple-dark)", t("write.title"), t("write.cardDesc"))}
+        {conjTenses.length > 0 && card(() => start("practice-conjugate"), "dumbbell", "var(--gold-tint)", "var(--gold-dark)", t("conjugate.title"),
+          t("conjugate.desc", { tenses: conjTenses.join(", ") }))}
         {card(() => speakBlock ? toast(t(speakBlock)) : openSheet(<DrillsSheet />), "clock", "var(--sky)", "var(--blue)", t("practice.drills"), speakBlock ? t(speakBlock) : t("practice.drillsDesc"))}
         {card(() => words.length < LISTEN_MIN_WORDS ? toast(t("practice.needWords", { count: LISTEN_MIN_WORDS })) : due ? start("practice-due") : toast(t("practice.noDue")),
           "refresh", "var(--green-tint)", "var(--green)", t("practice.due"),
@@ -342,7 +350,14 @@ export function Profile() {
   const { t, i18n } = useTranslation();
   const { s, xp, profile, done, legendary, enrollment, go, openSheet } = useApp();
   const [words, setWords] = useState(0);
-  useEffect(() => { if (enrollment) db.listWords(enrollment.id).then((w) => setWords(w.length)); }, [enrollment?.id]);
+  const [wordDays, setWordDays] = useState<Record<string, number>>({});
+  const [speech, setSpeech] = useState<Record<string, number>>({});
+  useEffect(() => { db.speechWeeks(profile!.id).then(setSpeech); }, [profile!.id]);
+  useEffect(() => {
+    if (!enrollment) return;
+    db.listWords(enrollment.id).then((w) => setWords(w.length));
+    db.wordDays(enrollment.id).then(setWordDays);
+  }, [enrollment?.id]);
   const league = useLeague();
   const since = new Date(profile!.created_at.replace(" ", "T") + "Z").toLocaleDateString(i18n.language, { month: "long", year: "numeric" });
   const stat = (v: React.ReactNode, k: string, c: string, onClick?: () => void) => {
@@ -374,6 +389,9 @@ export function Profile() {
         {stat(league.name, t("profile.currentLeague"), "var(--blue)")}
         {stat(t("profile.top3"), t("profile.bestLeague"), "var(--green-dark)")}
       </div>
+      <h2 className="section-title">{t("progress.title")}</h2>
+      {/* today from todayXp too: profiles from before #31 have no xpDays yet */}
+      <ProgressCharts xpDays={{ [s.day]: s.todayXp, ...s.xpDays }} wordDays={wordDays} accuracy={s.accuracy} speech={speech} />
       <h2 className="section-title">{t("profile.forYou")}</h2>
       <div className="od-grid profile-cards" style={{ "--od-cols": 2, "--od-gap": "12px" } as React.CSSProperties}>
         <CoachCard />
@@ -397,20 +415,32 @@ export function Stories() {
   const { t } = useTranslation();
   const { toast, course, enrollment, done } = useApp();
   const start = useStartLesson();
-  const units = (enrollment && course?.levels[enrollment.level]?.units) || [];
+  // The current level and every one before it; earlier levels are open in full.
+  const levels = course && enrollment ? levelsOf(course).slice(0, levelsOf(course).indexOf(enrollment.level) + 1) : [];
+  const [level, setLevel] = useState(enrollment?.level);
+  const lv = level && levels.includes(level) ? level : enrollment?.level;
+  const units = (lv && course?.levels[lv]?.units) || [];
   return (
     <>
       <h1 className="section-title">{t("stories.title")}</h1>
       <p className="muted" style={{ marginBottom: 18 }}>{t("stories.subtitle")}</p>
+      {levels.length > 1 && (
+        <label className="od-field" style={{ marginBottom: 14, maxWidth: 200 }}><b>{t("learn.levels")}</b>
+          <select className="select" value={lv} onChange={(e) => setLevel(e.target.value as Cefr)}>
+            {levels.map((l) => <option key={l} value={l}>{l} · {course!.levels[l]!.title}</option>)}
+          </select>
+        </label>
+      )}
       <div className="od-stack" style={{ "--od-gap": "12px" } as React.CSSProperties}>
         {units.map((u, ui) => {
-          // A unit's story opens once the unit is started (the first one is always open).
-          const open = ui === 0 || u.steps.some((st) => done.has(st.id));
-          const read = done.has(`story:${u.id}`);
+          // A unit's story opens once the unit is started (the first one is always open); earlier levels are all open.
+          const open = lv !== enrollment!.level || ui === 0 || u.steps.some((st) => done.has(st.id));
+          const id = storyId(lv!, u.id);
+          const read = done.has(id) || (lv === enrollment!.level && done.has(`story:${u.id}`)); // pre-1.9 id
           return (
-            <button className="card row-item" key={u.id} onClick={() => open ? start(`story:${u.id}`) : toast(t("stories.lockedToast", { unit: ui }))}>
+            <button className="card row-item" key={u.id} onClick={() => open ? start(id) : toast(t("stories.lockedToast", { unit: ui }))}>
               <span style={iconBox(open ? "var(--sky)" : "var(--surface)", open ? "var(--blue)" : "var(--text-faint)")}><Icon name={read ? "check" : open ? "story" : "lock"} /></span>
-              <span className="od-field od-fill"><b>{u.title}</b><span className="muted small">{t("learn.kicker", { level: enrollment!.level, unit: ui + 1 })}{u.description ? ` · ${u.description}` : ""}</span></span>
+              <span className="od-field od-fill"><b>{u.title}</b><span className="muted small">{t("learn.kicker", { level: lv, unit: ui + 1 })}{u.description ? ` · ${u.description}` : ""}</span></span>
               {open && <span className="btn btn-ghost" style={{ pointerEvents: "none" }}>{t(read ? "stories.again" : "stories.read")}</span>}
             </button>
           );

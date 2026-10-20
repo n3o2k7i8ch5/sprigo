@@ -195,6 +195,29 @@
     "doubleXpActive_one": "2× XP · noch {{count}} Min.",
     "doubleXpActive_other": "2× XP · noch {{count}} Min."
   },
+  "progress": {
+    "title": "Fortschritt",
+    "xpTitle": "XP pro Tag",
+    "xpSummary": "{{n}} XP in den letzten 14 Tagen",
+    "wordsTitle": "Gelernte Wörter",
+    "wordsSummary": "{{n}} Wörter, {{added}} neu in 30 Tagen",
+    "words": "Wörter",
+    "accTitle": "Genauigkeit nach Übung",
+    "accSummary": "Richtige Antworten, insgesamt",
+    "accRow": "{{pct}} % richtig von {{n}} Antworten",
+    "speechTitle": "Sprechtempo",
+    "speechSummary": "Im Schnitt {{n}} Wörter pro Minute, letzte 8 Wochen",
+    "wpm": "WpM",
+    "none": "Noch nichts",
+    "kinds": {
+      "choice": "Auswahl",
+      "bank": "Wortbank",
+      "input": "Tippen",
+      "match": "Paare",
+      "speak": "Sprechen"
+    },
+    "table": "Als Tabelle zeigen"
+  },
   "profile": {
     "since": "Lernt seit {{date}}",
     "garden": "Mein Garten",
@@ -302,6 +325,28 @@
     "again": "Nochmal lesen",
     "done": "Geschichte abgeschlossen!",
     "tapHint": "Tippe auf eine Zeile für die Übersetzung"
+  },
+  "conjugate": {
+    "title": "Verbformen",
+    "desc": "Tippe die richtige Form: {{tenses}}",
+    "prompt": "Tippe die Verbform",
+    "cells": {
+      "0": "Verb",
+      "1": "Person",
+      "2": "Zeitform"
+    }
+  },
+  "write": {
+    "title": "Schreiben",
+    "cardDesc": "Schreib ein paar Sätze zum Thema einer Einheit und lass jeden Fehler korrigieren und erklären.",
+    "pick": "Worüber möchtest du schreiben?",
+    "placeholder": "Schreib hier…",
+    "feedback": "Dein Text, korrigiert",
+    "noCorrections": "Keine Fehler. Gut gemacht!",
+    "rewritten": "Eine natürliche Fassung",
+    "hints": "Nützliche Wörter",
+    "fixPrompt": "Korrigiere das",
+    "done": "Schreiben geschafft!"
   },
   "roleplay": {
     "title": "Rollenspiel",

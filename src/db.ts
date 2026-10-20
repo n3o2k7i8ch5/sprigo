@@ -196,9 +196,10 @@ export type Word = { word: string; translation: string; strength: number; card: 
 const CARD_COLS = "due, stability, difficulty, reps, lapses, state, last_review";
 /** New words start as FSRS New cards. Seeing a word again only refreshes its translation: only recall is graded (#20). */
 export async function addWords(enrollmentId: number, pairs: [string, string][]) {
+  known = null;
   const d = await db(), c = newCard(new Date());
   for (const [w, t] of pairs) await d.execute(
-    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP)
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, w, t, c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review]);
 }
@@ -214,15 +215,30 @@ export async function reviewWord(enrollmentId: number, word: string, ok: boolean
 }
 /** Imported words (#24): new ones take the file's schedule (or start New), existing ones only get the file's translation. */
 export async function importWords(enrollmentId: number, words: { word: string; translation: string; card?: WordCard }[]) {
+  known = null;
   const d = await db(), c = newCard(new Date());
   const had = new Set((await d.select<{ word: string }>("SELECT word FROM words WHERE enrollment_id = $1", [enrollmentId])).map((r) => r.word));
   for (const { word, translation, card = c } of words) await d.execute(
-    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP)
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, word, translation, card.due, card.stability, card.difficulty, card.reps, card.lapses, card.state, card.last_review]);
   const added = words.filter((w) => !had.has(w.word)).length;
   return { added, updated: words.length - added };
 }
+/** New words per local day (YYYY-MM-DD), for the progress chart (#31). */
+export async function wordDays(enrollmentId: number) {
+  const r = await (await db()).select<{ d: string; n: number }>(
+    "SELECT date(created_at, 'localtime') AS d, COUNT(*) AS n FROM words WHERE enrollment_id = $1 GROUP BY d", [enrollmentId]);
+  return Object.fromEntries(r.map((x) => [x.d, x.n]));
+}
+// The list's words, for highlighting them in text (#27). Kept until the list changes.
+// ponytail: only addWords/importWords clear it; clear on profile delete too if enrollment ids get reused
+let known: { id: number; words: Promise<string[]> } | null = null;
+export function knownWords(enrollmentId: number) {
+  if (known?.id !== enrollmentId) known = { id: enrollmentId, words: listWords(enrollmentId).then((ws) => ws.map((w) => w.word)) };
+  return known.words;
+}
+
 export async function listWords(enrollmentId: number): Promise<Word[]> {
   const rows = await (await db()).select<{ word: string; translation: string } & WordCard>(
     `SELECT word, translation, ${CARD_COLS} FROM words WHERE enrollment_id = $1 ORDER BY updated_at DESC, word`, [enrollmentId]);
@@ -278,6 +294,13 @@ export async function listSpeechSessions(profileId: number, limit = 10, mode?: C
     mode ? [profileId, limit, mode] : [profileId, limit]);
   const parse = (s: string | null) => { try { return s ? JSON.parse(s) as Conditions : null; } catch { return null; } }; // a broken row counts as not measured
   return rows.map((r) => ({ ...r, conditions: parse(r.conditions) })).reverse();
+}
+/** Average speaking pace per week (Monday, local YYYY-MM-DD) over every voice mode, for the progress chart (#31). */
+export async function speechWeeks(profileId: number) {
+  const r = await (await db()).select<{ w: string; wpm: number }>(
+    `SELECT date(created_at, 'localtime', '-6 days', 'weekday 1') AS w, ROUND(AVG(wpm)) AS wpm FROM speech_sessions
+     WHERE profile_id = $1 AND words > 0 GROUP BY w`, [profileId]);
+  return Object.fromEntries(r.map((x) => [x.w, x.wpm]));
 }
 /** The learner's usual per answer over their last 10 tutor calls (SPR-26); chats and drills are a different kind of talk. Null before they have said a few things. */
 export async function speechBaseline(profileId: number): Promise<Baseline | null> {
