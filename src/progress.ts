@@ -15,6 +15,7 @@ export type Stats = {
   bargeIn: boolean; // the learner may talk over the tutor in a live call (SPR-17)
   memoryOn: boolean; // Sprigo keeps and uses facts about the learner (SPR-22–24)
   speechOn: boolean; // voice analysis: speech signals measured, used in the call and on the profile (SPR-25–27)
+  xpDays: Record<string, number>; // XP earned per local day, the last XP_DAYS days (#31 progress charts)
 };
 
 export const DAILY_XP_GOAL = 50;
@@ -27,7 +28,7 @@ export const NEW_STATS: Stats = {
   hearts: 5, maxHearts: 5, heartsOn: true, soundOn: true, reduceMotion: false, streak: 0, bestStreak: 0, streakFreeze: 0,
   gems: 0, todayXp: 0, bestDayXp: 0, chests: 0, day: "", lastActive: null, quests: QUESTS,
   doubleXpUntil: 0, legendTickets: 0, madnessBest: 0, league: null, weekXp: 0,
-  reminderOn: false, reminded: "", speakOn: true, bargeIn: true, memoryOn: true, speechOn: true,
+  reminderOn: false, reminded: "", speakOn: true, bargeIn: true, memoryOn: true, speechOn: true, xpDays: {},
 };
 
 /** Shop "Double XP": 15 minutes of ×2 on everything earned. */
@@ -64,7 +65,23 @@ export function recordSession(s0: Stats, r: { xp: number; gems: number; kind: "l
   const allDone = (qs: Quest[]) => qs.every((q) => q.cur >= q.goal);
   return {
     ...s, streak, bestStreak: Math.max(s.bestStreak, streak), lastActive: day,
-    todayXp, bestDayXp: Math.max(s.bestDayXp, todayXp), gems: s.gems + r.gems, quests, weekXp: s.weekXp + r.xp,
+    todayXp, bestDayXp: Math.max(s.bestDayXp, todayXp), gems: s.gems + r.gems, quests, weekXp: s.weekXp + r.xp, xpDays: logXp(s.xpDays, day, r.xp),
     chests: s.chests + +(allDone(quests) && !allDone(s.quests)), // all daily quests → one reward chest
   };
+}
+
+/** Days kept in `xpDays`; older ones are dropped so the stats JSON stays small. */
+export const XP_DAYS = 90;
+function logXp(days: Record<string, number>, day: string, xp: number) {
+  const from = addDays(day, 1 - XP_DAYS);
+  return Object.fromEntries([...Object.entries(days).filter(([d]) => d >= from && d !== day), [day, (days[day] ?? 0) + xp]]);
+}
+
+/** The `n` days ending at `end`, oldest first. */
+export const lastDays = (end: string, n: number) => Array.from({ length: n }, (_, i) => addDays(end, i - n + 1));
+
+/** Running total per day: `before` plus everything up to and including that day. Days before the range count into the start. */
+export function runningTotal(perDay: Record<string, number>, days: string[]) {
+  let total = Object.entries(perDay).filter(([d]) => d < days[0]).reduce((a, [, n]) => a + n, 0);
+  return days.map((d) => (total += perDay[d] ?? 0));
 }

@@ -193,6 +193,15 @@
     "doubleXpActive_one": "2× XP · {{count}} dk kaldı",
     "doubleXpActive_other": "2× XP · {{count}} dk kaldı"
   },
+  "progress": {
+    "title": "İlerleme",
+    "xpTitle": "Günlük XP",
+    "xpSummary": "Son 14 günde {{n}} XP",
+    "wordsTitle": "Öğrenilen kelimeler",
+    "wordsSummary": "{{n}} kelime, 30 günde {{added}} yeni",
+    "words": "kelime",
+    "table": "Tablo olarak göster"
+  },
   "profile": {
     "since": "{{date}} tarihinden beri öğreniyor",
     "garden": "Bahçem",

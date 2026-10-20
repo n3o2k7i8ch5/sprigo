@@ -649,3 +649,16 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .flashcard-grades{width:100%}
 .flashcard-grades .btn{display:flex;flex-direction:column;gap:2px;padding-inline:6px}
 .flashcard-days{font-size:11px;opacity:.8;text-transform:none}
+
+/* Progress charts (#31): recessive axes, text in text tokens; no animation, so reduced motion needs nothing */
+.chart{display:flex;flex-direction:column;gap:8px;padding:14px}
+.chart figcaption{display:flex;flex-direction:column;gap:2px}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-axis line{stroke:var(--border);stroke-width:1}
+.chart-axis text{fill:var(--text-muted);font-size:11px;font-weight:700}
+.chart-hit{fill:transparent}
+.chart-hit:hover{fill:color-mix(in srgb,var(--text) 6%,transparent)}
+.chart summary{cursor:pointer;font-weight:700}
+.chart-table{width:100%;margin-top:6px;border-collapse:collapse}
+.chart-table td{padding:2px 0}
+.chart-table td:last-child{text-align:right}

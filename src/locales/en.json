@@ -195,6 +195,15 @@
     "doubleXpActive_one": "2× XP · {{count}} min left",
     "doubleXpActive_other": "2× XP · {{count}} min left"
   },
+  "progress": {
+    "title": "Progress",
+    "xpTitle": "XP per day",
+    "xpSummary": "{{n}} XP in the last 14 days",
+    "wordsTitle": "Words learned",
+    "wordsSummary": "{{n}} words, {{added}} new in 30 days",
+    "words": "words",
+    "table": "Show as table"
+  },
   "profile": {
     "since": "Learning since {{date}}",
     "garden": "My garden",

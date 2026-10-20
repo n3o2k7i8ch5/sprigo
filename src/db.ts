@@ -199,7 +199,7 @@ export async function addWords(enrollmentId: number, pairs: [string, string][]) 
   known = null;
   const d = await db(), c = newCard(new Date());
   for (const [w, t] of pairs) await d.execute(
-    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP)
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, w, t, c.due, c.stability, c.difficulty, c.reps, c.lapses, c.state, c.last_review]);
 }
@@ -219,11 +219,17 @@ export async function importWords(enrollmentId: number, words: { word: string; t
   const d = await db(), c = newCard(new Date());
   const had = new Set((await d.select<{ word: string }>("SELECT word FROM words WHERE enrollment_id = $1", [enrollmentId])).map((r) => r.word));
   for (const { word, translation, card = c } of words) await d.execute(
-    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    `INSERT INTO words(enrollment_id, word, translation, ${CARD_COLS}, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP)
      ON CONFLICT DO UPDATE SET translation = $3, updated_at = CURRENT_TIMESTAMP`,
     [enrollmentId, word, translation, card.due, card.stability, card.difficulty, card.reps, card.lapses, card.state, card.last_review]);
   const added = words.filter((w) => !had.has(w.word)).length;
   return { added, updated: words.length - added };
+}
+/** New words per local day (YYYY-MM-DD), for the progress chart (#31). */
+export async function wordDays(enrollmentId: number) {
+  const r = await (await db()).select<{ d: string; n: number }>(
+    "SELECT date(created_at, 'localtime') AS d, COUNT(*) AS n FROM words WHERE enrollment_id = $1 GROUP BY d", [enrollmentId]);
+  return Object.fromEntries(r.map((x) => [x.d, x.n]));
 }
 // The list's words, for highlighting them in text (#27). Kept until the list changes.
 // ponytail: only addWords/importWords clear it; clear on profile delete too if enrollment ids get reused

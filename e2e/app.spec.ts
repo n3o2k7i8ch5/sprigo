@@ -123,3 +123,14 @@ test("writing practice corrects the text inline and queues the mistake", async (
   await w.getByRole("button", { name: "Done" }).click();
   await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
 });
+
+test("the profile charts XP and words after a lesson", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Learn" }).click();
+  await runLesson(page, /Basic Greetings/);
+  await page.getByRole("button", { name: "Profile", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+  const xp = page.getByRole("img", { name: /^XP per day\. [1-9]\d* XP in the last 14 days/ });
+  await expect(xp.locator("path")).toHaveCount(1); // one bar: today
+  await expect(page.getByRole("img", { name: /^Words learned\. [1-9]\d* words, [1-9]\d* new/ })).toBeVisible();
+});

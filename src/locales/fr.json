@@ -207,6 +207,15 @@
     "doubleXpActive_other": "2× XP · {{count}} min restantes",
     "doubleXpActive_many": "2× XP · {{count}} min restantes"
   },
+  "progress": {
+    "title": "Progression",
+    "xpTitle": "XP par jour",
+    "xpSummary": "{{n}} XP ces 14 derniers jours",
+    "wordsTitle": "Mots appris",
+    "wordsSummary": "{{n}} mots, {{added}} nouveaux en 30 jours",
+    "words": "mots",
+    "table": "Afficher en tableau"
+  },
   "profile": {
     "since": "Apprend depuis le {{date}}",
     "garden": "Mon jardin",
