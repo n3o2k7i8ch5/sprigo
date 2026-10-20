@@ -16,7 +16,9 @@ export type Stats = {
   memoryOn: boolean; // Sprigo keeps and uses facts about the learner (SPR-22–24)
   speechOn: boolean; // voice analysis: speech signals measured, used in the call and on the profile (SPR-25–27)
   xpDays: Record<string, number>; // XP earned per local day, the last XP_DAYS days (#31 progress charts)
+  accuracy: Partial<Record<Graded, [right: number, total: number]>>; // graded answers per exercise type, all time (#31)
 };
+export type Graded = "choice" | "bank" | "input" | "match" | "speak";
 
 export const DAILY_XP_GOAL = 50;
 const QUESTS: Quest[] = [
@@ -28,7 +30,7 @@ export const NEW_STATS: Stats = {
   hearts: 5, maxHearts: 5, heartsOn: true, soundOn: true, reduceMotion: false, streak: 0, bestStreak: 0, streakFreeze: 0,
   gems: 0, todayXp: 0, bestDayXp: 0, chests: 0, day: "", lastActive: null, quests: QUESTS,
   doubleXpUntil: 0, legendTickets: 0, madnessBest: 0, league: null, weekXp: 0,
-  reminderOn: false, reminded: "", speakOn: true, bargeIn: true, memoryOn: true, speechOn: true, xpDays: {},
+  reminderOn: false, reminded: "", speakOn: true, bargeIn: true, memoryOn: true, speechOn: true, xpDays: {}, accuracy: {},
 };
 
 /** Shop "Double XP": 15 minutes of ×2 on everything earned. */
@@ -84,4 +86,17 @@ export const lastDays = (end: string, n: number) => Array.from({ length: n }, (_
 export function runningTotal(perDay: Record<string, number>, days: string[]) {
   let total = Object.entries(perDay).filter(([d]) => d < days[0]).reduce((a, [, n]) => a + n, 0);
   return days.map((d) => (total += perDay[d] ?? 0));
+}
+
+/** One graded answer counted for the accuracy chart. */
+export function tally(acc: Stats["accuracy"], kind: Graded, ok: boolean): Stats["accuracy"] {
+  const [right, total] = acc[kind] ?? [0, 0];
+  return { ...acc, [kind]: [right + +ok, total + 1] };
+}
+
+/** Monday of `day`'s week, and the `n` weeks ending with it (oldest first), as YYYY-MM-DD. */
+export function lastWeeks(day: string, n: number) {
+  const [y, m, d] = day.split("-").map(Number);
+  const monday = addDays(day, -((new Date(y, m - 1, d).getDay() + 6) % 7));
+  return Array.from({ length: n }, (_, i) => addDays(monday, 7 * (i - n + 1)));
 }

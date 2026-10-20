@@ -133,4 +133,8 @@ test("the profile charts XP and words after a lesson", async ({ page }) => {
   const xp = page.getByRole("img", { name: /^XP per day\. [1-9]\d* XP in the last 14 days/ });
   await expect(xp.locator("path")).toHaveCount(1); // one bar: today
   await expect(page.getByRole("img", { name: /^Words learned\. [1-9]\d* words, [1-9]\d* new/ })).toBeVisible();
+  const acc = page.locator(".acc-rows li");
+  await expect(acc.filter({ hasText: "Choice" })).toContainText("100%"); // every answer was right
+  await expect(acc.filter({ hasText: "Pairs" })).toContainText("100%");
+  await expect(page.getByRole("img", { name: "Speaking pace. Nothing yet" })).toBeVisible(); // no voice session in this run
 });

@@ -202,6 +202,20 @@
     "wordsTitle": "Words learned",
     "wordsSummary": "{{n}} words, {{added}} new in 30 days",
     "words": "words",
+    "accTitle": "Accuracy by exercise",
+    "accSummary": "Right answers, all time",
+    "accRow": "{{pct}}% right of {{n}} answers",
+    "speechTitle": "Speaking pace",
+    "speechSummary": "{{n}} words per minute on average, last 8 weeks",
+    "wpm": "wpm",
+    "none": "Nothing yet",
+    "kinds": {
+      "choice": "Choice",
+      "bank": "Word bank",
+      "input": "Typing",
+      "match": "Pairs",
+      "speak": "Speaking"
+    },
     "table": "Show as table"
   },
   "profile": {

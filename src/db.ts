@@ -295,6 +295,13 @@ export async function listSpeechSessions(profileId: number, limit = 10, mode?: C
   const parse = (s: string | null) => { try { return s ? JSON.parse(s) as Conditions : null; } catch { return null; } }; // a broken row counts as not measured
   return rows.map((r) => ({ ...r, conditions: parse(r.conditions) })).reverse();
 }
+/** Average speaking pace per week (Monday, local YYYY-MM-DD) over every voice mode, for the progress chart (#31). */
+export async function speechWeeks(profileId: number) {
+  const r = await (await db()).select<{ w: string; wpm: number }>(
+    `SELECT date(created_at, 'localtime', '-6 days', 'weekday 1') AS w, ROUND(AVG(wpm)) AS wpm FROM speech_sessions
+     WHERE profile_id = $1 AND words > 0 GROUP BY w`, [profileId]);
+  return Object.fromEntries(r.map((x) => [x.w, x.wpm]));
+}
 /** The learner's usual per answer over their last 10 tutor calls (SPR-26); chats and drills are a different kind of talk. Null before they have said a few things. */
 export async function speechBaseline(profileId: number): Promise<Baseline | null> {
   const [r] = await (await db()).select<Baseline & { n: number | null }>(

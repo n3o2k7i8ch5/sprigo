@@ -200,6 +200,20 @@
     "wordsTitle": "Öğrenilen kelimeler",
     "wordsSummary": "{{n}} kelime, 30 günde {{added}} yeni",
     "words": "kelime",
+    "accTitle": "Alıştırmaya göre doğruluk",
+    "accSummary": "Doğru cevaplar, tüm zamanlar",
+    "accRow": "{{n}} cevabın %{{pct}} kadarı doğru",
+    "speechTitle": "Konuşma hızı",
+    "speechSummary": "Son 8 haftada ortalama dakikada {{n}} kelime",
+    "wpm": "kel/dk",
+    "none": "Henüz yok",
+    "kinds": {
+      "choice": "Seçmeli",
+      "bank": "Kelime bankası",
+      "input": "Yazma",
+      "match": "Eşleştirme",
+      "speak": "Konuşma"
+    },
     "table": "Tablo olarak göster"
   },
   "profile": {

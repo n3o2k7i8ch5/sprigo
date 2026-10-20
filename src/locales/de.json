@@ -202,6 +202,20 @@
     "wordsTitle": "Gelernte Wörter",
     "wordsSummary": "{{n}} Wörter, {{added}} neu in 30 Tagen",
     "words": "Wörter",
+    "accTitle": "Genauigkeit nach Übung",
+    "accSummary": "Richtige Antworten, insgesamt",
+    "accRow": "{{pct}} % richtig von {{n}} Antworten",
+    "speechTitle": "Sprechtempo",
+    "speechSummary": "Im Schnitt {{n}} Wörter pro Minute, letzte 8 Wochen",
+    "wpm": "WpM",
+    "none": "Noch nichts",
+    "kinds": {
+      "choice": "Auswahl",
+      "bank": "Wortbank",
+      "input": "Tippen",
+      "match": "Paare",
+      "speak": "Sprechen"
+    },
     "table": "Als Tabelle zeigen"
   },
   "profile": {

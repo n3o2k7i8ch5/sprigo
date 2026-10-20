@@ -214,6 +214,20 @@
     "wordsTitle": "Mots appris",
     "wordsSummary": "{{n}} mots, {{added}} nouveaux en 30 jours",
     "words": "mots",
+    "accTitle": "Précision par exercice",
+    "accSummary": "Bonnes réponses, depuis le début",
+    "accRow": "{{pct}} % justes sur {{n}} réponses",
+    "speechTitle": "Débit à l’oral",
+    "speechSummary": "{{n}} mots par minute en moyenne, 8 dernières semaines",
+    "wpm": "mpm",
+    "none": "Rien pour l’instant",
+    "kinds": {
+      "choice": "Choix",
+      "bank": "Banque de mots",
+      "input": "Saisie",
+      "match": "Paires",
+      "speak": "Oral"
+    },
     "table": "Afficher en tableau"
   },
   "profile": {
