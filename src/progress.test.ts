@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { NEW_STATS, recordSession, rollDay } from "./progress.ts";
+import { NEW_STATS, lastDays, recordSession, rollDay, runningTotal } from "./progress.ts";
 import type { LeagueState } from "./league.ts";
 
 const lesson = { xp: 30, gems: 4, kind: "lesson" as const };
@@ -47,4 +47,18 @@ test("rollDay redraws an old-format league the same day and passes the learner o
   assert.deepEqual(r.league!.who, { id: 7, lang: "de" });
   assert.ok(r.league!.rivals.every((x) => x.total > 0));
   assert.equal(rollDay(r, "2026-10-01"), r, "nothing to do: same object");
+});
+
+test("XP is logged per day and old days drop off", () => {
+  const lesson = { xp: 10, gems: 0, kind: "lesson" as const };
+  let s = recordSession({ ...NEW_STATS, xpDays: { "2025-01-01": 99 } }, lesson, "2026-03-01");
+  s = recordSession(s, lesson, "2026-03-01");
+  s = recordSession(s, lesson, "2026-03-03");
+  assert.deepEqual(s.xpDays, { "2026-03-01": 20, "2026-03-03": 10 });
+});
+
+test("series helpers: day ranges and running totals", () => {
+  const days = lastDays("2026-03-02", 3);
+  assert.deepEqual(days, ["2026-02-28", "2026-03-01", "2026-03-02"]);
+  assert.deepEqual(runningTotal({ "2026-01-10": 5, "2026-03-01": 2, "2026-03-02": 1 }, days), [5, 7, 8]);
 });

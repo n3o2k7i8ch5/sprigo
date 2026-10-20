@@ -1,3 +1,4 @@
+import { ProgressCharts } from "../ProgressCharts";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon, type IconName } from "../icons";
@@ -345,7 +346,12 @@ export function Profile() {
   const { t, i18n } = useTranslation();
   const { s, xp, profile, done, legendary, enrollment, go, openSheet } = useApp();
   const [words, setWords] = useState(0);
-  useEffect(() => { if (enrollment) db.listWords(enrollment.id).then((w) => setWords(w.length)); }, [enrollment?.id]);
+  const [wordDays, setWordDays] = useState<Record<string, number>>({});
+  useEffect(() => {
+    if (!enrollment) return;
+    db.listWords(enrollment.id).then((w) => setWords(w.length));
+    db.wordDays(enrollment.id).then(setWordDays);
+  }, [enrollment?.id]);
   const league = useLeague();
   const since = new Date(profile!.created_at.replace(" ", "T") + "Z").toLocaleDateString(i18n.language, { month: "long", year: "numeric" });
   const stat = (v: React.ReactNode, k: string, c: string, onClick?: () => void) => {
@@ -377,6 +383,9 @@ export function Profile() {
         {stat(league.name, t("profile.currentLeague"), "var(--blue)")}
         {stat(t("profile.top3"), t("profile.bestLeague"), "var(--green-dark)")}
       </div>
+      <h2 className="section-title">{t("progress.title")}</h2>
+      {/* today from todayXp too: profiles from before #31 have no xpDays yet */}
+      <ProgressCharts xpDays={{ [s.day]: s.todayXp, ...s.xpDays }} wordDays={wordDays} />
       <h2 className="section-title">{t("profile.forYou")}</h2>
       <div className="od-grid profile-cards" style={{ "--od-cols": 2, "--od-gap": "12px" } as React.CSSProperties}>
         <CoachCard />
