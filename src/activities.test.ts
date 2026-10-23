@@ -72,6 +72,14 @@ test("speaking check forgives order, case and punctuation but not missing words"
   assert.equal(speechScore("thank thank", "thank"), 0.5, "each heard word counts once");
 });
 
+test("speaking check names the words it didn't catch", async () => {
+  const { speechMisses } = await import("./activities.ts");
+  assert.deepEqual(speechMisses("Good morning, how are you?", "good morning"), ["how", "are", "you"]);
+  assert.deepEqual(speechMisses("I'm fine, thank you.", "you thank fine I'm"), []);
+  assert.deepEqual(speechMisses("thank thank", "thank"), ["thank"]);
+  assert.deepEqual(speechMisses("Hello!", ""), ["hello"]);
+});
+
 test("hideAnswer keeps only the meaning of a word-tile prompt", () => {
   const a = "They played football in the park yesterday.";
   assert.equal(hideAnswer(`'${a}' (Dün parkta futbol oynadılar.)`, a), "Dün parkta futbol oynadılar.");

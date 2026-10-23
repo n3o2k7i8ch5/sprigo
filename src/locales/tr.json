@@ -594,6 +594,7 @@
     "speakTitle": "Konuşma",
     "speakSub": "Mikrofon düğmesine bas ve cümleyi söyle.",
     "heard": "Duyulan: “{{text}}”",
+    "missed": "Anlaşılmayan: {{words}}",
     "heardNothing": "Anlaşılmadı — biraz daha yüksek sesle tekrar dene.",
     "cantSpeak": "Şu an konuşamam",
     "unitPassed": "Ünite geçildi!",

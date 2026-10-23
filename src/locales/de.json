@@ -600,6 +600,7 @@
     "speakTitle": "Sprich diesen Satz",
     "speakSub": "Tippe auf das Mikrofon und sprich den Satz.",
     "heard": "Gehört: „{{text}}“",
+    "missed": "Nicht erkannt: {{words}}",
     "heardNothing": "Das habe ich nicht verstanden – versuche es etwas lauter.",
     "cantSpeak": "Sprechen gerade nicht möglich",
     "unitPassed": "Einheit bestanden!",
