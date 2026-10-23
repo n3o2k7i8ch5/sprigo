@@ -30,6 +30,10 @@ const UNIT_TEST: CourseLevel["units"][number]["steps"][number]["activities"] = [
   { type: "multiple_choice", count: 3 }, { type: "fill_blank", count: 2 }, { type: "word_bank", count: 2 }, { type: "translate", count: 2 }, { type: "listen_select", count: 1 },
 ];
 
+/** `grammar:<pattern>` (#29): a short drill on one grammar pattern, set in the first unit that teaches it. Earns XP, marks nothing done. */
+export const grammarDrill = (id: string) => id.startsWith("grammar:") ? id.slice(8) : undefined;
+const GRAMMAR_DRILL: typeof UNIT_TEST = [{ type: "multiple_choice", count: 2 }, { type: "fill_blank", count: 2 }, { type: "word_bank", count: 2 }];
+
 /** Finds a step and its surroundings in the course tree; exams get a synthetic step covering the whole level. */
 export function stepContext(course: Course, stepId: string, native: string): LessonContext | null {
   const legend = legendStep(stepId);
@@ -59,10 +63,19 @@ export function stepContext(course: Course, stepId: string, native: string): Les
       },
     };
   }
-  const ut = unitTestOf(stepId);
+  const ut = unitTestOf(stepId), drill = grammarDrill(stepId);
   for (const level of levelsOf(course)) {
     const levelDef = course.levels[level]!;
     for (const u of levelDef.units) {
+      const g = drill === undefined ? undefined : u.steps.flatMap((s) => s.grammar).find((g) => g.pattern === drill);
+      if (g) return {
+        course, level, levelDef, unitTitle: u.title, native,
+        step: {
+          id: stepId, title: g.pattern,
+          description: `Grammar drill on one pattern: every exercise practises "${g.pattern}"; keep the vocabulary simple and from this unit.`,
+          vocabulary: unitWords(u), grammar: [g], activities: GRAMMAR_DRILL,
+        },
+      };
       if (ut === u.id) return {
         course, level, levelDef, unitTitle: u.title, native,
         step: {

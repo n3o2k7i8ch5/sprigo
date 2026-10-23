@@ -12,7 +12,7 @@ import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
 import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
-import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadConjugation, loadLesson, prefetchNext, stepContext, type Base } from "./lessons";
+import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, grammarDrill, judge, legendStep, loadConjugation, loadLesson, prefetchNext, stepContext, type Base } from "./lessons";
 import { recordSession, tally, today, xpMult, type Graded } from "./progress";
 import { acceptAppeal } from "./appeal";
 import { bankMatch, inField, keyAction, type KeyAction, type KeyState } from "./keys";
@@ -91,6 +91,7 @@ export function Lesson({ id }: { id: string }) {
   const ctx = useMemo(() => course && native && !id.startsWith("practice-") ? stepContext(course, id, native) : null, [course, native, id]);
   const lang = course?.iso ?? "en";
   const practice = id.startsWith("practice-");
+  const drill = grammarDrill(id) !== undefined;
   const exam = examLevel(id);
   const legend = legendStep(id);
   const unitTest = unitTestOf(id);
@@ -152,7 +153,7 @@ export function Lesson({ id }: { id: string }) {
     const total = (limit ? i + (fb ? 1 : 0) : list.filter((x) => x.kind !== "learn").length) || 1;
     const acc = Math.round((score.correct / total) * 100), gems = score.correct * 2, xp = score.xp * xpMult(s);
     setS((s) => {
-      const n = recordSession(s, { xp, gems, kind: practice ? "practice" : "lesson" }, today());
+      const n = recordSession(s, { xp, gems, kind: practice || drill ? "practice" : "lesson" }, today());
       return id === "practice-madness" ? { ...n, madnessBest: Math.max(n.madnessBest, score.correct * 5) } : n; // best = pairs matched
     });
     const required = legend ? LEGEND_PASS : unitTest ? UNIT_TEST_PASS : ctx?.levelDef.checkpoint?.required_score;
@@ -161,7 +162,7 @@ export function Lesson({ id }: { id: string }) {
       if (exam) (passed ? completeLevel(exam, xp) : gainXp(xp));
       else if (legend) { gainXp(xp); if (passed) markLegendary(legend); }
       else if (unitTest) (passed ? completeStep(ctx!.levelDef.units.find((u) => u.id === unitTest)!.steps.map((st) => st.id), xp) : gainXp(xp));
-      else if (ctx) {
+      else if (ctx && !drill) {
         completeStep(id, xp);
         prefetchNext(enrollment.id, ctx.course, ctx.level, id, ctx.native);
       } else gainXp(xp);

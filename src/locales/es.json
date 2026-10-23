@@ -34,7 +34,8 @@
     "roleplay": "Roleplay",
     "friends": "Amigos",
     "notifications": "Avisos",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "grammar": "Gramática"
   },
   "common": {
     "soon": "Próximamente",
@@ -1047,5 +1048,19 @@
         "a": "Con un modelo local, Whisper y una voz local, todo funciona sin conexión; solo las descargas necesitan internet. Sprigo es gratuito y de código abierto, sin cuenta.\nEl micrófono solo se activa en los ejercicios orales y las lecciones en vivo, y el audio nunca se guarda."
       }
     }
+  },
+  "grammar": {
+    "title": "Gramática",
+    "subtitle": "Todos los puntos de gramática del curso, por nivel y unidad. Toca uno para ver una explicación y un ejercicio corto.",
+    "search": "Buscar gramática",
+    "none": "Ninguna gramática coincide con tu búsqueda.",
+    "later": "aún no alcanzado",
+    "from": "Se enseña en {{level}} · {{unit}}",
+    "explain": "Explicar",
+    "explaining": "Escribiendo la explicación…",
+    "failed": "No se pudo escribir la explicación.",
+    "notInGuide": "La guía de la IA omitió esta estructura. Inténtalo de nuevo.",
+    "alsoIn": "También en: {{units}}",
+    "practise": "Practicar"
   }
 }

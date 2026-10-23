@@ -40,6 +40,9 @@ async function onboard(page: Page) {
 test("main screens, a sheet and a lesson have no serious axe findings", async ({ page }) => {
   await onboard(page);
   expect(await axe(page)).toEqual([]); // Settings
+  await page.getByRole("button", { name: "Grammar" }).click();
+  await expect(page.getByRole("heading", { name: /^A1 · / })).toBeVisible();
+  expect(await axe(page)).toEqual([]);
   await page.getByRole("button", { name: "Learn" }).click();
   await expect(page.getByText("Greetings & Introductions")).toBeVisible();
   expect(await axe(page)).toEqual([]);
@@ -85,6 +88,9 @@ for (const theme of ["light", "dark"]) test(`high contrast passes axe colour con
   expect(await axe(page, true)).toEqual([]);
   await page.getByRole("button", { name: "Practice" }).click();
   await expect(page.getByRole("button", { name: /^Verb forms/ })).toBeVisible();
+  expect(await axe(page, true)).toEqual([]);
+  await page.getByRole("button", { name: "Grammar" }).click();
+  await expect(page.getByRole("heading", { name: /^A1 · / })).toBeVisible();
   expect(await axe(page, true)).toEqual([]);
   await page.getByRole("button", { name: "Learn", exact: true }).click();
   await expect(page.getByText("Greetings & Introductions")).toBeVisible();
