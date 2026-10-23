@@ -5,6 +5,11 @@ import "@fontsource/nunito/600.css";
 import "@fontsource/nunito/700.css";
 import "@fontsource/nunito/800.css";
 import "@fontsource/nunito/900.css";
+// Readable font option (#34); the files only load once Settings turns it on.
+import "@fontsource/atkinson-hyperlegible-next/400.css";
+import "@fontsource/atkinson-hyperlegible-next/600.css";
+import "@fontsource/atkinson-hyperlegible-next/700.css";
+import "@fontsource/atkinson-hyperlegible-next/800.css";
 import "./styles.css";
 import "./i18n";
 import "./theme";

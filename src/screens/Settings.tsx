@@ -14,6 +14,7 @@ import { DataSection } from "./DataSettings";
 import { InfoTip, SttRow, TtsRow } from "./VoiceSettings";
 import { Icon, type IconName } from "../icons";
 
+const TEXT_SIZES = [1, 1.15, 1.3];
 const gap = (g: string) => ({ "--od-gap": g }) as React.CSSProperties;
 
 export function ToggleRow({ k, initial, onChange }: { k: string; initial: boolean; onChange?: (on: boolean) => void }) {
@@ -377,6 +378,17 @@ export function Settings() {
               ))}
             </div>
           </div>
+          <div className="card od-row" style={{ ...gap("12px"), flexWrap: "wrap" }}>
+            <b className="od-fill">{t("settings.textSize")}</b>
+            <div className="seg" role="radiogroup" aria-label={t("settings.textSize")}>
+              {TEXT_SIZES.map((f) => (
+                <button key={f} role="radio" aria-checked={s.textSize === f} className={`btn ${s.textSize === f ? "btn-blue" : "btn-ghost"}`} onClick={() => setS((s) => ({ ...s, textSize: f }))}>
+                  {Math.round(f * 100)}%
+                </button>
+              ))}
+            </div>
+          </div>
+          <ToggleRow k="readableFont" initial={s.readableFont} onChange={(readableFont) => setS((s) => ({ ...s, readableFont }))} />
           <div className="card od-row" style={gap("12px")}>
             <label className="od-fill" htmlFor="ui-lang"><b>{t("settings.language")}</b></label>
             <select id="ui-lang" className="select" value={i18n.resolvedLanguage} onChange={(e) => { i18n.changeLanguage(e.target.value); updateProfile({ ui_lang: e.target.value }); }}>

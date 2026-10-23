@@ -157,3 +157,15 @@ test("a conjugation drill asks the cross-checked forms and queues a miss", async
   await drill.getByRole("button", { name: "Done" }).click();
   await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
 });
+
+test("readable font and text size apply at once and stay after a reload", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("tab", { name: "Preferences" }).click();
+  await page.locator(".card", { hasText: "Readable font" }).getByRole("button", { name: "Off" }).click();
+  await page.getByRole("radiogroup", { name: "Text size" }).getByRole("radio", { name: "130%" }).click();
+  const look = () => page.evaluate(() => ({ font: getComputedStyle(document.body).fontFamily, zoom: document.documentElement.style.zoom }));
+  expect(await look()).toEqual({ font: expect.stringContaining("Atkinson Hyperlegible Next"), zoom: "1.3" });
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Learn" })).toBeVisible();
+  expect(await look()).toEqual({ font: expect.stringContaining("Atkinson Hyperlegible Next"), zoom: "1.3" });
+});
