@@ -5,12 +5,13 @@ import { useApp } from "./store";
 import * as db from "./db";
 import { lessonWord } from "./lessons";
 import { tokens, type Lookup } from "./lookup";
+import { normalize } from "./activities";
 import { SpeakButton } from "./SpeakButton";
 import { Icon } from "./icons";
 
 /** Target-language text whose words open their meaning on tap (#28); words in the learner's list are marked (#27).
  *  `off` while the text would give away a graded answer. */
-export function Words({ text, lang, off }: { text: string; lang: string; off?: boolean }) {
+export function Words({ text, lang, off, missed }: { text: string; lang: string; off?: boolean; missed?: string[] }) {
   const { enrollment } = useApp();
   const [at, setAt] = useState<{ word: string; el: HTMLElement } | null>(null);
   const [known, setKnown] = useState<Set<string>>(new Set());
@@ -20,9 +21,14 @@ export function Words({ text, lang, off }: { text: string; lang: string; off?: b
   }, [enrollment?.id, lang, off, at]); // `at`: a word added from the card shows up once it closes
   if (off) return <>{text}</>;
   const open = (e: React.SyntheticEvent<HTMLElement>, word: string) => { e.stopPropagation(); e.preventDefault(); setAt({ word, el: e.currentTarget }); };
+  const tks = tokens(text, lang), miss = [...missed ?? []], marked = tks.map(() => false);
+  // speechMisses words → tokens; a token like "2.99" normalizes to several words. ponytail: repeats mark their last copies, the transcript can't say which copy was said
+  for (let i = tks.length - 1; i >= 0; i--) if (tks[i].word) for (const w of normalize(tks[i].text).split(" ")) {
+    const k = miss.indexOf(w); if (k >= 0) { miss.splice(k, 1); marked[i] = true; }
+  }
   return <>
-    {tokens(text, lang).map((tk, i) => tk.word
-      ? <span key={i} className={known.has(tk.text.toLocaleLowerCase(lang)) ? "tap-word known" : "tap-word"} role="button" tabIndex={0} onClick={(e) => open(e, tk.text)}
+    {tks.map((tk, i) => tk.word
+      ? <span key={i} className={`tap-word${known.has(tk.text.toLocaleLowerCase(lang)) ? " known" : ""}${marked[i] ? " missed" : ""}`} role="button" tabIndex={0} onClick={(e) => open(e, tk.text)}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") open(e, tk.text); }}>{tk.text}</span>
       : tk.text)}
     {at && <WordCard word={at.word} sentence={text} lang={lang} anchor={at.el} onClose={() => setAt(null)} />}

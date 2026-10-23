@@ -151,12 +151,15 @@ export function hideAnswer(prompt: string, answer: string) {
 export const matchesAnswer = (given: string, item: { answer: string; accepted: string[] }) =>
   [item.answer, ...item.accepted].some((a) => normalize(a) === normalize(given));
 
-/** Speaking check: share of the expected words the transcript contains (order-free, each word counted once). */
+/** Expected words (normalized) the transcript doesn't contain (order-free, each heard word used once). Shown as "not caught" (#33). */
+export function speechMisses(expected: string, heard: string) {
+  const got = normalize(heard).split(" ");
+  return normalize(expected).split(" ").filter(Boolean).filter((w) => { const k = got.indexOf(w); if (k >= 0) got.splice(k, 1); return k < 0; });
+}
+/** Speaking check: share of the expected words the transcript contains. */
 export function speechScore(expected: string, heard: string) {
-  const want = normalize(expected).split(" ").filter(Boolean), got = normalize(heard).split(" ");
-  let hit = 0;
-  for (const w of want) { const k = got.indexOf(w); if (k >= 0) { hit++; got.splice(k, 1); } }
-  return want.length ? hit / want.length : 0;
+  const want = normalize(expected).split(" ").filter(Boolean).length;
+  return want ? 1 - speechMisses(expected, heard).length / want : 0;
 }
 export const SPEECH_PASS = 0.75; // ponytail: word overlap, not phoneme scoring; whisper already forgives accents
 

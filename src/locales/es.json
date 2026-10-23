@@ -624,6 +624,7 @@
     "speakTitle": "Di esta frase",
     "speakSub": "Toca el micrófono y di la frase.",
     "heard": "Se oyó: “{{text}}”",
+    "missed": "No se entendió: {{words}}",
     "heardNothing": "No te he entendido: inténtalo de nuevo un poco más alto.",
     "cantSpeak": "No puedo hablar ahora",
     "unitPassed": "¡Unidad superada!",

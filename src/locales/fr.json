@@ -624,6 +624,7 @@
     "speakTitle": "Prononce cette phrase",
     "speakSub": "Touche le micro et dis la phrase.",
     "heard": "Entendu : « {{text}} »",
+    "missed": "Non reconnu : {{words}}",
     "heardNothing": "Je n'ai pas compris — réessaie un peu plus fort.",
     "cantSpeak": "Impossible de parler maintenant",
     "unitPassed": "Unité validée !",

@@ -636,6 +636,7 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .fix ins{color:var(--green-dark);text-decoration:none;font-weight:800}
 .fix sup{color:var(--text-faint);font-weight:800;margin-inline-start:2px}
 .tap-word.known{background:color-mix(in srgb,var(--green) 16%,transparent)}
+.tap-word.missed{text-decoration:underline wavy var(--orange);text-decoration-thickness:2px}
 .word-card{position:fixed;inset:auto;margin:0;width:min(300px,calc(100vw - 16px));padding:14px;display:grid;gap:6px;
   background:var(--card);color:var(--text);border:2px solid var(--border);border-radius:16px;box-shadow:0 4px 0 var(--border)}
 .word-card-head{display:flex;align-items:center;gap:8px}

@@ -596,6 +596,7 @@
     "speakTitle": "Speak this sentence",
     "speakSub": "Tap the microphone and say the sentence.",
     "heard": "Heard: “{{text}}”",
+    "missed": "Not caught: {{words}}",
     "heardNothing": "Didn't catch that — try again a little louder.",
     "cantSpeak": "Can't speak now",
     "unitPassed": "Unit passed!",
