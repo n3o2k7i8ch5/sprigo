@@ -527,6 +527,8 @@
     "textSize": "Taille du texte",
     "readableFont": "Police lisible",
     "readableFontDesc": "Atkinson Hyperlegible : des lettres plus difficiles à confondre (b/d, I/l/1), pour la dyslexie et la basse vision",
+    "highContrast": "Contraste élevé",
+    "highContrastDesc": "Couleurs et bordures plus marquées, pour la basse vision et les pièces lumineuses",
     "appearance": "Apparence",
     "theme": "Thème",
     "themeSystem": "Système",

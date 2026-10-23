@@ -5,10 +5,19 @@ import { mockOllama } from "./mockAi";
 
 test.beforeEach(async ({ page }) => { await mockOllama(page); });
 
-/** Serious and critical axe findings on the current page. Colour contrast of the default theme is a design call (#34). */
-async function axe(page: Page) {
-  const r = await new AxeBuilder({ page }).disableRules(["color-contrast"]).analyze();
-  return r.violations.filter((v) => v.impact === "serious" || v.impact === "critical").map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
+/** Serious and critical axe findings on the current page. The default theme's colours are a brand call, so contrast is only checked in high contrast (#34). */
+async function axe(page: Page, contrast = false) {
+  const r = await (contrast ? new AxeBuilder({ page }) : new AxeBuilder({ page }).disableRules(["color-contrast"])).analyze();
+  // Text over a decorative pseudo-element (the .unit-head wave) lands in "incomplete", so whole areas would go unchecked.
+  // ponytail: gradient/short-text/toast incompletes are skipped; their colours are HC accents already checked elsewhere.
+  const unsure = contrast
+    ? r.incomplete
+        .filter((v) => v.id === "color-contrast")
+        .map((v) => ({ ...v, nodes: v.nodes.filter((n) => /pseudo/.test(n.any[0]?.message ?? "")) }))
+        .filter((v) => v.nodes.length)
+    : [];
+  return [...r.violations.filter((v) => v.impact === "serious" || v.impact === "critical"), ...unsure]
+    .map((v) => `${v.id}: ${v.nodes.map((n) => `${n.target.join(" ")} (${n.any[0]?.message ?? ""})`).join(", ")}`);
 }
 
 async function onboard(page: Page) {
@@ -66,4 +75,23 @@ test("a lesson takes focus and the app behind it can't be tabbed to", async ({ p
     await page.keyboard.press("Tab");
     expect(await page.evaluate(() => !document.activeElement?.closest(".app, .bottom-nav"))).toBe(true);
   }
+});
+
+for (const theme of ["light", "dark"]) test(`high contrast passes axe colour contrast in the ${theme} theme`, async ({ page }) => {
+  await page.addInitScript((t) => localStorage.setItem("sprigo.theme", t), theme);
+  await onboard(page);
+  await page.getByRole("tab", { name: "Preferences" }).click();
+  await page.locator(".card", { hasText: "High contrast" }).getByRole("button", { name: "Off" }).click();
+  expect(await axe(page, true)).toEqual([]);
+  await page.getByRole("button", { name: "Practice" }).click();
+  await expect(page.getByRole("button", { name: /^Verb forms/ })).toBeVisible();
+  expect(await axe(page, true)).toEqual([]);
+  await page.getByRole("button", { name: "Learn", exact: true }).click();
+  await expect(page.getByText("Greetings & Introductions")).toBeVisible();
+  expect(await axe(page, true)).toEqual([]);
+  await page.getByRole("button", { name: /Basic Greetings/ }).click();
+  const lesson = page.getByRole("dialog", { name: "Lesson" });
+  await lesson.getByRole("button", { name: "Continue" }).click();
+  await expect(lesson.getByRole("button", { name: "Check" })).toBeVisible();
+  expect(await axe(page, true)).toEqual([]);
 });

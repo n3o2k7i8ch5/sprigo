@@ -497,6 +497,8 @@
     "textSize": "Yazı boyutu",
     "readableFont": "Okunaklı yazı tipi",
     "readableFontDesc": "Atkinson Hyperlegible: harfleri birbirine karıştırmak daha zor (b/d, I/l/1); disleksi ve az görenler için",
+    "highContrast": "Yüksek kontrast",
+    "highContrastDesc": "Daha belirgin renkler ve kenarlıklar; az görenler ve aydınlık ortamlar için",
     "appearance": "Görünüm",
     "theme": "Tema",
     "themeSystem": "Sistem",

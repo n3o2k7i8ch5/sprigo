@@ -501,6 +501,8 @@
     "textSize": "Text size",
     "readableFont": "Readable font",
     "readableFontDesc": "Atkinson Hyperlegible: letters that are harder to mix up (b/d, I/l/1), for dyslexia and low vision",
+    "highContrast": "High contrast",
+    "highContrastDesc": "Stronger colours and borders, for low vision and bright rooms",
     "appearance": "Appearance",
     "theme": "Theme",
     "themeSystem": "System",

@@ -392,6 +392,7 @@ export function Settings() {
             </div>
           </div>
           <ToggleRow k="readableFont" initial={s.readableFont} onChange={(readableFont) => setS((s) => ({ ...s, readableFont }))} />
+          <ToggleRow k="highContrast" initial={s.highContrast} onChange={(highContrast) => setS((s) => ({ ...s, highContrast }))} />
           <div className="card od-row" style={gap("12px")}>
             <label className="od-fill" htmlFor="ui-lang"><b>{t("settings.language")}</b></label>
             <select id="ui-lang" className="select" value={i18n.resolvedLanguage} onChange={(e) => { i18n.changeLanguage(e.target.value); updateProfile({ ui_lang: e.target.value }); }}>
