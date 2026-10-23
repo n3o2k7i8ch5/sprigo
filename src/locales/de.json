@@ -964,5 +964,49 @@
     "days_one": "{{count}} Tag",
     "days_other": "{{count}} Tage",
     "done": "Stapel geschafft!"
+  },
+  "help": {
+    "title": "Hilfe & FAQ",
+    "tagline": "Antworten auf häufige Fragen zur Einrichtung",
+    "view": "Öffnen",
+    "open": "Hilfe",
+    "more": "Mehr im Wiki",
+    "stuck": "Kommst du nicht weiter?",
+    "qa": "Im Q&A fragen",
+    "wiki": "Wiki",
+    "topics": {
+      "ai": {
+        "q": "Wie richte ich die KI ein?",
+        "a": "Sprigo braucht ein Sprachmodell, das die Lektionen schreibt. Am einfachsten ist Ollama: installieren und Sprigo öffnen; Sprigo findet Ollama und bietet an, qwen3:8b (etwa 5,2 GB) herunterzuladen. LM Studio geht auch: lokalen Server starten und ein Modell laden.\nKein lokales Modell? Nutze einen Cloud-Anbieter (OpenAI, Anthropic, Gemini, OpenRouter) mit deinem eigenen API-Schlüssel. Schlüssel bleiben im Schlüsselbund des Systems.\nÄndern unter Einstellungen → KI & Stimme → KI-Anbieter."
+      },
+      "aiConnect": {
+        "q": "„Kein lokales Modell gefunden“ oder „Keine Verbindung“",
+        "a": "Ollama: Starte die Ollama-App. Sprigo sucht sie unter http://localhost:11434. Hat sie keine Modelle, lass Sprigo das vorgeschlagene herunterladen oder führe aus: ollama pull qwen3:8b\nLM Studio: lokalen Server starten und ein Modell laden.\nCloud: API-Schlüssel und Guthaben prüfen.\nAuch ein VPN oder eine Firewall kann localhost blockieren."
+      },
+      "weak": {
+        "q": "Warum sind Lektionen manchmal schwach oder falsch?",
+        "a": "Meist ist das Modell zu klein. Nimm eines mit 8B Parametern oder mehr (16 GB Arbeitsspeicher sind ein guter Anfang). Ist eine Übung falsch, kannst du in der Lektion Einspruch einlegen.\nLektionen werden einmal erzeugt und gespeichert; ein langsames Modell merkst du vor allem beim ersten Öffnen eines Schritts."
+      },
+      "mic": {
+        "q": "Sprigo hört mich nicht",
+        "a": "Erlaube das Mikrofon und starte Sprigo neu:\nmacOS: Systemeinstellungen → Datenschutz & Sicherheit → Mikrofon → Sprigo\nWindows: Einstellungen → Datenschutz und Sicherheit → Mikrofon → Desktop-Apps erlauben\nLinux: Wähle dein Eingabegerät in den Toneinstellungen.\nPrüfe außerdem, ob Einstellungen → Präferenzen → Sprechübungen an ist, und teste das Mikrofon mit Ausprobieren unter Spracherkennung."
+      },
+      "voice": {
+        "q": "Welche Stimme soll ich nehmen?",
+        "a": "Piper läuft in der App und spricht alle Kurssprachen. Kokoro ist die natürlichste lokale Stimme, spricht aber nur Englisch. Die Systemstimme nutzt die Stimmen deines Betriebssystems, ElevenLabs ist eine Cloud-Stimme mit eigenem Schlüssel.\nKann eine Stimme nicht sprechen, wechselt Sprigo zur Systemstimme.\nDer Tutor verstummt von selbst? Das Mikrofon hört deine Lautsprecher: Nimm Kopfhörer oder schalte Den Tutor unterbrechen aus."
+      },
+      "phone": {
+        "q": "Kann ich Sprigo auf dem Handy nutzen?",
+        "a": "Ja, über Tailscale: Einstellungen → Datenschutz & Daten → Auf dem Handy nutzen. Das Handy nutzt die Daten, die Spracherkennung und das lokale Modell des Computers, deshalb muss der Computer an sein. Cloud-Anbieter gehen dort nicht, weil die Schlüssel auf dem Computer bleiben.\nAuf dem iPhone den Stummmodus ausschalten, sonst hörst du den Tutor nicht."
+      },
+      "data": {
+        "q": "Wo sind meine Daten?",
+        "a": "In einer lokalen Datenbank im Datenordner, mit täglichen Sicherungen im Unterordner backups:\nmacOS: ~/Library/Application Support/com.ozerozdas.sprigo\nWindows: %APPDATA%\\com.ozerozdas.sprigo\nLinux: ~/.local/share/com.ozerozdas.sprigo\nUnter Einstellungen → Datenschutz & Daten kannst du den Ordner ändern (ein synchronisierter Ordner teilt die Daten zwischen zwei Computern), exportieren oder eine Sicherung importieren."
+      },
+      "offline": {
+        "q": "Geht es offline? Hört Sprigo ständig zu?",
+        "a": "Mit einem lokalen Modell, Whisper und einer lokalen Stimme geht alles offline; nur Downloads brauchen Internet. Sprigo ist kostenlos und quelloffen, ohne Konto.\nDas Mikrofon ist nur bei Sprechübungen und Live-Lektionen an, und Audio wird nie gespeichert."
+      }
+    }
   }
 }

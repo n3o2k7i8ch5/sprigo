@@ -13,6 +13,7 @@ import { betaOn, findUpdate, UpdateSheet } from "../Update";
 import { DataSection } from "./DataSettings";
 import { InfoTip, SttRow, TtsRow } from "./VoiceSettings";
 import { Icon, type IconName } from "../icons";
+import { HelpButton, HelpSheet, openLink } from "../Help";
 
 const gap = (g: string) => ({ "--od-gap": g }) as React.CSSProperties;
 
@@ -82,7 +83,7 @@ function PhoneInfoSheet() {
   const { closeSheet } = useApp();
   return (
     <div className="od-stack" style={gap("12px")}>
-      <h3>{t("settings.phone")}</h3>
+      <div className="od-row" style={gap("4px")}><h3>{t("settings.phone")}</h3><HelpButton topic="phone" /></div>
       <p className="muted">{t("settings.phoneDesc")}</p>
       <ol className="od-stack small" style={{ ...gap("8px"), paddingLeft: 20 }}>
         <li>{t("settings.phoneHow1")}</li>
@@ -131,7 +132,6 @@ function PhoneApproveSheet({ url }: { url: string }) {
 
 const OLLAMA_DOWNLOAD = "https://ollama.com/download";
 const AUTHOR_URL = "https://mehmetozer.dev";
-const openLink = async (url: string) => isTauri ? (await import("@tauri-apps/plugin-opener")).openUrl(url) : window.open(url, "_blank");
 
 /** First run: finds Ollama / LM Studio on this Mac, or helps install Ollama and pull a model. */
 function LocalSetup({ onPick }: { onPick: (p: ProviderId, models: string[]) => void }) {
@@ -159,6 +159,9 @@ function LocalSetup({ onPick }: { onPick: (p: ProviderId, models: string[]) => v
   if (name) return <p className="small" role="status" style={{ color: "var(--green)" }}>{t("ai.foundLocal", { name })}</p>;
   return (
     <div className="card od-stack" style={gap("10px")} role="status">
+      <div className="od-row" style={{ ...gap("8px"), justifyContent: "flex-end" }}>
+        <HelpButton topic="aiConnect" />
+      </div>
       {found.ollama ? <>
         <b>{t("ai.noModels")}</b>
         <span className="muted small">{t("ai.pullDesc", RECOMMENDED_OLLAMA)}</span>
@@ -196,7 +199,7 @@ export function AiSheet() {
   const configure = (p: ProviderId) => openSheet(<AiConfigSheet provider={p} models={found?.p === p ? found.models : []} />);
   return (
     <div className="od-stack" style={{ ...gap("14px"), textAlign: "left" }}>
-      <h3 style={{ textAlign: "center" }}>{t("ai.title")}</h3>
+      <div className="od-row" style={{ ...gap("4px"), justifyContent: "center" }}><h3>{t("ai.title")}</h3><HelpButton topic="ai" /></div>
       {ai && <p className="muted small">{t("ai.backupDesc")}</p>}
       {!ai && <LocalSetup onPick={(p, models) => setFound({ p, models })} />}
       <div className="od-stack" style={gap("8px")} role="radiogroup" aria-label={t("ai.provider")}>
@@ -404,7 +407,13 @@ export function Settings() {
         </>}
       </div>
 
-      {!isCompanion && <div className="od-stack" style={{ marginTop: 28, ...gap("10px") }}><VersionRow /></div>}
+      <div className="od-stack" style={{ marginTop: 28, ...gap("10px") }}>
+        <div className="card od-row" style={gap("12px")}>
+          <span className="od-field od-fill"><b>{t("help.title")}</b><span className="muted small">{t("help.tagline")}</span></span>
+          <button className="btn btn-ghost" onClick={() => openSheet(<HelpSheet />)}>{t("help.view")}</button>
+        </div>
+        {!isCompanion && <VersionRow />}
+      </div>
       <p className="muted small" style={{ textAlign: "center", marginTop: 8 }}>
         {t("update.madeBy")} <a href={AUTHOR_URL} onClick={(e) => { e.preventDefault(); void openLink(AUTHOR_URL); }}>mehmetozer.dev</a>
       </p>
