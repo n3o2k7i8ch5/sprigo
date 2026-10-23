@@ -34,7 +34,8 @@
     "roleplay": "Jeux de rôle",
     "friends": "Amis",
     "notifications": "Notifications",
-    "settings": "Réglages"
+    "settings": "Réglages",
+    "grammar": "Grammaire"
   },
   "common": {
     "soon": "Bientôt",
@@ -290,7 +291,8 @@
         "desc_many": "Rassemble {{count}} mots dans Mes mots"
       }
     },
-    "details": "Détails"
+    "details": "Détails",
+    "achDone": "Obtenu"
   },
   "memory": {
     "title": "Sprigo te connaît",
@@ -523,6 +525,11 @@
     "reminderDesc": "Sprigo te fait signe plusieurs fois par jour et se tait dès que tu as pratiqué. Quand il est activé, il reste en arrière-plan.",
     "reduceMotion": "Réduire les animations",
     "reduceMotionDesc": "Limiter les animations au minimum",
+    "textSize": "Taille du texte",
+    "readableFont": "Police lisible",
+    "readableFontDesc": "Atkinson Hyperlegible : des lettres plus difficiles à confondre (b/d, I/l/1), pour la dyslexie et la basse vision",
+    "highContrast": "Contraste élevé",
+    "highContrastDesc": "Couleurs et bordures plus marquées, pour la basse vision et les pièces lumineuses",
     "appearance": "Apparence",
     "theme": "Thème",
     "themeSystem": "Système",
@@ -624,6 +631,7 @@
     "speakTitle": "Prononce cette phrase",
     "speakSub": "Touche le micro et dis la phrase.",
     "heard": "Entendu : « {{text}} »",
+    "missed": "Non reconnu : {{words}}",
     "heardNothing": "Je n'ai pas compris — réessaie un peu plus fort.",
     "cantSpeak": "Impossible de parler maintenant",
     "unitPassed": "Unité validée !",
@@ -996,5 +1004,63 @@
     "days_other": "{{count}} jours",
     "days_many": "{{count}} jours",
     "done": "Paquet terminé !"
+  },
+  "help": {
+    "title": "Aide et FAQ",
+    "tagline": "Réponses aux questions de configuration courantes",
+    "view": "Ouvrir",
+    "open": "Aide",
+    "more": "Plus sur le wiki",
+    "stuck": "Toujours bloqué ?",
+    "qa": "Demander dans Q&A",
+    "wiki": "Wiki",
+    "topics": {
+      "ai": {
+        "q": "Comment configurer l'IA ?",
+        "a": "Sprigo a besoin d'un modèle de langage pour écrire les leçons. Le plus simple est Ollama : installe-le et ouvre Sprigo ; il trouve Ollama et propose de télécharger qwen3:8b (environ 5,2 Go). LM Studio marche aussi : démarre son serveur local et charge un modèle.\nPas de modèle local ? Utilise un fournisseur cloud (OpenAI, Anthropic, Gemini, OpenRouter) avec ta propre clé d'API. Les clés restent dans le trousseau du système.\nÀ changer dans Réglages → IA et voix → Fournisseur d'IA."
+      },
+      "aiConnect": {
+        "q": "« Aucun modèle local trouvé » ou « Connexion impossible »",
+        "a": "Ollama : lance l'app Ollama. Sprigo la cherche à http://localhost:11434. Si elle n'a aucun modèle, laisse Sprigo télécharger celui proposé, ou lance : ollama pull qwen3:8b\nLM Studio : démarre son serveur local et charge un modèle.\nCloud : vérifie la clé d'API et le crédit de ton compte.\nUn VPN ou un pare-feu peut aussi bloquer localhost."
+      },
+      "weak": {
+        "q": "Pourquoi les leçons sont-elles parfois faibles ou fausses ?",
+        "a": "En général, le modèle est trop petit. Prends-en un de 8B paramètres ou plus (16 Go de mémoire, c'est un bon début). Si un exercice est faux, tu peux le contester dans la leçon.\nLes leçons sont générées une fois puis gardées : un modèle lent se sent surtout à la première ouverture d'une étape."
+      },
+      "mic": {
+        "q": "Sprigo ne m'entend pas",
+        "a": "Autorise le micro, puis redémarre Sprigo :\nmacOS : Réglages Système → Confidentialité et sécurité → Microphone → Sprigo\nWindows : Paramètres → Confidentialité et sécurité → Microphone → autoriser les applications de bureau\nLinux : choisis ton périphérique d'entrée dans les réglages du son.\nVérifie aussi que Réglages → Préférences → Exercices oraux est activé, et teste ton micro avec Essayer sous Reconnaissance vocale."
+      },
+      "voice": {
+        "q": "Quelle voix choisir ?",
+        "a": "Piper tourne dans l'app et parle toutes les langues des cours. Kokoro est la voix locale la plus naturelle, mais ne parle qu'anglais. La voix du système utilise les voix installées sur ton OS, et ElevenLabs est une voix cloud avec ta propre clé.\nSi une voix ne peut pas parler, Sprigo passe à la voix du système.\nLe tuteur s'arrête tout seul ? Le micro entend tes haut-parleurs : mets un casque ou désactive Couper la parole au tuteur."
+      },
+      "phone": {
+        "q": "Puis-je utiliser Sprigo sur mon téléphone ?",
+        "a": "Oui, avec Tailscale : Réglages → Confidentialité et données → Utiliser sur ton téléphone. Le téléphone utilise les données, la reconnaissance vocale et le modèle local de l'ordinateur, qui doit donc rester allumé. Les fournisseurs cloud n'y marchent pas, car les clés restent sur l'ordinateur.\nSur iPhone, désactive le mode silencieux pour entendre le tuteur."
+      },
+      "data": {
+        "q": "Où sont mes données ?",
+        "a": "Dans une base de données locale du dossier de données, avec des sauvegardes quotidiennes dans son dossier backups :\nmacOS: ~/Library/Application Support/com.ozerozdas.sprigo\nWindows: %APPDATA%\\com.ozerozdas.sprigo\nLinux: ~/.local/share/com.ozerozdas.sprigo\nDans Réglages → Confidentialité et données, tu peux changer de dossier (un dossier synchronisé permet de l'utiliser sur deux ordinateurs), exporter ou importer une sauvegarde."
+      },
+      "offline": {
+        "q": "Ça marche hors ligne ? Sprigo écoute-t-il tout le temps ?",
+        "a": "Avec un modèle local, Whisper et une voix locale, tout marche hors ligne ; seuls les téléchargements demandent internet. Sprigo est gratuit et open source, sans compte.\nLe micro ne s'allume que pendant les exercices oraux et les leçons en direct, et l'audio n'est jamais enregistré."
+      }
+    }
+  },
+  "grammar": {
+    "title": "Grammaire",
+    "subtitle": "Tous les points de grammaire du cours, par niveau et par unité. Touche-en un pour une explication et un court exercice.",
+    "search": "Rechercher dans la grammaire",
+    "none": "Aucune grammaire ne correspond à ta recherche.",
+    "later": "pas encore atteint",
+    "from": "Vu en {{level}} · {{unit}}",
+    "explain": "Expliquer",
+    "explaining": "Rédaction de l’explication…",
+    "failed": "L’explication n’a pas pu être rédigée.",
+    "notInGuide": "Le guide de l’IA a omis cette structure. Réessaie.",
+    "alsoIn": "Aussi dans : {{units}}",
+    "practise": "S’entraîner"
   }
 }

@@ -29,6 +29,21 @@ test("onboarding creates a profile and sets up local AI", async ({ page }) => {
   await expect(page.getByRole("dialog")).toBeHidden();
 });
 
+test("help answers setup questions in the app, also from a setting's ?", async ({ page }) => {
+  await onboard(page);
+  await page.locator(".card", { hasText: "Help & FAQ" }).getByRole("button", { name: "Open" }).click();
+  const help = page.getByRole("dialog");
+  await help.getByText("Where is my data?").click();
+  await expect(help.getByText(/Application Support\/com\.ozerozdas\.sprigo/)).toBeVisible();
+  await expect(help.getByRole("link", { name: "More on the wiki" }).first()).toHaveAttribute("href", /\/wiki\/FAQ$/);
+  await help.getByRole("button", { name: "Close" }).click();
+
+  await page.getByRole("tab", { name: "AI & voice" }).click();
+  await page.locator(".card", { hasText: "AI provider" }).getByRole("button", { name: "Change" }).click();
+  await page.getByRole("dialog").getByRole("button", { name: "Help: How do I set up the AI?" }).click();
+  await expect(page.locator("details[open] summary")).toHaveText("How do I set up the AI?");
+});
+
 /** Answers whatever exercise is on screen with the mock's right answer; false once the lesson is over. */
 async function answer(lesson: ReturnType<Page["getByRole"]>) {
   const button = (name: string) => lesson.getByRole("button", { name, exact: true });
@@ -156,4 +171,36 @@ test("a conjugation drill asks the cross-checked forms and queues a miss", async
   }
   await drill.getByRole("button", { name: "Done" }).click();
   await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
+});
+
+test("the grammar reference searches every pattern and drills one", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Grammar" }).click();
+  await expect(page.getByRole("heading", { name: /^A1 · / })).toBeVisible();
+  await page.getByLabel("Search grammar").fill("LLAMAS");
+  await expect(page.getByRole("button", { name: "¿Cómo te llamas?" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "¡Buenos días!" })).toBeHidden();
+  await page.getByRole("button", { name: "¿Cómo te llamas?" }).click();
+  const sheet = page.getByRole("dialog", { name: "¿Cómo te llamas?" });
+  await sheet.getByRole("button", { name: "Explain this" }).click();
+  await expect(sheet.getByRole("alert")).toContainText("left this pattern out"); // the mock's guide has no grammar entries
+  await sheet.getByRole("button", { name: "Practise this" }).click();
+  const lesson = page.getByRole("dialog", { name: "Lesson" });
+  await expect(lesson.getByRole("heading", { name: "Which word means “hello”?" })).toBeVisible(); // a drill has no teaching cards
+  for (let i = 0; await answer(lesson); i++) expect(i).toBeLessThan(20);
+  await expect(lesson.getByText("100%")).toBeVisible();
+  await lesson.getByRole("button", { name: "Done" }).click();
+  await expect(lesson).toBeHidden();
+});
+
+test("readable font and text size apply at once and stay after a reload", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("tab", { name: "Preferences" }).click();
+  await page.locator(".card", { hasText: "Readable font" }).getByRole("button", { name: "Off" }).click();
+  await page.getByRole("radiogroup", { name: "Text size" }).getByRole("radio", { name: "130%" }).click();
+  const look = () => page.evaluate(() => ({ font: getComputedStyle(document.body).fontFamily, zoom: document.documentElement.style.zoom }));
+  expect(await look()).toEqual({ font: expect.stringContaining("Atkinson Hyperlegible Next"), zoom: "1.3" });
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Learn" })).toBeVisible();
+  expect(await look()).toEqual({ font: expect.stringContaining("Atkinson Hyperlegible Next"), zoom: "1.3" });
 });

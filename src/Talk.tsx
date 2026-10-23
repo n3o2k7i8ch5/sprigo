@@ -35,7 +35,7 @@ export function Shell({ label, progress, time, onClose, onRegen, body, footer }:
     return () => document.removeEventListener("keydown", onKey);
   });
   return (
-    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={label}>
+    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={label} tabIndex={-1}>
       <div className="lesson-top">
         <button className="icon-btn" onClick={onClose} aria-label={t("lesson.close")}><Icon name="x" /></button>
         <div className="lesson-progress"><i style={{ width: `${progress}%` }} /></div>

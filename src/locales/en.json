@@ -34,7 +34,8 @@
     "roleplay": "Roleplay",
     "friends": "Friends",
     "notifications": "Notifications",
-    "settings": "Settings"
+    "settings": "Settings",
+    "grammar": "Grammar"
   },
   "common": {
     "soon": "Coming soon",
@@ -270,7 +271,8 @@
         "desc_other": "Collect {{count}} words in My words"
       }
     },
-    "details": "Details"
+    "details": "Details",
+    "achDone": "Earned"
   },
   "memory": {
     "title": "Sprigo knows you",
@@ -497,6 +499,11 @@
     "reminderDesc": "Sprigo nudges you a few times a day and goes quiet once you've practiced. While on, it stays in the background.",
     "reduceMotion": "Reduce motion",
     "reduceMotionDesc": "Keep animations to a minimum",
+    "textSize": "Text size",
+    "readableFont": "Readable font",
+    "readableFontDesc": "Atkinson Hyperlegible: letters that are harder to mix up (b/d, I/l/1), for dyslexia and low vision",
+    "highContrast": "High contrast",
+    "highContrastDesc": "Stronger colours and borders, for low vision and bright rooms",
     "appearance": "Appearance",
     "theme": "Theme",
     "themeSystem": "System",
@@ -596,6 +603,7 @@
     "speakTitle": "Speak this sentence",
     "speakSub": "Tap the microphone and say the sentence.",
     "heard": "Heard: “{{text}}”",
+    "missed": "Not caught: {{words}}",
     "heardNothing": "Didn't catch that — try again a little louder.",
     "cantSpeak": "Can't speak now",
     "unitPassed": "Unit passed!",
@@ -964,5 +972,63 @@
     "days_one": "{{count}} day",
     "days_other": "{{count}} days",
     "done": "Deck done!"
+  },
+  "help": {
+    "title": "Help & FAQ",
+    "tagline": "Answers to common setup questions",
+    "view": "Open",
+    "open": "Help",
+    "more": "More on the wiki",
+    "stuck": "Still stuck?",
+    "qa": "Ask in Q&A",
+    "wiki": "Wiki",
+    "topics": {
+      "ai": {
+        "q": "How do I set up the AI?",
+        "a": "Sprigo needs a language model to write lessons. The easiest is Ollama: install it and open Sprigo; it finds Ollama and offers to download qwen3:8b (about 5.2 GB). LM Studio works too: start its local server and load a model.\nNo local model? Use a cloud provider (OpenAI, Anthropic, Gemini, OpenRouter) with your own API key. Keys stay in the system keychain.\nChange it in Settings → AI & voice → AI provider."
+      },
+      "aiConnect": {
+        "q": "“No local model found” or “Could not connect”",
+        "a": "Ollama: start the Ollama app. Sprigo looks for it at http://localhost:11434. If it has no models, let Sprigo download the suggested one, or run: ollama pull qwen3:8b\nLM Studio: start its local server and load a model.\nCloud: check the API key and your account's credit.\nA VPN or firewall can also block localhost."
+      },
+      "weak": {
+        "q": "Why are lessons weak or wrong sometimes?",
+        "a": "Usually the model is too small. Use one with 8B parameters or more (16 GB of memory is a good start). If one exercise is wrong, appeal it in the lesson.\nLessons are generated once and cached, so a slow model mostly affects the first visit to a step."
+      },
+      "mic": {
+        "q": "Sprigo doesn't hear me",
+        "a": "Allow the microphone, then restart Sprigo:\nmacOS: System Settings → Privacy & Security → Microphone → Sprigo\nWindows: Settings → Privacy & security → Microphone → allow desktop apps\nLinux: select your input device in the sound settings.\nAlso check that Settings → Preferences → Speaking exercises is on, and test your mic with Try it under Speech recognition."
+      },
+      "voice": {
+        "q": "Which voice should I use?",
+        "a": "Piper runs in the app and speaks every course language. Kokoro is the most natural local voice but speaks English only. The system voice uses the voices your OS has installed, and ElevenLabs is a cloud voice with your own key.\nIf a voice can't speak, Sprigo switches to the system voice.\nTutor stops by itself? The mic is hearing your speakers: use headphones, or turn off Cut in on the tutor."
+      },
+      "phone": {
+        "q": "Can I use Sprigo on my phone?",
+        "a": "Yes, through Tailscale: Settings → Privacy & data → Use on your phone. The phone uses the desktop's data, speech recognition and local model, so the desktop must be on. Cloud AI providers don't work there, because the keys stay on the desktop.\nOn iPhone, turn off silent mode to hear the tutor."
+      },
+      "data": {
+        "q": "Where is my data?",
+        "a": "In a local database in the data folder, with daily backups in its backups folder:\nmacOS: ~/Library/Application Support/com.ozerozdas.sprigo\nWindows: %APPDATA%\\com.ozerozdas.sprigo\nLinux: ~/.local/share/com.ozerozdas.sprigo\nIn Settings → Privacy & data you can change the folder (a synced folder lets two computers share it), export, or import a backup."
+      },
+      "offline": {
+        "q": "Does it work offline? Does it listen all the time?",
+        "a": "With a local model, Whisper and a local voice, everything works offline; only downloads need the internet. Sprigo is free and open source, with no account.\nThe microphone is only on during speaking exercises and live lessons, and audio is never stored."
+      }
+    }
+  },
+  "grammar": {
+    "title": "Grammar",
+    "subtitle": "Every grammar point in the course, by level and unit. Tap one for an explanation and a short drill.",
+    "search": "Search grammar",
+    "none": "No grammar matches your search.",
+    "later": "not reached yet",
+    "from": "Taught in {{level}} · {{unit}}",
+    "explain": "Explain this",
+    "explaining": "Writing the explanation…",
+    "failed": "The explanation could not be written.",
+    "notInGuide": "The AI's guide left this pattern out. Try again.",
+    "alsoIn": "Also in: {{units}}",
+    "practise": "Practise this"
   }
 }

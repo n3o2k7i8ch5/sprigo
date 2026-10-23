@@ -4,6 +4,7 @@ import { Icon } from "./icons";
 import { startRecording, sttReady, type Recording } from "./stt";
 import { useApp } from "./store";
 import { type Utterance } from "./speech";
+import { HelpButton } from "./Help";
 
 /** Why speaking is unavailable (i18n key), or null when it can be used: needs the bundled model and the Settings switch. */
 export function useSpeakBlock() {
@@ -47,6 +48,7 @@ export function MicButton({ lang, onText, disabled, trigger = 0, native }: { lan
       <button className={`mic-btn ${state}`} onClick={toggle} disabled={disabled || state === "busy"} aria-pressed={state === "rec"}
         aria-label={t(state === "rec" ? "stt.stop" : "stt.record")}><Icon name="mic" /></button>
       <p className="muted small" role="status" style={{ textAlign: "center", color: err ? "var(--red)" : undefined }}>{err || t(`stt.${state}`)}</p>
+      {err && <div style={{ display: "flex", justifyContent: "center" }}><HelpButton topic="mic" /></div>}
     </div>
   );
 }

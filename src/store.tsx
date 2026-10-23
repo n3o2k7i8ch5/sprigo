@@ -11,8 +11,8 @@ import { FutureSchemaError } from "./migrate";
 import { DataDirError, LockedError, startHeartbeat } from "./datadir";
 import { onHandoff } from "./companion";
 
-export type Route = "learn" | "practice" | "league" | "shop" | "profile" | "stories" | "roleplay" | "friends" | "notifications" | "settings" | "garden";
-const ROUTES: Route[] = ["learn", "practice", "league", "shop", "profile", "stories", "roleplay", "friends", "notifications", "settings", "garden"];
+export type Route = "learn" | "practice" | "league" | "shop" | "profile" | "stories" | "roleplay" | "friends" | "notifications" | "settings" | "garden" | "grammar";
+const ROUTES: Route[] = ["learn", "practice", "league", "shop", "profile", "stories", "roleplay", "friends", "notifications", "settings", "garden", "grammar"];
 const readRoute = (): Route => {
   const r = location.hash.slice(1) as Route;
   return ROUTES.includes(r) ? r : "learn";

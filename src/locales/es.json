@@ -34,7 +34,8 @@
     "roleplay": "Roleplay",
     "friends": "Amigos",
     "notifications": "Avisos",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "grammar": "Gramática"
   },
   "common": {
     "soon": "Próximamente",
@@ -290,7 +291,8 @@
         "desc_many": "Reúne {{count}} palabras en Mis palabras"
       }
     },
-    "details": "Detalles"
+    "details": "Detalles",
+    "achDone": "Conseguido"
   },
   "memory": {
     "title": "Sprigo te conoce",
@@ -523,6 +525,11 @@
     "reminderDesc": "Sprigo te avisa varias veces al día y se calla cuando ya has practicado. Mientras esté activado, sigue en segundo plano.",
     "reduceMotion": "Reducir movimiento",
     "reduceMotionDesc": "Mantén las animaciones al mínimo",
+    "textSize": "Tamaño del texto",
+    "readableFont": "Fuente legible",
+    "readableFontDesc": "Atkinson Hyperlegible: letras más difíciles de confundir (b/d, I/l/1), para dislexia y baja visión",
+    "highContrast": "Alto contraste",
+    "highContrastDesc": "Colores y bordes más marcados, para baja visión y lugares con mucha luz",
     "appearance": "Apariencia",
     "theme": "Tema",
     "themeSystem": "Sistema",
@@ -624,6 +631,7 @@
     "speakTitle": "Di esta frase",
     "speakSub": "Toca el micrófono y di la frase.",
     "heard": "Se oyó: “{{text}}”",
+    "missed": "No se entendió: {{words}}",
     "heardNothing": "No te he entendido: inténtalo de nuevo un poco más alto.",
     "cantSpeak": "No puedo hablar ahora",
     "unitPassed": "¡Unidad superada!",
@@ -996,5 +1004,63 @@
     "days_other": "{{count}} días",
     "days_many": "{{count}} días",
     "done": "¡Mazo terminado!"
+  },
+  "help": {
+    "title": "Ayuda y preguntas frecuentes",
+    "tagline": "Respuestas a dudas comunes de configuración",
+    "view": "Abrir",
+    "open": "Ayuda",
+    "more": "Más en la wiki",
+    "stuck": "¿Sigues atascado?",
+    "qa": "Pregunta en Q&A",
+    "wiki": "Wiki",
+    "topics": {
+      "ai": {
+        "q": "¿Cómo configuro la IA?",
+        "a": "Sprigo necesita un modelo de lenguaje para escribir las lecciones. Lo más fácil es Ollama: instálalo y abre Sprigo; lo encuentra y te ofrece descargar qwen3:8b (unos 5,2 GB). LM Studio también sirve: inicia su servidor local y carga un modelo.\n¿Sin modelo local? Usa un proveedor en la nube (OpenAI, Anthropic, Gemini, OpenRouter) con tu propia clave de API. Las claves se guardan en el llavero del sistema.\nCámbialo en Ajustes → IA y voz → Proveedor de IA."
+      },
+      "aiConnect": {
+        "q": "«No se encontró un modelo local» o «No se pudo conectar»",
+        "a": "Ollama: abre la app de Ollama. Sprigo la busca en http://localhost:11434. Si no tiene modelos, deja que Sprigo descargue el sugerido o ejecuta: ollama pull qwen3:8b\nLM Studio: inicia su servidor local y carga un modelo.\nNube: revisa la clave de API y el saldo de tu cuenta.\nUna VPN o un cortafuegos también pueden bloquear localhost."
+      },
+      "weak": {
+        "q": "¿Por qué las lecciones a veces son flojas o tienen errores?",
+        "a": "Normalmente el modelo es demasiado pequeño. Usa uno de 8B parámetros o más (16 GB de memoria es un buen punto de partida). Si un ejercicio está mal, puedes reclamarlo en la lección.\nLas lecciones se generan una vez y se guardan, así que un modelo lento se nota sobre todo la primera vez que abres un paso."
+      },
+      "mic": {
+        "q": "Sprigo no me oye",
+        "a": "Permite el micrófono y reinicia Sprigo:\nmacOS: Ajustes del Sistema → Privacidad y seguridad → Micrófono → Sprigo\nWindows: Configuración → Privacidad y seguridad → Micrófono → permitir aplicaciones de escritorio\nLinux: elige tu dispositivo de entrada en la configuración de sonido.\nComprueba también que Ajustes → Preferencias → Ejercicios orales esté activado y prueba el micrófono con Probar en Reconocimiento de voz."
+      },
+      "voice": {
+        "q": "¿Qué voz debo usar?",
+        "a": "Piper funciona dentro de la app y habla todos los idiomas de los cursos. Kokoro es la voz local más natural, pero solo habla inglés. La voz del sistema usa las voces instaladas en tu sistema operativo, y ElevenLabs es una voz en la nube con tu propia clave.\nSi una voz no puede hablar, Sprigo cambia a la voz del sistema.\n¿El tutor se calla solo? El micrófono oye tus altavoces: usa auriculares o desactiva Interrumpir al tutor."
+      },
+      "phone": {
+        "q": "¿Puedo usar Sprigo en el móvil?",
+        "a": "Sí, con Tailscale: Ajustes → Privacidad y datos → Usar en tu móvil. El móvil usa los datos, el reconocimiento de voz y el modelo local del ordenador, así que el ordenador debe estar encendido. Los proveedores en la nube no funcionan allí, porque las claves se quedan en el ordenador.\nEn el iPhone, desactiva el modo silencio para oír al tutor."
+      },
+      "data": {
+        "q": "¿Dónde están mis datos?",
+        "a": "En una base de datos local dentro de la carpeta de datos, con copias diarias en su carpeta backups:\nmacOS: ~/Library/Application Support/com.ozerozdas.sprigo\nWindows: %APPDATA%\\com.ozerozdas.sprigo\nLinux: ~/.local/share/com.ozerozdas.sprigo\nEn Ajustes → Privacidad y datos puedes cambiar la carpeta (una carpeta sincronizada permite usarla en dos ordenadores), exportar o importar una copia."
+      },
+      "offline": {
+        "q": "¿Funciona sin conexión? ¿Me escucha todo el tiempo?",
+        "a": "Con un modelo local, Whisper y una voz local, todo funciona sin conexión; solo las descargas necesitan internet. Sprigo es gratuito y de código abierto, sin cuenta.\nEl micrófono solo se activa en los ejercicios orales y las lecciones en vivo, y el audio nunca se guarda."
+      }
+    }
+  },
+  "grammar": {
+    "title": "Gramática",
+    "subtitle": "Todos los puntos de gramática del curso, por nivel y unidad. Toca uno para ver una explicación y un ejercicio corto.",
+    "search": "Buscar gramática",
+    "none": "Ninguna gramática coincide con tu búsqueda.",
+    "later": "aún no alcanzado",
+    "from": "Se enseña en {{level}} · {{unit}}",
+    "explain": "Explicar",
+    "explaining": "Escribiendo la explicación…",
+    "failed": "No se pudo escribir la explicación.",
+    "notInGuide": "La guía de la IA omitió esta estructura. Inténtalo de nuevo.",
+    "alsoIn": "También en: {{units}}",
+    "practise": "Practicar"
   }
 }

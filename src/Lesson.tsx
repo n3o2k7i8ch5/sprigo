@@ -4,7 +4,7 @@ import { Icon } from "./icons";
 import { useApp } from "./store";
 import { useBuy } from "./screens/Screens";
 import * as db from "./db";
-import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechScore, type Item } from "./activities";
+import { SPEECH_PASS, hideAnswer, listenItems, madnessItems, matchesAnswer, normalize, speakItems, speechMisses, speechScore, type Item } from "./activities";
 import { MicButton } from "./Mic";
 import { answerLang } from "./evalRules";
 import { sttReady } from "./stt";
@@ -12,7 +12,7 @@ import { dueToday } from "./srs";
 import { prewarm, speak, SPEED } from "./tts";
 import { Words } from "./Words";
 import { SpeakButton } from "./SpeakButton";
-import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, judge, legendStep, loadConjugation, loadLesson, prefetchNext, stepContext, type Base } from "./lessons";
+import { LEGEND_PASS, UNIT_TEST_PASS, unitTestOf, appeal, examLevel, explain, grammarDrill, judge, legendStep, loadConjugation, loadLesson, prefetchNext, stepContext, type Base } from "./lessons";
 import { recordSession, tally, today, xpMult, type Graded } from "./progress";
 import { acceptAppeal } from "./appeal";
 import { bankMatch, inField, keyAction, type KeyAction, type KeyState } from "./keys";
@@ -91,6 +91,7 @@ export function Lesson({ id }: { id: string }) {
   const ctx = useMemo(() => course && native && !id.startsWith("practice-") ? stepContext(course, id, native) : null, [course, native, id]);
   const lang = course?.iso ?? "en";
   const practice = id.startsWith("practice-");
+  const drill = grammarDrill(id) !== undefined;
   const exam = examLevel(id);
   const legend = legendStep(id);
   const unitTest = unitTestOf(id);
@@ -152,7 +153,7 @@ export function Lesson({ id }: { id: string }) {
     const total = (limit ? i + (fb ? 1 : 0) : list.filter((x) => x.kind !== "learn").length) || 1;
     const acc = Math.round((score.correct / total) * 100), gems = score.correct * 2, xp = score.xp * xpMult(s);
     setS((s) => {
-      const n = recordSession(s, { xp, gems, kind: practice ? "practice" : "lesson" }, today());
+      const n = recordSession(s, { xp, gems, kind: practice || drill ? "practice" : "lesson" }, today());
       return id === "practice-madness" ? { ...n, madnessBest: Math.max(n.madnessBest, score.correct * 5) } : n; // best = pairs matched
     });
     const required = legend ? LEGEND_PASS : unitTest ? UNIT_TEST_PASS : ctx?.levelDef.checkpoint?.required_score;
@@ -161,7 +162,7 @@ export function Lesson({ id }: { id: string }) {
       if (exam) (passed ? completeLevel(exam, xp) : gainXp(xp));
       else if (legend) { gainXp(xp); if (passed) markLegendary(legend); }
       else if (unitTest) (passed ? completeStep(ctx!.levelDef.units.find((u) => u.id === unitTest)!.steps.map((st) => st.id), xp) : gainXp(xp));
-      else if (ctx) {
+      else if (ctx && !drill) {
         completeStep(id, xp);
         prefetchNext(enrollment.id, ctx.course, ctx.level, id, ctx.native);
       } else gainXp(xp);
@@ -276,7 +277,7 @@ export function Lesson({ id }: { id: string }) {
   const listenBtn = (txt: string) => (
     <div className="listen-row">
       <SpeakButton className="prompt-word" text={txt} lang={lang}><Icon name="headphones" /> {t("lesson.listen")}</SpeakButton>
-      <SpeakButton className="prompt-word" text={txt} lang={lang} speed={SPEED.slow} aria-label={t("lesson.listenSlow")} title={t("lesson.listenSlow")}>{SPEED.slow}×</SpeakButton>
+      <SpeakButton className="prompt-word" text={txt} lang={lang} speed={SPEED.slow} aria-label={`${t("lesson.listenSlow")} ${SPEED.slow}×`} title={t("lesson.listenSlow")}>{SPEED.slow}×</SpeakButton>
     </div>
   );
 
@@ -378,13 +379,15 @@ export function Lesson({ id }: { id: string }) {
       <h2 className="ex-title">{t("lesson.speakTitle")}</h2>
       <p className="ex-sub">{t("lesson.speakSub")}</p>
       <div className="card" style={{ textAlign: "center", padding: 22 }}>
-        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}><Words text={it.phrase} lang={lang} /></p>
+        <p lang={lang} style={{ fontSize: 26, fontWeight: 900 }}><Words text={it.phrase} lang={lang} missed={heard ? speechMisses(it.phrase, heard) : undefined} /></p>
         <p className="muted" style={{ fontWeight: 700, margin: "4px 0 12px" }}>{it.translation}</p>
         {listenBtn(it.phrase)}
       </div>
       <MicButton lang={lang} disabled={!!fb} trigger={micPress} onText={(txt) => {
         setHeard(txt);
-        if (txt) grade(speechScore(it.phrase, txt) >= SPEECH_PASS, it.phrase, txt, t("lesson.heard", { text: txt }));
+        const miss = speechMisses(it.phrase, txt);
+        if (txt) grade(speechScore(it.phrase, txt) >= SPEECH_PASS, it.phrase, txt,
+          [t("lesson.heard", { text: txt }), miss.length ? t("lesson.missed", { words: miss.join(", ") }) : ""].filter(Boolean).join(" · "));
       }} />
       {heard === "" && <p className="small" role="alert" style={{ textAlign: "center", color: "var(--orange)", fontWeight: 800 }}>{t("lesson.heardNothing")}</p>}
     </>
@@ -454,7 +457,7 @@ export function Lesson({ id }: { id: string }) {
   );
 
   return (
-    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={t("lesson.dialog")}>
+    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={t("lesson.dialog")} tabIndex={-1}>
       <div className="lesson-top">
         <button className="icon-btn" onClick={askQuit} aria-label={t("lesson.close")}><Icon name="x" /></button>
         <div className="lesson-progress"><i style={{ width: `${progress}%` }} /></div>

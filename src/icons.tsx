@@ -36,6 +36,7 @@ const I = {
   greenhouse:'<svg viewBox="0 0 24 24" fill="none" stroke="var(--green,#4f8a3c)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5v-9L12 4l8.5 7.5v9Z"/><path d="M12 4v16.5M3.5 14.5h17M8 8v12.5M16 8v12.5"/></svg>',
   basket:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 10a4.5 4.5 0 0 1 9 0"/><path d="M3 10h18l-1.7 9a2 2 0 0 1-2 1.6H6.7a2 2 0 0 1-2-1.6L3 10Z"/><path d="M9 10v10.5M15 10v10.5M3.8 14.5h16.4"/></svg>',
   info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".6" fill="currentColor"/></svg>',
+  help:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.5-1.5 2.5-1.5 3.5"/><path d="M12 17h.01"/></svg>',
   qr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2.5v2.5h-2.5zM18 18h2.5v2.5H18zM14.5 20.5h1M20.5 14.5v1" stroke-linecap="round"/></svg>',
   dots:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg>',
 } as const;
@@ -44,5 +45,5 @@ export type IconName = keyof typeof I;
 
 /** `size` (px) overrides the default 24px glyph; a fixed-size wrapper alone does not resize the SVG. */
 export function Icon({ name, className, size }: { name: IconName; className?: string; size?: number }) {
-  return <span className={className ? `ic ${className}` : "ic"} style={{ display: "inline-flex", ...(size && { "--ic": `${size}px` }) } as React.CSSProperties} dangerouslySetInnerHTML={{ __html: I[name] }} />;
+  return <span aria-hidden="true" className={className ? `ic ${className}` : "ic"} style={{ display: "inline-flex", ...(size && { "--ic": `${size}px` }) } as React.CSSProperties} dangerouslySetInnerHTML={{ __html: I[name] }} />;
 }
