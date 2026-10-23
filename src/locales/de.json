@@ -501,6 +501,8 @@
     "textSize": "Schriftgröße",
     "readableFont": "Gut lesbare Schrift",
     "readableFontDesc": "Atkinson Hyperlegible: Buchstaben, die sich schwerer verwechseln lassen (b/d, I/l/1), bei Legasthenie und Sehschwäche",
+    "highContrast": "Hoher Kontrast",
+    "highContrastDesc": "Kräftigere Farben und Rahmen, bei Sehschwäche und in hellen Räumen",
     "appearance": "Darstellung",
     "theme": "Design",
     "themeSystem": "System",

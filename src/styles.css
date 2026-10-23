@@ -64,6 +64,25 @@ html[data-theme="dark"]{
   --scrim:rgba(0,0,0,.6);
   color-scheme:dark;
 }
+/* High contrast (#34): light keeps white on darker accents; dark puts black on brighter ones. Text ≥ 7:1 where it can, ≥ 4.5:1 always.
+   The --*-tint, --green-bright and --sky defaults already hold up against the HC accents. */
+html[data-contrast="high"]:not([data-theme="dark"]){
+  --text:#14110d; --text-muted:#3b352d; --text-faint:#4f483e;
+  --bg:#fff; --surface:#f1ede4; --card:#fff; --border:#756c5f; --locked-shadow:#8f8676;
+  --green:#2b5a1f; --green-dark:#1b3b13; --blue:#1d4a61; --blue-dark:#12323f;
+  --red:#922c1a; --red-dark:#5f1a0e; --orange:#8f4416; --purple:#5a2f5d; --purple-dark:#3e1f41;
+  --gold:#8a5d00; --gold-dark:#5e3f00; --fruit:#a5321f;
+}
+html[data-theme="dark"][data-contrast="high"]{
+  --text:#fff; --text-muted:#e0dbd0; --text-faint:#c2bcae;
+  --bg:#000; --surface:#151515; --card:#0b0b0b; --border:#9a9384; --locked-shadow:#000;
+  --green:#8fd16f; --green-dark:#5c9a43; --blue:#7cc4e6; --blue-dark:#4b93b5;
+  --red:#ff8a73; --red-dark:#c95a45; --orange:#ffab7a; --purple:#d9a6dc; --purple-dark:#a873ab;
+  --gold:#ffcc4d; --gold-dark:#d9a01f; --on-accent:#000;
+}
+html[data-contrast="high"] .unit-head::after{display:none} /* decorative wave; also lets axe measure the text */
+html[data-contrast="high"] .unit.later .unit-head,html[data-contrast="high"] .unit-head .uh-kicker{opacity:1;filter:none} /* faded text fails contrast; the dimmed path still marks later units */
+html[data-theme="dark"][data-contrast="high"] .btn-gold{--coin:#000;--coin-edge:rgba(255,255,255,.35)}
 html[data-theme="dark"] .start-tag{color:var(--green-bright)}
 html[data-theme="dark"] .word-chip{box-shadow:0 2px 0 var(--border)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -132,16 +151,16 @@ svg{display:block}
   transition:transform .12s ease, filter .2s ease;
 }
 .btn:active{transform:translateY(2px)}
-.btn-primary{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+.btn-primary{background:var(--green);color:var(--on-accent);box-shadow:0 4px 0 var(--green-dark)}
 .btn-primary:hover{filter:brightness(1.05)}
 .btn-primary:active{box-shadow:0 2px 0 var(--green-dark)}
-.btn-blue{background:var(--blue);color:#fff;box-shadow:0 4px 0 var(--blue-dark)}
+.btn-blue{background:var(--blue);color:var(--on-accent);box-shadow:0 4px 0 var(--blue-dark)}
 .btn-blue:active{box-shadow:0 2px 0 var(--blue-dark)}
 .btn-gold{background:var(--gold);color:var(--on-accent);box-shadow:0 4px 0 var(--gold-dark)}
 .btn-gold:active{box-shadow:0 2px 0 var(--gold-dark)}
 .btn-ghost{background:var(--card);color:var(--blue);border:2px solid var(--border);box-shadow:0 2px 0 var(--border)}
 .btn-ghost:hover{background:var(--surface)}
-.btn-danger{background:var(--red);color:#fff;box-shadow:0 4px 0 var(--red-dark)}
+.btn-danger{background:var(--red);color:var(--on-accent);box-shadow:0 4px 0 var(--red-dark)}
 .btn[disabled]{background:var(--border);color:var(--text-faint);box-shadow:none;cursor:not-allowed;transform:none}
 /* coin on a coloured button: white face so it stays visible on gold */
 .btn-gold{--coin:#fff;--coin-edge:rgba(0,0,0,.18)}
@@ -167,7 +186,7 @@ html[data-theme="dark"] .biome-scene .sky{fill:transparent}
 .biome-thumb{flex:none;width:56px;height:40px;border-radius:10px;overflow:hidden}
 .unit-head{
   position:sticky;bottom:12px;z-index:5;overflow:hidden;
-  background:var(--green);color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 24px;
+  background:var(--green);color:var(--on-accent);border-radius:16px;padding:18px 20px;margin:8px 0 24px;
   box-shadow:0 4px 0 var(--green-dark);
 }
 .unit-head .uh-kicker{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.85}
@@ -188,7 +207,7 @@ html[data-theme="dark"] .biome-scene .sky{fill:transparent}
 .unit-head .guidebook{
   display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);
   border:2px solid rgba(255,255,255,.35);border-radius:var(--r);padding:8px 14px;
-  font-weight:800;font-size:13px;color:#fff;min-height:44px;
+  font-weight:800;font-size:13px;color:var(--on-accent);min-height:44px;
 }
 
 .path{position:relative;display:flex;align-items:center;padding:16px 0;gap:22px}
@@ -492,7 +511,7 @@ button.bubble:hover{border-color:var(--blue)}
 .league-row.cut-down{border-bottom:2px dashed var(--red);border-radius:var(--r) var(--r) 0 0}
 /* Speaking: round mic button */
 .mic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin:26px 0}
-.mic-btn{width:84px;height:84px;border-radius:50%;background:var(--blue);color:#fff;box-shadow:0 5px 0 var(--blue-dark);display:flex;align-items:center;justify-content:center}
+.mic-btn{width:84px;height:84px;border-radius:50%;background:var(--blue);color:var(--on-accent);box-shadow:0 5px 0 var(--blue-dark);display:flex;align-items:center;justify-content:center}
 .mic-btn svg{width:34px;height:34px}
 .mic-btn.rec{background:var(--red);box-shadow:0 5px 0 var(--red-dark);animation:pulse 1.2s infinite;outline:4px solid var(--red-tint)}
 .mic-btn:disabled{opacity:.6}
@@ -629,7 +648,7 @@ html[data-theme="dark"] .garden-hero{background:var(--btd)}
 .garden-note p{line-height:1.5}
 .garden-fruit{display:flex;gap:6px;margin:6px 0}
 .garden-fruit span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:900;border:2px dashed var(--border);color:var(--text-faint)}
-.garden-fruit span.on{background:var(--fruit);border:none;color:#fff}
+.garden-fruit span.on{background:var(--fruit);border:none;color:var(--on-accent)}
 @media(prefers-reduced-motion:no-preference){.garden-tree{animation:sway 6s ease-in-out infinite}}
 @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-1deg)}50%{transform:translateX(-50%) rotate(1deg)}}
 

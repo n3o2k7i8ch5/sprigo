@@ -191,7 +191,8 @@ export default function App() {
     sfxState.on = s.soundOn;
     document.documentElement.dataset.motion = s.reduceMotion ? "reduce" : "full";
     document.documentElement.dataset.font = s.readableFont ? "readable" : "default";
-  }, [s.soundOn, s.reduceMotion, s.readableFont]);
+    document.documentElement.dataset.contrast = s.highContrast ? "high" : "default";
+  }, [s.soundOn, s.reduceMotion, s.readableFont, s.highContrast]);
   useEffect(() => { textSize(s.textSize).catch((e) => console.warn("text size", e)); }, [s.textSize]);
 
   // Once per launch, after sign-in so the sheet has somewhere to show: what's new after an update, else a quiet update check.
