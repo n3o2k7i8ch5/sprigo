@@ -599,6 +599,16 @@ html[data-theme="dark"] .face .scene{filter:brightness(.6) saturate(.8)}
 .stt-heard p.muted{color:var(--text-muted)}
 .sheet-actions .btn{display:flex;align-items:center;justify-content:center;gap:8px}
 
+/* Help & FAQ (#39): collapsible topics, pre-line answers keep wiki line breaks */
+.help-topic{border:2px solid var(--border);border-radius:14px;background:var(--card);overflow:hidden}
+.help-topic summary{cursor:pointer;padding:12px 14px;font-weight:800;display:flex;align-items:center;justify-content:space-between;list-style:none}
+.help-topic summary::-webkit-details-marker{display:none}
+.help-topic summary::after{content:"+";color:var(--text-faint);font-size:20px;line-height:1}
+.help-topic[open] summary::after{content:"−"}
+.help-answer{padding:0 14px 14px;color:var(--text-muted);white-space:pre-line}
+.help-answer p{margin:0 0 10px}
+.help-answer a{font-weight:700}
+
 /* ===== garden (SPR-10) ===== */
 .garden{position:fixed;inset:0;z-index:100;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .garden-hero{position:relative;height:min(58vh,480px);max-width:760px;margin:0 auto;border-radius:0 0 24px 24px;overflow:hidden;background:var(--bt)}

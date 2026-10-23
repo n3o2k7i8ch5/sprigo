@@ -29,6 +29,21 @@ test("onboarding creates a profile and sets up local AI", async ({ page }) => {
   await expect(page.getByRole("dialog")).toBeHidden();
 });
 
+test("help answers setup questions in the app, also from a setting's ?", async ({ page }) => {
+  await onboard(page);
+  await page.locator(".card", { hasText: "Help & FAQ" }).getByRole("button", { name: "Open" }).click();
+  const help = page.getByRole("dialog");
+  await help.getByText("Where is my data?").click();
+  await expect(help.getByText(/Application Support\/com\.ozerozdas\.sprigo/)).toBeVisible();
+  await expect(help.getByRole("link", { name: "More on the wiki" }).first()).toHaveAttribute("href", /\/wiki\/FAQ$/);
+  await help.getByRole("button", { name: "Close" }).click();
+
+  await page.getByRole("tab", { name: "AI & voice" }).click();
+  await page.locator(".card", { hasText: "AI provider" }).getByRole("button", { name: "Change" }).click();
+  await page.getByRole("dialog").getByRole("button", { name: "Help: How do I set up the AI?" }).click();
+  await expect(page.locator("details[open] summary")).toHaveText("How do I set up the AI?");
+});
+
 /** Answers whatever exercise is on screen with the mock's right answer; false once the lesson is over. */
 async function answer(lesson: ReturnType<Page["getByRole"]>) {
   const button = (name: string) => lesson.getByRole("button", { name, exact: true });

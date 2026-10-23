@@ -6,6 +6,7 @@ import { getSetting, isCompanion, isTauri, setSetting } from "../db";
 import { elevenVoice, getElevenKey, loadKokoro, loadPiper, localTts, sayWithEleven, sayWithLocal, setElevenKey, speak, speakingWith, TTS_KEY, ttsProvider, ttsSpeaks, useTtsPreparing, ACCENTS, SPEED, ttsAccent, ttsSpeed, type TtsProvider } from "../tts";
 import { ELEVEN_VOICES, LOCAL_TTS } from "../ttsCloud";
 import { Icon } from "../icons";
+import { HelpButton } from "../Help";
 import { deepgramTranscribe, downloadWhisper, getDeepgramKey, listen, pickWhisper, removeWhisper, resetSttReady, setDeepgramKey, sttProvider, sttReady, whisperModels, type Listener, type SttProvider, type WhisperModel } from "../stt";
 import { isNoise } from "../tutor";
 import { useLangName } from "./Profiles";
@@ -59,6 +60,7 @@ export function TtsRow() {
       <span className="od-field od-fill"><b>{t("settings.tts")}</b><span className="muted small">{t(ttsName(v))}</span>
         {now && now !== v && <span className="small" style={{ color: "var(--orange)" }}>{t("voice.using", { name: t(`voice.engine.${now}`) })}</span>}
         {!ttsSpeaks(v, lang) && <span className="small" style={{ color: "var(--orange)" }}>{t("voice.notForLang", { lang: langName(lang) })}</span>}</span>
+      <HelpButton topic="voice" />
       <button className="btn btn-ghost" onClick={() => openSheet(<TtsSheet initial={v} onChange={setV} />)}>{t("settings.change")}</button>
     </div>
   );
@@ -281,6 +283,7 @@ export function SttRow() {
   return (
     <div className="card od-row" style={gap("12px")}>
       <span className="od-field od-fill"><b>{t("settings.stt")}</b><span className="muted small">{t(v === "deepgram" ? "settings.sttDeepgram" : "settings.sttWhisper")}</span></span>
+      <HelpButton topic="mic" />
       <button className="btn btn-ghost" onClick={() => openSheet(<SttSheet initial={v} onChange={setV} />)}>{t("settings.change")}</button>
     </div>
   );

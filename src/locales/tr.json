@@ -962,5 +962,49 @@
     "days_one": "{{count}} gün",
     "days_other": "{{count}} gün",
     "done": "Deste bitti!"
+  },
+  "help": {
+    "title": "Yardım ve SSS",
+    "tagline": "Sık sorulan kurulum soruları",
+    "view": "Aç",
+    "open": "Yardım",
+    "more": "Wiki'de devamı",
+    "stuck": "Hâlâ takıldın mı?",
+    "qa": "Soru-Cevap'ta sor",
+    "wiki": "Wiki",
+    "topics": {
+      "ai": {
+        "q": "Yapay zekâyı nasıl kurarım?",
+        "a": "Sprigo dersleri yazmak için bir dil modeline ihtiyaç duyar. En kolayı Ollama: kur ve Sprigo'yu aç; Sprigo Ollama'yı bulur ve qwen3:8b modelini (yaklaşık 5,2 GB) indirmeyi önerir. LM Studio da olur: yerel sunucusunu başlatıp bir model yükle.\nYerel model çalıştıramıyor musun? Kendi API anahtarınla bir bulut sağlayıcı kullan (OpenAI, Anthropic, Gemini, OpenRouter). Anahtarlar sistemin anahtar zincirinde kalır.\nAyarlar → Yapay zekâ ve ses → Yapay zekâ sağlayıcısı'ndan değiştirebilirsin."
+      },
+      "aiConnect": {
+        "q": "“Yerel model bulunamadı” ya da “Bağlanılamadı”",
+        "a": "Ollama: Ollama uygulamasını başlat. Sprigo onu http://localhost:11434 adresinde arar. Hiç modeli yoksa Sprigo'nun önerdiği modeli indirmesine izin ver ya da şunu çalıştır: ollama pull qwen3:8b\nLM Studio: yerel sunucuyu başlatıp bir model yükle.\nBulut: API anahtarını ve hesabındaki krediyi kontrol et.\nVPN ya da güvenlik duvarı da localhost'u engelleyebilir."
+      },
+      "weak": {
+        "q": "Dersler neden bazen zayıf ya da hatalı?",
+        "a": "Genelde model çok küçüktür. 8B ya da daha büyük bir model kullan (16 GB bellek iyi bir başlangıç). Bir alıştırma yanlışsa derste itiraz edebilirsin.\nDersler bir kez üretilip saklanır; yavaş bir model çoğunlukla bir adımı ilk açışında hissedilir."
+      },
+      "mic": {
+        "q": "Sprigo beni duymuyor",
+        "a": "Mikrofon iznini ver, sonra Sprigo'yu yeniden başlat:\nmacOS: Sistem Ayarları → Gizlilik ve Güvenlik → Mikrofon → Sprigo\nWindows: Ayarlar → Gizlilik ve güvenlik → Mikrofon → masaüstü uygulamalarına izin ver\nLinux: ses ayarlarında giriş aygıtını seç.\nAyrıca Ayarlar → Tercihlerim → Konuşma egzersizleri'nin açık olduğuna bak ve Konuşma tanıma altındaki Dene ile mikrofonu sına."
+      },
+      "voice": {
+        "q": "Hangi sesi kullanmalıyım?",
+        "a": "Piper uygulamanın içinde çalışır ve bütün kurs dillerini konuşur. Kokoro en doğal yerel sestir ama yalnızca İngilizce konuşur. Sistem sesi işletim sisteminde kurulu sesleri kullanır; ElevenLabs ise kendi anahtarınla çalışan bir bulut sesidir.\nSeçtiğin ses konuşamazsa Sprigo sistem sesine geçer.\nTutor kendi kendine susuyor mu? Mikrofon hoparlörü duyuyordur: kulaklık tak ya da Tutor'un sözünü kesebilirim ayarını kapat."
+      },
+      "phone": {
+        "q": "Sprigo'yu telefonda kullanabilir miyim?",
+        "a": "Evet, Tailscale ile: Ayarlar → Gizlilik ve veri → Telefonda kullan. Telefon, bilgisayarın verisini, konuşma tanımasını ve yerel modelini kullanır; bu yüzden bilgisayar açık olmalı. Anahtarlar bilgisayarda kaldığı için bulut sağlayıcılar telefonda çalışmaz.\niPhone'da Tutor'u duymak için sessiz modu kapat."
+      },
+      "data": {
+        "q": "Verilerim nerede?",
+        "a": "Veri klasöründeki yerel bir veritabanında; günlük yedekler de içindeki backups klasöründe:\nmacOS: ~/Library/Application Support/com.ozerozdas.sprigo\nWindows: %APPDATA%\\com.ozerozdas.sprigo\nLinux: ~/.local/share/com.ozerozdas.sprigo\nAyarlar → Gizlilik ve veri'den klasörü değiştirebilir (eşitlenen bir klasör iki bilgisayarda kullanmanı sağlar), dışa aktarabilir ya da bir yedeği içe aktarabilirsin."
+      },
+      "offline": {
+        "q": "İnternetsiz çalışır mı? Sürekli dinliyor mu?",
+        "a": "Yerel model, Whisper ve yerel bir sesle her şey internetsiz çalışır; yalnızca indirmeler için internet gerekir. Sprigo ücretsiz ve açık kaynaklıdır, hesap gerekmez.\nMikrofon yalnızca konuşma egzersizlerinde ve canlı derslerde açılır; ses hiçbir zaman kaydedilmez."
+      }
+    }
   }
 }

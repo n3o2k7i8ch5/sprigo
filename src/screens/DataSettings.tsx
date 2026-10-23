@@ -6,6 +6,7 @@ import { useApp } from "../store";
 import { backupNow, isTauri } from "../db";
 import { closeTauriDb, dataLocation, dbFile, lockHolder, restart, type Location } from "../datadir";
 import { today } from "../progress";
+import { HelpButton } from "../Help";
 
 const gap = (g: string) => ({ "--od-gap": g }) as React.CSSProperties;
 const dialog = () => import("@tauri-apps/plugin-dialog");
@@ -106,7 +107,7 @@ function DataSheet({ loc }: { loc: Location }) {
   );
   return (
     <div className="od-stack" style={sheet}>
-      <h3 style={{ textAlign: "center" }}>{t("data.title")}</h3>
+      <div className="od-row" style={{ ...gap("4px"), justifyContent: "center" }}><h3>{t("data.title")}</h3><HelpButton topic="data" /></div>
       <span className="od-field"><b>{t(loc.dataDir === loc.defaultDir ? "data.default" : "data.folder")}</b>
         <span className="muted small" style={{ overflowWrap: "anywhere" }}>{loc.dataDir}</span></span>
       <p className="small">{t("data.hint")}</p>
