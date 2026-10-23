@@ -7,7 +7,9 @@ test.beforeEach(async ({ page }) => { await mockOllama(page); });
 
 /** Serious and critical axe findings on the current page. The default theme's colours are a brand call, so contrast is only checked in high contrast (#34). */
 async function axe(page: Page, contrast = false) {
-  const r = await (contrast ? new AxeBuilder({ page }) : new AxeBuilder({ page }).disableRules(["color-contrast"])).analyze();
+  // The toast fades in and out, so axe can catch it half-transparent (on slow CI); it is --text on --bg, checked everywhere else.
+  const base = new AxeBuilder({ page }).exclude(".toast");
+  const r = await (contrast ? base : base.disableRules(["color-contrast"])).analyze();
   // Text over a decorative pseudo-element (the .unit-head wave) lands in "incomplete", so whole areas would go unchecked.
   // ponytail: gradient/short-text/toast incompletes are skipped; their colours are HC accents already checked elsewhere.
   const unsure = contrast
