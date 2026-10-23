@@ -270,7 +270,8 @@
         "desc_other": "Collect {{count}} words in My words"
       }
     },
-    "details": "Details"
+    "details": "Details",
+    "achDone": "Earned"
   },
   "memory": {
     "title": "Sprigo knows you",

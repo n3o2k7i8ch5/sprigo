@@ -425,7 +425,8 @@ button[aria-busy="true"]{cursor:progress}
   background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
 /* Profiles (not in the design; same visual language as .select / .avatar) */
 .input{font:inherit;font-weight:700;color:var(--text);background:var(--card);border:2px solid var(--border);border-radius:var(--r);padding:10px 12px;min-height:44px;width:100%}
-.input:focus-visible,.select:focus-visible{outline:none;border-color:var(--blue)}
+.input:focus-visible,.select:focus-visible{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 35%,transparent)}
+.sheet:focus,.lesson-overlay:focus{outline:none}
 .swatch{width:36px;height:36px;border-radius:50%;border:3px solid transparent;box-shadow:0 0 0 2px var(--border)}
 .swatch[aria-checked="true"]{border-color:var(--card);box-shadow:0 0 0 3px var(--blue)}
 .menu-wrap{position:relative}

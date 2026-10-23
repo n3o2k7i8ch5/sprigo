@@ -270,7 +270,8 @@
         "desc_other": "Sammle {{count}} Wörter in Meine Wörter"
       }
     },
-    "details": "Details"
+    "details": "Details",
+    "achDone": "Erreicht"
   },
   "memory": {
     "title": "Sprigo kennt dich",

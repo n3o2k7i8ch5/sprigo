@@ -267,7 +267,8 @@
         "desc_other": "Kelimelerinde {{count}} kelime topla"
       }
     },
-    "details": "Ayrıntılar"
+    "details": "Ayrıntılar",
+    "achDone": "Kazanıldı"
   },
   "memory": {
     "title": "Sprigo seni tanıyor",

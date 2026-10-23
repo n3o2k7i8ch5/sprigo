@@ -276,7 +276,7 @@ export function Lesson({ id }: { id: string }) {
   const listenBtn = (txt: string) => (
     <div className="listen-row">
       <SpeakButton className="prompt-word" text={txt} lang={lang}><Icon name="headphones" /> {t("lesson.listen")}</SpeakButton>
-      <SpeakButton className="prompt-word" text={txt} lang={lang} speed={SPEED.slow} aria-label={t("lesson.listenSlow")} title={t("lesson.listenSlow")}>{SPEED.slow}×</SpeakButton>
+      <SpeakButton className="prompt-word" text={txt} lang={lang} speed={SPEED.slow} aria-label={`${t("lesson.listenSlow")} ${SPEED.slow}×`} title={t("lesson.listenSlow")}>{SPEED.slow}×</SpeakButton>
     </div>
   );
 
@@ -454,7 +454,7 @@ export function Lesson({ id }: { id: string }) {
   );
 
   return (
-    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={t("lesson.dialog")}>
+    <div className="lesson-overlay open" role="dialog" aria-modal="true" aria-label={t("lesson.dialog")} tabIndex={-1}>
       <div className="lesson-top">
         <button className="icon-btn" onClick={askQuit} aria-label={t("lesson.close")}><Icon name="x" /></button>
         <div className="lesson-progress"><i style={{ width: `${progress}%` }} /></div>

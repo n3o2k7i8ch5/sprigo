@@ -44,5 +44,5 @@ export type IconName = keyof typeof I;
 
 /** `size` (px) overrides the default 24px glyph; a fixed-size wrapper alone does not resize the SVG. */
 export function Icon({ name, className, size }: { name: IconName; className?: string; size?: number }) {
-  return <span className={className ? `ic ${className}` : "ic"} style={{ display: "inline-flex", ...(size && { "--ic": `${size}px` }) } as React.CSSProperties} dangerouslySetInnerHTML={{ __html: I[name] }} />;
+  return <span aria-hidden="true" className={className ? `ic ${className}` : "ic"} style={{ display: "inline-flex", ...(size && { "--ic": `${size}px` }) } as React.CSSProperties} dangerouslySetInnerHTML={{ __html: I[name] }} />;
 }
