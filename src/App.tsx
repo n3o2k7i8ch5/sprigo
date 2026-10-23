@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon, type IconName } from "./icons";
 import { useApp, type BootError, type Route } from "./store";
@@ -49,7 +49,7 @@ function NavBtn({ id, icon, onGo }: { id: Route; icon: IconName; onGo?: () => vo
 }
 
 /** Phone bottom bar: the main tabs, then "…" opening profile and the rest upwards. */
-function BottomNav() {
+function BottomNav({ inert }: { inert: boolean }) {
   const { t } = useTranslation();
   const { route } = useApp();
   const [open, setOpen] = useState(false);
@@ -64,8 +64,8 @@ function BottomNav() {
   return (
     <>
       {open && <div className="more-backdrop" onClick={() => setOpen(false)} />}
-      {open && <div className="more-menu" id="more-menu">{rest.map((n) => <NavBtn key={n.id} {...n} onGo={() => setOpen(false)} />)}</div>}
-      <nav className="bottom-nav" aria-label={t("nav.bottom")}>
+      {open && <div className="more-menu" id="more-menu" inert={inert}>{rest.map((n) => <NavBtn key={n.id} {...n} onGo={() => setOpen(false)} />)}</div>}
+      <nav className="bottom-nav" aria-label={t("nav.bottom")} inert={inert}>
         {tabs.map((n) => <NavBtn key={n.id} {...n} onGo={() => setOpen(false)} />)}
         <button className={`nav-item ${inMore || open ? "active" : ""}`} onClick={() => setOpen((o) => !o)}
           aria-expanded={open} aria-controls="more-menu">
@@ -142,6 +142,43 @@ export default function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, [sheet, closeSheet]);
 
+  // Modal focus (#34): what's behind a sheet or lesson is inert; focus moves into it, and back to where it was once it closes.
+  const sheetBox = useRef<HTMLDivElement>(null);
+  const back = useRef<{ sheet?: HTMLElement; lesson?: HTMLElement }>({});
+  useEffect(() => {
+    // focusin for the keyboard; pointerdown too, because WebKit (the macOS app) doesn't focus a clicked button
+    const f = (e: Event) => {
+      const el = (e.target as HTMLElement).closest?.<HTMLElement>("button, a, input, select, textarea, [tabindex]");
+      if (!el || el.closest(".sheet")) return;
+      back.current.sheet = el;
+      if (!el.closest(".lesson-overlay")) back.current.lesson = el;
+    };
+    document.addEventListener("focusin", f);
+    document.addEventListener("pointerdown", f);
+    return () => { document.removeEventListener("focusin", f); document.removeEventListener("pointerdown", f); };
+  }, []);
+  const restore = (to?: HTMLElement) => () => { requestAnimationFrame(() => { if (to?.isConnected) to.focus({ preventScroll: true }); }); };
+  useEffect(() => { if (sheet) return restore(back.current.sheet); }, [!!sheet]);
+  // Also when one sheet replaces another: the focused button went with the old one.
+  useEffect(() => { if (sheet && !sheetBox.current!.contains(document.activeElement)) sheetBox.current!.focus(); }, [sheet]);
+  // A sheet is named by its heading, kept current when the heading changes. ponytail: read from the DOM, so sheets need no id plumbing
+  useEffect(() => {
+    const box = sheetBox.current;
+    if (!box) return; // not rendered until boot is done
+    const name = () => { const h = box.querySelector("h2, h3")?.textContent; if (h) box.setAttribute("aria-label", h); else box.removeAttribute("aria-label"); };
+    const m = new MutationObserver(name);
+    m.observe(box, { childList: true, subtree: true, characterData: true });
+    return () => m.disconnect();
+  }, [ready, !!bootError]);
+  useEffect(() => {
+    if (!lessonId) return;
+    requestAnimationFrame(() => {
+      const box = document.querySelector<HTMLElement>(".lesson-overlay");
+      if (box && !box.contains(document.activeElement)) box.focus();
+    });
+    return restore(back.current.lesson);
+  }, [lessonId]);
+
   useEffect(() => {
     sfxState.on = s.soundOn;
     document.documentElement.dataset.motion = s.reduceMotion ? "reduce" : "full";
@@ -181,8 +218,8 @@ export default function App() {
   return (
     <>
       {!profile ? <ProfileGate /> : <>
-      <div className="app">
-        <aside className="sidebar" aria-label={t("nav.main")}>
+      <div className="app" inert={!!(lessonId || sheet)}>
+        <aside className="sidebar" aria-label={t("nav.main")} inert={route === "garden"}>
           <div className="logo">sprigo</div>
           <nav>
             <LiveButton />
@@ -192,28 +229,30 @@ export default function App() {
             </div>
             {MORE.map((n) => <NavBtn key={n.id} {...n} />)}
           </nav>
-          <button className="nav-item nav-more profile-switch" onClick={logout} title={t("settings.logout")} aria-label={`${profile.name} · ${t("settings.logout")}`}>
+          <button className="nav-item nav-more profile-switch" onClick={logout} title={t("settings.logout")}>
             <Avatar p={profile} size={30} /><span className="od-fill">{profile.name}</span><Icon name="swap" />
           </button>
         </aside>
         <main className="main">
           <div className="main-inner">
             <div className="center" tabIndex={-1}><Screen /></div>
-            <aside className="rail" aria-label={t("rail.label")}><Rail /></aside>
+            <aside className="rail" aria-label={t("rail.label")} inert={route === "garden"}><Rail /></aside>
           </div>
         </main>
       </div>
-      <BottomNav />
+      <BottomNav inert={!!(lessonId || sheet) || route === "garden"} />
 
+      <div inert={!!sheet}>
       {lessonId && (lessonId.startsWith("story:") ? (story && <Story key={lessonId} {...story} />)
         : lessonId.startsWith("write:") ? (writing && <Writing key={lessonId} level={writing.level as Cefr} unit={writing.unit} />)
         : lessonId.startsWith("cards:") ? <Flashcards key={lessonId} deck={lessonId.slice(6)} />
         : lessonId.startsWith("tutor:") ? (lessonId.slice(6) in CHARACTERS && <TutorCall key={lessonId} who={lessonId.slice(6) as CharacterId} />)
         : /^(chat|call|rehearse|drill):/.test(lessonId) ? (talk && <Chat key={lessonId} talk={talk} />) : <Lesson id={lessonId} />)}
+      </div>
       </>}
 
       <div className={`sheet-scrim ${sheet ? "open" : ""}`} onClick={(e) => e.target === e.currentTarget && closeSheet()}>
-        <div className="sheet" role="dialog" aria-modal="true">{sheet}</div>
+        <div className="sheet" role="dialog" aria-modal="true" tabIndex={-1} ref={sheetBox}>{sheet}</div>
       </div>
       <div className={`toast ${toastOn ? "show" : ""}`} role="status">{toastMsg}</div>
     </>

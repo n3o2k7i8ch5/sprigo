@@ -328,7 +328,7 @@ function AchRow({ a }: { a: Achievement }) {
       <span className="od-field od-fill"><b>{t(`profile.ach.${a.family}.title`)} {roman(a.tier)}</b><span className="muted small">{t(`profile.ach.${a.family}.desc`, { count: a.goal })}</span>
         {!a.earned && <span className="progress-track" style={{ display: "block", height: 10, marginTop: 6 }}><i className="progress-fill" style={{ display: "block", width: `${(done / a.goal) * 100}%` }} /></span>}
       </span>
-      {a.earned ? <span style={{ color: "var(--gold-dark)" }}><Icon name="check" /></span> : <span className="od-nowrap muted small" style={{ fontWeight: 800 }}>{done}/{a.goal}</span>}
+      {a.earned ? <span style={{ color: "var(--gold-dark)" }} role="img" aria-label={t("profile.achDone")}><Icon name="check" /></span> : <span className="od-nowrap muted small" style={{ fontWeight: 800 }}>{done}/{a.goal}</span>}
     </div>
   );
 }

@@ -290,7 +290,8 @@
         "desc_many": "Rassemble {{count}} mots dans Mes mots"
       }
     },
-    "details": "Détails"
+    "details": "Détails",
+    "achDone": "Obtenu"
   },
   "memory": {
     "title": "Sprigo te connaît",
