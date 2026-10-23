@@ -173,6 +173,26 @@ test("a conjugation drill asks the cross-checked forms and queues a miss", async
   await expect(page.getByRole("button", { name: /Fix your mistakes.*1 question waiting/ })).toBeVisible();
 });
 
+test("the grammar reference searches every pattern and drills one", async ({ page }) => {
+  await onboard(page);
+  await page.getByRole("button", { name: "Grammar" }).click();
+  await expect(page.getByRole("heading", { name: /^A1 · / })).toBeVisible();
+  await page.getByLabel("Search grammar").fill("LLAMAS");
+  await expect(page.getByRole("button", { name: "¿Cómo te llamas?" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "¡Buenos días!" })).toBeHidden();
+  await page.getByRole("button", { name: "¿Cómo te llamas?" }).click();
+  const sheet = page.getByRole("dialog", { name: "¿Cómo te llamas?" });
+  await sheet.getByRole("button", { name: "Explain this" }).click();
+  await expect(sheet.getByRole("alert")).toContainText("left this pattern out"); // the mock's guide has no grammar entries
+  await sheet.getByRole("button", { name: "Practise this" }).click();
+  const lesson = page.getByRole("dialog", { name: "Lesson" });
+  await expect(lesson.getByRole("heading", { name: "Which word means “hello”?" })).toBeVisible(); // a drill has no teaching cards
+  for (let i = 0; await answer(lesson); i++) expect(i).toBeLessThan(20);
+  await expect(lesson.getByText("100%")).toBeVisible();
+  await lesson.getByRole("button", { name: "Done" }).click();
+  await expect(lesson).toBeHidden();
+});
+
 test("readable font and text size apply at once and stay after a reload", async ({ page }) => {
   await onboard(page);
   await page.getByRole("tab", { name: "Preferences" }).click();

@@ -34,7 +34,8 @@
     "roleplay": "Rol Yapma",
     "friends": "Arkadaşlar",
     "notifications": "Bildirimler",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "grammar": "Dilbilgisi"
   },
   "common": {
     "soon": "Yakında",
@@ -1009,5 +1010,19 @@
         "a": "Yerel model, Whisper ve yerel bir sesle her şey internetsiz çalışır; yalnızca indirmeler için internet gerekir. Sprigo ücretsiz ve açık kaynaklıdır, hesap gerekmez.\nMikrofon yalnızca konuşma egzersizlerinde ve canlı derslerde açılır; ses hiçbir zaman kaydedilmez."
       }
     }
+  },
+  "grammar": {
+    "title": "Dilbilgisi",
+    "subtitle": "Kurstaki tüm dilbilgisi konuları, seviye ve üniteye göre. Açıklama ve kısa bir alıştırma için birine dokun.",
+    "search": "Dilbilgisinde ara",
+    "none": "Aramanla eşleşen dilbilgisi yok.",
+    "later": "henüz gelinmedi",
+    "from": "{{level}} · {{unit}} ünitesinde öğretiliyor",
+    "explain": "Bunu açıkla",
+    "explaining": "Açıklama yazılıyor…",
+    "failed": "Açıklama yazılamadı.",
+    "notInGuide": "Yapay zekânın rehberi bu kalıbı atlamış. Tekrar dene.",
+    "alsoIn": "Şunlarda da var: {{units}}",
+    "practise": "Bunu çalış"
   }
 }

@@ -34,7 +34,8 @@
     "roleplay": "Rollenspiel",
     "friends": "Freunde",
     "notifications": "Mitteilungen",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "grammar": "Grammatik"
   },
   "common": {
     "soon": "Bald verfügbar",
@@ -1015,5 +1016,19 @@
         "a": "Mit einem lokalen Modell, Whisper und einer lokalen Stimme geht alles offline; nur Downloads brauchen Internet. Sprigo ist kostenlos und quelloffen, ohne Konto.\nDas Mikrofon ist nur bei Sprechübungen und Live-Lektionen an, und Audio wird nie gespeichert."
       }
     }
+  },
+  "grammar": {
+    "title": "Grammatik",
+    "subtitle": "Alle Grammatikthemen des Kurses, nach Niveau und Einheit. Tippe eins an für eine Erklärung und eine kurze Übung.",
+    "search": "Grammatik durchsuchen",
+    "none": "Keine Grammatik passt zu deiner Suche.",
+    "later": "noch nicht erreicht",
+    "from": "Behandelt in {{level}} · {{unit}}",
+    "explain": "Erklären",
+    "explaining": "Erklärung wird geschrieben…",
+    "failed": "Die Erklärung konnte nicht geschrieben werden.",
+    "notInGuide": "Der KI-Leitfaden hat dieses Muster ausgelassen. Versuch es noch einmal.",
+    "alsoIn": "Auch in: {{units}}",
+    "practise": "Üben"
   }
 }

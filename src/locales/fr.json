@@ -34,7 +34,8 @@
     "roleplay": "Jeux de rôle",
     "friends": "Amis",
     "notifications": "Notifications",
-    "settings": "Réglages"
+    "settings": "Réglages",
+    "grammar": "Grammaire"
   },
   "common": {
     "soon": "Bientôt",
@@ -1047,5 +1048,19 @@
         "a": "Avec un modèle local, Whisper et une voix locale, tout marche hors ligne ; seuls les téléchargements demandent internet. Sprigo est gratuit et open source, sans compte.\nLe micro ne s'allume que pendant les exercices oraux et les leçons en direct, et l'audio n'est jamais enregistré."
       }
     }
+  },
+  "grammar": {
+    "title": "Grammaire",
+    "subtitle": "Tous les points de grammaire du cours, par niveau et par unité. Touche-en un pour une explication et un court exercice.",
+    "search": "Rechercher dans la grammaire",
+    "none": "Aucune grammaire ne correspond à ta recherche.",
+    "later": "pas encore atteint",
+    "from": "Vu en {{level}} · {{unit}}",
+    "explain": "Expliquer",
+    "explaining": "Rédaction de l’explication…",
+    "failed": "L’explication n’a pas pu être rédigée.",
+    "notInGuide": "Le guide de l’IA a omis cette structure. Réessaie.",
+    "alsoIn": "Aussi dans : {{units}}",
+    "practise": "S’entraîner"
   }
 }
