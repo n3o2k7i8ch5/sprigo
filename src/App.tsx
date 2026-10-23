@@ -9,6 +9,7 @@ import { nudgeDue, nudgeMessage } from "./nudge";
 import { keepInBackground, notify } from "./notify";
 import { takeOver, resetDataDir } from "./datadir";
 import { findUpdate, UpdateSheet, whatsNew, WhatsNewSheet } from "./Update";
+import { isTauri } from "./db";
 import type { Update } from "@tauri-apps/plugin-updater";
 import { Chat, Story } from "./Talk";
 import { Flashcards } from "./Flashcards";
@@ -36,6 +37,13 @@ const SCREENS: Record<Route, () => React.ReactNode> = {
   stories: Stories, roleplay: Roleplay, friends: Friends, notifications: Notifications, settings: Settings,
   garden: Garden,
 };
+
+/** Text size (#34): the webview's own zoom in the app, so vh and px scale together. Zoom hotkeys stay off (tauri.conf default), so nothing fights it.
+ *  ponytail: in a browser (phone, dev) CSS zoom on <html>; fine in Chromium, unchecked in mobile Safari. */
+async function textSize(f: number) {
+  if (isTauri) return (await import("@tauri-apps/api/webview")).getCurrentWebview().setZoom(f);
+  document.documentElement.style.zoom = f === 1 ? "" : String(f);
+}
 
 function NavBtn({ id, icon, onGo }: { id: Route; icon: IconName; onGo?: () => void }) {
   const { route, go } = useApp();
@@ -145,7 +153,9 @@ export default function App() {
   useEffect(() => {
     sfxState.on = s.soundOn;
     document.documentElement.dataset.motion = s.reduceMotion ? "reduce" : "full";
-  }, [s.soundOn, s.reduceMotion]);
+    document.documentElement.dataset.font = s.readableFont ? "readable" : "default";
+  }, [s.soundOn, s.reduceMotion, s.readableFont]);
+  useEffect(() => { textSize(s.textSize).catch((e) => console.warn("text size", e)); }, [s.textSize]);
 
   // Once per launch, after sign-in so the sheet has somewhere to show: what's new after an update, else a quiet update check.
   useEffect(() => {

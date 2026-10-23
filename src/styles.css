@@ -74,6 +74,7 @@ body{
   font-size:16px; line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
+:root[data-font="readable"] body{font-family:"Atkinson Hyperlegible Next","Segoe UI",system-ui,sans-serif}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
 h1,h2,h3{line-height:1.25}
@@ -84,7 +85,7 @@ svg{display:block}
 /* Notched phones (viewport-fit=cover): all 0 on the desktop app and on phones without a notch */
 .app{padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
 .sidebar{
-  position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column; /* scrolls at large text sizes on short windows */
   border-right:2px solid var(--border);padding:20px 12px;gap:4px;background:var(--card);z-index:20;
 }
 .logo{padding:6px 12px 18px;font-weight:900;font-size:26px;color:var(--green);letter-spacing:-.5px;user-select:none}
